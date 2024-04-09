@@ -3,7 +3,7 @@ import { MainContent } from "./_components/main-content";
 
 export default function DevicesPage() {
   return (
-    <div>
+    <div className="w-full">
       <Header />
       <MainContent />
     </div>

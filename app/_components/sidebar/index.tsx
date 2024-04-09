@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 import { Items } from "./items";
 import { Account } from "./account";
 import { ChevronButton } from "./chevron-button";
-import { Button } from "@/components/ui/button";
 
 export const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(true);
@@ -17,7 +16,7 @@ export const Sidebar = () => {
 
   return (
     <motion.div
-      animate={{ width: collapsed ? 56 : 164 }}
+      animate={{ width: collapsed ? 56 : 220 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
       className="h-screen flex flex-col justify-between border-l-2 border-r-2 border-border"
     >
