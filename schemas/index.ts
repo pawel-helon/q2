@@ -1,11 +1,11 @@
 import { z } from "zod";
 
-export const schema = z.object({
-  first: z.string().trim().min(1, {
-    message: "First name is required",
-  }),
-  last: z.string().trim().min(1, {
-    message: "Last name is required",
-  }),
-  email: z.string().trim().email(),
+export const addDeviceSchema = z.object({
+  streetAddress: z.string().trim(),
+  city: z.string().trim(),
+  country: z.string().trim(),
+  model: z.string().trim(),
+  owner: z.string().trim(),
+  SIM: z.string().trim(),
+
 });

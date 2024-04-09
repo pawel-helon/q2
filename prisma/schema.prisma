@@ -13,9 +13,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id      Int     @id @default(autoincrement())
-  first   String?
-  last    String?
-  email   String  @unique
+model Device {
+  id              Int       @id @default(autoincrement())
+  streetAddress   String
+  city            String
+  country         String
+  model           String
+  owner           String?
+  SIM             String
+
 }

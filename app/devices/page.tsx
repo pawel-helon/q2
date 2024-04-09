@@ -1,20 +1,23 @@
 import { z } from "zod";
 
 import { db } from "@/lib/db";
-import { schema } from "@/schemas";
-import { RegistrationForm } from "./_components/RegistrationForm";
+import { addDeviceSchema } from "@/schemas";
+import { AddDeviceForm } from "./_components/add-device-form";
 
 export default function Home() {
-  const onDataAction = async (data: z.infer<typeof schema>) => {
+  const onDataAction = async (data: z.infer<typeof addDeviceSchema>) => {
     "use server";
-    const parsed = schema.safeParse(data);
+    const parsed = addDeviceSchema.safeParse(data);
 
     if (parsed.success) {
-      await db.user.create({
+      await db.device.create({
         data: {
-          first: parsed.data.first,
-          last: parsed.data.last,
-          email: parsed.data.email,
+          streetAddress: parsed.data.streetAddress,
+          city: parsed.data.city,
+          country: parsed.data.country,
+          model: parsed.data.model,
+          owner: parsed.data.owner,
+          SIM: parsed.data.SIM,
         },
       });
       console.log("User registered");
@@ -30,7 +33,7 @@ export default function Home() {
 
   return (
     <div className="mx-auto max-w-xl my-8">
-      <RegistrationForm onDataAction={onDataAction} />
+      <AddDeviceForm onDataAction={onDataAction} />
     </div>
   );
 }
