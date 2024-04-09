@@ -1,9 +1,12 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
+import { addDeviceSchema } from "@/schemas";
+import { DialogClose } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -14,7 +17,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { addDeviceSchema } from "@/schemas";
 import {
   Select,
   SelectContent,
@@ -45,8 +47,11 @@ export const AddDeviceForm = ({
     },
   });
 
+  const router = useRouter();
+
   const onSubmit = async (data: z.infer<typeof addDeviceSchema>) => {
     await onDataAction(data);
+    router.refresh();
   };
 
   return (
@@ -185,7 +190,9 @@ export const AddDeviceForm = ({
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <DialogClose asChild>
+          <Button type="submit">Submit</Button>
+        </DialogClose>
       </form>
     </Form>
   );

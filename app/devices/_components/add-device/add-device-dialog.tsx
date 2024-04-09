@@ -7,13 +7,11 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { AddDeviceForm } from "./add-device-form";
 
 export const AddDeviceDialog = () => {
   return (
     <Dialog>
-      <DialogContent className="md:max-w-[720px] bg-grayQ">
+      <DialogContent className="md:max-w-[720px] bg-card">
         <DialogHeader>
           <div className="flex justify-between">
             <DialogTitle>
