@@ -1,28 +1,57 @@
-import { X } from "lucide-react";
-
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
+  DialogTrigger,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { Plus } from "lucide-react";
+import { AddDeviceForm } from "./add-device-form";
+import { addDeviceSchema } from "@/schemas";
+import { db } from "@/lib/db";
+import { z } from "zod";
 
 export const AddDeviceDialog = () => {
+  const onDataAction = async (data: z.infer<typeof addDeviceSchema>) => {
+    "use server";
+    const parsed = addDeviceSchema.safeParse(data);
+
+    if (parsed.success) {
+      await db.device.create({
+        data: {
+          streetAddress: parsed.data.streetAddress,
+          city: parsed.data.city,
+          country: parsed.data.country,
+          model: parsed.data.model,
+          owner: parsed.data.owner,
+          SIM: parsed.data.SIM,
+        },
+      });
+      console.log("Device added");
+
+      return { message: "Device added", user: parsed.data };
+    } else {
+      return {
+        message: "Invalid data",
+        issues: parsed.error.issues.map((issue) => issue.message),
+      };
+    }
+  };
+  
   return (
     <Dialog>
-      <DialogContent className="md:max-w-[720px] bg-card">
-        <DialogHeader>
-          <div className="flex justify-between">
-            <DialogTitle>
-              Add new device
-            </DialogTitle>
-            <DialogClose className="rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-[#343437] focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
-              <X className="size-5" />
-            </DialogClose>
-          </div>
+      <DialogTrigger asChild>
+        <Button>
+          <Plus className="-ml-2 mr-2" />
+          Add new device
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="md:max-w-[720px]">
+        <DialogHeader className="mb-4 text-left">
+          <DialogTitle>Add new device</DialogTitle>
         </DialogHeader>
-        {/* <AddDeviceForm /> */}
+        <AddDeviceForm onDataAction={onDataAction} />
       </DialogContent>
     </Dialog>
   );
