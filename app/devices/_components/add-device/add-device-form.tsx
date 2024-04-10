@@ -25,6 +25,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { revalidatePath } from "next/cache";
 
 export const AddDeviceForm = ({
   onDataAction,
@@ -52,7 +53,7 @@ export const AddDeviceForm = ({
   const onSubmit = async (data: z.infer<typeof addDeviceSchema>) => {
     //Server Action
     await onDataAction(data);
-    router.refresh();
+    router.push('/devices');
   };
 
   return (

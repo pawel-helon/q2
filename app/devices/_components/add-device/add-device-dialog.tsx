@@ -11,6 +11,7 @@ import { AddDeviceForm } from "./add-device-form";
 import { addDeviceSchema } from "@/schemas";
 import { db } from "@/lib/db";
 import { z } from "zod";
+import { revalidatePath } from "next/cache";
 
 export const AddDeviceDialog = () => {
   const onDataAction = async (data: z.infer<typeof addDeviceSchema>) => {
@@ -28,7 +29,7 @@ export const AddDeviceDialog = () => {
           SIM: parsed.data.SIM,
         },
       });
-      console.log("Device added");
+      revalidatePath("/devices", "page");
 
       return { message: "Device added", user: parsed.data };
     } else {

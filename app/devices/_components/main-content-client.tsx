@@ -12,6 +12,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
 
 export const MainContentClient = () => {
   const [devices, setDevices] = useState<
@@ -32,10 +33,15 @@ export const MainContentClient = () => {
       setDevices(devices);
     };
     updatedDevices();
+
+    const interval = setInterval(updatedDevices, 5000);
+
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
   const router = useRouter();
-
   const handleClick = () => {
     router.push("/devices/device");
   }
