@@ -50,6 +50,7 @@ export const AddDeviceForm = ({
   const router = useRouter();
 
   const onSubmit = async (data: z.infer<typeof addDeviceSchema>) => {
+    //Server Action
     await onDataAction(data);
     router.refresh();
   };
