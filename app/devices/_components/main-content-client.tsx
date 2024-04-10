@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { findDevices } from "../../api/find-devices.ts/route";
+import { findDevices } from "../../api/find-devices/route";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Table,
