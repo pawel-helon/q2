@@ -30,10 +30,10 @@ export const SearchInput = ({ value, setValue }: SearchInputProps) => {
         <Search className="text-muted-foreground" />
         <Input
           type="search"
-          placeholder="Search by street address"
+          placeholder="Search by address"
           onChange={handleChange}
           value={value}
-          className="max-w-[240px] h-9 flex items-center border-none bg-background text-white"
+          className="max-w-[264px] h-9 flex items-center border-none bg-background text-white"
         />
       </div>
     </form>
