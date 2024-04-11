@@ -24,7 +24,7 @@ export const Assistant = () => {
     return (
       <Button
         onClick={handleIsChat}
-        className="absolute bottom-4 right-4"
+        className="fixed bottom-6 right-6"
         size="icon"
       >
         <MessageCircle className="text-white" />

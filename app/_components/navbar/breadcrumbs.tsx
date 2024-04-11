@@ -1,3 +1,5 @@
+"use client"
+
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -6,13 +8,14 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
   } from "@/components/ui/breadcrumb";
+import { usePathname } from "next/navigation";
 
 export const Breadcrumbs = () => {
   return (
     <Breadcrumb>
     <BreadcrumbList>
       <BreadcrumbItem>
-        <BreadcrumbLink href="/">Devices</BreadcrumbLink>
+        <BreadcrumbLink>Devices</BreadcrumbLink>
       </BreadcrumbItem>
       <BreadcrumbSeparator />
       <BreadcrumbItem>

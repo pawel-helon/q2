@@ -3,7 +3,7 @@ import { AddDeviceDialog } from "@/app/devices/_components/add-device/add-device
 
 export const Navbar = () => {
   return (
-    <div className="w-full h-[64px] flex justify-between items-center">
+    <div className="w-full py-6 flex justify-between items-center">
       <Breadcrumbs />
       <div className="flex gap-2 justify-end">
         <AddDeviceDialog />

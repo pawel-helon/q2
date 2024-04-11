@@ -14,7 +14,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Q2",
+  title: "QT",
   description: "",
 };
 
@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(poppins.className, "antialiased")}>
-        <div className="relative h-screen flex mx-auto xl:max-w-[1280px] 2xl:max-w-[1536px]">
+        <div className="relative min-h-screen flex mx-auto xl:max-w-[1280px] 2xl:max-w-[1536px]">
           <Sidebar />
           <div className="flex flex-col w-full px-6 border-r-2 border-border">
             <Navbar />
