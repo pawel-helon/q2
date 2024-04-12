@@ -1,11 +1,9 @@
 "use client";
 
-import { ChangeEvent, useEffect, useState } from "react";
-import { useDebounceValue } from "usehooks-ts";
+import { ChangeEvent } from "react";
 import { Search } from "lucide-react";
 
 import { Input } from "@/components/ui/input";
-import { searchDevices } from "@/app/api/search-devices/route";
 
 interface SearchInputProps {
   value: string;
@@ -21,7 +19,8 @@ export const SearchInput = ({ value, setValue }: SearchInputProps) => {
       <div className="flex items-center">
         <Search className="text-muted-foreground" />
         <Input
-          type="search"
+          // type="search"
+          spellCheck="false"
           placeholder="Search by address"
           onChange={handleChange}
           value={value}

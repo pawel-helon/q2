@@ -21,5 +21,4 @@ model Device {
   model           String
   owner           String?
   SIM             String
-
 }

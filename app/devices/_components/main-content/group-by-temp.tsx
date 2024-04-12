@@ -8,7 +8,11 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 
-export const GroupBy = () => {
+interface GroupByTempProps {
+  setStatus: (status: boolean) => void;
+}
+
+export const GroupByTemp = ({ setStatus }: GroupByTempProps) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -24,8 +28,14 @@ export const GroupBy = () => {
         sideOffset={4}
         className="bg-card shadow-2xl shadow-white/10"
       >
-        <DropdownMenuItem>None</DropdownMenuItem>
-        <DropdownMenuItem>Status</DropdownMenuItem>
+        <DropdownMenuItem>
+          None
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          onSelect={() => setStatus(true)}
+        >
+          Status
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

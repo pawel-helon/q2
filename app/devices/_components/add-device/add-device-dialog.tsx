@@ -45,7 +45,7 @@ export const AddDeviceDialog = () => {
       <DialogTrigger asChild>
         <Button>
           <Plus className="-ml-2 mr-2" />
-          Add new device
+          Add device
         </Button>
       </DialogTrigger>
       <DialogContent className="md:max-w-[720px]">
