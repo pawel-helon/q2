@@ -12,6 +12,7 @@ import { addDeviceSchema } from "@/schemas";
 import { db } from "@/lib/db";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
+import { STATUS } from "@prisma/client";
 
 export const AddDeviceDialog = () => {
   const onDataAction = async (data: z.infer<typeof addDeviceSchema>) => {
@@ -21,12 +22,14 @@ export const AddDeviceDialog = () => {
     if (parsed.success) {
       await db.device.create({
         data: {
+          deviceName: parsed.data.deviceName,
           streetAddress: parsed.data.streetAddress,
           city: parsed.data.city,
           country: parsed.data.country,
           model: parsed.data.model,
           owner: parsed.data.owner,
           SIM: parsed.data.SIM,
+          status: STATUS.INACTIVE,
         },
       });
       revalidatePath("/devices", "page");

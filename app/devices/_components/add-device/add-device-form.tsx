@@ -38,6 +38,7 @@ export const AddDeviceForm = ({
   const addNewDeviceForm = useForm<z.infer<typeof addDeviceSchema>>({
     resolver: zodResolver(addDeviceSchema),
     defaultValues: {
+      deviceName: "",
       streetAddress: "",
       city: "",
       country: "",
@@ -50,9 +51,8 @@ export const AddDeviceForm = ({
   const router = useRouter();
 
   const onSubmit = async (data: z.infer<typeof addDeviceSchema>) => {
-    //Server Action
     await onDataAction(data);
-    router.push('/devices');
+    router.push("/devices");
   };
 
   return (
@@ -63,6 +63,19 @@ export const AddDeviceForm = ({
       >
         <div className="flex flex-col md:flex-row gap-4 mb-10 mt-10">
           <div className="flex flex-col w-full justify-between gap-4">
+            <FormField
+              control={addNewDeviceForm.control}
+              name="deviceName"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel>Device Name</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter device name" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <FormField
               control={addNewDeviceForm.control}
               name="streetAddress"
@@ -129,7 +142,7 @@ export const AddDeviceForm = ({
               )}
             />
           </div>
-          <div className="flex flex-col w-full justify-between gap-4">
+          <div className="flex flex-col justify-start w-full gap-4">
             <FormField
               control={addNewDeviceForm.control}
               name="model"
@@ -197,14 +210,14 @@ export const AddDeviceForm = ({
             />
           </div>
         </div>
-          <div className="flex justify-end gap-2 mt-4">
-            <DialogClose asChild>
-              <Button variant="ghost">Cancel</Button>
-            </DialogClose>
-            <DialogClose asChild>
-              <Button type="submit">Submit</Button>
-            </DialogClose>
-          </div>
+        <div className="flex justify-end gap-2 mt-4">
+          <DialogClose asChild>
+            <Button variant="ghost">Cancel</Button>
+          </DialogClose>
+          <DialogClose asChild>
+            <Button type="submit">Submit</Button>
+          </DialogClose>
+        </div>
       </form>
     </Form>
   );

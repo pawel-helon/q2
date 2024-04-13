@@ -13,12 +13,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum STATUS {
+  ACTIVE
+  INACTIVE
+}
+
 model Device {
   id              Int       @id @default(autoincrement())
+  deviceName      String
   streetAddress   String
   city            String
   country         String
   model           String
   owner           String?
   SIM             String
+  status          STATUS
 }

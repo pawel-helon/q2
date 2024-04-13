@@ -1,61 +1,77 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { Actions } from "./actions";
-import { DataTable } from "./data-table";
-import { searchDevices } from "@/app/api/search-devices/route";
+import { useState } from "react";
 import { ActionsTemp } from "./actions-temp";
+import { AllDevicesTableTemp } from "./all-devices-table-temp";
+import { GroupedDevicesTablesTemp } from "./grouped-devices-tables-temp";
 
 export const MainContentTemp = () => {
-  const [value, setValue] = useState("");
+  const [searchValue, setSearchValue] = useState("");
   const [status, setStatus] = useState(false);
 
-  const [devices, setDevices] = useState<
+  const [allDevices, setAllDevices] = useState<
     {
       id: number;
+      deviceName: string;
       streetAddress: string;
       city: string;
       country: string;
       model: string;
       owner: string | null;
       SIM: string;
+      status: string;
     }[]
   >([]);
 
-  useEffect(() => {
-    const searchedDevices = async () => {
-      const devices = await searchDevices(value);
-      setDevices(devices);
-    };
-    searchedDevices();
+  const [activeDevices, setActiveDevices] = useState<
+    {
+      id: number;
+      deviceName: string;
+      streetAddress: string;
+      city: string;
+      country: string;
+      model: string;
+      owner: string | null;
+      SIM: string;
+      status: string;
+    }[]
+  >([]);
 
-    const interval = setInterval(searchedDevices, 5000);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, [value]);
-
-  const router = useRouter();
-  const handleClick = () => {
-    router.push("/devices/device");
-  };
+  const [inactiveDevices, setInactiveDevices] = useState<
+    {
+      id: number;
+      deviceName: string;
+      streetAddress: string;
+      city: string;
+      country: string;
+      model: string;
+      owner: string | null;
+      SIM: string;
+      status: string;
+    }[]
+  >([]);
 
   return (
     <div className="flex flex-col mt-12">
+      <ActionsTemp
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+        setStatus={setStatus}
+      />
       {!status ? (
-        <>
-          <ActionsTemp
-            value={value}
-            setValue={setValue}
-            setStatus={setStatus}
-          />
-          <DataTable devices={devices} handleClick={handleClick} />
-        </>
+        <AllDevicesTableTemp
+          searchValue={searchValue}
+          allDevices={allDevices}
+          setAllDevices={setAllDevices}
+        />
       ) : (
-        //TODO: Cards
-        <p>Grouped by status</p>
+        <GroupedDevicesTablesTemp
+          searchValue={searchValue}
+          activeDevices={activeDevices}
+          setActiveDevices={setActiveDevices}
+          inactiveDevices={inactiveDevices}
+          setInactiveDevices={setInactiveDevices}
+        />
       )}
     </div>
   );

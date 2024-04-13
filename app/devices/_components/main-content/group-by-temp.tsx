@@ -28,7 +28,9 @@ export const GroupByTemp = ({ setStatus }: GroupByTempProps) => {
         sideOffset={4}
         className="bg-card shadow-2xl shadow-white/10"
       >
-        <DropdownMenuItem>
+        <DropdownMenuItem
+          onSelect={() => setStatus(false)}
+        >
           None
         </DropdownMenuItem>
         <DropdownMenuItem
