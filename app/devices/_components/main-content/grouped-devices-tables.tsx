@@ -19,7 +19,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Heading } from "@/components/typography";
 
-interface AllDevicesTableTempProps {
+interface GroupedDevicesTablesProps {
   searchValue: string;
   activeDevices: {
     id: number;
@@ -71,13 +71,13 @@ interface AllDevicesTableTempProps {
   ) => void;
 }
 
-export const GroupedDevicesTablesTemp = ({
+export const GroupedDevicesTables = ({
   searchValue,
   activeDevices,
   setActiveDevices,
   inactiveDevices,
   setInactiveDevices,
-}: AllDevicesTableTempProps) => {
+}: GroupedDevicesTablesProps) => {
   const router = useRouter();
   const handleClick = () => {
     router.push("/devices/device");

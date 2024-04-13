@@ -1,18 +1,19 @@
 "use client";
 
-import { SearchInput } from "./search-input";
 import { GroupBy } from "./group-by";
+import { SearchInput } from "./search-input";
 
 interface ActionsProps {
-  value: string;
-  setValue: (value: string) => void;
+  searchValue: string;
+  setSearchValue: (searchValue: string) => void;
+  setStatus: (status: boolean) => void;
 }
 
-export const Actions = ({ value, setValue }: ActionsProps) => {
+export const Actions = ({ searchValue, setSearchValue, setStatus }: ActionsProps) => {
   return (
     <div className="flex justify-between border-b-2 border-border pb-1">
-      <SearchInput value={value} setValue={setValue}/>
-      <GroupBy />
+      <SearchInput searchValue={searchValue} setSearchValue={setSearchValue}/>
+      <GroupBy setStatus={setStatus}/>
     </div>
   );
 };

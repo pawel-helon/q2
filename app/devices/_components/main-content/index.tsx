@@ -1,48 +1,78 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { Actions } from "./actions";
-import { DataTable } from "./data-table";
-import { searchDevices } from "@/app/api/search-devices/route";
+import { AllDevicesTable } from "./all-devices-table";
+import { GroupedDevicesTables } from "./grouped-devices-tables";
 
 export const MainContent = () => {
-  const [value, setValue] = useState("");
-  const [devices, setDevices] = useState<
+  const [searchValue, setSearchValue] = useState("");
+  const [status, setStatus] = useState(false);
+
+  const [allDevices, setAllDevices] = useState<
     {
       id: number;
+      deviceName: string;
       streetAddress: string;
       city: string;
       country: string;
       model: string;
       owner: string | null;
       SIM: string;
+      status: string;
     }[]
   >([]);
 
-  useEffect(() => {
-    const searchedDevices = async () => {
-      const devices = await searchDevices(value);
-      setDevices(devices);
-    };
-    searchedDevices();
+  const [activeDevices, setActiveDevices] = useState<
+    {
+      id: number;
+      deviceName: string;
+      streetAddress: string;
+      city: string;
+      country: string;
+      model: string;
+      owner: string | null;
+      SIM: string;
+      status: string;
+    }[]
+  >([]);
 
-    const interval = setInterval(searchedDevices, 5000);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, [value]);
-
-  const router = useRouter();
-  const handleClick = () => {
-    router.push("/devices/device");
-  };
+  const [inactiveDevices, setInactiveDevices] = useState<
+    {
+      id: number;
+      deviceName: string;
+      streetAddress: string;
+      city: string;
+      country: string;
+      model: string;
+      owner: string | null;
+      SIM: string;
+      status: string;
+    }[]
+  >([]);
 
   return (
     <div className="flex flex-col mt-12">
-      <Actions value={value} setValue={setValue} />
-      <DataTable devices={devices} handleClick={handleClick} />
+      <Actions
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+        setStatus={setStatus}
+      />
+      {!status ? (
+        <AllDevicesTable
+          searchValue={searchValue}
+          allDevices={allDevices}
+          setAllDevices={setAllDevices}
+        />
+      ) : (
+        <GroupedDevicesTables
+          searchValue={searchValue}
+          activeDevices={activeDevices}
+          setActiveDevices={setActiveDevices}
+          inactiveDevices={inactiveDevices}
+          setInactiveDevices={setInactiveDevices}
+        />
+      )}
     </div>
   );
 };

@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-import { fetchAllDevices, searchDevices } from "@/app/api/search-devices/route";
+import { fetchAllDevices } from "@/app/api/search-devices/route";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Table,
@@ -14,10 +14,9 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
 import { Heading } from "@/components/typography";
 
-interface AllDevicesTableTempProps {
+interface AllDevicesTableProps {
   searchValue: string;
   allDevices: {
     id: number;
@@ -45,11 +44,11 @@ interface AllDevicesTableTempProps {
   ) => void;
 }
 
-export const AllDevicesTableTemp = ({
+export const AllDevicesTable = ({
   searchValue,
   allDevices,
   setAllDevices,
-}: AllDevicesTableTempProps) => {
+}: AllDevicesTableProps) => {
   const router = useRouter();
   const handleClick = () => {
     router.push("/devices/device");
