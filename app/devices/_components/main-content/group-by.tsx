@@ -9,18 +9,25 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 interface GroupByProps {
+  status: boolean;
   setStatus: (status: boolean) => void;
 }
 
-export const GroupBy = ({ setStatus }: GroupByProps) => {
+export const GroupBy = ({ status, setStatus }: GroupByProps) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
+          size="sm"
           variant="secondary"
-          className="pl-3 bg-card border"
+          className="pl-3 bg-card border text-muted-foreground"
         >
-          Group by <ChevronDown className="ml-4 -mr-2" />
+          Group by :
+          {status
+            ? <p className="text-white">&nbsp;Status</p>
+            : <p className="text-white">&nbsp;None</p>
+          }
+          <ChevronDown className="ml-2 -mr-2" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent

@@ -1,8 +1,9 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
+import { Devices, SetDevices } from "@/types";
 import { fetchAllDevices } from "@/app/api/search-devices/route";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -13,35 +14,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
 import { Heading } from "@/components/typography";
 
 interface AllDevicesTableProps {
   searchValue: string;
-  allDevices: {
-    id: number;
-    deviceName: string;
-    streetAddress: string;
-    city: string;
-    country: string;
-    model: string;
-    owner: string | null;
-    SIM: string;
-    status: string;
-  }[];
-  setAllDevices: (
-    devices: {
-      id: number;
-      deviceName: string;
-      streetAddress: string;
-      city: string;
-      country: string;
-      model: string;
-      owner: string | null;
-      SIM: string;
-      status: string;
-    }[]
-  ) => void;
+  allDevices: Devices
+  setAllDevices: SetDevices
 }
 
 export const AllDevicesTable = ({
@@ -104,9 +82,7 @@ export const AllDevicesTable = ({
                 <TableCell className="text-center">{device.owner}</TableCell>
                 <TableCell className="text-center">{device.SIM}</TableCell>
                 <TableCell className="text-right pr-0">
-                  <Badge variant="outline" className="w-full">
                     {device.status}
-                  </Badge>
                 </TableCell>
               </TableRow>
             ))}

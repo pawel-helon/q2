@@ -1,8 +1,9 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
+import { Devices, SetDevices } from "@/types";
 import {
   fetchActiveDevices,
   fetchInactiveDevices,
@@ -18,61 +19,20 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Heading } from "@/components/typography";
+import { cn } from "@/lib/utils";
 
 interface GroupedDevicesTablesProps {
   searchValue: string;
-  activeDevices: {
-    id: number;
-    deviceName: string;
-    streetAddress: string;
-    city: string;
-    country: string;
-    model: string;
-    owner: string | null;
-    SIM: string;
-    status: string;
-  }[];
-  setActiveDevices: (
-    devices: {
-      id: number;
-      deviceName: string;
-      streetAddress: string;
-      city: string;
-      country: string;
-      model: string;
-      owner: string | null;
-      SIM: string;
-      status: string;
-    }[]
-  ) => void;
-  inactiveDevices: {
-    id: number;
-    deviceName: string;
-    streetAddress: string;
-    city: string;
-    country: string;
-    model: string;
-    owner: string | null;
-    SIM: string;
-    status: string;
-  }[];
-  setInactiveDevices: (
-    devices: {
-      id: number;
-      deviceName: string;
-      streetAddress: string;
-      city: string;
-      country: string;
-      model: string;
-      owner: string | null;
-      SIM: string;
-      status: string;
-    }[]
-  ) => void;
+  status: boolean;
+  activeDevices: Devices;
+  setActiveDevices: SetDevices;
+  inactiveDevices: Devices;
+  setInactiveDevices: SetDevices;
 }
 
 export const GroupedDevicesTables = ({
   searchValue,
+  status,
   activeDevices,
   setActiveDevices,
   inactiveDevices,
@@ -131,8 +91,14 @@ export const GroupedDevicesTables = ({
                 <TableHead className="text-center">Country</TableHead>
                 <TableHead className="text-center">Model</TableHead>
                 <TableHead className="text-center">Owner</TableHead>
-                <TableHead className="text-center">SIM</TableHead>
-                <TableHead className="text-right pr-0">Status</TableHead>
+                <TableHead
+                  className={cn("text-center", status && "text-right pr-0")}
+                >
+                  SIM
+                </TableHead>
+                {!status ? (
+                  <TableHead className="text-right pr-0">Status</TableHead>
+                ) : null}
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -150,12 +116,18 @@ export const GroupedDevicesTables = ({
                   </TableCell>
                   <TableCell className="text-center">{device.model}</TableCell>
                   <TableCell className="text-center">{device.owner}</TableCell>
-                  <TableCell className="text-center">{device.SIM}</TableCell>
-                  <TableCell className="text-right pr-0">
-                    <Badge variant="outline" className="w-full">
-                      {device.status}
-                    </Badge>
+                  <TableCell
+                    className={cn("text-center", status && "text-right pr-0")}
+                  >
+                    {device.SIM}
                   </TableCell>
+                  {!device.status ? (
+                    <TableCell className="text-right pr-0">
+                      <Badge variant="outline" className="w-full">
+                        {device.status}
+                      </Badge>
+                    </TableCell>
+                  ) : null}
                 </TableRow>
               ))}
             </TableBody>
@@ -176,8 +148,14 @@ export const GroupedDevicesTables = ({
                 <TableHead className="text-center">Country</TableHead>
                 <TableHead className="text-center">Model</TableHead>
                 <TableHead className="text-center">Owner</TableHead>
-                <TableHead className="text-center">SIM</TableHead>
-                <TableHead className="text-right pr-0">Status</TableHead>
+                <TableHead
+                  className={cn("text-center", status && "text-right pr-0")}
+                >
+                  SIM
+                </TableHead>
+                {!status ? (
+                  <TableHead className="text-right pr-0">Status</TableHead>
+                ) : null}
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -195,12 +173,18 @@ export const GroupedDevicesTables = ({
                   </TableCell>
                   <TableCell className="text-center">{device.model}</TableCell>
                   <TableCell className="text-center">{device.owner}</TableCell>
-                  <TableCell className="text-center">{device.SIM}</TableCell>
-                  <TableCell className="text-right pr-0">
-                    <Badge variant="outline" className="w-full">
-                      {device.status}
-                    </Badge>
+                  <TableCell
+                    className={cn("text-center", status && "text-right pr-0")}
+                  >
+                    {device.SIM}
                   </TableCell>
+                  {!device.status ? (
+                    <TableCell className="text-right pr-0">
+                      <Badge variant="outline" className="w-full">
+                        {device.status}
+                      </Badge>
+                    </TableCell>
+                  ) : null}
                 </TableRow>
               ))}
             </TableBody>
