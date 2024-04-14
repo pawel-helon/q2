@@ -7,6 +7,7 @@ export default function DevicesPage() {
     <div className="w-full">
       <Header />
       <MainContent />
+      {/* <MainContent /> */}
       {/* <MainContentServer /> */}
     </div>
   )

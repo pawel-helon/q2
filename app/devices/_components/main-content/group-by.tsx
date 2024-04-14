@@ -9,23 +9,23 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 interface GroupByProps {
-  status: boolean;
-  setStatus: (status: boolean) => void;
+  groupedByStatus: boolean;
+  setGroupedByStatus: (groupedByStatus: boolean) => void;
 }
 
-export const GroupBy = ({ status, setStatus }: GroupByProps) => {
+export const GroupBy = ({ groupedByStatus, setGroupedByStatus }: GroupByProps) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
           size="sm"
           variant="secondary"
-          className="pl-3 bg-card border text-muted-foreground"
+          className="pl-3 bg-card border text-muted-foreground w-[10rem]"
         >
-          Group by :
-          {status
-            ? <p className="text-white">&nbsp;Status</p>
-            : <p className="text-white">&nbsp;None</p>
+          Group by:  &nbsp;
+          {groupedByStatus
+            ? <p className="text-white">Status</p>
+            : <p className="text-white">None</p>
           }
           <ChevronDown className="ml-2 -mr-2" />
         </Button>
@@ -33,15 +33,15 @@ export const GroupBy = ({ status, setStatus }: GroupByProps) => {
       <DropdownMenuContent
         align="end"
         sideOffset={4}
-        className="bg-card"
+        className="bg-card w-[10rem]"
       >
         <DropdownMenuItem
-          onSelect={() => setStatus(false)}
+          onSelect={() => setGroupedByStatus(false)}
         >
           None
         </DropdownMenuItem>
         <DropdownMenuItem
-          onSelect={() => setStatus(true)}
+          onSelect={() => setGroupedByStatus(true)}
         >
           Status
         </DropdownMenuItem>

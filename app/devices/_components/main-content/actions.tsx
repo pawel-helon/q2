@@ -6,15 +6,15 @@ import { SearchInput } from "./search-input";
 interface ActionsProps {
   searchValue: string;
   setSearchValue: (searchValue: string) => void;
-  status: boolean;
-  setStatus: (status: boolean) => void;
+  groupedByStatus: boolean;
+  setGroupedByStatus: (groupedByStatus: boolean) => void;
 }
 
-export const Actions = ({ searchValue, setSearchValue, status, setStatus }: ActionsProps) => {
+export const Actions = ({ searchValue, setSearchValue, groupedByStatus, setGroupedByStatus }: ActionsProps) => {
   return (
     <div className="flex justify-between border-b-2 border-border pb-1">
       <SearchInput searchValue={searchValue} setSearchValue={setSearchValue}/>
-      <GroupBy status={status} setStatus={setStatus}/>
+      <GroupBy groupedByStatus={groupedByStatus} setGroupedByStatus={setGroupedByStatus}/>
     </div>
   );
 };
