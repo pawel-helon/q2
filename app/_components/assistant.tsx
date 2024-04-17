@@ -37,7 +37,7 @@ export const Assistant = () => {
       animate={{ width: isChat ? 380 : 0 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
       className={cn(
-        "h-full border-border/80 p-4 flex flex-col justify-between",
+        "h-screen border-border/80 p-4 flex flex-col justify-between",
         isChat ? "w-[440px] border-r-2 border-border" : "w-0"
       )}
     >

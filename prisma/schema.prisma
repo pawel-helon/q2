@@ -29,3 +29,15 @@ model Device {
   SIM             String
   status          STATUS
 }
+
+enum ROLE {
+  ADMIN
+  USER
+}
+
+model User {
+  id       Int      @id @default(autoincrement())
+  email    String   @unique
+  name     String?
+  role     ROLE     @default(USER)
+}

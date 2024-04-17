@@ -1,3 +1,11 @@
+import { z } from "zod";
+import { revalidatePath } from "next/cache";
+import { STATUS } from "@prisma/client";
+import { Plus } from "lucide-react";
+
+import { AddDeviceForm } from "./add-device-form";
+import { addDeviceSchema } from "@/schemas";
+import { db } from "@/lib/db";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -6,13 +14,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Plus } from "lucide-react";
-import { AddDeviceForm } from "./add-device-form";
-import { addDeviceSchema } from "@/schemas";
-import { db } from "@/lib/db";
-import { z } from "zod";
-import { revalidatePath } from "next/cache";
-import { STATUS } from "@prisma/client";
 
 export const AddDeviceDialog = () => {
   const onDataAction = async (data: z.infer<typeof addDeviceSchema>) => {

@@ -8,18 +8,17 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
   } from "@/components/ui/breadcrumb";
-import { usePathname } from "next/navigation";
 
 export const Breadcrumbs = () => {
   return (
     <Breadcrumb>
     <BreadcrumbList>
       <BreadcrumbItem>
-        <BreadcrumbLink>Devices</BreadcrumbLink>
+        <BreadcrumbLink>Home</BreadcrumbLink>
       </BreadcrumbItem>
       <BreadcrumbSeparator />
       <BreadcrumbItem>
-        <BreadcrumbPage>Device Name</BreadcrumbPage>
+        <BreadcrumbPage>Devices</BreadcrumbPage>
       </BreadcrumbItem>
     </BreadcrumbList>
   </Breadcrumb>

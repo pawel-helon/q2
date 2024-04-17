@@ -5,7 +5,11 @@ import { useState } from "react";
 import { Actions } from "./actions";
 import { Devices } from "@/types";
 import { DevicesTable } from "./devices-table";
-import { fetchActiveDevices, fetchAllDevices, fetchInactiveDevices } from "@/app/api/search-devices/route";
+import {
+  fetchAllDevices,
+  fetchActiveDevices,
+  fetchInactiveDevices,
+} from "@/app/api/search-devices/route";
 
 export const MainContent = () => {
   const [searchValue, setSearchValue] = useState("");

@@ -62,7 +62,7 @@ export const AddDeviceForm = ({
         className="space flex flex-col gap-4"
       >
         <div className="flex flex-col md:flex-row gap-4 mb-10 mt-10">
-          <div className="flex flex-col w-full justify-between gap-4">
+          <div className="flex flex-col w-full justify-start gap-4">
             <FormField
               control={addNewDeviceForm.control}
               name="deviceName"
@@ -78,14 +78,68 @@ export const AddDeviceForm = ({
             />
             <FormField
               control={addNewDeviceForm.control}
-              name="streetAddress"
+              name="model"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <FormLabel>Street address</FormLabel>
+                  <FormLabel>Model</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter street address" {...field} />
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Select model" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectItem value="NX-123">NX-123</SelectItem>
+                          <SelectItem value="MP-28">MP-28</SelectItem>
+                          <SelectItem value="NZ-3427">NZ-3427</SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={addNewDeviceForm.control}
+              name="SIM"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>SIM</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter SIM number" {...field} />
                   </FormControl>
                   <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <div className="flex flex-col justify-start w-full gap-4">
+            <FormField
+              control={addNewDeviceForm.control}
+              name="country"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel>Country</FormLabel>
+                  <FormControl>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Select country" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectItem value="France">France</SelectItem>
+                          <SelectItem value="Germany">Germany</SelectItem>
+                          <SelectItem value="USA">USA</SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  </FormControl>
                 </FormItem>
               )}
             />
@@ -105,63 +159,9 @@ export const AddDeviceForm = ({
                       </SelectTrigger>
                       <SelectContent>
                         <SelectGroup>
-                          <SelectItem value="cityA">City A</SelectItem>
-                          <SelectItem value="cityB">City B</SelectItem>
-                          <SelectItem value="cityC">City C</SelectItem>
-                        </SelectGroup>
-                      </SelectContent>
-                    </Select>
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={addNewDeviceForm.control}
-              name="country"
-              render={({ field }) => (
-                <FormItem className="w-full">
-                  <FormLabel>Country</FormLabel>
-                  <FormControl>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Select country" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectGroup>
-                          <SelectItem value="countryA">Country A</SelectItem>
-                          <SelectItem value="countryB">Country B</SelectItem>
-                          <SelectItem value="countryC">Country C</SelectItem>
-                        </SelectGroup>
-                      </SelectContent>
-                    </Select>
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-          </div>
-          <div className="flex flex-col justify-start w-full gap-4">
-            <FormField
-              control={addNewDeviceForm.control}
-              name="model"
-              render={({ field }) => (
-                <FormItem className="w-full">
-                  <FormLabel>Model</FormLabel>
-                  <FormControl>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Select model" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectGroup>
-                          <SelectItem value="modelA">Model A</SelectItem>
-                          <SelectItem value="modelB">Model B</SelectItem>
-                          <SelectItem value="modelC">Model C</SelectItem>
+                          <SelectItem value="Boston">Boston</SelectItem>
+                          <SelectItem value="Dallas">Dallas</SelectItem>
+                          <SelectItem value="Austin">Austin</SelectItem>
                         </SelectGroup>
                       </SelectContent>
                     </Select>
@@ -185,9 +185,13 @@ export const AddDeviceForm = ({
                       </SelectTrigger>
                       <SelectContent>
                         <SelectGroup>
-                          <SelectItem value="ownerA">Owner A</SelectItem>
-                          <SelectItem value="ownerB">Owner B</SelectItem>
-                          <SelectItem value="ownerC">Owner C</SelectItem>
+                          <SelectItem value="Tod Tompson">
+                            Tod Tompson
+                          </SelectItem>
+                          <SelectItem value="Jessy Jones">
+                            Jessy Jones
+                          </SelectItem>
+                          <SelectItem value="Corey Cox">Corey Cox</SelectItem>
                         </SelectGroup>
                       </SelectContent>
                     </Select>
@@ -197,12 +201,12 @@ export const AddDeviceForm = ({
             />
             <FormField
               control={addNewDeviceForm.control}
-              name="SIM"
+              name="streetAddress"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>SIM</FormLabel>
+                <FormItem className="w-full">
+                  <FormLabel>Street address</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter SIM number" {...field} />
+                    <Input placeholder="Enter street address" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

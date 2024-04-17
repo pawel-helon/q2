@@ -50,7 +50,7 @@ export const DevicesTable = ({
     return () => {
       clearInterval(interval);
     };
-  }, [searchValue, fetchList ,setDevicesList]);
+  }, [searchValue, fetchList, setDevicesList]);
 
   return (
     <Card className="mt-8">

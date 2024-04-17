@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/lib/db";
-import { STATUS } from "@prisma/client";
+import { $Enums, STATUS } from "@prisma/client";
 
 export const searchDevices = async (value: string) => {
   const devices = await db.device.findMany({

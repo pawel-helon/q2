@@ -1,13 +1,62 @@
-import { z } from "zod";
-
 import { db } from "@/lib/db";
-import { addDeviceSchema } from "@/schemas";
-import { AddDeviceForm } from "../devices/_components/add-device/add-device-form";
+import { DataTable } from "./_components/data-table";
+import { columns } from "./_components/data-table/columns";
+import { ROLE } from "@prisma/client";
+import { Navbar } from "./_components/navbar";
+import { Header } from "../_components/header";
 
-export default function UsersPage() {
+export default async function UsersPage() {
+  const allUsers = await fetchAll();
+  const allUsersWithSearch = await fetchAllWithSearch("John");
+  const admins = await fetchAdmins();
+  const users = await fetchUsers();
+
   return (
     <div>
-      UsersPage
+      <Navbar />
+      <Header title="Users" />
+      {/* @ts-ignore */}
+      <DataTable columns={columns} data={allUsers} />
+      {/* @ts-ignore */}
+      {/* <DataTable columns={columns} data={allUsersWithSearch} title="All users with search" /> */}
+      {/* @ts-ignore */}
+      {/* <DataTable columns={columns} data={admins} title="Admins" /> */}
+      {/* @ts-ignore */}
+      {/* <DataTable columns={columns} data={users} title="Users" /> */}
     </div>
   );
+}
+
+export async function fetchAll() {
+  const users = await db.user.findMany();
+  return users;
+}
+
+export async function fetchAllWithSearch(searchValue: string) {
+  const users = await db.user.findMany({
+    where: {
+      name: {
+        contains: searchValue,
+      },
+    },
+  });
+  return users;
+}
+
+export async function fetchAdmins() {
+  const users = await db.user.findMany({
+    where: {
+      role: ROLE.ADMIN,
+    },
+  });
+  return users;
+}
+
+export async function fetchUsers() {
+  const users = await db.user.findMany({
+    where: {
+      role: ROLE.USER,
+    },
+  });
+  return users;
 }
