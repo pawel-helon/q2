@@ -13,6 +13,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum ROLE {
+  ADMIN
+  USER
+}
+
+model User {
+  id       Int      @id @default(autoincrement())
+  email    String   @unique
+  name     String?
+  role     ROLE     @default(USER)
+}
+
 enum STATUS {
   ACTIVE
   INACTIVE
@@ -28,16 +40,4 @@ model Device {
   owner           String?
   SIM             String
   status          STATUS
-}
-
-enum ROLE {
-  ADMIN
-  USER
-}
-
-model User {
-  id       Int      @id @default(autoincrement())
-  email    String   @unique
-  name     String?
-  role     ROLE     @default(USER)
 }

@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Table } from "@tanstack/react-table";
 import { TableColumns } from "./table-columns";
+import { Div } from "@/components/motion-ui/div";
 
 interface ActionsProps<TData> {
   table: Table<TData>;
@@ -12,13 +13,13 @@ export function Actions<TData>({ table, anySelectedRow }: ActionsProps<TData>) {
   return (
     <div className="relative">
       {anySelectedRow ? (
-        <div className="flex min-w-sm">
+        <Div duration=".3" className="flex min-w-sm">
           <Button variant="ghost">Assign device</Button>
           <Separator orientation="vertical" className="mx-2" />
           <Button variant="ghost">Delete</Button>
-        </div>
+        </Div>
       ) : (
-        <div className="size-[36px]"/>
+        <div className="size-[36px]" />
       )}
       <TableColumns table={table} />
     </div>

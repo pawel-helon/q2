@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
 
 import {
   ColumnDef,
@@ -19,6 +18,7 @@ import { DataTableHeader } from "./data-table-header";
 import { DataTableFooter } from "./data-table-footer";
 import { DataTableBody } from "./data-table-body";
 import { DataTableSearch } from "./data-table-search";
+import { Div } from "@/components/motion-ui/div";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -75,11 +75,7 @@ export function DataTable<TData, TValue>({
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.6, type: "easeOut"}}
-    >
+    <Div duration=".6">
       <DataTableSearch table={table} />
       <div className="mt-12 py-4 border border-border shadow-black shadow-2xl rounded-lg">
         <DataTableHeader
@@ -94,6 +90,6 @@ export function DataTable<TData, TValue>({
           setPagination={setPagination}
         />
       </div>
-    </motion.div>
+    </Div>
   );
 }
