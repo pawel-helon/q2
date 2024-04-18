@@ -1,12 +1,14 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { $Enums } from "@prisma/client";
+import { CaretSortIcon } from "@radix-ui/react-icons";
 import { ColumnDef } from "@tanstack/react-table";
 
 export type User = {
   id: number;
-  name: string;
+  name: string | null;
   email: string;
   role: $Enums.ROLE;
 };
@@ -27,7 +29,9 @@ export const columns: ColumnDef<User>[] = [
     cell: ({ row }) => (
       <Checkbox
         checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        onCheckedChange={(value) => {
+          row.toggleSelected(!!value)
+        }}
         aria-label="Select row"
       />
     ),
@@ -36,14 +40,47 @@ export const columns: ColumnDef<User>[] = [
   },
   {
     accessorKey: "name",
-    header: "Name",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="hover:bg-transparent p-0"
+        >
+          Name
+          <CaretSortIcon className="ml-2 size-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "email",
-    header: "Email",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="hover:bg-transparent p-0"
+        >
+          Email
+          <CaretSortIcon className="ml-2 size-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "role",
-    header: "Role",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="hover:bg-transparent p-0"
+        >
+          Role
+          <CaretSortIcon className="ml-2 size-4" />
+        </Button>
+      );
+    },
   },
 ];

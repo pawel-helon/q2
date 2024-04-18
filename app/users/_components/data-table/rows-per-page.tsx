@@ -30,12 +30,12 @@ export function RowsPerPage<TData>({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="px-2 text-muted-foreground text-xs">
+        <Button variant="ghost" className="px-2 text-muted-foreground text-xs focus-visible:ring-background">
           {pageSize} rows
           <ChevronDown className="ml-2 -mr-1" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[40px]">
+      <DropdownMenuContent align="center" className="min-w-[5rem] bg-background shadow-black shadow-lg">
         <DropdownMenuItem
           onSelect={() =>
             setPagination({
@@ -53,7 +53,6 @@ export function RowsPerPage<TData>({
               pageSize: 10,
             })
           }
-          className="w-[40px]"
         >
           10
         </DropdownMenuItem>

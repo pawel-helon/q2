@@ -38,7 +38,7 @@ export const Assistant = () => {
       transition={{ duration: 0.3, ease: "easeOut" }}
       className={cn(
         "h-screen border-border/80 p-4 flex flex-col justify-between",
-        isChat ? "w-[440px] border-r-2 border-border" : "w-0"
+        isChat ? "w-[440px] border-r-[1px] border-border" : "w-0"
       )}
     >
       <div className="w-full flex justify-between items-center">

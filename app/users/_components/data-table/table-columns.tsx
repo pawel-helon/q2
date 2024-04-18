@@ -14,14 +14,14 @@ interface TableColumnsProps<TData> {
 
 export function TableColumns<TData>({ table }: TableColumnsProps<TData>) {
   return (
-    <div className="absolute top-[68px] right-1 z-50">
+    <div className="absolute top-[68px] right-0 z-50">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline" size="icon" className="rounded-full">
             <Plus />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
+        <DropdownMenuContent align="end" className="bg-background shadow-black shadow-lg">
           {table
             .getAllColumns()
             .filter((column) => column.getCanHide())

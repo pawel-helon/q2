@@ -4,6 +4,7 @@ import { columns } from "./_components/data-table/columns";
 import { ROLE } from "@prisma/client";
 import { Navbar } from "./_components/navbar";
 import { Header } from "../_components/header";
+import { IndexTemp } from "./_components/data-table/index-temp";
 
 export default async function UsersPage() {
   const allUsers = await fetchAll();
@@ -15,11 +16,9 @@ export default async function UsersPage() {
     <div>
       <Navbar />
       <Header title="Users" />
-      {/* @ts-ignore */}
-      <DataTable columns={columns} data={allUsers} />
-      {/* @ts-ignore */}
+      {/* <DataTable columns={columns} data={allUsers} title="temp"/> */}
+      <IndexTemp columns={columns} data={allUsers} title="temp"/>
       {/* <DataTable columns={columns} data={allUsersWithSearch} title="All users with search" /> */}
-      {/* @ts-ignore */}
       {/* <DataTable columns={columns} data={admins} title="Admins" /> */}
       {/* @ts-ignore */}
       {/* <DataTable columns={columns} data={users} title="Users" /> */}
