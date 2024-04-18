@@ -1,16 +1,22 @@
-import { Header } from "@/app/_components/header";
-import { MainContent } from "./_components/main-content";
-import { MainContentServer } from "./_components/main-content-server";
+import { db } from "@/lib/db";
+import { DataTable } from "./_components/data-table";
+import { columns } from "./_components/data-table/columns";
 import { Navbar } from "./_components/navbar";
+import { Header } from "../_components/header";
 
-export default function DevicesPage() {
+export default async function UsersPage() {
+  const allDevices = await fetchAll();
+
   return (
-    <div className="w-full">
+    <div>
       <Navbar />
-      <Header title="Devices"/>
-      <MainContent />
-      {/* <MainContent /> */}
-      {/* <MainContentServer /> */}
+      <Header title="Devices" />
+      <DataTable columns={columns} data={allDevices} />
     </div>
-  )
+  );
+}
+
+export async function fetchAll() {
+  const devices = await db.device.findMany();
+  return devices;
 }

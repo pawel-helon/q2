@@ -13,7 +13,7 @@ export function Actions<TData>({ table, anySelectedRow }: ActionsProps<TData>) {
     <div className="relative">
       {anySelectedRow ? (
         <div className="flex min-w-sm">
-          <Button variant="ghost">Assign device</Button>
+          <Button variant="ghost">Assign owner</Button>
           <Separator orientation="vertical" className="mx-2" />
           <Button variant="ghost">Delete</Button>
         </div>

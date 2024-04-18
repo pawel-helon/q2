@@ -14,9 +14,9 @@ export function DataTableSearch<TData>({ table }: DataTableSearchProps<TData>) {
         <Input
           placeholder="Search by name"
           spellCheck={false}
-          value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
+          value={(table.getColumn("deviceName")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("name")?.setFilterValue(event.target.value)
+            table.getColumn("deviceName")?.setFilterValue(event.target.value)
           }
           className="max-w-[264px] h-9 flex items-center border-none bg-background text-white"
         />

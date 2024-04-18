@@ -4,13 +4,13 @@ import { Actions } from "./actions";
 
 interface DataTableHeaderProps<TData> {
   table: Table<TData>;
-  numberOfUsers: number;
+  numberOfResults: number;
   anySelectedRow: boolean;
 }
 
 export function DataTableHeader<TData>({
   table,
-  numberOfUsers,
+  numberOfResults,
   anySelectedRow
 }: DataTableHeaderProps<TData>) {
   return (
@@ -18,7 +18,7 @@ export function DataTableHeader<TData>({
       <div className="flex gap-2 items-end">
       <Heading variant="h3">Users</Heading>
       <Paragraph variant="small-thick" className="text-muted-foreground">
-        ({numberOfUsers})
+        ({numberOfResults})
       </Paragraph>
       </div>
       <Actions table={table} anySelectedRow={anySelectedRow}/>

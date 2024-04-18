@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Breadcrumbs } from "./breadcrumbs";
-import { AddDeviceDialog } from "@/app/devices/_components/add-device/add-device-dialog";
 import { Plus } from "lucide-react";
 
 export const Navbar = () => {

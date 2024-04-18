@@ -1,5 +1,3 @@
-import React, { Dispatch, SetStateAction } from "react";
-
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -7,9 +5,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Table } from "@tanstack/react-table";
 import { ChevronDown } from "lucide-react";
+import { Dispatch, SetStateAction } from "react";
 
-interface RowsPerPageProps {
+interface RowsPerPageProps<TData> {
   pagination: {
     pageIndex: number;
     pageSize: number;
@@ -22,22 +22,20 @@ interface RowsPerPageProps {
   >;
 }
 
-export const RowsPerPage = ({
+export function RowsPerPage<TData>({
   pagination,
   setPagination,
-}: RowsPerPageProps) => {
-    
+}: RowsPerPageProps<TData>) {
   const pageSize = pagination.pageSize;
-    
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="px-2 text-muted-foreground text-xs">
-            {pageSize} rows
-          <ChevronDown className="ml-2"/>
+        <Button variant="ghost" className="px-2 text-muted-foreground text-xs focus-visible:ring-background">
+          {pageSize} rows
+          <ChevronDown className="ml-2 -mr-1" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align="center" className="min-w-[5rem] bg-background shadow-black shadow-lg">
         <DropdownMenuItem
           onSelect={() =>
             setPagination({
@@ -61,4 +59,4 @@ export const RowsPerPage = ({
       </DropdownMenuContent>
     </DropdownMenu>
   );
-};
+}

@@ -83,4 +83,9 @@ export const columns: ColumnDef<User>[] = [
       );
     },
   },
+  {
+    id: "Status",
+    header: () => {return <div className="w-[40px]" />},
+    cell: () => {return <div className="w-[40px]" />}
+  }
 ];

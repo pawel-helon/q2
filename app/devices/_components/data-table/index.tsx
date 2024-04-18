@@ -62,7 +62,7 @@ export function DataTable<TData, TValue>({
     },
   });
 
-  const numberOfUsers = data.length;
+  const numberOfResults = data.length;
 
   const selectedRows = table.getState().rowSelection;
 
@@ -84,7 +84,7 @@ export function DataTable<TData, TValue>({
       <div className="mt-12 py-4 border border-border shadow-black shadow-2xl rounded-lg">
         <DataTableHeader
           table={table}
-          numberOfUsers={numberOfUsers}
+          numberOfResults={numberOfResults}
           anySelectedRow={anySelectedRow}
         />
         <DataTableBody table={table} />

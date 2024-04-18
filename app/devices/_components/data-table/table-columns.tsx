@@ -36,7 +36,7 @@ export function TableColumns<TData>({ table }: TableColumnsProps<TData>) {
                   {column.id}
                 </DropdownMenuCheckboxItem>
               );
-          })}
+            })}
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
