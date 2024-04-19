@@ -5,7 +5,7 @@ import { Navbar } from "./_components/navbar";
 import { Header } from "../_components/header";
 
 export default async function UsersPage() {
-  const allDevices = await fetchAll();
+  const allDevices = await fetchDevices();
 
   return (
     <div>
@@ -15,8 +15,30 @@ export default async function UsersPage() {
     </div>
   );
 }
-
-export async function fetchAll() {
+export async function fetchDevices() {
   const devices = await db.device.findMany();
-  return devices;
+
+  const devicesWithOwners = await Promise.all(devices.map(async (device) => {
+    const ownerId = device.ownerId;
+
+    const owner = await db.user.findUnique({
+      where: {
+        id: ownerId,
+      },
+    });
+
+    return {
+      id: device.id,
+      deviceName: device.deviceName,
+      streetAddress: device.streetAddress,
+      city: device.city,
+      country: device.country,
+      model: device.model,
+      SIM: device.SIM,
+      status: device.status,
+      owner: owner?.name || null,
+    };
+  }));
+
+  return devicesWithOwners;
 }

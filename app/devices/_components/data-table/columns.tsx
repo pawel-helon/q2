@@ -8,7 +8,7 @@ import { ColumnDef } from "@tanstack/react-table";
 
 export type Device = {
   id: number;
-  deviceName: string | null;
+  deviceName: string;
   city: string;
   country: string;
   model: string;

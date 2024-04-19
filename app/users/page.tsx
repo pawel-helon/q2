@@ -31,6 +31,5 @@ export async function fetchUsers() {
     devices: user.devices[0]?.deviceName || null,
   }));
 
-  console.log('users:', usersWithDevices);
   return usersWithDevices;
 }
