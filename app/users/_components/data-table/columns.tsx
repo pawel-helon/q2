@@ -11,6 +11,7 @@ export type User = {
   name: string | null;
   email: string;
   role: $Enums.ROLE;
+  devices?: string | null;
 };
 
 export const columns: ColumnDef<User>[] = [
@@ -84,8 +85,16 @@ export const columns: ColumnDef<User>[] = [
     },
   },
   {
+    accessorKey: "devices",
+    header: "Devices",
+  },
+  {
     id: "Status",
-    header: () => {return <div className="w-[40px]" />},
-    cell: () => {return <div className="w-[40px]" />}
-  }
+    header: () => {
+      return <div className="w-[40px]" />;
+    },
+    cell: () => {
+      return <div className="w-[40px]" />;
+    },
+  },
 ];

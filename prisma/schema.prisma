@@ -23,6 +23,7 @@ model User {
   email    String   @unique
   name     String?
   role     ROLE     @default(USER)
+  devices  Device[]
 }
 
 enum STATUS {
@@ -37,7 +38,8 @@ model Device {
   city            String
   country         String
   model           String
-  owner           String?
   SIM             String
   status          STATUS
+  owner           User @relation(fields: [ownerId], references: [id])
+  ownerId         Int
 }
