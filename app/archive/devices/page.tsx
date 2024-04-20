@@ -4,6 +4,7 @@ import { MainContentServer } from "./_components/main-content-server";
 import { Navbar } from "./_components/navbar";
 
 export default function DevicesPage() {
+
   return (
     <div className="w-full">
       <Navbar />

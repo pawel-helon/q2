@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
-import { STATUS } from "@prisma/client";
+import { $Enums, STATUS } from "@prisma/client";
 import { Plus } from "lucide-react";
 
 import { AddDeviceForm } from "./add-device-form";
@@ -15,7 +15,16 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-export const AddDeviceDialog = () => {
+interface AddDeviceDialogProps {
+  owners: {
+    id: number;
+    email: string;
+    name: string | null;
+    role: $Enums.ROLE;
+}[]
+}
+
+export const AddDeviceDialog = ({ owners }: AddDeviceDialogProps) => {
   const onDataAction = async (data: z.infer<typeof addDeviceSchema>) => {
     "use server";
     const parsed = addDeviceSchema.safeParse(data);
@@ -60,7 +69,7 @@ export const AddDeviceDialog = () => {
         <DialogHeader className="mb-4 text-left">
           <DialogTitle>Add new device</DialogTitle>
         </DialogHeader>
-        <AddDeviceForm onDataAction={onDataAction}/>
+        <AddDeviceForm onDataAction={onDataAction} owners={owners}/>
       </DialogContent>
     </Dialog>
   );

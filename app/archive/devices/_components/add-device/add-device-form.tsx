@@ -25,15 +25,23 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { $Enums } from "@prisma/client";
 
 export const AddDeviceForm = ({
   onDataAction,
+  owners,
 }: {
   onDataAction: (data: z.infer<typeof addDeviceSchema>) => Promise<{
     message: string;
     device?: z.infer<typeof addDeviceSchema>;
     issues?: string[] | undefined;
   }>;
+  owners: {
+    id: number;
+    email: string;
+    name: string | null;
+    role: $Enums.ROLE;
+}[]
 }) => {
   const addNewDeviceForm = useForm<z.infer<typeof addDeviceSchema>>({
     resolver: zodResolver(addDeviceSchema),
@@ -185,18 +193,14 @@ export const AddDeviceForm = ({
                       </SelectTrigger>
                       <SelectContent>
                         <SelectGroup>
-                          <SelectItem value="jdoe@mail.com">
-                            jdoe@mail.com
-                          </SelectItem>
-                          <SelectItem value="ttompson@mail.com">
-                            ttompson@mail.com
-                          </SelectItem>
-                          <SelectItem value="temp@mail.com">
-                            temp@mail.com
-                          </SelectItem>
-                          <SelectItem value="temp@mail.com">
-                            saturday@mail.com
-                          </SelectItem>
+                          {owners.map((owner) => {
+                            return (
+                              <SelectItem key={owner.id} value={owner.email}>
+                                {owner.email}
+                              </SelectItem>
+                            );
+                          
+                          })}
                         </SelectGroup>
                       </SelectContent>
                     </Select>

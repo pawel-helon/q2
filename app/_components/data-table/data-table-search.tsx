@@ -1,12 +1,23 @@
 import { Input } from "@/components/ui/input";
 import { Table } from "@tanstack/react-table";
 import { Search } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 interface DataTableSearchProps<TData> {
   table: Table<TData>;
 }
 
 export function DataTableSearch<TData>({ table }: DataTableSearchProps<TData>) {
+  const pathname = usePathname()
+  
+  let searchColumn: string
+
+  if (pathname === "/users") {
+    searchColumn = "name"
+  } else {
+    searchColumn = "deviceName"
+  }
+  
   return (
     <div className="flex justify-between border-b border-border pb-1 my-12">
       <div className="flex items-center">
@@ -14,9 +25,9 @@ export function DataTableSearch<TData>({ table }: DataTableSearchProps<TData>) {
         <Input
           placeholder="Search by name"
           spellCheck={false}
-          value={(table.getColumn("deviceName")?.getFilterValue() as string) ?? ""}
+          value={(table.getColumn(searchColumn)?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("deviceName")?.setFilterValue(event.target.value)
+            table.getColumn(searchColumn)?.setFilterValue(event.target.value)
           }
           className="max-w-[264px] h-9 flex items-center border-none bg-background text-white"
         />
