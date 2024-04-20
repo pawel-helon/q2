@@ -7,7 +7,8 @@ import {
   TableCell,
 } from "@/components/ui/table";
 import { Table, flexRender } from "@tanstack/react-table";
-import { columns } from "./columns";
+import { columns } from "@/app/devices/_components/data-table/columns";
+// import { columns } from "./columns";
 
 interface DataTableBodyProps<TData> {
   table: Table<TData>;

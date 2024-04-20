@@ -1,35 +1,18 @@
-import { db } from "@/lib/db";
-import { DataTable } from "./_components/data-table";
+import { Header } from "../_components/header";
+import { DataTable } from "@/app/_components/data-table";
+import { fetchUsers } from "@/app/api/neon";
+
 import { columns } from "./_components/data-table/columns";
 import { Navbar } from "./_components/navbar";
-import { Header } from "../_components/header";
 
 export default async function UsersPage() {
-  const usersWithDevices = await fetchUsers();
+  const allUsers = await fetchUsers();
 
   return (
     <div>
       <Navbar />
       <Header title="Users" />
-      <DataTable columns={columns} data={usersWithDevices} />
+      <DataTable columns={columns} data={allUsers} />
     </div>
   );
-}
-
-export async function fetchUsers() {
-  const users = await db.user.findMany({
-    include: {
-      devices: true,
-    }
-  });
-
-  const usersWithDevices = users.map(user => ({
-    id: user.id,
-    email: user.email,
-    name: user.name,
-    role: user.role,
-    devices: user.devices[0]?.deviceName || null,
-  }));
-
-  return usersWithDevices;
 }
