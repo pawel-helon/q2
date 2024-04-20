@@ -41,3 +41,10 @@ export type Fetch = {
     status: $Enums.STATUS;
 }[]>
 }
+
+export type Users = {
+  id: number;
+  email: string;
+  name: string | null;
+  role: $Enums.ROLE;
+}[];

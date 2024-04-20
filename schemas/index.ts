@@ -6,6 +6,6 @@ export const addDeviceSchema = z.object({
   city: z.string().trim(),
   country: z.string().trim(),
   model: z.string().trim(),
-  owner: z.string().trim(),
   SIM: z.string().trim(),
+  owner: z.string().trim(),
 });

@@ -1,4 +1,3 @@
-import { usePathname } from "next/navigation";
 import { Breadcrumbs } from "./breadcrumbs";
 import { AddDeviceDialog } from "@/app/archive/devices/_components/add-device/add-device-dialog";
 

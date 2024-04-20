@@ -185,13 +185,18 @@ export const AddDeviceForm = ({
                       </SelectTrigger>
                       <SelectContent>
                         <SelectGroup>
-                          <SelectItem value="Tod Tompson">
-                            Tod Tompson
+                          <SelectItem value="jdoe@mail.com">
+                            jdoe@mail.com
                           </SelectItem>
-                          <SelectItem value="Jessy Jones">
-                            Jessy Jones
+                          <SelectItem value="ttompson@mail.com">
+                            ttompson@mail.com
                           </SelectItem>
-                          <SelectItem value="Corey Cox">Corey Cox</SelectItem>
+                          <SelectItem value="temp@mail.com">
+                            temp@mail.com
+                          </SelectItem>
+                          <SelectItem value="temp@mail.com">
+                            saturday@mail.com
+                          </SelectItem>
                         </SelectGroup>
                       </SelectContent>
                     </Select>

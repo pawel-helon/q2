@@ -45,3 +45,8 @@ export async function fetchUsers() {
 
   return usersWithDevices;
 }
+
+export async function fetchOwners() {
+  const users = await db.user.findMany();
+  return users;
+}

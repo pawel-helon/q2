@@ -28,7 +28,11 @@ export const AddDeviceDialog = () => {
           city: parsed.data.city,
           country: parsed.data.country,
           model: parsed.data.model,
-          owner: parsed.data.owner,
+          owner: {
+            connect: {
+              email: parsed.data.owner,
+            },
+          },
           SIM: parsed.data.SIM,
           status: STATUS.INACTIVE,
         },
@@ -56,7 +60,7 @@ export const AddDeviceDialog = () => {
         <DialogHeader className="mb-4 text-left">
           <DialogTitle>Add new device</DialogTitle>
         </DialogHeader>
-        <AddDeviceForm onDataAction={onDataAction} />
+        <AddDeviceForm onDataAction={onDataAction}/>
       </DialogContent>
     </Dialog>
   );
