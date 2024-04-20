@@ -1,6 +1,8 @@
 import { Heading, Paragraph } from "@/components/typography";
 import { Table } from "@tanstack/react-table";
 import { Actions } from "./actions";
+import { usePathname } from "next/navigation";
+import path from "path";
 
 interface DataTableHeaderProps<TData> {
   table: Table<TData>;
@@ -13,10 +15,19 @@ export function DataTableHeader<TData>({
   numberOfResults,
   anySelectedRow
 }: DataTableHeaderProps<TData>) {
+  const pathname = usePathname();
+
+  let title
+  if (pathname === "/users") {
+    title = "Users"
+  } else {
+    title = "Devices"
+  }
+
   return (
     <div className="flex px-4 justify-between items-center">
       <div className="flex gap-2 items-end">
-      <Heading variant="h3">Devices</Heading>
+      <Heading variant="h3">{title}</Heading>
       <Paragraph variant="small-thick" className="text-muted-foreground">
         ({numberOfResults})
       </Paragraph>
