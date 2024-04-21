@@ -2,7 +2,6 @@ import { Heading, Paragraph } from "@/components/typography";
 import { Table } from "@tanstack/react-table";
 import { Actions } from "./actions";
 import { usePathname } from "next/navigation";
-import path from "path";
 
 interface DataTableHeaderProps<TData> {
   table: Table<TData>;
