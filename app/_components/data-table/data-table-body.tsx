@@ -8,7 +8,6 @@ import {
 } from "@/components/ui/table";
 import { Table, flexRender } from "@tanstack/react-table";
 import { columns } from "@/app/devices/_components/data-table/columns";
-// import { columns } from "./columns";
 
 interface DataTableBodyProps<TData> {
   table: Table<TData>;
@@ -16,7 +15,7 @@ interface DataTableBodyProps<TData> {
 
 export function DataTableBody<TData>({ table }: DataTableBodyProps<TData>) {
   return (
-    <div className="px-4 mt-6">
+    <div className='px-4 mt-6'>
       <TableShad>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (

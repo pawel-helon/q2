@@ -5,7 +5,6 @@ import "@/app/globals.css";
 
 import { cn } from "@/lib/utils";
 import { Sidebar } from "./_components/sidebar";
-import { Navbar } from "./devices/_components/navbar";
 import { Assistant } from "./_components/assistant";
 
 const poppins = Poppins({
@@ -25,11 +24,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn(poppins.className, "antialiased")}>
-        <div className="relative min-h-screen flex mx-auto xl:max-w-[1280px] 2xl:max-w-[1536px]">
+      <body className={cn(
+        poppins.className, "antialiased")}>
+        <div className={cn(
+          'relative min-h-screen flex mx-auto xl:max-w-[1280px] 2xl:max-w-[1536px]',
+          'scrollbar scrollbar-thumb-muted scrollbar-track-background h-32 overflow-y-scroll'
+        )}>
           <Sidebar />
           <div className="flex flex-col w-full px-6 border-r-[1px] border-border">
-            {/* <Navbar /> */}
             {children}
           </div>
           <Assistant />
