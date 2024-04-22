@@ -31,7 +31,11 @@ export function DataTableHeader<TData>({
         ({numberOfResults})
       </Paragraph>
       </div>
-      <Actions table={table} anySelectedRow={anySelectedRow}/>
+      <Actions
+        table={table}
+        anySelectedRow={anySelectedRow}
+        title={title}
+      />
     </div>
   );
 }

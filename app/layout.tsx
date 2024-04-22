@@ -6,6 +6,7 @@ import "@/app/globals.css";
 import { cn } from "@/lib/utils";
 import { Sidebar } from "./_components/sidebar";
 import { Assistant } from "./_components/assistant";
+import { Toaster } from "@/components/ui/sonner";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -35,6 +36,7 @@ export default function RootLayout({
             {children}
           </div>
           <Assistant />
+          <Toaster position="top-center"/>
         </div>
       </body>
     </html>

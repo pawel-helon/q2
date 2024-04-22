@@ -1,10 +1,14 @@
 "use client";
 
+import { Div } from "@/components/motion-ui/div";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { cn } from "@/lib/utils";
 import { $Enums } from "@prisma/client";
 import { CaretSortIcon } from "@radix-ui/react-icons";
 import { ColumnDef } from "@tanstack/react-table";
+import { info } from "console";
 
 export type Device = {
   id: number;
@@ -34,7 +38,7 @@ export const columns: ColumnDef<Device>[] = [
       <Checkbox
         checked={row.getIsSelected()}
         onCheckedChange={(value) => {
-          row.toggleSelected(!!value)
+          row.toggleSelected(!!value);
         }}
         aria-label="Select row"
       />
@@ -161,10 +165,24 @@ export const columns: ColumnDef<Device>[] = [
         </Button>
       );
     },
+    cell: (info) => {
+      const value = info.getValue();
+      return (
+        <Badge className={cn(
+          value === "ACTIVE" ? "bg-emerald-500" : "bg-destructive"
+        )}>
+          {value === "ACTIVE" ? "Active" : "Inactive"}
+        </Badge>
+      )
+    }
   },
   {
     accessorKey: "id",
-    header: () => {return <div className="w-[40px]" />},
-    cell: () => {return <div className="w-[40px]" />}
-  }
+    header: () => {
+      return <div className="w-[40px]" />;
+    },
+    cell: () => {
+      return <div className="w-[40px]" />;
+    },
+  },
 ];
