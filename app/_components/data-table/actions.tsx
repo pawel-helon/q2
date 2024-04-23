@@ -1,7 +1,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-import { updateBobsDevice } from "@/app/api/neon/activate-device";
+import { activateDevice } from "@/app/api/neon/activate-device";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Table } from "@tanstack/react-table";
@@ -29,9 +29,14 @@ export function Actions<TData>({
   //   setDisabled(true);
   //   router.refresh();
   // };
+  
+  const selectedRowsActions = table.getSelectedRowModel().rows;
+  const ids = selectedRowsActions.map((row) => row.original.id);
+
+  console.log(ids)
 
   const handleClick = () => {
-    updateBobsDevice();
+    activateDevice(ids);
     setTimeout(() => {
       setDisabled(true);
       toast.success("Device activated")

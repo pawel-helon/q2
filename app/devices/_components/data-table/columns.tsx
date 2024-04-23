@@ -1,6 +1,5 @@
 "use client";
 
-import { Div } from "@/components/motion-ui/div";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -8,7 +7,6 @@ import { cn } from "@/lib/utils";
 import { $Enums } from "@prisma/client";
 import { CaretSortIcon } from "@radix-ui/react-icons";
 import { ColumnDef } from "@tanstack/react-table";
-import { info } from "console";
 
 export type Device = {
   id: number;

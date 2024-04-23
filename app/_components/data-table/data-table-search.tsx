@@ -29,7 +29,7 @@ export function DataTableSearch<TData>({ table }: DataTableSearchProps<TData>) {
           onChange={(event) =>
             table.getColumn(searchColumn)?.setFilterValue(event.target.value)
           }
-          className="max-w-[264px] h-9 flex items-center border-none bg-background text-white"
+          className="h-9 flex items-center border-none bg-background text-white"
         />
       </div>
     </div>

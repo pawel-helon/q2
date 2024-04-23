@@ -12,7 +12,7 @@ interface DataTableHeaderProps<TData> {
 export function DataTableHeader<TData>({
   table,
   numberOfResults,
-  anySelectedRow
+  anySelectedRow,
 }: DataTableHeaderProps<TData>) {
   const pathname = usePathname();
 
