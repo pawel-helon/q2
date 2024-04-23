@@ -3,9 +3,6 @@
 import { db } from "@/lib/db";
 
 export const findDevices = async () => {
-  const devices = await db.device.findMany({
-    // all or results matching search query 
-  });
-  
+  const devices = await db.device.findMany();
   return devices;
 };

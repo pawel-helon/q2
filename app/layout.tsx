@@ -1,3 +1,5 @@
+import { ClerkProvider } from "@clerk/nextjs";
+
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 
@@ -24,21 +26,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={cn(
-        poppins.className, "antialiased")}>
-        <div className={cn(
-          'relative min-h-screen flex mx-auto xl:max-w-[1280px] 2xl:max-w-[1536px]',
-          'scrollbar scrollbar-thumb-muted scrollbar-track-background h-32 overflow-y-scroll'
-        )}>
-          <Sidebar />
-          <div className="flex flex-col w-full px-6 border-r-[1px] border-border">
-            {children}
+    <ClerkProvider>
+      <html lang="en">
+        <body className={cn(poppins.className, "antialiased")}>
+          <div
+            className={cn(
+              "relative min-h-screen flex mx-auto xl:max-w-[1280px] 2xl:max-w-[1536px]",
+              "scrollbar scrollbar-thumb-muted scrollbar-track-background h-32 overflow-y-scroll"
+            )}
+          >
+            <Sidebar />
+            <div className="flex flex-col w-full px-6 border-r-[1px] border-border">
+              {children}
+            </div>
+            <Assistant />
+            <Toaster position="top-center" />
           </div>
-          <Assistant />
-          <Toaster position="top-center"/>
-        </div>
-      </body>
-    </html>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

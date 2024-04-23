@@ -1,4 +1,4 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { SignedIn, UserButton } from "@clerk/nextjs";
 
 import { cn } from "@/lib/utils";
 
@@ -10,14 +10,15 @@ export const Account = ({ collapsed }: AccountProps) => {
   return (
     <div
       className={cn(
-        "flex w-full items-center ml-[2px] px-[6px] mb-[10px] animate transition-all",
+        "flex w-full items-center ml-[6px] px-[6px] mb-[10px] animate transition-all",
         collapsed ? "justify-center" : "justify-start"
       )}
     >
-      <Avatar>
-        <AvatarImage src="/user.png" alt="user" />
-        <AvatarFallback>JD</AvatarFallback>
-      </Avatar>
+      <>
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
+      </>
       <div className="w-full" />
     </div>
   );
