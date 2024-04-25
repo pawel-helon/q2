@@ -10,7 +10,7 @@ export default async function Loading() {
   return (
     <div>
       <Navbar owners={owners} />
-      <Header title="Users" />
+      <Header title="Devices" />
       <div className="flex justify-between border-b border-border pb-1 my-12">
         <div className="flex items-center">
           <Search className="text-muted-foreground" />

@@ -8,7 +8,7 @@ import { Table } from "@tanstack/react-table";
 import { TableColumns } from "./table-columns";
 import { Div } from "@/components/motion-ui/div";
 import { toast } from "sonner"
-import { auth } from "@clerk/nextjs/server";
+import { deleteUsers } from "@/app/api/neon/delete-user";
 
 interface ActionsProps<TData> {
   table: Table<TData>;
@@ -37,6 +37,15 @@ export function Actions<TData>({
     }, 500)
   };
 
+  const handleDelete = () => {
+    deleteUsers(ids)
+    setTimeout(() => {
+      setDisabled(true);
+      toast.success("User(s) deleted")
+      router.refresh();
+    }, 500)
+  }
+
   return (
     <div className="relative">
       {anySelectedRow ? (
@@ -51,12 +60,17 @@ export function Actions<TData>({
           ) : (
             <>
             <Button variant="ghost">
-              Add device
+              Assign device
             </Button>
             <Separator orientation="vertical" className="mx-2" />
           </>
           )}
-          <Button variant="ghost">Delete</Button>
+          <Button
+            variant="ghost"
+            onClick={handleDelete}
+          >
+            Delete
+          </Button>
         </Div>
       ) : (
         <div className="size-[36px]" />
