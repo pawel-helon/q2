@@ -8,6 +8,7 @@ import { Table } from "@tanstack/react-table";
 import { TableColumns } from "./table-columns";
 import { Div } from "@/components/motion-ui/div";
 import { toast } from "sonner"
+import { auth } from "@clerk/nextjs/server";
 
 interface ActionsProps<TData> {
   table: Table<TData>;
@@ -23,23 +24,15 @@ export function Actions<TData>({
   const [disabled, setDisabled] = useState(false);
 
   const router = useRouter();
-
-  // const handleClick = () => {
-  //   updateBobsDevice();
-  //   setDisabled(true);
-  //   router.refresh();
-  // };
-  
   const selectedRowsActions = table.getSelectedRowModel().rows;
+  // @ts-ignore
   const ids = selectedRowsActions.map((row) => row.original.id);
-
-  console.log(ids)
 
   const handleClick = () => {
     activateDevice(ids);
     setTimeout(() => {
       setDisabled(true);
-      toast.success("Device activated")
+      toast.success("Device(s) activated")
       router.refresh();
     }, 500)
   };

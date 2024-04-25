@@ -5,7 +5,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Table } from "@tanstack/react-table";
 import { ChevronDown } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
 
