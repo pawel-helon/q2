@@ -18,7 +18,6 @@ export type Device = {
   SIM: string;
   status: $Enums.STATUS;
 };
-
 export const columns: ColumnDef<Device>[] = [
   {
     id: "select",
@@ -39,6 +38,10 @@ export const columns: ColumnDef<Device>[] = [
           row.toggleSelected(!!value);
         }}
         aria-label="Select row"
+        onClick={(e) => {
+          e.stopPropagation();
+          console.log("checkbox clicked");
+        }}
       />
     ),
     enableSorting: false,
@@ -166,13 +169,17 @@ export const columns: ColumnDef<Device>[] = [
     cell: (info) => {
       const value = info.getValue();
       return (
-        <Badge className={cn(
-          value === "ACTIVE" ? "bg-emerald-500" : "bg-destructive"
-        )}>
+        <Badge
+          className={cn(
+            value === "ACTIVE"
+              ? "bg-emerald-500 hover:bg-emerald-600"
+              : "bg-destructive hover:bg-destructive/80"
+          )}
+        >
           {value === "ACTIVE" ? "Active" : "Inactive"}
         </Badge>
-      )
-    }
+      );
+    },
   },
   {
     accessorKey: "id",

@@ -7,8 +7,9 @@ import { Separator } from "@/components/ui/separator";
 import { Table } from "@tanstack/react-table";
 import { TableColumns } from "./table-columns";
 import { Div } from "@/components/motion-ui/div";
-import { toast } from "sonner"
+import { toast } from "sonner";
 import { deleteUsers } from "@/app/api/neon/delete-user";
+import { deleteDevices } from "@/app/api/neon/delete-device";
 
 interface ActionsProps<TData> {
   table: Table<TData>;
@@ -28,49 +29,54 @@ export function Actions<TData>({
   // @ts-ignore
   const ids = selectedRowsActions.map((row) => row.original.id);
 
-  const handleClick = () => {
+  const handleActivateDevice = () => {
     activateDevice(ids);
     setTimeout(() => {
       setDisabled(true);
-      toast.success("Device(s) activated")
+      toast.success("Device(s) activated");
       router.refresh();
-    }, 500)
+    }, 500);
   };
 
-  const handleDelete = () => {
-    deleteUsers(ids)
+  const handleDeleteDevice = () => {
+    deleteDevices(ids);
     setTimeout(() => {
-      setDisabled(true);
-      toast.success("User(s) deleted")
+      toast.success("Device(s) deleted");
       router.refresh();
-    }, 500)
+    }, 500);
   }
 
-  return (
+  const handleDeleteUser = () => {
+    deleteUsers(ids);
+    setTimeout(() => {
+      toast.success("User(s) deleted");
+      router.refresh();
+    }, 500);
+  };
+
+  return ( 
     <div className="relative">
       {anySelectedRow ? (
         <Div duration=".3" className="flex min-w-sm">
           {title === "Devices" ? (
             <>
-              <Button variant="ghost" onClick={handleClick} disabled={disabled}>
+              <Button variant="ghost" onClick={handleActivateDevice} disabled={disabled}>
                 Activate
               </Button>
               <Separator orientation="vertical" className="mx-2" />
+              <Button variant="ghost" onClick={handleDeleteDevice}>
+                Delete
+              </Button>
             </>
           ) : (
             <>
-            <Button variant="ghost">
-              Assign device
-            </Button>
-            <Separator orientation="vertical" className="mx-2" />
-          </>
+              <Button variant="ghost">Assign device</Button>
+              <Separator orientation="vertical" className="mx-2" />
+              <Button variant="ghost" onClick={handleDeleteUser}>
+                Delete
+              </Button>
+            </>
           )}
-          <Button
-            variant="ghost"
-            onClick={handleDelete}
-          >
-            Delete
-          </Button>
         </Div>
       ) : (
         <div className="size-[36px]" />

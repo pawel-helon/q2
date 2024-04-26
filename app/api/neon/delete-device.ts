@@ -2,9 +2,9 @@
 
 import { db } from "@/lib/db";
 
-export async function deleteUsers(ids: any[]) {
+export async function deleteDevices(ids: any[]) {
   for (const index of ids) {
-    await db.user.delete({
+    await db.device.delete({
       where: {
         id: index,
       },

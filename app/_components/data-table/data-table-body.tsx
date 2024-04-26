@@ -6,14 +6,20 @@ import {
   TableBody,
   TableCell,
 } from "@/components/ui/table";
-import { Table, flexRender } from "@tanstack/react-table";
+import { Row, Table, flexRender } from "@tanstack/react-table";
 import { columns } from "@/app/devices/_components/data-table/columns";
+import { useRouter } from "next/navigation";
 
 interface DataTableBodyProps<TData> {
   table: Table<TData>;
 }
 
 export function DataTableBody<TData>({ table }: DataTableBodyProps<TData>) {
+  const router = useRouter();
+  const handleRowClick = () => {
+    router.push("/devices/device")
+  }
+  
   return (
     <div className='px-4 mt-6'>
       <TableShad>
@@ -41,6 +47,7 @@ export function DataTableBody<TData>({ table }: DataTableBodyProps<TData>) {
               <TableRow
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
+                onClick={handleRowClick}
               >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id}>
