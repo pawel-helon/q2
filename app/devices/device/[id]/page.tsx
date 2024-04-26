@@ -1,12 +1,21 @@
+import { fetchDevice } from "@/app/api/neon/find-device"
+
 interface DevicePageProps {
     params: {
         id: number
     }
 }
 
-const DevicePage = ({ params }: DevicePageProps) => {
+async function DevicePage({ params }: DevicePageProps) {
+  const id = Number(params.id)
+
+  const device = await fetchDevice(id)
+
+  console.log(device)  
   return (
-    <div>{params.id}</div>
+    <div>
+      <h1>{device?.deviceName}</h1>
+    </div>
   )
 }
 
