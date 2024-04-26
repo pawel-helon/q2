@@ -18,7 +18,7 @@ export function DataTableBody<TData>({ table }: DataTableBodyProps<TData>) {
   const router = useRouter();
   const handleRowClick = (row: Row<TData>) => {
     //@ts-ignore
-    router.push(`/devices/device/${row.original.id}`);
+    router.push(`/devices/${row.original.id}`);
   };
 
   return (

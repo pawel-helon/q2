@@ -28,7 +28,7 @@ export const Items = ({ collapsed }: ItemsProps) => {
               className={cn(
                 !collapsed &&
                   "h-9 w-full justify-between px-2 bg-primary text-whiteQ shadow hover:bg-primary/90",
-                pathname === item.href
+                pathname.includes(item.href)
                   ? "bg-primary hover:bg-primary/90"
                   : "bg-border/80 hover:bg-border/60"
               )}
