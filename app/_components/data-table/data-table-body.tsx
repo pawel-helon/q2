@@ -16,12 +16,13 @@ interface DataTableBodyProps<TData> {
 
 export function DataTableBody<TData>({ table }: DataTableBodyProps<TData>) {
   const router = useRouter();
-  const handleRowClick = () => {
-    router.push("/devices/device")
-  }
-  
+  const handleRowClick = (row: Row<TData>) => {
+    //@ts-ignore
+    router.push(`/devices/device/${row.original.id}`);
+  };
+
   return (
-    <div className='px-4 mt-6'>
+    <div className="px-4 mt-6">
       <TableShad>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -47,7 +48,7 @@ export function DataTableBody<TData>({ table }: DataTableBodyProps<TData>) {
               <TableRow
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
-                onClick={handleRowClick}
+                onClick={() => handleRowClick(row)}
               >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id}>

@@ -40,7 +40,6 @@ export const columns: ColumnDef<Device>[] = [
         aria-label="Select row"
         onClick={(e) => {
           e.stopPropagation();
-          console.log("checkbox clicked");
         }}
       />
     ),
