@@ -13,6 +13,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Device } from "@/types";
 import { deactivateDevice } from "@/app/api/neon/deactivate-device";
+import { revalidatePath } from "next/cache";
+import { useRouter } from "next/navigation";
 
 interface DeactivateDialogProps {
   isDeactivateDialogOpen: boolean;
@@ -26,7 +28,7 @@ export const DeactivateDialog = ({
   device
 }: DeactivateDialogProps) => {
   const id = Number(device?.id)
-  
+
   const handleDeactivateDevice = () => {
     deactivateDevice(id)
     setIsDeactivateDialogOpen(false);
