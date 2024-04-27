@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
-import { $Enums, STATUS } from "@prisma/client";
+import { $Enums, STATE, STATUS } from "@prisma/client";
 import { Plus } from "lucide-react";
 
 import { AddDeviceForm } from "./add-device-form";
@@ -44,6 +44,7 @@ export const AddDeviceDialog = ({ owners }: AddDeviceDialogProps) => {
           },
           SIM: parsed.data.SIM,
           status: STATUS.INACTIVE,
+          state: STATE.CLOSED,
         },
       });
       revalidatePath("/devices", "page");

@@ -33,6 +33,9 @@ export const columns: ColumnDef<User>[] = [
         onCheckedChange={(value) => {
           row.toggleSelected(!!value)
         }}
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
         aria-label="Select row"
       />
     ),

@@ -8,17 +8,23 @@ import {
 } from "@/components/ui/table";
 import { Row, Table, flexRender } from "@tanstack/react-table";
 import { columns } from "@/app/devices/_components/data-table/columns";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 interface DataTableBodyProps<TData> {
   table: Table<TData>;
 }
 
 export function DataTableBody<TData>({ table }: DataTableBodyProps<TData>) {
+  const pathname = usePathname()
   const router = useRouter();
   const handleRowClick = (row: Row<TData>) => {
-    //@ts-ignore
-    router.push(`/devices/${row.original.id}`);
+    if (pathname === "/devices") {
+      //@ts-ignore
+      router.push(`/devices/${row.original.id}`);
+    } else {
+      //@ts-ignore
+      router.push(`/users/${row.original.id}`);
+    }
   };
 
   return (
