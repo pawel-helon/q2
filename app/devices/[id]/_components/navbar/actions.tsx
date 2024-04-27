@@ -1,16 +1,19 @@
-import { $Enums } from "@prisma/client"
+"use client"
+
 import { MoreButton } from "./more-button"
 import { OpenCloseButton } from "./open-close-button"
+import { Device } from "@/types"
 
 interface ActionsProps {
-  state: $Enums.STATE | undefined
+  device: Device | null;
+  role: string | null | undefined;
 }
 
-export const Actions = ({ state }: ActionsProps) => {
+export const Actions = ({ device, role }: ActionsProps) => {
   return (
     <div className="flex gap-2 justify-end">
-    <OpenCloseButton state={state}/>
-    <MoreButton />
+    <OpenCloseButton device={device} />
+    {role !== "org:member" && <MoreButton device={device}/>}
   </div>
   )
-}
+}   

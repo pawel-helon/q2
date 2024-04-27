@@ -1,19 +1,19 @@
-import { Button } from "@/components/ui/button";
 import { Breadcrumbs } from "./breadcrumbs";
 import { Actions } from "./actions";
 import { $Enums } from "@prisma/client";
+import { Device } from "@/types";
 
 interface NavbarProps {
-    deviceName: string | undefined;
-    state: $Enums.STATE | undefined
+    device: Device | null;
+    role: string | null | undefined;
 }
 
-export const Navbar = ({ deviceName, state }: NavbarProps) => {
+export const Navbar = ({ device, role }: NavbarProps) => {
   return (
     <div className="w-full py-6 flex justify-between items-center">
-      <Breadcrumbs deviceName={deviceName}/>
+      <Breadcrumbs device={device} />
       <div className="flex gap-2 justify-end">
-        <Actions state={state}/>
+        <Actions device={device} role={role}/>
       </div>
     </div>
   );

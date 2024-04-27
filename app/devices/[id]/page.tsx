@@ -12,16 +12,13 @@ async function DevicePage({ params }: DevicePageProps) {
   const role = auth().orgRole
   
   const id = Number(params.id)
-  
   const device = await fetchDevice(id)
-  const deviceName = device?.deviceName
-  const state = device?.state
 
   // console.log(device)
   
   return (
     <div>
-      <Navbar deviceName={deviceName} state={state}/>
+      <Navbar device={device} role={role}/>
       {/* <Header /> */}
       {/* <TabsQ /> */}
     </div>

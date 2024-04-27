@@ -1,5 +1,18 @@
 import { $Enums } from "@prisma/client";
 
+export type Device = {
+  id: number;
+  deviceName: string;
+  streetAddress: string;
+  city: string;
+  country: string;
+  model: string;
+  SIM: string;
+  status: $Enums.STATUS;
+  state: $Enums.STATE;
+  ownerId: number;
+}
+
 export type Devices = {
   id: number;
   deviceName: string;
@@ -48,3 +61,4 @@ export type Users = {
   name: string | null;
   role: $Enums.ROLE;
 }[];
+

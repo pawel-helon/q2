@@ -8,12 +8,15 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { Device } from "@/types";
 
 interface BreadcrumbsProps {
-  deviceName: string | undefined;
+  device: Device | null;
 }
 
-export const Breadcrumbs = ({ deviceName }: BreadcrumbsProps) => {
+export const Breadcrumbs = ({ device }: BreadcrumbsProps) => {
+  const deviceName = device?.deviceName;
+  
   return (
     <Breadcrumb>
       <BreadcrumbList>
