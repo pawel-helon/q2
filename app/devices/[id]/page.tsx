@@ -3,7 +3,6 @@ import { auth } from "@clerk/nextjs/server";
 import { Navbar } from "./_components/navbar";
 import { Header } from "@/app/_components/header";
 import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
 import { DeviceTabs } from "./_components/device-tabs";
 import { GeneralTab } from "./_components/device-tabs/general-tab";
 
@@ -25,7 +24,7 @@ async function DevicePage({ params }: DevicePageProps) {
     <div>
       <Navbar device={device} role={role} />
       <Header title={deviceName}>
-        <Badge className={cn(status === "active" && "bg-emerald-500")}>
+        <Badge variant={status === "active" ? "success" : "destructive"}>
           {status}
         </Badge>
       </Header>

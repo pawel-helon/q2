@@ -20,7 +20,7 @@ interface GeneralTabProps {
 
 export const GeneralTab = ({ role, device }: GeneralTabProps) => {
   return (
-    <div className="mt-12 w-full grid grid-cols-3 gap-4">
+    <div className="mt-12 w-full grid grid-cols-4 gap-4">
       <Status />
       <div>
         <DetailsCard device={device} role={role} />

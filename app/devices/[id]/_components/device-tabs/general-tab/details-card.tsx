@@ -31,8 +31,6 @@ interface DetailsCardProps {
 export const DetailsCard = ({ role, device }: DetailsCardProps) => {
   const [isEditDetailsDialogOpen, setIsEditDetailsDialogOpen] = useState(false);
 
-  console.log("role: ", role)
-
   return (
     <div className="border border-border shadow-black shadow-2xl rounded-lg">
       <Card className="flex flex-col col-span-1 bg-transparent border-none">
