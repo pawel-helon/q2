@@ -42,7 +42,7 @@ export const columns: ColumnDef<Status>[] = [
     cell: (info) => {
       const value = info.getValue();
       return (
-        <Badge variant={value ? "success" : "destructive"}>
+        <Badge variant={value ? "success" : "destructive"} className="justify-center min-w-[102px]">
           {value ? "connected" : "disconnected"}
         </Badge>
       );
