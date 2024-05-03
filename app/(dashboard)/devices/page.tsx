@@ -12,8 +12,6 @@ export default async function DevicesPage() {
   const session = await verifySession();
   const role = session?.role;
 
-  console.log(role)
-
   const allDevices = await fetchDevices();
   const owners = await fetchOwners();
 
@@ -21,7 +19,6 @@ export default async function DevicesPage() {
     <div>
       <Navbar owners={owners} />
       <Header title="Devices" />
-      {JSON.stringify(session)}
       {role === "org:member" ? (
         <DataTable columns={columnsMember} data={allDevices} />
       ) : (
