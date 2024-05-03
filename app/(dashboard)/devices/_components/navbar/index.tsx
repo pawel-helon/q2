@@ -1,3 +1,5 @@
+"use server"
+
 import { $Enums } from "@prisma/client";
 import { Breadcrumbs } from "./breadcrumbs";
 import { AddDeviceDialog } from "@/app/archive/devices/_components/add-device/add-device-dialog";

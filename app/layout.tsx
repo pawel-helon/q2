@@ -1,14 +1,8 @@
-import { ClerkProvider } from "@clerk/nextjs";
-
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 
 import "@/app/globals.css";
-
 import { cn } from "@/lib/utils";
-import { Sidebar } from "./_components/sidebar";
-import { Assistant } from "./_components/assistant";
-import { Toaster } from "@/components/ui/sonner";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -16,7 +10,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "QT",
+  title: "Q",
   description: "",
 };
 
@@ -26,24 +20,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
       <html lang="en">
         <body className={cn(poppins.className, "antialiased")}>
-          <div
-            className={cn(
-              "relative min-h-screen flex mx-auto xl:max-w-[1280px] 2xl:max-w-[1536px]",
-              "scrollbar scrollbar-thumb-muted scrollbar-track-background h-32 overflow-y-scroll"
-            )}
-          >
-            <Sidebar />
-            <div className="flex flex-col w-full px-6 border-r-[1px] border-border">
-              {children}
-            </div>
-            <Assistant />
-            <Toaster position="top-center" />
-          </div>
+          {children}
         </body>
       </html>
-    </ClerkProvider>
   );
 }

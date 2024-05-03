@@ -1,9 +1,9 @@
-import { Header } from "../_components/header";
 import { DataTable } from "@/app/_components/data-table";
 import { fetchUsers } from "@/app/api/neon";
 
 import { columns } from "./_components/data-table/columns";
 import { Navbar } from "./_components/navbar";
+import { Header } from "@/app/_components/header";
 
 export default async function UsersPage() {
   const allUsers = await fetchUsers();

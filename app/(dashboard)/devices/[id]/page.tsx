@@ -1,5 +1,4 @@
 import { fetchDevice } from "@/app/api/neon/find-device";
-import { auth } from "@clerk/nextjs/server";
 import { Navbar } from "./_components/navbar";
 import { Header } from "@/app/_components/header";
 import { Badge } from "@/components/ui/badge";
@@ -13,7 +12,7 @@ interface DevicePageProps {
 }
 
 async function DevicePage({ params }: DevicePageProps) {
-  const role = auth().orgRole;
+  const role = "org:member"
 
   const id = Number(params.id);
   const device = await fetchDevice(id);

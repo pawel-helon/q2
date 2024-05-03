@@ -169,13 +169,10 @@ export const columns: ColumnDef<Device>[] = [
       const value = info.getValue();
       return (
         <Badge
-          className={cn(
-            value === "ACTIVE"
-              ? "bg-emerald-500 hover:bg-emerald-600"
-              : "bg-destructive hover:bg-destructive/80"
-          )}
+          variant={value === "ACTIVE" ? "success" : "destructive"}
+          className="w-[72px] justify-center"
         >
-          {value === "ACTIVE" ? "Active" : "Inactive"}
+          {value === "ACTIVE" ? "active" : "inactive"}
         </Badge>
       );
     },

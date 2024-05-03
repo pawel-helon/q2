@@ -1,5 +1,5 @@
-import { SignedIn, UserButton } from "@clerk/nextjs";
 
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 
 interface AccountProps {
@@ -15,9 +15,10 @@ export const Account = ({ collapsed }: AccountProps) => {
       )}
     >
       <>
-        <SignedIn>
-          <UserButton />
-        </SignedIn>
+      <Avatar>
+        <AvatarImage src="/user.png" alt="user" />
+      <AvatarFallback>JD</AvatarFallback>
+    </Avatar>
       </>
       <div className="w-full" />
     </div>

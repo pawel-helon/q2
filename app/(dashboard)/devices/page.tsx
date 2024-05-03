@@ -1,5 +1,4 @@
-import { auth } from "@clerk/nextjs/server";
-
+"use server"
 import { Header } from "@/app/_components/header";
 import { DataTable } from "@/app/_components/data-table";
 import { fetchDevices, fetchOwners } from "@/app/api/neon";
@@ -9,7 +8,7 @@ import { Navbar } from "./_components/navbar";
 import { columnsMember } from "./_components/data-table/columns-member";
 
 export default async function DevicesPage() {
-  const role = auth().orgRole
+  const role = "org:member"
 
   const allDevices = await fetchDevices();
   const owners = await fetchOwners();

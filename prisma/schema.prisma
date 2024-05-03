@@ -15,14 +15,15 @@ datasource db {
 
 enum ROLE {
   ADMIN
-  USER
+  OWNER
+  ENDUSER
 }
 
 model User {
   id       Int      @id @default(autoincrement())
   email    String   @unique
   name     String?
-  role     ROLE     @default(USER)
+  role     ROLE     @default(ENDUSER)
   devices  Device[]
 }
 

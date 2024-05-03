@@ -1,9 +1,9 @@
 import React from "react";
 import { Navbar } from "./_components/navbar";
-import { fetchOwners } from "../api/neon";
-import { Header } from "../_components/header";
+import { fetchOwners } from "@/app/api/neon";
 import { Loader, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { Header } from "@/app/_components/header";
 
 export default async function Loading() {
   const owners = await fetchOwners();
