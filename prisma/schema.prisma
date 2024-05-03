@@ -20,11 +20,14 @@ enum ROLE {
 }
 
 model User {
-  id       Int      @id @default(autoincrement())
-  email    String   @unique
-  name     String?
-  role     ROLE     @default(ENDUSER)
-  devices  Device[]
+  id         Int      @id @default(autoincrement())
+  email      String   @unique
+  name       String?
+  password   String
+  role       ROLE     @default(ENDUSER)
+  devices    Device[]
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
 
 enum STATUS {
