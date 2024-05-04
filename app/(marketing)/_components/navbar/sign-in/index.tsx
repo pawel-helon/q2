@@ -8,21 +8,21 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { SignUpForm } from "./sign-up-form";
+import { SignInForm } from "./sign-in-form";
 
-export const SignUp = () => {
+export const SignIn = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="ghost">Sign up</Button>
+        <Button>Sign in</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle className="mb-6">
-            Create account
+            Sign in
           </DialogTitle>
         </DialogHeader>
-        <SignUpForm />
+        <SignInForm />
       </DialogContent>
     </Dialog>
   );

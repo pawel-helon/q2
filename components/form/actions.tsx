@@ -6,9 +6,11 @@ import { Button } from "@/components/ui/button";
 import { DialogClose } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 
-export function Actions() {
-  const { pending } = useFormStatus();
+interface ActionsProps {
+  children: React.ReactNode;
+}
 
+export function Actions({ children }: ActionsProps) {
   return (
     <div className="flex gap-2 w-full justify-end">
       <DialogClose
@@ -21,9 +23,7 @@ export function Actions() {
       >
         Cancel
       </DialogClose>
-        <Button disabled={pending} aria-disabled={pending} type="submit">
-          {pending ? "Submitting..." : "Sign up"}
-        </Button>
+      {children}
     </div>
   );
 }

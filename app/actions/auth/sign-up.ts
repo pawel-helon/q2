@@ -5,6 +5,7 @@ import bcrypt from "bcryptjs";
 import { SignupFormSchema, FormState } from "@/lib/schemas/sign-up";
 import { db } from "@/lib/db";
 import { ROLE } from "@prisma/client";
+import { redirect } from "next/navigation";
 
 export async function signup(state: FormState, formData: FormData) {
   const validatedFields = SignupFormSchema.safeParse({
@@ -36,4 +37,5 @@ export async function signup(state: FormState, formData: FormData) {
       message: "An error occurred while creating your account.",
     };
   }
+  redirect("/sign-in");
 }
