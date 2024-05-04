@@ -1,3 +1,4 @@
+import { link } from "fs"
 import type { Config } from "tailwindcss"
 
 const config = {
@@ -53,6 +54,7 @@ const config = {
           foreground: "hsl(var(--card-foreground))",
         },
         whiteQ: "hsl(var(--whiteQ))",
+        textLink: "hsl(var(--textLink))",
       },
       borderRadius: {
         lg: "var(--radius)",

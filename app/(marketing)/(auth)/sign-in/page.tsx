@@ -10,9 +10,9 @@ import { Label } from "@/components/ui/label";
 import { useFormState } from "react-dom";
 import { signup } from "@/app/actions/auth/sign-up";
 import { FormField } from "../../../../components/form/form-field";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 
-const Page = () => {
+const SignInPage = () => {
   const [state, action] = useFormState(signup, undefined);
 
   return (
@@ -53,4 +53,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default SignInPage;

@@ -1,4 +1,5 @@
 import { useFormState, useFormStatus } from "react-dom";
+import { useRouter } from "next/navigation";
 
 import { signin } from "@/app/actions/auth/sign-in";
 import { Button } from "@/components/ui/button";
@@ -12,6 +13,8 @@ export const SignInForm = () => {
   const [state, action] = useFormState(signin, undefined);
   const { pending } = useFormStatus();
 
+  const router = useRouter();
+
   return (
     <form action={action} className="flex flex-col gap-5">
       <FormField>
@@ -22,7 +25,7 @@ export const SignInForm = () => {
         <FieldDescription>{state.errors.email}</FieldDescription>
       )}
 
-      <FormField>
+      <FormField className="mb-6">
         <Label htmlFor="password">Password</Label>
         <Input
           id="password"
@@ -43,6 +46,16 @@ export const SignInForm = () => {
           </FieldDescription>
         </div>
       )}
+      <div className="flex items-center -my-5">
+        <FieldDescription>Don&apos;t have account?</FieldDescription>
+        <Button
+          variant="link"
+          className="-ml-2"
+          onClick={() => router.push("/sign-up")}
+        >
+          Sign up
+        </Button>
+      </div>
       <Actions>
         <Button disabled={pending} aria-disabled={pending} type="submit">
           {pending ? "Submitting..." : "Sign in"}

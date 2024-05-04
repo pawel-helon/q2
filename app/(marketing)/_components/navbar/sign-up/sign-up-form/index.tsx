@@ -1,4 +1,5 @@
 import { useFormState, useFormStatus } from "react-dom";
+import { useRouter } from "next/navigation";
 
 import { signup } from "@/app/actions/auth/sign-up";
 import { Button } from "@/components/ui/button";
@@ -11,6 +12,8 @@ import { FieldDescription } from "@/components/form/field-description";
 export const SignUpForm = () => {
   const [state, action] = useFormState(signup, undefined);
   const { pending } = useFormStatus();
+
+  const router = useRouter()
 
   return (
     <form action={action} className="flex flex-col gap-5">
@@ -47,6 +50,10 @@ export const SignUpForm = () => {
           </div>
         )}
       </FormField>
+      <div className="flex items-center -my-5">
+        <FieldDescription>Already have an account?</FieldDescription>
+        <Button variant="link" className="-ml-2" onClick={() => router.push('/sign-in')}>Sign in</Button>
+      </div>
       <Actions>
         <Button disabled={pending} aria-disabled={pending} type="submit">
           {pending ? "Submitting..." : "Sign up"}
