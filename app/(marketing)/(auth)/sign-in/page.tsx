@@ -1,19 +1,13 @@
 "use client";
 
-import Link from "next/link";
-import { Container } from "lucide-react";
-
 import { cn } from "@/lib/utils";
+import { Navbar } from "../_components/navbar";
 import { SignInForm } from "@/app/(marketing)/_components/navbar/sign-in/sign-in-form";
 
 export default function SignInPage() {
   return (
-    <div className="h-screen w-full flex relative justify-center items-center">
-      <div className="absolute top-0 left-0 w-full py-6 px-4 flex gap-2 justify-start items-center">
-        <Link href="/">
-          <Container />
-        </Link>
-      </div>
+    <div className="w-full flex relative justify-center items-center">
+      <Navbar />
       <div
         className={cn(
           "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%]",
