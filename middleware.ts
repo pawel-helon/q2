@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 
 import { decrypt } from "@/lib/session";
 
-const protectedRoutes = ["/dashboard"];
+const protectedRoutes = ["/devices", "/users"];
 const publicRoutes = ["/"];
 const protectedAdminRoutes = ["/users"];
 
@@ -23,9 +23,9 @@ export default async function middleware(req: NextRequest) {
   if (
     isPublicRoute &&
     session?.userId &&
-    !req.nextUrl.pathname.startsWith("/dashboard")
+    !req.nextUrl.pathname.startsWith("/devices")
   ) {
-    return NextResponse.redirect(new URL("/dashboard", req.nextUrl));
+    return NextResponse.redirect(new URL("/devices", req.nextUrl));
   }
 
   if (isProtectedAdminRoutes && session?.role !== "ADMIN") {

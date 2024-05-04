@@ -1,5 +1,4 @@
 import { SignIn } from './sign-in'
-import { SignInForm } from './sign-in-form'
 import { SignUp } from './sign-up'
 
 export const Navbar = () => {

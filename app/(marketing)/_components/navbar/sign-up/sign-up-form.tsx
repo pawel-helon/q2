@@ -5,15 +5,18 @@ import { signup } from "@/app/actions/auth/sign-up";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Actions } from "@/components/form/actions";
 import { FormField } from "@/components/form/form-field";
 import { FieldDescription } from "@/components/form/field-description";
 
-export const SignUpForm = () => {
+interface SignUpFormProps {
+  children?: React.ReactNode;
+}
+
+export const SignUpForm = ({ children }: SignUpFormProps) => {
   const [state, action] = useFormState(signup, undefined);
   const { pending } = useFormStatus();
 
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <form action={action} className="flex flex-col gap-5">
@@ -44,21 +47,28 @@ export const SignUpForm = () => {
             <FieldDescription className="text-foreground">
               Password must:
             </FieldDescription>
-              {state.errors.password.map((error) => (
-                <FieldDescription key={error}>{error}</FieldDescription>
-              ))}
+            {state.errors.password.map((error) => (
+              <FieldDescription key={error}>{error}</FieldDescription>
+            ))}
           </div>
         )}
       </FormField>
       <div className="flex items-center -my-5">
         <FieldDescription>Already have an account?</FieldDescription>
-        <Button variant="link" className="-ml-2" onClick={() => router.push('/sign-in')}>Sign in</Button>
+        <Button
+          variant="link"
+          className="-ml-2"
+          onClick={() => router.push("/sign-in")}
+        >
+          Sign in
+        </Button>
       </div>
-      <Actions>
+      <div className="flex gap-2 w-full justify-end">
+        {children}
         <Button disabled={pending} aria-disabled={pending} type="submit">
           {pending ? "Submitting..." : "Sign up"}
         </Button>
-      </Actions>
+      </div>
     </form>
   );
 };

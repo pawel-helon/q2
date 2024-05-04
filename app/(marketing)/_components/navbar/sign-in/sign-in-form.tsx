@@ -5,11 +5,14 @@ import { signin } from "@/app/actions/auth/sign-in";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Actions } from "@/components/form/actions";
 import { FormField } from "@/components/form/form-field";
 import { FieldDescription } from "@/components/form/field-description";
 
-export const SignInForm = () => {
+interface SignInFormProps {
+  children?: React.ReactNode;
+}
+
+export const SignInForm = ({ children }: SignInFormProps) => {
   const [state, action] = useFormState(signin, undefined);
   const { pending } = useFormStatus();
 
@@ -56,11 +59,12 @@ export const SignInForm = () => {
           Sign up
         </Button>
       </div>
-      <Actions>
+      <div className="flex gap-2 w-full justify-end">
+        {children}
         <Button disabled={pending} aria-disabled={pending} type="submit">
           {pending ? "Submitting..." : "Sign in"}
         </Button>
-      </Actions>
+      </div>
     </form>
   );
 };
