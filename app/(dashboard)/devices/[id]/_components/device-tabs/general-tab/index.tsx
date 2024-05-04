@@ -3,7 +3,7 @@ import { DetailsCard } from "./details-card";
 import { Status } from "./status";
 
 interface GeneralTabProps {
-  role: string | null | undefined;
+  role: unknown;
   device: {
     id: number;
     deviceName: string;

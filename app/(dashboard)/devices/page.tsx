@@ -19,7 +19,7 @@ export default async function DevicesPage() {
     <div>
       <Navbar owners={owners} />
       <Header title="Devices" />
-      {role === "org:member" ? (
+      {role !== "ADMIN" ? (
         <DataTable columns={columnsMember} data={allDevices} />
       ) : (
         <DataTable columns={columns} data={allDevices} />

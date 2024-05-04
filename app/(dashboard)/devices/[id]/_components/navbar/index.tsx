@@ -1,11 +1,10 @@
 import { Breadcrumbs } from "./breadcrumbs";
 import { Actions } from "./actions";
-import { $Enums } from "@prisma/client";
 import { Device } from "@/types";
 
 interface NavbarProps {
     device: Device | null;
-    role: string | null | undefined;
+    role: unknown;
 }
 
 export const Navbar = ({ device, role }: NavbarProps) => {

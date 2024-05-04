@@ -13,7 +13,7 @@ import { Heading, Paragraph } from "@/components/typography";
 import { $Enums } from "@prisma/client";
 
 interface DetailsCardProps {
-  role: string | null | undefined;
+  role: unknown;
   device: {
     id: number;
     deviceName: string;
@@ -77,7 +77,7 @@ export const DetailsCard = ({ role, device }: DetailsCardProps) => {
             </li>
           </ul>
         </CardContent>
-        {role !== "org:member" && (
+        {role === "ADMIN" && (
           <CardFooter className="p-4">
             <div className="w-full flex justify-end">
               <Button variant="secondary">Edit</Button>

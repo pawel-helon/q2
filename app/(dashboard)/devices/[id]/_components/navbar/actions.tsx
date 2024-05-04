@@ -6,14 +6,14 @@ import { Device } from "@/types"
 
 interface ActionsProps {
   device: Device | null;
-  role: string | null | undefined;
+  role: unknown;
 }
 
 export const Actions = ({ device, role }: ActionsProps) => {
   return (
     <div className="flex gap-2 justify-end">
     <OpenCloseButton device={device} />
-    {role !== "org:member" && <MoreButton device={device}/>}
+    {role === "ADMIN" && <MoreButton device={device}/>}
   </div>
   )
 }   
