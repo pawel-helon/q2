@@ -4,10 +4,16 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 
 import { Items } from "./items";
-import { Account } from "./account";
 import { ChevronButton } from "./chevron-button";
+import { Account } from "./account";
 
-export const Sidebar = () => {
+interface SidebarProps {
+  email: {
+    email: string;
+} | null;
+}
+
+export const Sidebar = ({ email }: SidebarProps) => {
   const [collapsed, setCollapsed] = useState(true);
 
   const handleCollapse = () => {
@@ -24,7 +30,7 @@ export const Sidebar = () => {
         <ChevronButton collapsed={collapsed} handleCollapse={handleCollapse} />
         <Items collapsed={collapsed} />
       </div>
-      <Account collapsed={collapsed} />
+      <Account collapsed={collapsed} email={email}/>
     </motion.div>
   );
 };

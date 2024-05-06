@@ -1,14 +1,21 @@
 import { Toaster } from "sonner";
 
+import { fetchUserEmail } from "../api/neon/fetchUserEmail";
 import { Assistant } from "../_components/assistant";
 import { Sidebar } from "../_components/sidebar";
+import { verifySession } from "@/lib/data-access-layer";
 import { cn } from "@/lib/utils";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
 }
 
-const DashboardLayout = ({ children }: DashboardLayoutProps) => {
+const DashboardLayout = async ({ children }: DashboardLayoutProps) => {
+  const session = await verifySession();
+  const ownerId = Number(session?.userId);
+
+  const email = await fetchUserEmail(ownerId);
+
   return (
     <div
       className={cn(
@@ -16,7 +23,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         "scrollbar scrollbar-thumb-muted scrollbar-track-background h-32 overflow-y-scroll"
       )}
     >
-      <Sidebar />
+      <Sidebar email={email}/>
       <div className="flex flex-col w-full px-6 border-r-[1px] border-border">
         {children}
       </div>

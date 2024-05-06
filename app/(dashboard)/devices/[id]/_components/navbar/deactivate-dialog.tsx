@@ -40,12 +40,12 @@ export const DeactivateDialog = ({
   return (
     <Dialog open={isDeactivateDialogOpen}>
       <DialogContent onInteractOutside={() => setIsDeactivateDialogOpen(false)}>
-        <DialogClose
+        {/* <DialogClose
           onClick={() => setIsDeactivateDialogOpen(false)}
           className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
         >
           <X className="size-4" />
-        </DialogClose>
+        </DialogClose> */}
         <DialogHeader>
           <DialogTitle>
             Deactivate device

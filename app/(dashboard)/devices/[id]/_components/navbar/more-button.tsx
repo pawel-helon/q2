@@ -51,10 +51,14 @@ export const MoreButton = ({ device }: MoreButtonProps) => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent side="bottom" sideOffset={8} align="end">
-          <DropdownMenuItem onSelect={() => setIsDeactivateDialogOpen(true)}>
+          <DropdownMenuItem
+            onSelect={() => setIsDeactivateDialogOpen(true)}
+          >
             Deactivate
           </DropdownMenuItem>
-          <DropdownMenuItem onSelect={() => setIsDeleteDialogOpen(true)}>
+          <DropdownMenuItem
+            onSelect={() => setIsDeleteDialogOpen(true)}
+          >
             Delete
           </DropdownMenuItem>
         </DropdownMenuContent>

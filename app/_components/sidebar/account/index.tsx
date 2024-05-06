@@ -2,16 +2,21 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuTrigger,
+  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
-import { SignOutButton } from "./sign-out-button";
+import { SignOutItem } from "./sign-out-item";
+import { AccountItem } from "./account-item";
 
 interface AccountProps {
   collapsed: boolean;
+  email: {
+    email: string;
+} | null;
 }
 
-export const Account = ({ collapsed }: AccountProps) => {
+export const Account = ({ collapsed, email }: AccountProps) => {
   return (
     <div
       className={cn(
@@ -26,12 +31,17 @@ export const Account = ({ collapsed }: AccountProps) => {
             <AvatarFallback>JD</AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
-        <DropdownMenuContent
-          side="right"
-          sideOffset={8}
-          align="end"
-        >
-          <SignOutButton />
+        <DropdownMenuContent side="right" sideOffset={7} align="end">
+          <div className="flex gap-2 items-center rounded-sm px-2 py-1.5 text-xs text-muted-foreground">
+            <Avatar className="size-6">
+              <AvatarImage src="/user.png" alt="user" />
+              <AvatarFallback>JD</AvatarFallback>
+            </Avatar>
+            {email?.email}
+          </div>
+          <DropdownMenuSeparator />
+          <AccountItem />
+          <SignOutItem />
         </DropdownMenuContent>
       </DropdownMenu>
       <div className="w-full" />
