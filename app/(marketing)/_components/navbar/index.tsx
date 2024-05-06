@@ -6,7 +6,6 @@ export const Navbar = () => {
     <div className="w-full py-6 px-4 flex gap-2 justify-end items-center">
     <SignUp />
     <SignIn />
-    {/* <SignInForm /> */}
 </div>
   )
 }
