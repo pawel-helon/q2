@@ -28,14 +28,28 @@ export const ChangePasswordForm = ({ userId }: ChangePasswordFormProps) => {
           <Label htmlFor="password">Password</Label>
           <PasswordInput id="password" name="password" />
           {state?.errors?.password && (
-            <FieldDescription>{state.errors.password}</FieldDescription>
+            <div>
+            <FieldDescription className="text-foreground">
+              Password must:
+            </FieldDescription>
+            {state.errors.password.map((error) => (
+              <FieldDescription key={error}>{error}</FieldDescription>
+            ))}
+          </div>
           )}
         </FormField>
         <FormField className="mb-6">
           <Label htmlFor="confirm">Confirm password</Label>
           <PasswordInput id="confirm" name="confirm" />
           {state?.errors?.confirm && (
-            <FieldDescription>{state.errors.confirm}</FieldDescription>
+            <div>
+            <FieldDescription className="text-foreground">
+              Password must:
+            </FieldDescription>
+            {state.errors.confirm.map((error) => (
+              <FieldDescription key={error}>{error}</FieldDescription>
+            ))}
+          </div>
           )}
         </FormField>
       </div>
