@@ -12,6 +12,7 @@ export async function changePassword(state: FormState, formData: FormData) {
 
   const validatedField = ChangePasswordSchema.safeParse({
     password: formData.get("password"),
+    confirm: formData.get("confirm"),
   });
 
 

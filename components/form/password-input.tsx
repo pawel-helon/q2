@@ -7,14 +7,19 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-export const PasswordInput = () => {
+interface PasswordInputProps {
+  id: string;
+  name: string;
+}
+
+export const PasswordInput = ({id, name}: PasswordInputProps) => {
   const [visibility, setVisibility] = useState(false);
 
   return (
     <div className="relative">
       <Input
-        id="password"
-        name="password"
+        id={id}
+        name={name}
         type={visibility ? "" : "password"}
         placeholder="*******"
       />

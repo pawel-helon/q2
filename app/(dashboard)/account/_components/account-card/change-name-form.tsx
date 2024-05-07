@@ -34,11 +34,9 @@ export const ChangeNameForm = ({ userId }: ChangeNameFormProps) => {
         <DialogClose asChild>
           <Button variant="ghost">Cancel</Button>
         </DialogClose>
-        <DialogClose asChild>
           <Button disabled={pending} aria-disabled={pending} type="submit">
             {pending ? "Submitting..." : "Change"}
           </Button>
-        </DialogClose>
       </div>
     </form>
   );

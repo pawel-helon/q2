@@ -8,6 +8,7 @@ import { FieldDescription } from "@/components/form/field-description";
 import { useFormState, useFormStatus } from "react-dom";
 import { changeEmail } from "@/app/actions/auth/change-email";
 import { DialogClose } from "@/components/ui/dialog";
+import { useState } from "react";
 
 interface ChangeEmailFormProps {
   userId: number;
@@ -18,7 +19,10 @@ export const ChangeEmailForm = ({ userId }: ChangeEmailFormProps) => {
   const { pending } = useFormStatus();
 
   return (
-    <form action={action} className="flex flex-col gap-5">
+    <form
+      action={action}
+      className="flex flex-col gap-5"
+    >
       <input type="hidden" name="userId" value={userId} />
       <FormField className="mb-6">
         <Label htmlFor="email">Email address</Label>
@@ -31,11 +35,9 @@ export const ChangeEmailForm = ({ userId }: ChangeEmailFormProps) => {
         <DialogClose asChild>
           <Button variant="ghost">Cancel</Button>
         </DialogClose>
-        <DialogClose asChild>
           <Button disabled={pending} aria-disabled={pending} type="submit">
             {pending ? "Submitting..." : "Change"}
           </Button>
-        </DialogClose>
       </div>
     </form>
   );
