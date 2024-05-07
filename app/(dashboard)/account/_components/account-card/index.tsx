@@ -1,3 +1,5 @@
+"use server"
+
 import { fetchUser } from "@/app/actions/fetchUser";
 import { Heading } from "@/components/typography";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";

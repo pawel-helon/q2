@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { DialogClose } from "@/components/ui/dialog";
+import { PasswordInput } from "@/components/form/password-input";
 
 interface ChangePasswordFormProps {
   userId: number;
@@ -24,7 +25,7 @@ export const ChangePasswordForm = ({ userId }: ChangePasswordFormProps) => {
       <input type="hidden" name="userId" value={userId} />
       <FormField className="mb-6">
         <Label htmlFor="password">Password</Label>
-        <Input id="password" name="password" type="password" placeholder="*******" />
+        <PasswordInput />
         {state?.errors?.password && (
           <FieldDescription>{state.errors.password}</FieldDescription>
         )}
