@@ -6,14 +6,14 @@ import { Label } from "@/components/ui/label";
 import { FormField } from "@/components/form/form-field";
 import { FieldDescription } from "@/components/form/field-description";
 import { useFormState, useFormStatus } from "react-dom";
-import { changeEmail } from "@/app/actions/change-email";
+import { changeEmail } from "@/app/actions/auth/change-email";
 import { DialogClose } from "@/components/ui/dialog";
 
-interface ChangeEmailProps {
+interface ChangeEmailFormProps {
   userId: number;
 }
 
-export const ChangeEmail = ({ userId }: ChangeEmailProps) => {
+export const ChangeEmailForm = ({ userId }: ChangeEmailFormProps) => {
   const [state, action] = useFormState(changeEmail, undefined);
   const { pending } = useFormStatus();
 
@@ -21,21 +21,18 @@ export const ChangeEmail = ({ userId }: ChangeEmailProps) => {
     <form action={action} className="flex flex-col gap-5">
       <input type="hidden" name="userId" value={userId} />
       <FormField className="mb-6">
-        <Label htmlFor="email">New email address</Label>
+        <Label htmlFor="email">Email address</Label>
         <Input id="email" name="email" placeholder="Enter new email address" />
         {state?.errors?.email && (
           <FieldDescription>{state.errors.email}</FieldDescription>
         )}
       </FormField>
-      <div className="flex gap-4 w-full justify-end">
-        <DialogClose>Cancel</DialogClose>
+      <div className="flex gap-2 w-full justify-end">
         <DialogClose asChild>
-          <Button
-            disabled={pending}
-            aria-disabled={pending}
-            type="submit"
-            onSubmit={() => console.log("clicked")}
-          >
+          <Button variant="ghost">Cancel</Button>
+        </DialogClose>
+        <DialogClose asChild>
+          <Button disabled={pending} aria-disabled={pending} type="submit">
             {pending ? "Submitting..." : "Change"}
           </Button>
         </DialogClose>

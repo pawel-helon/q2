@@ -1,15 +1,16 @@
 "use server";
 
-import { FormState } from "@/lib/schemas/sign-up";
-import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
-import { ChangeEmailSchema } from "@/lib/schemas/change-email";
 
-export async function changeEmail(state: FormState, formData: FormData) {
+import { FormState } from "@/lib/schemas/sign-up";
+import { ChangeNameSchema } from "@/lib/schemas/change-name-schema";
+import { db } from "@/lib/db";
+
+export async function changeName(state: FormState, formData: FormData) {
   const userId = Number(formData.get("userId"))
 
-  const validatedField = ChangeEmailSchema.safeParse({
-    email: formData.get("email"),
+  const validatedField = ChangeNameSchema.safeParse({
+    name: formData.get("name"),
   });
 
 
@@ -19,13 +20,13 @@ export async function changeEmail(state: FormState, formData: FormData) {
     };
   }
 
-  const { email } = validatedField.data;
+  const { name } = validatedField.data;
 
   await db.user.update({
     where: {
       id: userId,
     },
-    data: { email },
+    data: { name },
   });
 
   redirect("/account");
