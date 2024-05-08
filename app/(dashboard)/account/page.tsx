@@ -22,7 +22,7 @@ export default async function AccountPage() {
 
   return (
     <div>
-      <Navbar />
+      <Navbar userId={userId}/>
       <Header title="Account">
         <Badge className={badgeClassName}>{role}</Badge>
       </Header>
