@@ -12,6 +12,7 @@ export async function signup(state: FormState, formData: FormData) {
     name: formData.get("name"),
     email: formData.get("email"),
     password: formData.get("password"),
+    confirm: formData.get("confirm"),
   });
 
   if (!validatedFields.success) {

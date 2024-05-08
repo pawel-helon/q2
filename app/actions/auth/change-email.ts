@@ -29,6 +29,5 @@ export async function changeEmail(state: FormState, formData: FormData) {
     data: { email },
   });
 
-  revalidatePath("/account");
-  redirect("/account");
+  redirect("/");
 }

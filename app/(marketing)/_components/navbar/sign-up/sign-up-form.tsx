@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { FormField } from "@/components/form/form-field";
 import { FieldDescription } from "@/components/form/field-description";
+import { PasswordInput } from "@/components/form/password-input";
 
 interface SignUpFormProps {
   children?: React.ReactNode;
@@ -34,20 +35,29 @@ export const SignUpForm = ({ children }: SignUpFormProps) => {
           <FieldDescription>{state.errors.email}</FieldDescription>
         )}
       </FormField>
-      <FormField className="mb-6">
+      <FormField>
         <Label htmlFor="password">Password</Label>
-        <Input
-          id="password"
-          name="password"
-          type="password"
-          placeholder="********"
-        />
+        <PasswordInput id="password" name="password" />
         {state?.errors?.password && (
           <div>
             <FieldDescription className="text-foreground">
               Password must:
             </FieldDescription>
             {state.errors.password.map((error) => (
+              <FieldDescription key={error}>{error}</FieldDescription>
+            ))}
+          </div>
+        )}
+      </FormField>
+      <FormField className="mb-6">
+        <Label htmlFor="confirm">Confirm password</Label>
+        <PasswordInput id="confirm" name="confirm" />
+        {state?.errors?.confirm && (
+          <div>
+            <FieldDescription className="text-foreground">
+              Password must:
+            </FieldDescription>
+            {state.errors.confirm.map((error) => (
               <FieldDescription key={error}>{error}</FieldDescription>
             ))}
           </div>

@@ -10,7 +10,6 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { DialogClose } from "@/components/ui/dialog";
 import { PasswordInput } from "@/components/form/password-input";
-import { Input } from "@/components/ui/input";
 
 interface ChangePasswordFormProps {
   userId: number;

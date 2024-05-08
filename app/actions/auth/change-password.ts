@@ -33,5 +33,5 @@ export async function changePassword(state: FormState, formData: FormData) {
     data: { password: hashedPassword },
   });
 
-  redirect("/account");
+  redirect("/");
 }

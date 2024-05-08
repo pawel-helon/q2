@@ -29,5 +29,5 @@ export async function changeName(state: FormState, formData: FormData) {
     data: { name },
   });
 
-  redirect("/account");
+  redirect("/");
 }
