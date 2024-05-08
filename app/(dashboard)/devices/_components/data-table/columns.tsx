@@ -62,6 +62,21 @@ export const columns: ColumnDef<Device>[] = [
     },
   },
   {
+    accessorKey: "owner",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="hover:bg-transparent p-0"
+        >
+          Owner
+          <CaretSortIcon className="ml-2 size-4" />
+        </Button>
+      );
+    },
+  },
+  {
     accessorKey: "streetAddress",
     header: ({ column }) => {
       return (
@@ -107,6 +122,21 @@ export const columns: ColumnDef<Device>[] = [
     },
   },
   {
+    accessorKey: "SIM",
+    header: ({ column }) => {
+      return (
+        <Button
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        className="hover:bg-transparent p-0"
+        >
+          SIM
+          <CaretSortIcon className="ml-2 size-4" />
+        </Button>
+      );
+    },
+  },
+  {
     accessorKey: "model",
     header: ({ column }) => {
       return (
@@ -116,36 +146,6 @@ export const columns: ColumnDef<Device>[] = [
           className="hover:bg-transparent p-0"
         >
           Model
-          <CaretSortIcon className="ml-2 size-4" />
-        </Button>
-      );
-    },
-  },
-  {
-    accessorKey: "owner",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="hover:bg-transparent p-0"
-        >
-          Owner
-          <CaretSortIcon className="ml-2 size-4" />
-        </Button>
-      );
-    },
-  },
-  {
-    accessorKey: "SIM",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="hover:bg-transparent p-0"
-        >
-          SIM
           <CaretSortIcon className="ml-2 size-4" />
         </Button>
       );

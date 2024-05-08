@@ -23,14 +23,14 @@ export const SignUpForm = ({ children }: SignUpFormProps) => {
     <form action={action} className="flex flex-col gap-5">
       <FormField>
         <Label htmlFor="name">Name</Label>
-        <Input id="name" name="name" placeholder="Enter full name" />
+        <Input id="name" name="name" placeholder="Enter full name" spellCheck="false" />
         {state?.errors?.name && (
           <FieldDescription>{state.errors.name}</FieldDescription>
         )}
       </FormField>
       <FormField>
         <Label htmlFor="email">Email</Label>
-        <Input id="email" name="email" placeholder="Enter email address" />
+        <Input id="email" name="email" placeholder="Enter email address" spellCheck="false" />
         {state?.errors?.email && (
           <FieldDescription>{state.errors.email}</FieldDescription>
         )}

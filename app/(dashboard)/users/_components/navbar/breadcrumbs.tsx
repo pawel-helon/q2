@@ -14,7 +14,7 @@ export const Breadcrumbs = () => {
     <Breadcrumb>
     <BreadcrumbList>
       <BreadcrumbItem>
-        <BreadcrumbLink>Home</BreadcrumbLink>
+        <BreadcrumbLink href="/">Home</BreadcrumbLink>
       </BreadcrumbItem>
       <BreadcrumbSeparator />
       <BreadcrumbItem>

@@ -73,6 +73,10 @@ export const columns: ColumnDef<User>[] = [
     },
   },
   {
+    accessorKey: "devices",
+    header: "Devices",
+  },
+  {
     accessorKey: "role",
     header: ({ column }) => {
       return (
@@ -86,10 +90,6 @@ export const columns: ColumnDef<User>[] = [
         </Button>
       );
     },
-  },
-  {
-    accessorKey: "devices",
-    header: "Devices",
   },
   {
     id: "Status",

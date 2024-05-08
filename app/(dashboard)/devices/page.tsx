@@ -1,4 +1,5 @@
-"use server";
+"use server"
+
 import { Header } from "@/app/_components/header";
 import { DataTable } from "@/app/_components/data-table";
 import { fetchDevices, fetchOwners } from "@/app/api/neon";

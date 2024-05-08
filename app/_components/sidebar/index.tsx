@@ -8,12 +8,13 @@ import { ChevronButton } from "./chevron-button";
 import { Account } from "./account";
 
 interface SidebarProps {
+  role: string;
   email: {
     email: string;
 } | null;
 }
 
-export const Sidebar = ({ email }: SidebarProps) => {
+export const Sidebar = ({ email, role }: SidebarProps) => {
   const [collapsed, setCollapsed] = useState(true);
 
   const handleCollapse = () => {
@@ -28,7 +29,7 @@ export const Sidebar = ({ email }: SidebarProps) => {
     >
       <div className="flex flex-col gap-10">
         <ChevronButton collapsed={collapsed} handleCollapse={handleCollapse} />
-        <Items collapsed={collapsed} />
+        <Items collapsed={collapsed} role={role}/>
       </div>
       <Account collapsed={collapsed} email={email}/>
     </motion.div>

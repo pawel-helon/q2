@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { FormField } from "@/components/form/form-field";
 import { FieldDescription } from "@/components/form/field-description";
+import { PasswordInput } from "@/components/form/password-input";
 
 interface SignInFormProps {
   children?: React.ReactNode;
@@ -22,7 +23,7 @@ export const SignInForm = ({ children }: SignInFormProps) => {
     <form action={action} className="flex flex-col gap-5">
       <FormField>
         <Label htmlFor="email">Email</Label>
-        <Input id="email" name="email" placeholder="Enter email address" />
+        <Input id="email" name="email" placeholder="Enter email address" spellCheck="false" />
       </FormField>
       {state?.errors?.email && (
         <FieldDescription>{state.errors.email}</FieldDescription>
@@ -30,12 +31,7 @@ export const SignInForm = ({ children }: SignInFormProps) => {
 
       <FormField className="mb-6">
         <Label htmlFor="password">Password</Label>
-        <Input
-          id="password"
-          name="password"
-          type="password"
-          placeholder="********"
-        />
+        <PasswordInput id="password" name="password" />
       </FormField>
       {state?.errors?.password && (
         <div>
