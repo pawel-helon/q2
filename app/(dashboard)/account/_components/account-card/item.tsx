@@ -38,6 +38,7 @@ export const Item = ({
             <Button
               variant="link"
               className="absolute top-1/2 transform -translate-y-1/2 right-0"
+              size="sm"
             >
               Change
             </Button>

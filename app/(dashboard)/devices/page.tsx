@@ -4,8 +4,8 @@ import { Header } from "@/app/_components/header";
 import { DataTable } from "@/app/_components/data-table";
 import { fetchDevices, fetchOwners } from "@/app/api/neon";
 
-import { columns } from "./_components/data-table/columns";
 import { Navbar } from "./_components/navbar";
+import { columns } from "./_components/data-table/columns";
 import { columnsMember } from "./_components/data-table/columns-member";
 import { verifySession } from "@/lib/data-access-layer";
 

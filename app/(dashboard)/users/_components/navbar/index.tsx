@@ -1,5 +1,5 @@
+import { Breadcrumbs } from "@/components/breadcrumbs";
 import { Button } from "@/components/ui/button";
-import { Breadcrumbs } from "./breadcrumbs";
 import { Plus } from "lucide-react";
 
 export const Navbar = () => {

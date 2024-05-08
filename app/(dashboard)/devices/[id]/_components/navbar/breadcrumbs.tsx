@@ -15,13 +15,13 @@ interface BreadcrumbsProps {
 }
 
 export const Breadcrumbs = ({ device }: BreadcrumbsProps) => {
-  const deviceName = device?.deviceName;
+  const deviceName = String(device?.deviceName)
   
   return (
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink>Home</BreadcrumbLink>
+          <BreadcrumbLink href="/">Home</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>

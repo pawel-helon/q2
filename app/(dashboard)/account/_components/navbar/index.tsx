@@ -1,6 +1,6 @@
 "use server"
 
-import { Breadcrumbs } from "./breadcrumbs";
+import { Breadcrumbs } from "@/components/breadcrumbs";
 import { DeleteAccountDialog } from "./delete-account-dialog";
 
 interface NavbarProps {
