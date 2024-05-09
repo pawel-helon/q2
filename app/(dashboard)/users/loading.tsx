@@ -1,13 +1,21 @@
 import React from "react";
-import { Navbar } from "./_components/navbar";
-import { Loader, Search } from "lucide-react";
+import { Loader, Plus, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Header } from "@/app/_components/header";
+import { Navbar } from "@/components/navbar";
+import { Button } from "@/components/ui/button";
 
 export default async function Loading() {
   return (
     <div>
-      <Navbar />
+      <Navbar>
+        <div className="flex gap-2 justify-end">
+          <Button>
+            <Plus className="-ml-2 mr-2" />
+            Add user
+          </Button>
+        </div>
+      </Navbar>
       <Header title="Users" />
       <div className="flex justify-between border-b border-border pb-1 my-12">
         <div className="flex items-center">

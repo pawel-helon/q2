@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { Navbar } from "../_components/navbar";
-import { SignUpForm } from "@/app/(marketing)/_components/navbar/sign-up/sign-up-form";
+import { SignUpForm } from "@/app/(marketing)/_components/sign-up/sign-up-form";
 
 export default function SignUpPage() {
   return (

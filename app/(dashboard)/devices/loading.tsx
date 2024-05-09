@@ -1,15 +1,18 @@
 import React from "react";
-import { Navbar } from "./_components/navbar";
 import { fetchOwners } from "@/app/api/neon";
 import { Loader, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Header } from "@/app/_components/header";
+import { Navbar } from "@/components/navbar";
+import { AddDeviceDialog } from "./_components/add-device-dialog";
 
 export default async function Loading() {
   const owners = await fetchOwners();
   return (
     <div>
-      <Navbar owners={owners} />
+      <Navbar>
+        <AddDeviceDialog owners={owners} />
+      </Navbar>
       <Header title="Devices" />
       <div className="flex justify-between border-b border-border pb-1 my-12">
         <div className="flex items-center">

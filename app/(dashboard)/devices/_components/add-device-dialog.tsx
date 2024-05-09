@@ -1,6 +1,8 @@
+"use server"
+
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
-import { STATUS } from "@prisma/client";
+import { $Enums, STATE, STATUS } from "@prisma/client";
 import { Plus } from "lucide-react";
 
 import { AddDeviceForm } from "./add-device-form";
@@ -15,7 +17,19 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-export const AddDeviceDialog = () => {
+interface AddDeviceDialogProps {
+  owners: {
+    id: number;
+    email: string;
+    name: string | null;
+    password: string;
+    role: $Enums.ROLE;
+    createdAt: Date;
+    updatedAt: Date;
+}[]
+}
+
+export const AddDeviceDialog = ({ owners }: AddDeviceDialogProps) => {
   const onDataAction = async (data: z.infer<typeof addDeviceSchema>) => {
     "use server";
     const parsed = addDeviceSchema.safeParse(data);
@@ -28,9 +42,14 @@ export const AddDeviceDialog = () => {
           city: parsed.data.city,
           country: parsed.data.country,
           model: parsed.data.model,
-          owner: parsed.data.owner,
+          owner: {
+            connect: {
+              email: parsed.data.owner,
+            },
+          },
           SIM: parsed.data.SIM,
           status: STATUS.INACTIVE,
+          state: STATE.CLOSED,
         },
       });
       revalidatePath("/devices", "page");
@@ -56,7 +75,7 @@ export const AddDeviceDialog = () => {
         <DialogHeader className="mb-4 text-left">
           <DialogTitle>Add new device</DialogTitle>
         </DialogHeader>
-        <AddDeviceForm onDataAction={onDataAction} />
+        <AddDeviceForm onDataAction={onDataAction} owners={owners}/>
       </DialogContent>
     </Dialog>
   );

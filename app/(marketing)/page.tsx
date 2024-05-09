@@ -1,10 +1,14 @@
-import React from 'react'
-import { Navbar } from './_components/navbar'
+import { Navbar } from "@/components/navbar"
+import { SignIn } from "./_components/sign-in"
+import { SignUp } from "./_components/sign-up"
 
 const HomePage = () => {
   return (
-    <div>
-      <Navbar />
+    <div className="px-4">
+      <Navbar>
+        <SignUp />
+        <SignIn />
+      </Navbar>
     </div>
   )
 }
