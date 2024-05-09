@@ -1,4 +1,4 @@
-"use server"
+"use server";
 
 import { fetchUser } from "@/app/actions/fetchUser";
 import { Heading } from "@/components/typography";
@@ -7,6 +7,7 @@ import { Item } from "./item";
 import { ChangeEmailForm } from "./change-email-form";
 import { ChangeNameForm } from "./change-name-form";
 import { ChangePasswordForm } from "./change-pasword-form";
+import { ChangeNameField } from "./change-name-field";
 
 interface AccountCardProps {
   userId: number;
@@ -22,13 +23,19 @@ export const AccountCard = async ({ userId }: AccountCardProps) => {
           <Heading variant="h3">Account</Heading>
         </CardHeader>
         <CardContent className="grow p-4 flex flex-col gap-6">
-          <Item
+          <ChangeNameField
+            label="Full name"
+            placeholder={user?.name || undefined}
+            dialogTitle="Change name"
+            userId={userId}
+          />
+          {/* <Item
             label="Full name"
             placeholder={user?.name || undefined}
             dialogTitle="Change name"
           >
             <ChangeNameForm userId={userId} />
-          </Item>
+          </Item> */}
           <Item
             label="Email"
             placeholder={user?.email || undefined}

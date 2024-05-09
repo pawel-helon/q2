@@ -63,29 +63,38 @@ export function Actions<TData>({
           {title === "Devices" ? (
             <>
               <Button
-                variant="ghost"
                 onClick={handleActivateDevice}
+                variant="ghost"
+                size="sm"
                 disabled={disabled}
               >
                 Activate
               </Button>
-              <Separator orientation="vertical" className="mx-2" />
-              <Button variant="ghost" onClick={handleDeleteDevice}>
+              <Separator orientation="vertical" className="mx-1" />
+              <Button
+                onClick={handleDeleteDevice}
+                variant="ghost"
+                size="sm"
+              >
                 Delete
               </Button>
             </>
           ) : (
             <>
               <ChangeRole ids={ids} />
-              <Separator orientation="vertical" className="mx-2" />
-              <Button variant="ghost" onClick={handleDeleteUser}>
+              <Separator orientation="vertical" className="mx-1" />
+              <Button
+                onClick={handleDeleteUser}
+                variant="ghost"
+                size="sm"
+              >
                 Delete
               </Button>
             </>
           )}
         </Div>
       ) : (
-        <div className="size-[36px]" />
+        <div className="size-[32px]" />
       )}
       <TableColumns table={table} />
     </div>

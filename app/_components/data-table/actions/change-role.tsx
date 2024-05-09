@@ -44,7 +44,12 @@ export const ChangeRole = ({ ids }: ChangeRoleProps) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>
-        <Button variant="ghost">Change role</Button>
+        <Button
+          variant="ghost"
+          size="sm"
+        >
+          Change role
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader className="mb-6">

@@ -56,6 +56,7 @@ export const ChangePasswordForm = ({ userId }: ChangePasswordFormProps) => {
         <DialogClose asChild>
           <Button variant="ghost">Cancel</Button>
         </DialogClose>
+        {/* add onClick with setOpen(false) */}
         <Button disabled={pending} aria-disabled={pending} type="submit">
           {pending ? "Submitting..." : "Change"}
         </Button>

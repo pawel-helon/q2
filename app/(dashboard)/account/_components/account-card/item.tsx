@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -22,7 +24,6 @@ export const Item = ({
   dialogTitle,
   children,
 }: ItemProps) => {
-  
   return (
     <li className="flex flex-col gap-2">
       <Label>
