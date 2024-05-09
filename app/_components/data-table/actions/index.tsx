@@ -5,11 +5,13 @@ import { activateDevice } from "@/app/api/neon/activate-device";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Table } from "@tanstack/react-table";
-import { TableColumns } from "./table-columns";
+import { TableColumns } from "../table-columns";
 import { Div } from "@/components/motion-ui/div";
 import { toast } from "sonner";
 import { deleteUsers } from "@/app/api/neon/delete-user";
 import { deleteDevices } from "@/app/api/neon/delete-device";
+import { changeRoles } from "@/app/api/neon/change-role";
+import { ChangeRole } from "./change-role";
 
 interface ActionsProps<TData> {
   table: Table<TData>;
@@ -44,7 +46,7 @@ export function Actions<TData>({
       toast.success("Device(s) deleted");
       router.refresh();
     }, 500);
-  }
+  };
 
   const handleDeleteUser = () => {
     deleteUsers(ids);
@@ -54,13 +56,17 @@ export function Actions<TData>({
     }, 500);
   };
 
-  return ( 
+  return (
     <div className="relative">
       {anySelectedRow ? (
         <Div duration=".3" className="flex min-w-sm">
           {title === "Devices" ? (
             <>
-              <Button variant="ghost" onClick={handleActivateDevice} disabled={disabled}>
+              <Button
+                variant="ghost"
+                onClick={handleActivateDevice}
+                disabled={disabled}
+              >
                 Activate
               </Button>
               <Separator orientation="vertical" className="mx-2" />
@@ -70,7 +76,7 @@ export function Actions<TData>({
             </>
           ) : (
             <>
-              <Button variant="ghost">Assign device</Button>
+              <ChangeRole ids={ids} />
               <Separator orientation="vertical" className="mx-2" />
               <Button variant="ghost" onClick={handleDeleteUser}>
                 Delete

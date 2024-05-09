@@ -18,7 +18,7 @@ export const Status = () => {
       type="single"
       defaultValue="item-1"
       collapsible
-      className="col-span-3 flex flex-col gap-4"
+      className="col-span-2 flex flex-col gap-4"
     >
       <AccordionItem
         value="item-1"
