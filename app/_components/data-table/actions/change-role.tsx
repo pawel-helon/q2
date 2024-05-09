@@ -23,6 +23,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Label } from "@radix-ui/react-dropdown-menu";
 
 interface ChangeRoleProps {
   ids: any[];
@@ -38,7 +39,7 @@ export const ChangeRole = ({ ids }: ChangeRoleProps) => {
       toast.success("Role(s) updated");
       router.refresh();
     }, 500);
-  };
+  }
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -51,7 +52,8 @@ export const ChangeRole = ({ ids }: ChangeRoleProps) => {
         </DialogHeader>
         <form action={changeRoles}>
           <input type="hidden" name="ids" value={ids} />
-          <Select defaultValue="ADMIN" name="role">
+          <Label className="mb-1">Select role</Label>
+          <Select defaultValue="ENDUSER" name="role">
             <SelectTrigger>
               <SelectValue placeholder="Select role" />
             </SelectTrigger>
@@ -63,7 +65,7 @@ export const ChangeRole = ({ ids }: ChangeRoleProps) => {
               </SelectGroup>
             </SelectContent>
           </Select>
-          <div className="w-full flex justify-end gap-2 mt-6">
+          <div className="w-full flex justify-end gap-2 mt-10">
             <DialogClose asChild>
               <Button variant="ghost">Cancel</Button>
             </DialogClose>
