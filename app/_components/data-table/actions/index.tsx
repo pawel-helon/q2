@@ -1,17 +1,20 @@
+"use client"
+
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { Table } from "@tanstack/react-table";
+import { toast } from "sonner";
 
 import { activateDevice } from "@/app/api/neon/activate-device";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { Table } from "@tanstack/react-table";
-import { TableColumns } from "../table-columns";
-import { Div } from "@/components/motion-ui/div";
-import { toast } from "sonner";
-import { deleteUsers } from "@/app/api/neon/delete-user";
 import { deleteDevices } from "@/app/api/neon/delete-device";
-import { changeRoles } from "@/app/api/neon/change-role";
+import { TableColumns } from "../table-columns";
+
 import { ChangeRole } from "./change-role";
+import { MoreButton } from "./more-button";
+import { Div } from "@/components/motion-ui/div";
+import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
+
 
 interface ActionsProps<TData> {
   table: Table<TData>;
@@ -48,14 +51,6 @@ export function Actions<TData>({
     }, 500);
   };
 
-  const handleDeleteUser = () => {
-    deleteUsers(ids);
-    setTimeout(() => {
-      toast.success("User(s) deleted");
-      router.refresh();
-    }, 500);
-  };
-
   return (
     <div className="relative">
       {anySelectedRow ? (
@@ -80,17 +75,18 @@ export function Actions<TData>({
               </Button>
             </>
           ) : (
-            <>
+            <div className="flex items-center">
               <ChangeRole ids={ids} />
               <Separator orientation="vertical" className="mx-1" />
               <Button
-                onClick={handleDeleteUser}
+                onClick={() => {}}
                 variant="ghost"
                 size="sm"
               >
-                Delete
+                Assign device
               </Button>
-            </>
+              <MoreButton ids={ids}/>
+            </div>
           )}
         </Div>
       ) : (

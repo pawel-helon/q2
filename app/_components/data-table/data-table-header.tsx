@@ -16,26 +16,22 @@ export function DataTableHeader<TData>({
 }: DataTableHeaderProps<TData>) {
   const pathname = usePathname();
 
-  let title
+  let title;
   if (pathname === "/users") {
-    title = "Users"
+    title = "Users";
   } else {
-    title = "Devices"
+    title = "Devices";
   }
 
   return (
     <div className="flex px-4 justify-between items-center">
       <div className="flex gap-2 items-end">
-      <Heading variant="h3">{title}</Heading>
-      <Paragraph variant="small-thick" className="text-muted-foreground">
-        ({numberOfResults})
-      </Paragraph>
+        <Heading variant="h3">{title}</Heading>
+        <Paragraph variant="small-thick" className="text-muted-foreground">
+          ({numberOfResults})
+        </Paragraph>
       </div>
-      <Actions
-        table={table}
-        anySelectedRow={anySelectedRow}
-        title={title}
-      />
+      <Actions table={table} anySelectedRow={anySelectedRow} title={title} />
     </div>
   );
 }

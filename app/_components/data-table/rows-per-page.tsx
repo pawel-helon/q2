@@ -34,7 +34,9 @@ export function RowsPerPage<TData>({
           <ChevronDown className="ml-2 -mr-1" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="center" className="min-w-[5rem] bg-background shadow-black shadow-lg">
+      <DropdownMenuContent
+        align="center"
+        className="min-w-[5rem] bg-background shadow-black shadow-lg">
         <DropdownMenuItem
           onSelect={() =>
             setPagination({
