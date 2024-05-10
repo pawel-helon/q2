@@ -1,13 +1,12 @@
 "use server";
 
 import { fetchUser } from "@/app/actions/fetchUser";
+
+import { ChangeNameField } from "./change-name-field/index.";
+import { ChangeEmailField } from "./change-email-field";
+import { ChangePasswordField } from "./change-password-field";
 import { Heading } from "@/components/typography";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Item } from "./item";
-import { ChangeEmailForm } from "./change-email-form";
-import { ChangeNameForm } from "./change-name-form";
-import { ChangePasswordForm } from "./change-pasword-form";
-import { ChangeNameField } from "./change-name-field";
 
 interface AccountCardProps {
   userId: number;
@@ -29,27 +28,18 @@ export const AccountCard = async ({ userId }: AccountCardProps) => {
             dialogTitle="Change name"
             userId={userId}
           />
-          {/* <Item
-            label="Full name"
-            placeholder={user?.name || undefined}
-            dialogTitle="Change name"
-          >
-            <ChangeNameForm userId={userId} />
-          </Item> */}
-          <Item
+          <ChangeEmailField
             label="Email"
             placeholder={user?.email || undefined}
             dialogTitle="Change email"
-          >
-            <ChangeEmailForm userId={userId} />
-          </Item>
-          <Item
+            userId={userId}
+          />
+          <ChangePasswordField
             label="Password"
             placeholder="*******"
             dialogTitle="Change password"
-          >
-            <ChangePasswordForm userId={userId} />
-          </Item>
+            userId={userId}
+          />
         </CardContent>
       </Card>
     </div>

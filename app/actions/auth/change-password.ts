@@ -1,7 +1,6 @@
 "use server";
 
 import bcrypt from "bcryptjs";
-import { redirect } from "next/navigation";
 
 import { ChangePasswordSchema } from "@/lib/schemas/change-password-schema";
 import { db } from "@/lib/db";
@@ -32,6 +31,4 @@ export async function changePassword(state: FormState, formData: FormData) {
     },
     data: { password: hashedPassword },
   });
-
-  redirect("/");
 }

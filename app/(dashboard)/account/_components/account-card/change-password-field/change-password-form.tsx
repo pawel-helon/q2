@@ -13,9 +13,10 @@ import { PasswordInput } from "@/components/form/password-input";
 
 interface ChangePasswordFormProps {
   userId: number;
+  handleClick: () => void;
 }
 
-export const ChangePasswordForm = ({ userId }: ChangePasswordFormProps) => {
+export const ChangePasswordForm = ({ userId, handleClick }: ChangePasswordFormProps) => {
   const [state, action] = useFormState(changePassword, undefined);
   const { pending } = useFormStatus();
 
@@ -28,13 +29,13 @@ export const ChangePasswordForm = ({ userId }: ChangePasswordFormProps) => {
           <PasswordInput id="password" name="password" />
           {state?.errors?.password && (
             <div>
-            <FieldDescription className="text-foreground">
-              Password must:
-            </FieldDescription>
-            {state.errors.password.map((error) => (
-              <FieldDescription key={error}>{error}</FieldDescription>
-            ))}
-          </div>
+              <FieldDescription className="text-foreground">
+                Password must:
+              </FieldDescription>
+              {state.errors.password.map((error) => (
+                <FieldDescription key={error}>{error}</FieldDescription>
+              ))}
+            </div>
           )}
         </FormField>
         <FormField className="mb-6">
@@ -42,13 +43,13 @@ export const ChangePasswordForm = ({ userId }: ChangePasswordFormProps) => {
           <PasswordInput id="confirm" name="confirm" />
           {state?.errors?.confirm && (
             <div>
-            <FieldDescription className="text-foreground">
-              Password must:
-            </FieldDescription>
-            {state.errors.confirm.map((error) => (
-              <FieldDescription key={error}>{error}</FieldDescription>
-            ))}
-          </div>
+              <FieldDescription className="text-foreground">
+                Password must:
+              </FieldDescription>
+              {state.errors.confirm.map((error) => (
+                <FieldDescription key={error}>{error}</FieldDescription>
+              ))}
+            </div>
           )}
         </FormField>
       </div>
@@ -56,8 +57,12 @@ export const ChangePasswordForm = ({ userId }: ChangePasswordFormProps) => {
         <DialogClose asChild>
           <Button variant="ghost">Cancel</Button>
         </DialogClose>
-        {/* add onClick with setOpen(false) */}
-        <Button disabled={pending} aria-disabled={pending} type="submit">
+        <Button
+          type="submit"
+          onClick={handleClick}
+          disabled={pending}
+          aria-disabled={pending}
+        >
           {pending ? "Submitting..." : "Change"}
         </Button>
       </div>
