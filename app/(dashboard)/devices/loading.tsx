@@ -4,14 +4,20 @@ import { Loader, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Header } from "@/app/_components/header";
 import { Navbar } from "@/components/navbar";
-import { AddDeviceDialog } from "./_components/add-device-dialog";
+import { AddDevice } from "./_components/add-device";
+import { verifySession } from "@/lib/data-access-layer";
 
 export default async function Loading() {
+  const session = await verifySession();
+
+  const role = String(session?.role);
+  const userId = Number(session?.userId);
   const owners = await fetchOwners();
+
   return (
     <div>
       <Navbar>
-        <AddDeviceDialog owners={owners} />
+        <AddDevice role={role} userId={userId} owners={owners} />
       </Navbar>
       <Header title="Devices" />
       <div className="flex justify-between border-b border-border pb-1 my-12">
