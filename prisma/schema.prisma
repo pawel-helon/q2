@@ -50,10 +50,12 @@ model Device {
 }
 
 model Notification {
-  id          Int      @id @default(autoincrement())
-  title       String
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId      Int
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id              Int      @id @default(autoincrement())
+  title           String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId          Int
+  requester       Int
+  requestedRole   ROLE
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }

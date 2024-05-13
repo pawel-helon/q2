@@ -7,6 +7,7 @@ import { Items } from "./items";
 import { ChevronButton } from "./chevron-button";
 import { Account } from "./account";
 import { Notifications } from "./notifications";
+import { $Enums } from "@prisma/client";
 
 interface SidebarProps {
   role: string;
@@ -17,9 +18,11 @@ interface SidebarProps {
     id: number;
     title: string;
     userId: number;
+    requester: number;
+    requestedRole: $Enums.ROLE;
     createdAt: Date;
     updatedAt: Date;
-  }[];
+}[]
 }
 
 export const Sidebar = ({ email, role, notifications }: SidebarProps) => {
@@ -39,7 +42,7 @@ export const Sidebar = ({ email, role, notifications }: SidebarProps) => {
         <ChevronButton collapsed={collapsed} handleCollapse={handleCollapse} />
         <Items collapsed={collapsed} role={role} />
       </div>
-      <div className="flex flex-col">
+      <div className="flex flex-col gap-0">
         <Notifications
           collapsed={collapsed}
           notifications={notifications}

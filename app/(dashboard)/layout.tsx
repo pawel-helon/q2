@@ -26,11 +26,7 @@ const DashboardLayout = async ({ children }: DashboardLayoutProps) => {
         "scrollbar scrollbar-thumb-muted scrollbar-track-background h-32 overflow-y-scroll"
       )}
     >
-      <Sidebar
-        role={role}
-        email={email}
-        notifications={notifications}
-      />
+      <Sidebar role={role} email={email} notifications={notifications} />
       <div className="flex flex-col w-full px-6 border-r-[1px] border-border">
         {children}
       </div>
