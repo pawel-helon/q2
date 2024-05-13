@@ -6,15 +6,23 @@ import { motion } from "framer-motion";
 import { Items } from "./items";
 import { ChevronButton } from "./chevron-button";
 import { Account } from "./account";
+import { Notifications } from "./notifications";
 
 interface SidebarProps {
   role: string;
   email: {
     email: string;
-} | null;
+  } | null;
+  notifications: {
+    id: number;
+    title: string;
+    userId: number;
+    createdAt: Date;
+    updatedAt: Date;
+  }[];
 }
 
-export const Sidebar = ({ email, role }: SidebarProps) => {
+export const Sidebar = ({ email, role, notifications }: SidebarProps) => {
   const [collapsed, setCollapsed] = useState(true);
 
   const handleCollapse = () => {
@@ -29,9 +37,15 @@ export const Sidebar = ({ email, role }: SidebarProps) => {
     >
       <div className="flex flex-col gap-10">
         <ChevronButton collapsed={collapsed} handleCollapse={handleCollapse} />
-        <Items collapsed={collapsed} role={role}/>
+        <Items collapsed={collapsed} role={role} />
       </div>
-      <Account collapsed={collapsed} email={email}/>
+      <div className="flex flex-col">
+        <Notifications
+          collapsed={collapsed}
+          notifications={notifications}
+        />
+        <Account collapsed={collapsed} email={email} />
+      </div>
     </motion.div>
   );
 };

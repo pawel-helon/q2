@@ -7,12 +7,14 @@ import { ChangeEmailField } from "./change-email-field";
 import { ChangePasswordField } from "./change-password-field";
 import { Heading } from "@/components/typography";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { ChangeRoleField } from "./change-role-field";
 
 interface AccountCardProps {
   userId: number;
+  role: string;
 }
 
-export const AccountCard = async ({ userId }: AccountCardProps) => {
+export const AccountCard = async ({ userId, role }: AccountCardProps) => {
   const user = await fetchUser(userId);
 
   return (
@@ -34,6 +36,14 @@ export const AccountCard = async ({ userId }: AccountCardProps) => {
             dialogTitle="Change email"
             userId={userId}
           />
+          {role !== "ADMIN" && (
+            <ChangeRoleField
+              label="Role"
+              placeholder={user?.role || undefined}
+              dialogTitle="Request role change"
+              userId={userId}
+            />
+          )}
           <ChangePasswordField
             label="Password"
             placeholder="*******"

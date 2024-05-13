@@ -11,40 +11,36 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 interface SplitButtonProps {
+  primaryAction: () => void;
   primaryActionLabel: string;
+  secondaryAction: () => void;
   secondaryActionLabel: string;
 }
 
 export function SplitButton({
+  primaryAction,
   primaryActionLabel,
+  secondaryAction,
   secondaryActionLabel,
 }: SplitButtonProps) {
-  const primaryAction = () => {
-    console.log("Primary action");
-  };
-  const secondaryAction = () => {
-    console.log("Secondary action");
-  };
   return (
-    <div className="flex">
-      <Button onClick={primaryAction} className="rounded-r-none border-r w-[80px]">
+    <div className="flex w-[98px]">
+      <Button
+        onClick={primaryAction}
+        size="sm"
+        className="rounded-r-none border-r grow"
+      >
         {primaryActionLabel}
       </Button>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button size="icon" className="rounded-l-none">
-            <ChevronDown />
+          <Button size="sm" className="rounded-l-none w-8 px-0">
+            <ChevronDown size={16} />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
-          <DropdownMenuItem asChild>
-            <Button
-              onClick={secondaryAction}
-              variant="ghost"
-              className="w-full justify-start"
-            >
-              {secondaryActionLabel}
-            </Button>
+        <DropdownMenuContent align="end" className="min-w-[1rem] w-[98px] p-0">
+          <DropdownMenuItem onSelect={secondaryAction} className="text-xs px-3 py-2">
+            {secondaryActionLabel}
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

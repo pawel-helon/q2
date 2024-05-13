@@ -15,7 +15,7 @@ export const Navbar = ({ children }: NavbarProps) => {
 
   return (
     <div className="w-full py-6 flex justify-between items-center">
-      {pathname === "/" ? (
+      {pathname === "/" || pathname === "/sign-in" || pathname === "/sign-up" ? (
         <Link href="/">
           <Container />
         </Link>

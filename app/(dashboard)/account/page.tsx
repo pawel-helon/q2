@@ -5,7 +5,7 @@ import { Header } from "@/app/_components/header";
 import { AccountCard } from "./_components/account-card";
 import { verifySession } from "@/lib/data-access-layer";
 import { Navbar } from "@/components/navbar";
-import { DeleteAccountDialog } from "./_components/delete-account-dialog.tsx";
+import { DeleteAccount } from "./_components/delete-account";
 
 export default async function AccountPage() {
   const session = await verifySession();
@@ -24,13 +24,13 @@ export default async function AccountPage() {
   return (
     <div>
       <Navbar>
-        <DeleteAccountDialog userId={userId} />
+        <DeleteAccount userId={userId} />
       </Navbar>
       <Header title="Account">
         <Badge className={badgeClassName}>{role}</Badge>
       </Header>
       <div className="mt-[84px] border-t">
-        <AccountCard userId={userId} />
+        <AccountCard userId={userId} role={role}/>
       </div>
     </div>
   );

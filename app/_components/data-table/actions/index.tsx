@@ -9,11 +9,11 @@ import { activateDevice } from "@/app/api/neon/activate-device";
 import { deleteDevices } from "@/app/api/neon/delete-device";
 import { TableColumns } from "../table-columns";
 
-import { ChangeRole } from "./change-role";
 import { MoreButton } from "./more-button";
 import { Div } from "@/components/motion-ui/div";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
+import { ChangeRole } from "./change-role";
 
 
 interface ActionsProps<TData> {

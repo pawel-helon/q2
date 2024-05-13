@@ -24,14 +24,6 @@ export const MoreButton = ({ device }: MoreButtonProps) => {
   
   const router = useRouter();
 
-  const handleDeleteDevice = () => {
-    setIsDeleteDialogOpen(false);
-    setTimeout(() => {
-      router.push("/users");
-      toast("Device has been deleted");
-    }, 500);
-  };
-
   return (
     <>
       <DeleteDialog

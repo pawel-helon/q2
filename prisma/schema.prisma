@@ -14,14 +14,15 @@ enum ROLE {
 }
 
 model User {
-  id         Int      @id @default(autoincrement())
-  email      String   @unique
-  name       String?
-  password   String
-  role       ROLE     @default(ENDUSER)
-  devices    Device[]
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id              Int      @id @default(autoincrement())
+  email           String   @unique
+  name            String?
+  password        String
+  role            ROLE     @default(ENDUSER)
+  devices         Device[]
+  notifications   Notification[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
 
 enum STATUS {
@@ -46,4 +47,13 @@ model Device {
   state           STATE
   owner           User @relation(fields: [ownerId], references: [id], onDelete: Cascade)
   ownerId         Int
+}
+
+model Notification {
+  id          Int      @id @default(autoincrement())
+  title       String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
