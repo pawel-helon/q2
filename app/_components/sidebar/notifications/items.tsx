@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { $Enums } from "@prisma/client";
 import { toast } from "sonner";
@@ -7,6 +7,9 @@ import { approveRoleChange } from "@/app/actions/auth/approve-role-change";
 import { SplitButton } from "@/components/split-button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { Dispatch, SetStateAction } from "react";
+import { useRouter } from "next/navigation";
+import { set } from "zod";
 
 interface ItemsProps {
   notifications: {
@@ -17,10 +20,13 @@ interface ItemsProps {
     requestedRole: $Enums.ROLE;
     createdAt: Date;
     updatedAt: Date;
-}[]
+  }[];
+  setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-export const Items = ({ notifications }: ItemsProps) => {
+export const Items = ({ notifications, setOpen }: ItemsProps) => {
+  const router = useRouter();
+
   return (
     <div className="flex flex-col gap-8 rounded-sm">
       {notifications.map((notification) => (
@@ -50,7 +56,19 @@ export const Items = ({ notifications }: ItemsProps) => {
               <p>{notification.title}</p>
             </div>
             <SplitButton
-              primaryAction={() => approveRoleChange(notification)}
+              primaryAction={() => {
+                approveRoleChange(notification)
+                  .then(() => {
+                    setTimeout(() => {
+                      toast.success("Role has been changed successfully!");
+                      setOpen(false);
+                      router.refresh();
+                    }, 500);
+                  })
+                  .catch((error) => {
+                    toast.error(error.message);
+                  });
+              }}
               primaryActionLabel="Accept"
               secondaryAction={() => console.log("clicked decline")}
               secondaryActionLabel="Decline"

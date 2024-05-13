@@ -62,7 +62,7 @@ export const Notifications = ({
         >
           <NotificationsHeader open={open} setOpen={setOpen}/>
           {hasNotifications ? (
-            <Items notifications={notifications} />
+            <Items notifications={notifications} setOpen={setOpen}/>
           ) : (
             <EmptyItem />
           )}

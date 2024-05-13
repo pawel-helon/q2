@@ -1,7 +1,7 @@
 "use server"
 
-import { db } from "@/lib/db";
 import { $Enums } from "@prisma/client";
+import { db } from "@/lib/db";
 
 export async function approveRoleChange(notification: {
     id: number;
