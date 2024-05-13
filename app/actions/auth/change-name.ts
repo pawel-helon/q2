@@ -1,9 +1,6 @@
 "use server";
 
-import { redirect } from "next/navigation";
-
-import { FormState } from "@/lib/schemas/sign-up";
-import { ChangeNameSchema } from "@/lib/schemas/change-name-schema";
+import { ChangeNameSchema, FormState } from "@/lib/schemas/change-name-schema";
 import { db } from "@/lib/db";
 
 export async function changeName(state: FormState, formData: FormData) {

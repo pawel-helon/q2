@@ -1,13 +1,11 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { Navbar } from "../_components/navbar";
 import { SignUpForm } from "@/app/(marketing)/_components/sign-up/sign-up-form";
 
 export default function SignUpPage() {
   return (
     <div className="w-full flex relative justify-center items-center">
-      <Navbar />
       <div
         className={cn(
           "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%]",

@@ -7,7 +7,7 @@ import { Container } from "lucide-react";
 import { Breadcrumbs } from "./breadcrumbs";
 
 interface NavbarProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export const Navbar = ({ children }: NavbarProps) => {
