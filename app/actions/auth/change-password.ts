@@ -1,30 +1,8 @@
 "use server";
 
-import bcrypt from "bcryptjs";
-
-import { ChangePasswordSchema } from "@/lib/schemas/change-password-schema";
 import { db } from "@/lib/db";
-import { FormState } from "@/lib/schemas/sign-up";
 
-export async function changePassword(state: FormState, formData: FormData) {
-  const userId = Number(formData.get("userId"))
-
-  const validatedField = ChangePasswordSchema.safeParse({
-    password: formData.get("password"),
-    confirm: formData.get("confirm"),
-  });
-
-
-  if (!validatedField.success) {
-    return {
-      errors: validatedField.error.flatten().fieldErrors,
-    };
-  }
-
-  const { password } = validatedField.data;
-
-  const hashedPassword = await bcrypt.hash(password, 10);
-
+export async function updateUser(userId: number, hashedPassword: string) {
   await db.user.update({
     where: {
       id: userId,

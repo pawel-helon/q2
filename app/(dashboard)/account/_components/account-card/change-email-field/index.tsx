@@ -1,8 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { toast } from "sonner";
 
 import { ChangeEmailForm } from "./change-email-form";
 import { Button } from "@/components/ui/button";
@@ -30,14 +28,6 @@ export const ChangeEmailField = ({
   userId,
 }: ChangeNameFieldProps) => {
   const [open, setOpen] = useState(false);
-  const router = useRouter();
-  const handleClick = () => {
-    setOpen(false);
-    setTimeout(() => {
-      toast.success("Email has been updated.");
-      router.refresh();
-    }, 500);
-  };
 
   return (
     <li className="flex flex-col gap-2">
@@ -58,10 +48,7 @@ export const ChangeEmailField = ({
             <DialogHeader className="mb-6">
               <DialogTitle>{dialogTitle}</DialogTitle>
             </DialogHeader>
-            <ChangeEmailForm
-              userId={userId}
-              handleClick={handleClick}
-            />
+            <ChangeEmailForm userId={userId} setOpen={setOpen} />
           </DialogContent>
         </Dialog>
       </div>

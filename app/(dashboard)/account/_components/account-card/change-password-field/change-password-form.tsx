@@ -1,24 +1,58 @@
 "use client";
 
 import { useFormState, useFormStatus } from "react-dom";
+import bcrypt from "bcryptjs";
+import { Dispatch, SetStateAction } from "react";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
-import { changePassword } from "@/app/actions/auth/change-password";
+import { ChangePasswordSchema, FormState } from "@/lib/schemas/change-password-schema";
+import { updateUser } from "@/app/actions/auth/change-password";
+
+import { PasswordInput } from "@/components/form/password-input";
 import { FormField } from "@/components/form/form-field";
 import { FieldDescription } from "@/components/form/field-description";
 
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { DialogClose } from "@/components/ui/dialog";
-import { PasswordInput } from "@/components/form/password-input";
 
 interface ChangePasswordFormProps {
   userId: number;
-  handleClick: () => void;
+  setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-export const ChangePasswordForm = ({ userId, handleClick }: ChangePasswordFormProps) => {
+export const ChangePasswordForm = ({ userId, setOpen }: ChangePasswordFormProps) => {
   const [state, action] = useFormState(changePassword, undefined);
   const { pending } = useFormStatus();
+  const router = useRouter();
+
+  async function changePassword(state: FormState, formData: FormData) {
+  const userId = Number(formData.get("userId"))
+
+  const validatedField = ChangePasswordSchema.safeParse({
+    password: formData.get("password"),
+    confirm: formData.get("confirm"),
+  });
+
+
+  if (!validatedField.success) {
+    return {
+      errors: validatedField.error.flatten().fieldErrors,
+    };
+  }
+
+  const { password } = validatedField.data;
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  updateUser(userId, hashedPassword);
+  setOpen(false);
+  setTimeout(() => {
+    toast.success("Password has been updated.");
+    router.refresh();
+  }, 500);
+}
 
   return (
     <form action={action} className="flex flex-col gap-5">
@@ -59,7 +93,6 @@ export const ChangePasswordForm = ({ userId, handleClick }: ChangePasswordFormPr
         </DialogClose>
         <Button
           type="submit"
-          onClick={handleClick}
           disabled={pending}
           aria-disabled={pending}
         >

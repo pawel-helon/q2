@@ -1,9 +1,8 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { toast } from "sonner";
 
+import { ChangePasswordForm } from "./change-password-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -14,7 +13,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { ChangePasswordForm } from "./change-password-form";
 
 interface ChangeNameFieldProps {
   label: string;
@@ -30,14 +28,6 @@ export const ChangePasswordField = ({
   userId,
 }: ChangeNameFieldProps) => {
   const [open, setOpen] = useState(false);
-  const router = useRouter();
-  const handleClick = () => {
-    setOpen(false);
-    setTimeout(() => {
-      toast.success("Password has been updated.");
-      router.refresh();
-    }, 500);
-  };
 
   return (
     <li className="flex flex-col gap-2">
@@ -60,7 +50,7 @@ export const ChangePasswordField = ({
             </DialogHeader>
             <ChangePasswordForm
               userId={userId}
-              handleClick={handleClick}
+              setOpen={setOpen}
             />
           </DialogContent>
         </Dialog>

@@ -1,8 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { toast } from "sonner";
 
 import { ChangeNameForm } from "./change-name-form";
 import { Button } from "@/components/ui/button";
@@ -30,14 +28,6 @@ export const ChangeNameField = ({
   userId,
 }: ChangeNameFieldProps) => {
   const [open, setOpen] = useState(false);
-  const router = useRouter();
-  const handleClick = () => {
-    setOpen(false);
-    setTimeout(() => {
-      toast.success("Name has been updated.");
-      router.refresh();
-    }, 500);
-  };
 
   return (
     <li className="flex flex-col gap-2">
@@ -58,10 +48,7 @@ export const ChangeNameField = ({
             <DialogHeader className="mb-6">
               <DialogTitle>{dialogTitle}</DialogTitle>
             </DialogHeader>
-            <ChangeNameForm
-              userId={userId}
-              handleClick={handleClick}
-            />
+            <ChangeNameForm userId={userId} setOpen={setOpen} />
           </DialogContent>
         </Dialog>
       </div>

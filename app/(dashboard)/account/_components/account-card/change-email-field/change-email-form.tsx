@@ -1,8 +1,13 @@
 "use client";
 
 import { useFormState, useFormStatus } from "react-dom";
+import { Dispatch, SetStateAction } from "react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
-import { changeEmail } from "@/app/actions/auth/change-email";
+import { ChangeEmailSchema, FormState } from "@/lib/schemas/change-email-schema";
+import { updateUser } from "@/app/actions/auth/change-email";
+
 import { FormField } from "@/components/form/form-field";
 import { FieldDescription } from "@/components/form/field-description";
 
@@ -11,17 +16,45 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { DialogClose } from "@/components/ui/dialog";
 
+
+
 interface ChangeNameFormProps {
   userId: number;
-  handleClick: () => void;
+  setOpen: Dispatch<SetStateAction<boolean>>
 }
 
 export const ChangeEmailForm = ({
   userId,
-  handleClick,
+  setOpen
 }: ChangeNameFormProps) => {
   const [state, action] = useFormState(changeEmail, undefined);
   const { pending } = useFormStatus();
+  const router = useRouter();
+
+
+  async function changeEmail(state: FormState, formData: FormData) {
+  const userId = Number(formData.get("userId"))
+
+  const validatedField = ChangeEmailSchema.safeParse({
+    email: formData.get("email"),
+  });
+
+
+  if (!validatedField.success) {
+    return {
+      errors: validatedField.error.flatten().fieldErrors,
+    };
+  }
+
+  const { email } = validatedField.data;
+
+  updateUser(userId, email)
+  setOpen(false)
+  setTimeout(() => {
+    toast.success("Email has been updated.");
+    router.refresh();
+  }, 500);
+}
 
   return (
     <form action={action} className="flex flex-col gap-5">
@@ -44,7 +77,6 @@ export const ChangeEmailForm = ({
         </DialogClose>
         <Button
           type="submit"
-          onClick={handleClick}
           aria-disabled={pending}
           disabled={pending}
         >
