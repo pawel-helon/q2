@@ -1,8 +1,8 @@
 "use client";
 
 import { MoreButton } from "./more-button";
-import { OpenCloseButton } from "./open-close-button";
 import { Device } from "@/types";
+import { OpenCloseButton } from "./open-close-button";
 
 interface ActionsProps {
   device: Device | null;

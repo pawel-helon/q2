@@ -1,10 +1,11 @@
 import { fetchDevice } from "@/app/api/neon/find-device";
-import { Navbar } from "./_components/navbar";
 import { Header } from "@/app/_components/header";
 import { Badge } from "@/components/ui/badge";
 import { DeviceTabs } from "./_components/device-tabs";
 import { GeneralTab } from "./_components/device-tabs/general-tab";
 import { verifySession } from "@/lib/data-access-layer";
+import { Navbar } from "@/components/navbar";
+import { Actions } from "./_components/actions";
 
 interface DevicePageProps {
   params: {
@@ -23,7 +24,9 @@ async function DevicePage({ params }: DevicePageProps) {
 
   return (
     <div>
-      <Navbar device={device} role={role} />
+      <Navbar>
+        <Actions device={device} role={role}/>
+      </Navbar>
       <Header title={deviceName}>
         <Badge variant={status === "active" ? "success" : "destructive"}>
           {status}

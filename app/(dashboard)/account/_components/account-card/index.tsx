@@ -5,9 +5,9 @@ import { fetchUser } from "@/app/actions/fetchUser";
 import { ChangeNameField } from "./change-name-field/index.";
 import { ChangeEmailField } from "./change-email-field";
 import { ChangePasswordField } from "./change-password-field";
+import { ChangeRoleField } from "./change-role-field";
 import { Heading } from "@/components/typography";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { ChangeRoleField } from "./change-role-field";
 
 interface AccountCardProps {
   userId: number;
