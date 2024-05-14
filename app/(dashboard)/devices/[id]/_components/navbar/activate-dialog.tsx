@@ -1,6 +1,7 @@
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
-import { deactivateDevice } from "@/app/api/neon/deactivate-device";
+import { activateDevice } from "@/app/api/neon/activate-device-mb";
 import {
   Dialog,
   DialogContent,
@@ -11,7 +12,6 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Device } from "@/types";
-import { activateDevice } from "@/app/api/neon/activate-device-mb";
 
 interface ActivateDialogProps {
   isActivateDialogOpen: boolean;
@@ -25,6 +25,7 @@ export const ActivateDialog = ({
   device,
 }: ActivateDialogProps) => {
   const id = Number(device?.id);
+  const router = useRouter();
 
   const handleActivateDevice = () => {
     activateDevice(id);
@@ -32,6 +33,7 @@ export const ActivateDialog = ({
     setTimeout(() => {
       toast("Device has been deactivated");
     }, 500);
+    router.refresh()
   };
 
   return (

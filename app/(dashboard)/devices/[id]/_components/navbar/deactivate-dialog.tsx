@@ -1,9 +1,9 @@
-import { X } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
+import { deactivateDevice } from "@/app/api/neon/deactivate-device";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -12,9 +12,6 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Device } from "@/types";
-import { deactivateDevice } from "@/app/api/neon/deactivate-device";
-import { revalidatePath } from "next/cache";
-import { useRouter } from "next/navigation";
 
 interface DeactivateDialogProps {
   isDeactivateDialogOpen: boolean;
@@ -28,6 +25,7 @@ export const DeactivateDialog = ({
   device
 }: DeactivateDialogProps) => {
   const id = Number(device?.id)
+  const router = useRouter();
 
   const handleDeactivateDevice = () => {
     deactivateDevice(id)
@@ -35,17 +33,12 @@ export const DeactivateDialog = ({
     setTimeout(() => {
       toast("Device has been deactivated");
     }, 500);
+    router.refresh()
   };
 
   return (
     <Dialog open={isDeactivateDialogOpen}>
       <DialogContent onInteractOutside={() => setIsDeactivateDialogOpen(false)}>
-        {/* <DialogClose
-          onClick={() => setIsDeactivateDialogOpen(false)}
-          className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
-        >
-          <X className="size-4" />
-        </DialogClose> */}
         <DialogHeader>
           <DialogTitle>
             Deactivate device
