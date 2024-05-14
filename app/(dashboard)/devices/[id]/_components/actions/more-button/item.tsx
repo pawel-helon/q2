@@ -1,10 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { Dispatch, SetStateAction } from "react";
-import { toast } from "sonner";
-
-import { activateDevice } from "@/app/api/neon/activate-device-mb";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -16,30 +11,21 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Device } from "@/types";
 import { cn } from "@/lib/utils";
 
 interface ActivateProps {
-  device: Device | null;
-  open: boolean;
-  setOpen: Dispatch<SetStateAction<boolean>>;
+  cta: string;
+  dialogTitle: string;
+  dialogDescription: string;
+  action: () => void;
 }
 
-export const Activate = ({ device, open, setOpen }: ActivateProps) => {
-  const id = Number(device?.id);
-
-  const router = useRouter();
-
-  const handleActivateDevice = () => {
-    activateDevice(id).then(() => {
-      setTimeout(() => {
-        toast("Device has been activated");
-      }, 500);
-      setOpen(!open);
-      router.refresh();
-    });
-  };
-
+export const Item = ({
+  cta,
+  dialogTitle,
+  dialogDescription,
+  action,
+}: ActivateProps) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -50,21 +36,19 @@ export const Activate = ({ device, open, setOpen }: ActivateProps) => {
             "data-[disabled]:opacity-50 hover:bg-accent"
           )}
         >
-          Activate
+          {cta}
         </button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Activate device</DialogTitle>
-          <DialogDescription>
-            Are you sure you want to activate this device?
-          </DialogDescription>
+          <DialogTitle>{dialogTitle}</DialogTitle>
+          <DialogDescription>{dialogDescription}</DialogDescription>
         </DialogHeader>
         <DialogFooter className="flex justify-end gap-2">
           <DialogClose asChild>
             <Button variant="ghost">Cancel</Button>
           </DialogClose>
-          <Button onClick={handleActivateDevice}>Activate</Button>
+          <Button onClick={action}>{cta}</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
