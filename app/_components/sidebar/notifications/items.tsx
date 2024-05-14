@@ -1,15 +1,14 @@
 "use client";
 
-import { $Enums } from "@prisma/client";
 import { toast } from "sonner";
+import { Dispatch, SetStateAction } from "react";
+import { useRouter } from "next/navigation";
+import { $Enums } from "@prisma/client";
 
 import { approveRoleChange } from "@/app/actions/auth/approve-role-change";
 import { SplitButton } from "@/components/split-button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Dispatch, SetStateAction } from "react";
-import { useRouter } from "next/navigation";
-import { set } from "zod";
 
 interface ItemsProps {
   notifications: {
@@ -21,10 +20,9 @@ interface ItemsProps {
     createdAt: Date;
     updatedAt: Date;
   }[];
-  setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-export const Items = ({ notifications, setOpen }: ItemsProps) => {
+export const Items = ({ notifications }: ItemsProps) => {
   const router = useRouter();
 
   return (
@@ -61,7 +59,6 @@ export const Items = ({ notifications, setOpen }: ItemsProps) => {
                   .then(() => {
                     setTimeout(() => {
                       toast.success("Role has been changed successfully!");
-                      setOpen(false);
                       router.refresh();
                     }, 500);
                   })

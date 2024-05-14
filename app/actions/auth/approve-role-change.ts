@@ -22,7 +22,8 @@ export async function approveRoleChange(notification: {
       role: newRole,
     },
   });
-
+  //create a new notification for the user
+  //send email to the user
   await db.notification.delete({
     where: {
       id: notification.id,

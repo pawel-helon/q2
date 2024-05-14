@@ -50,7 +50,7 @@ export const Notifications = ({
           >
             <Bell />
             {hasNotifications && (
-              <div className="absolute top-1 right-1 size-2 bg-primary rounded-full" />
+              <div className="absolute top-0.5 right-0.5 size-2 bg-primary rounded-full" />
             )}
           </Button>
         </DropdownMenuTrigger>
@@ -62,7 +62,7 @@ export const Notifications = ({
         >
           <NotificationsHeader open={open} setOpen={setOpen}/>
           {hasNotifications ? (
-            <Items notifications={notifications} setOpen={setOpen}/>
+            <Items notifications={notifications} />
           ) : (
             <EmptyItem />
           )}
