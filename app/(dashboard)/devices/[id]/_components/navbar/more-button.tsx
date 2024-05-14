@@ -1,6 +1,6 @@
-import { useRouter } from "next/navigation";
+"use client";
+
 import { useState } from "react";
-import { toast } from "sonner";
 import { EllipsisVertical } from "lucide-react";
 
 import { Device } from "@/types";
@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { DeleteDialog } from "./delete-dialog";
 import { DeactivateDialog } from "./deactivate-dialog";
+import { ActivateDialog } from "./activate-dialog";
 
 interface MoreButtonProps {
   device: Device | null;
@@ -21,8 +22,9 @@ interface MoreButtonProps {
 export const MoreButton = ({ device }: MoreButtonProps) => {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [isDeactivateDialogOpen, setIsDeactivateDialogOpen] = useState(false);
-  
-  const router = useRouter();
+  const [isActivateDialogOpen, setIsActivateDialogOpen] = useState(false);
+
+  const deviceStatus = device?.status;
 
   return (
     <>
@@ -36,6 +38,11 @@ export const MoreButton = ({ device }: MoreButtonProps) => {
         setIsDeactivateDialogOpen={setIsDeactivateDialogOpen}
         device={device}
       />
+      <ActivateDialog
+        isActivateDialogOpen={isActivateDialogOpen}
+        setIsActivateDialogOpen={setIsActivateDialogOpen}
+        device={device}
+      />
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline" size="icon">
@@ -43,14 +50,16 @@ export const MoreButton = ({ device }: MoreButtonProps) => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent side="bottom" sideOffset={8} align="end">
-          <DropdownMenuItem
-            onSelect={() => setIsDeactivateDialogOpen(true)}
-          >
-            Deactivate
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onSelect={() => setIsDeleteDialogOpen(true)}
-          >
+          {deviceStatus === "ACTIVE" ? (
+            <DropdownMenuItem onSelect={() => setIsDeactivateDialogOpen(true)}>
+              Deactivate
+            </DropdownMenuItem>
+          ) : (
+            <DropdownMenuItem onSelect={() => setIsActivateDialogOpen(true)}>
+              Activate
+            </DropdownMenuItem>
+          )}
+          <DropdownMenuItem onSelect={() => setIsDeleteDialogOpen(true)}>
             Delete
           </DropdownMenuItem>
         </DropdownMenuContent>
