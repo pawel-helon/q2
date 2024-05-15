@@ -1,32 +1,31 @@
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { Dispatch, SetStateAction } from "react";
 
 import { deleteUsers } from "@/app/api/neon/delete-user";
 
+import { DialogContent } from "@/components/dialog-content";
 import {
-  AlertDialog,
-  AlertDialogTrigger,
-  AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogCancel,
-  AlertDialogAction,
-} from "@/components/ui/alert-dialog";
+  Dialog,
+  DialogClose,
+  DialogDescription,
+  DialogFooter,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
 interface DeleteUsersProps {
   ids: any[];
+  open: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-export const DeleteUsers = ({ ids }: DeleteUsersProps) => {
-  const [open, setOpen] = useState(false);
+export const DeleteUsers = ({ ids, open, setOpen }: DeleteUsersProps) => {
   const router = useRouter();
 
   const handleDeleteUsers = () => {
     deleteUsers(ids);
+    setOpen(false);
     setTimeout(() => {
       toast.success("User(s) deleted");
       router.refresh();
@@ -34,34 +33,25 @@ export const DeleteUsers = ({ ids }: DeleteUsersProps) => {
   };
 
   return (
-    <AlertDialog open={open} onOpenChange={setOpen}>
-      <AlertDialogTrigger asChild>
-        <Button
-          onClick={() => setOpen(true)}
-          variant="ghost"
-          size="sm"
-          className="w-full justify-start"
-        >
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="ghost" size="sm" className="w-full justify-start">
           Delete user
         </Button>
-      </AlertDialogTrigger>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle className="mb-6">
-            Are you absolutely sure?
-          </AlertDialogTitle>
-          <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete user(s)
-            and remove data from our servers.
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter className="mt-6">
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction asChild>
+      </DialogTrigger>
+      <DialogContent title="Delete user(s)">
+        <DialogDescription>
+          {" "}
+          This action cannot be undone. This will permanently delete user(s) and
+          remove data from our servers.
+        </DialogDescription>
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button variant="ghost">Cancel</Button>
+          </DialogClose>
             <Button onClick={handleDeleteUsers}>Continue</Button>
-          </AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 };

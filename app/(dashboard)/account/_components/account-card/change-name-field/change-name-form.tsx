@@ -42,8 +42,9 @@ export const ChangeNameForm = ({ userId, setOpen }: ChangeNameFormProps) => {
     const { name } = validatedField.data;
 
     updateUser(userId, name);
-    setOpen(false);
+    
     setTimeout(() => {
+      setOpen(false);
       toast.success("Name has been updated.");
       router.refresh();
     }, 500);

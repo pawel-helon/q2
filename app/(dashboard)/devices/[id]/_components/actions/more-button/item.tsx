@@ -1,16 +1,16 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { DialogContent } from "@/components/dialog-content";
 import {
   Dialog,
   DialogClose,
-  DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 interface ActivateProps {
@@ -39,11 +39,10 @@ export const Item = ({
           {cta}
         </button>
       </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>{dialogTitle}</DialogTitle>
-          <DialogDescription>{dialogDescription}</DialogDescription>
-        </DialogHeader>
+      <DialogContent title={dialogTitle}>
+        <DialogDescription className="mb-4">
+          {dialogDescription}
+        </DialogDescription>
         <DialogFooter className="flex justify-end gap-2">
           <DialogClose asChild>
             <Button variant="ghost">Cancel</Button>

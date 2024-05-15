@@ -1,18 +1,17 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { $Enums } from "@prisma/client";
-import { AddDeviceFormAdmin } from "./add-device-form-admin";
-import { AddDeviceFormEndUser } from "./add-device-form-end-user";
 import { Plus } from "lucide-react";
 import { useState } from "react";
+import { $Enums } from "@prisma/client";
+
+import { AddDeviceFormAdmin } from "./add-device-form-admin";
+import { AddDeviceFormEndUser } from "./add-device-form-end-user";
+import { DialogContent } from "@/components/dialog-content";
+import {
+  Dialog,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 
 interface AddDeviceProps {
   role: string;
@@ -39,10 +38,7 @@ export const AddDevice = ({ role, userId, owners }: AddDeviceProps) => {
           Add device
         </Button>
       </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle className="mb-6">Add new device</DialogTitle>
-        </DialogHeader>
+      <DialogContent title="Add new device">
         {role !== "ENDUSER" ? (
           <AddDeviceFormAdmin owners={owners} />
         ) : (

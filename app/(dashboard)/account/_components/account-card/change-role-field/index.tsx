@@ -2,17 +2,15 @@
 
 import { useState } from "react";
 
+import { ChangeRoleForm } from "./change-role-form";
+import { DialogContent } from "@/components/dialog-content";
+import {
+  Dialog,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { ChangeRoleForm } from "./change-role-form";
 
 interface ChangeRoleField {
   label: string;
@@ -43,10 +41,7 @@ export const ChangeRoleField = ({
               Request change
             </Button>
           </DialogTrigger>
-          <DialogContent>
-            <DialogHeader className="mb-6">
-              <DialogTitle>{dialogTitle}</DialogTitle>
-            </DialogHeader>
+          <DialogContent title={dialogTitle}>
             <ChangeRoleForm userId={userId} setOpen={setOpen} />
           </DialogContent>
         </Dialog>

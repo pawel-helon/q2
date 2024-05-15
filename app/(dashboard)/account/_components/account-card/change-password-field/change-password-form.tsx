@@ -47,8 +47,9 @@ export const ChangePasswordForm = ({ userId, setOpen }: ChangePasswordFormProps)
   const hashedPassword = await bcrypt.hash(password, 10);
 
   updateUser(userId, hashedPassword);
-  setOpen(false);
+  
   setTimeout(() => {
+    setOpen(false);
     toast.success("Password has been updated.");
     router.refresh();
   }, 500);

@@ -1,15 +1,9 @@
 "use client";
 
 import { SignInForm } from "./sign-in-form";
+import { DialogContent } from "@/components/dialog-content";
+import { Dialog, DialogClose, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 
 export const SignIn = () => {
@@ -18,10 +12,7 @@ export const SignIn = () => {
       <DialogTrigger asChild>
         <Button>Sign in</Button>
       </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle className="mb-6">Sign in</DialogTitle>
-        </DialogHeader>
+      <DialogContent title="Sign in">
         <SignInForm>
           <DialogClose
             className={cn(

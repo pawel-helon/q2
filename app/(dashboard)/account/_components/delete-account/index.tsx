@@ -1,11 +1,9 @@
 "use client";
 
+import { DialogContent } from "@/components/dialog-content";
 import {
   Dialog,
-  DialogContent,
   DialogDescription,
-  DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -21,15 +19,12 @@ export const DeleteAccount = ({ userId }: DeleteAccountDialog) => {
       <DialogTrigger asChild>
         <Button>Delete Account</Button>
       </DialogTrigger>
-      <DialogContent>
-          <DialogHeader>
-            <DialogTitle className="mb-6">Are you absolutely sure?</DialogTitle>
-            <DialogDescription>
-              This action cannot be undone. This will permanently delete your
-              account and remove your data from our servers.
-            </DialogDescription>
-          </DialogHeader>
-        <DeleteAccountForm userId={userId}/>
+      <DialogContent title="Delete account">
+        <DialogDescription>
+          This action cannot be undone. This will permanently delete your
+          account and remove your data from our servers.
+        </DialogDescription>
+        <DeleteAccountForm userId={userId} />
       </DialogContent>
     </Dialog>
   );

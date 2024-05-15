@@ -49,8 +49,9 @@ export const ChangeEmailForm = ({
   const { email } = validatedField.data;
 
   updateUser(userId, email)
-  setOpen(false)
+
   setTimeout(() => {
+    setOpen(false)
     toast.success("Email has been updated.");
     router.refresh();
   }, 500);
