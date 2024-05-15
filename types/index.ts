@@ -62,3 +62,28 @@ export type Users = {
   role: $Enums.ROLE;
 }[];
 
+export type devices = {
+  id: number;
+  deviceName: string;
+  streetAddress: string;
+  city: string;
+  country: string;
+  model: string;
+  SIM: string;
+  status: $Enums.STATUS;
+  state: $Enums.STATE;
+  ownerId: number;
+}[]
+
+export type device = {
+  id: number;
+  deviceName: string;
+  streetAddress: string;
+  city: string;
+  country: string;
+  model: string;
+  SIM: string;
+  status: $Enums.STATUS;
+  state: $Enums.STATE;
+  ownerId: number;
+}

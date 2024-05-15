@@ -13,7 +13,7 @@ interface DevicePageProps {
   };
 }
 
-async function DevicePage({ params }: DevicePageProps) {
+export default async function DevicePage({ params }: DevicePageProps) {
   const session = await verifySession();
   const role = session?.role;
 
@@ -25,7 +25,7 @@ async function DevicePage({ params }: DevicePageProps) {
   return (
     <div>
       <Navbar>
-        <Actions device={device} role={role}/>
+        <Actions device={device} role={role} />
       </Navbar>
       <Header title={deviceName}>
         <Badge variant={status === "active" ? "success" : "destructive"}>
@@ -34,13 +34,11 @@ async function DevicePage({ params }: DevicePageProps) {
       </Header>
       {role !== "ADMIN" ? (
         <div className="mt-[84px] border-t">
-          <GeneralTab device={device} role={role}/>
+          <GeneralTab device={device} role={role} />
         </div>
       ) : (
-        <DeviceTabs role={role} device={device}/>
+        <DeviceTabs role={role} device={device} />
       )}
     </div>
   );
 }
-
-export default DevicePage;

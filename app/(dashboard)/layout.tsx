@@ -30,7 +30,7 @@ const DashboardLayout = async ({ children }: DashboardLayoutProps) => {
       <div className="flex flex-col w-full px-6 border-r-[1px] border-border">
         {children}
       </div>
-      <Assistant />
+      {/* <Assistant /> */}
       <Toaster
         position="top-center"
         toastOptions={{
