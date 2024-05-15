@@ -22,7 +22,7 @@ export const SignUpForm = ({ children }: SignUpFormProps) => {
   return (
     <form action={action} className="flex flex-col gap-5">
       <FormField>
-        <Label htmlFor="name">Name</Label>
+        <Label htmlFor="name">Full name</Label>
         <Input id="name" name="name" placeholder="Enter full name" spellCheck="false" />
         {state?.errors?.name && (
           <FieldDescription>{state.errors.name}</FieldDescription>

@@ -14,6 +14,7 @@ import { Div } from "@/components/motion-ui/div";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { ChangeRole } from "./change-role";
+import { Delete } from "./delete";
 
 
 interface ActionsProps<TData> {
@@ -43,14 +44,6 @@ export function Actions<TData>({
     }, 500);
   };
 
-  const handleDeleteDevice = () => {
-    deleteDevices(ids);
-    setTimeout(() => {
-      toast.success("Device(s) deleted");
-      router.refresh();
-    }, 500);
-  };
-
   return (
     <div className="relative">
       {anySelectedRow ? (
@@ -66,25 +59,12 @@ export function Actions<TData>({
                 Activate
               </Button>
               <Separator orientation="vertical" className="mx-1" />
-              <Button
-                onClick={handleDeleteDevice}
-                variant="ghost"
-                size="sm"
-              >
-                Delete
-              </Button>
+              <Delete ids={ids} />
             </>
           ) : (
             <div className="flex items-center">
               <ChangeRole ids={ids} />
               <Separator orientation="vertical" className="mx-1" />
-              <Button
-                onClick={() => {}}
-                variant="ghost"
-                size="sm"
-              >
-                Assign device
-              </Button>
               <MoreButton ids={ids}/>
             </div>
           )}

@@ -1,27 +1,24 @@
+"use server";
+
 import { DataTable } from "@/app/_components/data-table";
+import { columns } from "./_components/data-table/columns";
+
 import { fetchUsers } from "@/app/api/neon";
 
-import { columns } from "./_components/data-table/columns";
-import { Header } from "@/app/_components/header";
 import { Navbar } from "@/components/navbar";
-import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { AddUser } from "./_components/add-user";
+import { Header } from "@/app/_components/header";
 
 export default async function UsersPage() {
-  const allUsers = await fetchUsers();
+  const users = await fetchUsers();
 
   return (
     <div>
       <Navbar>
-        <div className="flex gap-2 justify-end">
-          <Button>
-            <Plus className="-ml-2 mr-2" />
-            Add user
-          </Button>
-        </div>
+        <AddUser />
       </Navbar>
       <Header title="Users" />
-      <DataTable columns={columns} data={allUsers} />
+      <DataTable columns={columns} data={users} />
     </div>
   );
 }

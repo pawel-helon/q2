@@ -36,7 +36,7 @@ export const DeleteUsers = ({ ids, open, setOpen }: DeleteUsersProps) => {
     <Dialog>
       <DialogTrigger asChild>
         <Button variant="ghost" size="sm" className="w-full justify-start">
-          Delete user
+          Delete
         </Button>
       </DialogTrigger>
       <DialogContent title="Delete user(s)">

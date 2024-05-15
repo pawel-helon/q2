@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Device } from "@/types";
+import { Separator } from "@/components/ui/separator";
 
 interface MoreButtonProps {
   device: Device | null;
@@ -83,6 +84,7 @@ export const MoreButton = ({ device }: MoreButtonProps) => {
             action={handleActivateDevice}
           />
         )}
+        <Separator />
         <Item
           cta="Delete"
           dialogTitle="Delete device"
