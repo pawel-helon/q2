@@ -7,20 +7,12 @@ import { AccountCard } from "./_components/account-card";
 import { Header } from "@/app/_components/header";
 import { Navbar } from "@/components/navbar";
 import { Badge } from "@/components/ui/badge";
+import { Role } from "@/types";
 
 export default async function AccountPage() {
   const session = await verifySession();
   const userId = Number(session.userId);
-  const role = String(session?.role);
-
-  let badgeClassName;
-  if (role === "ADMIN") {
-    badgeClassName = "bg-amber-700 hover:bg-amber-700/80";
-  } else if (role === "OWNER") {
-    badgeClassName = "bg-pink-700 hover:bg-pink-700/80";
-  } else {
-    badgeClassName = "bg-indigo-700 hover:bg-indigo-700/80";
-  }
+  const role = session?.role as Role;
 
   return (
     <div>
@@ -28,7 +20,7 @@ export default async function AccountPage() {
         <DeleteAccount userId={userId} />
       </Navbar>
       <Header title="Account">
-        <Badge className={badgeClassName}>{role}</Badge>
+        <Badge variant={role}>{role}</Badge>
       </Header>
       <div className="mt-[5.5rem] border-t">
         <AccountCard userId={userId} role={role} />

@@ -99,3 +99,5 @@ export type user = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type Role = "ADMIN" | "OWNER" | "ENDUSER";

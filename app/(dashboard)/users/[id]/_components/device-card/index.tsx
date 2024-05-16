@@ -21,7 +21,7 @@ export async function DeviceCard({ user }: DeviceCardProps) {
             <Heading variant="h3">Device</Heading>
           </CardHeader>
           <CardContent>
-            <Item title="Device name" value={device[0].deviceName} />
+            <Item title="Name" value={device[0].deviceName} />
             <Item title="Model" value={device[0].model} />
             <Item title="Status" value={device[0].status} />
             <Item title="State" value={device[0].state} />
@@ -34,7 +34,7 @@ export async function DeviceCard({ user }: DeviceCardProps) {
             <Heading variant="h3">Device</Heading>
           </CardHeader>
           <CardContent className="h-[240px] justify-center items-center">
-            <p className="absolute top-1/2 text-center text-xs text-white">
+            <p className="absolute top-1/2 text-center text-xs text-white px-8">
               No device has been assigned yet.
             </p>
           </CardContent>
