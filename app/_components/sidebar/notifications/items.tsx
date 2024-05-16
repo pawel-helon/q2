@@ -1,32 +1,30 @@
 "use client";
 
 import { toast } from "sonner";
-import { Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/navigation";
-import { $Enums } from "@prisma/client";
 
 import { approveRoleChange } from "@/app/actions/auth/approve-role-change";
 import { SplitButton } from "@/components/split-button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { notifications } from "@/types";
 
 interface ItemsProps {
-  notifications: {
-    id: number;
-    title: string;
-    userId: number;
-    requester: number;
-    requestedRole: $Enums.ROLE;
-    createdAt: Date;
-    updatedAt: Date;
-  }[];
+  notifications: notifications;
 }
 
 export const Items = ({ notifications }: ItemsProps) => {
   const router = useRouter();
 
   return (
-    <div className="flex flex-col gap-8 rounded-sm">
+    <div
+      className={cn(
+        "flex flex-col gap-8 rounded-sm pl-4 pr-2",
+        "scrollbar max-h-[80vh] overflow-y-scroll scrollbar-w-2",
+        "scrollbar-track-card-background scrollbar-thumb-rounded-full scrollbar-thumb-background/50"
+      )}
+    >
       {notifications.map((notification) => (
         <div
           key={notification.id}

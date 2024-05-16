@@ -1,11 +1,11 @@
 import { X } from "lucide-react";
 
 import { Heading } from "@/components/typography";
-import { Dispatch, SetStateAction } from "react";
+import { setOpen } from "@/types";
 
 interface NotificationsHeaderProps {
   open: boolean;
-  setOpen: Dispatch<SetStateAction<boolean>>;
+  setOpen: setOpen;
 }
 
 export const NotificationsHeader = ({
@@ -13,7 +13,7 @@ export const NotificationsHeader = ({
   setOpen,
 }: NotificationsHeaderProps) => {
   return (
-    <div className="flex justify-between border-b pb-4 mb-4">
+    <div className="flex justify-between border-b px-4 pb-4 mb-4">
       <Heading variant="h4">Notifications</Heading>
       <button onClick={() => setOpen(!open)}>
         <X size={16} />

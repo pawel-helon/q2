@@ -1,4 +1,5 @@
 import { $Enums } from "@prisma/client";
+import { Dispatch, SetStateAction } from "react";
 
 export type Device = {
   id: number;
@@ -101,3 +102,15 @@ export type user = {
 };
 
 export type Role = "ADMIN" | "OWNER" | "ENDUSER";
+
+export type notifications = {
+  id: number;
+  title: string;
+  userId: number;
+  requester: number;
+  requestedRole: $Enums.ROLE;
+  createdAt: Date;
+  updatedAt: Date;
+}[];
+
+export type setOpen = Dispatch<SetStateAction<boolean>>

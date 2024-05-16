@@ -9,22 +9,14 @@ import { cn } from "@/lib/utils";
 import { EmptyItem } from "./empty-item";
 import { Items } from "./items";
 import { Button } from "@/components/ui/button";
-import { Bell, X } from "lucide-react";
+import { Bell } from "lucide-react";
 import { NotificationsHeader } from "./notifications-header";
 import { useState } from "react";
-import { $Enums } from "@prisma/client";
+import { notifications } from "@/types";
 
 interface NotificationsProps {
   collapsed: boolean;
-  notifications: {
-    id: number;
-    title: string;
-    userId: number;
-    requester: number;
-    requestedRole: $Enums.ROLE;
-    createdAt: Date;
-    updatedAt: Date;
-}[]
+  notifications: notifications;
 }
 
 export const Notifications = ({
@@ -58,9 +50,9 @@ export const Notifications = ({
           side="right"
           sideOffset={12}
           align="end"
-          className="p-4"
+          className="py-4"
         >
-          <NotificationsHeader open={open} setOpen={setOpen}/>
+          <NotificationsHeader open={open} setOpen={setOpen} />
           {hasNotifications ? (
             <Items notifications={notifications} />
           ) : (
