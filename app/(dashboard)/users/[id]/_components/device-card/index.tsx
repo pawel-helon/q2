@@ -16,7 +16,7 @@ export async function DeviceCard({ user }: DeviceCardProps) {
   return (
     <>
       {device.length > 0 ? (
-        <Card>
+        <Card className="col-span-1">
           <CardHeader>
             <Heading variant="h3">Device</Heading>
           </CardHeader>

@@ -25,7 +25,7 @@ export const DetailsCard = ({ role, device }: DetailsCardProps) => {
         <CardContent className="grow mb-4 p-4">
           <ul className="flex flex-col gap-3">
             <li className="w-full flex justify-between">
-              <Paragraph variant="base-thin">Device Name</Paragraph>
+              <Paragraph variant="base-thin">Name</Paragraph>
               <Paragraph variant="base-thick" className="text-right">
                 {device?.deviceName}
               </Paragraph>

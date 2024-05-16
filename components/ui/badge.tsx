@@ -17,6 +17,7 @@ const badgeVariants = cva(
         outline: "text-foreground",
         success: "border-transparent bg-emerald-500 text-primary-foreground shadow hover:bg-emerald-500/80",
         icon: "size-8 bg-emerald-500 rounded-full p-1.5",
+        
         ADMIN: "border-transparent text-primary-foreground shadow bg-amber-700 hover:bg-amber-700/80",
         OWNER: "border-transparent text-primary-foreground shadow bg-pink-700 hover:bg-pink-700/80",
         ENDUSER: "border-transparent text-primary-foreground shadow bg-indigo-700 hover:bg-indigo-700/80",

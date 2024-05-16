@@ -5,7 +5,10 @@ import { Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
-import { ChangeEmailSchema, FormState } from "@/lib/schemas/change-email-schema";
+import {
+  ChangeEmailSchema,
+  FormState,
+} from "@/lib/schemas/change-email-schema";
 import { updateUser } from "@/app/actions/auth/change-email";
 
 import { FormField } from "@/components/form/form-field";
@@ -16,46 +19,38 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { DialogClose } from "@/components/ui/dialog";
 
-
-
 interface ChangeNameFormProps {
   userId: number;
-  setOpen: Dispatch<SetStateAction<boolean>>
+  setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-export const ChangeEmailForm = ({
-  userId,
-  setOpen
-}: ChangeNameFormProps) => {
+export const ChangeEmailForm = ({ userId, setOpen }: ChangeNameFormProps) => {
   const [state, action] = useFormState(changeEmail, undefined);
   const { pending } = useFormStatus();
   const router = useRouter();
 
-
   async function changeEmail(state: FormState, formData: FormData) {
-  const userId = Number(formData.get("userId"))
+    const validatedField = ChangeEmailSchema.safeParse({
+      email: formData.get("email"),
+    });
 
-  const validatedField = ChangeEmailSchema.safeParse({
-    email: formData.get("email"),
-  });
+    if (!validatedField.success) {
+      return {
+        errors: validatedField.error.flatten().fieldErrors,
+      };
+    }
 
+    const userId = Number(formData.get("userId"));
+    const { email } = validatedField.data;
 
-  if (!validatedField.success) {
-    return {
-      errors: validatedField.error.flatten().fieldErrors,
-    };
+    updateUser(userId, email);
+
+    setTimeout(() => {
+      setOpen(false);
+      toast.success("Email has been updated.");
+      router.refresh();
+    }, 500);
   }
-
-  const { email } = validatedField.data;
-
-  updateUser(userId, email)
-
-  setTimeout(() => {
-    setOpen(false)
-    toast.success("Email has been updated.");
-    router.refresh();
-  }, 500);
-}
 
   return (
     <form action={action} className="flex flex-col gap-5">
@@ -63,10 +58,10 @@ export const ChangeEmailForm = ({
       <FormField className="mb-6">
         <Label htmlFor="email">Full Name</Label>
         <Input
-            id="email"
-            name="email"
-            placeholder="Enter new name"
-            spellCheck="false"    
+          id="email"
+          name="email"
+          placeholder="Enter new name"
+          spellCheck="false"
         />
         {state?.errors?.email && (
           <FieldDescription>{state.errors.email}</FieldDescription>
@@ -76,11 +71,7 @@ export const ChangeEmailForm = ({
         <DialogClose asChild>
           <Button variant="ghost">Cancel</Button>
         </DialogClose>
-        <Button
-          type="submit"
-          aria-disabled={pending}
-          disabled={pending}
-        >
+        <Button type="submit" aria-disabled={pending} disabled={pending}>
           {pending ? "Submitting..." : "Change"}
         </Button>
       </div>

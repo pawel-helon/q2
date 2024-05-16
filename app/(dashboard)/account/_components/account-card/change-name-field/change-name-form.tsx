@@ -27,8 +27,6 @@ export const ChangeNameForm = ({ userId, setOpen }: ChangeNameFormProps) => {
   const router = useRouter();
 
   async function changeName(state: FormState, formData: FormData) {
-    const userId = Number(formData.get("userId"));
-
     const validatedField = ChangeNameSchema.safeParse({
       name: formData.get("name"),
     });
@@ -39,10 +37,11 @@ export const ChangeNameForm = ({ userId, setOpen }: ChangeNameFormProps) => {
       };
     }
 
+    const userId = Number(formData.get("userId"));
     const { name } = validatedField.data;
 
     updateUser(userId, name);
-    
+
     setTimeout(() => {
       setOpen(false);
       toast.success("Name has been updated.");

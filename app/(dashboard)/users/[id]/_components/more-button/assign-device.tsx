@@ -28,7 +28,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { devices } from "@/types";
 import { cn } from "@/lib/utils";
-import { Label } from "@radix-ui/react-dropdown-menu";
 
 interface AssignDeviceProps {
   devices: devices;
