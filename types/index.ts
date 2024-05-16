@@ -11,7 +11,7 @@ export type Device = {
   status: $Enums.STATUS;
   state: $Enums.STATE;
   ownerId: number;
-}
+};
 
 export type Devices = {
   id: number;
@@ -42,18 +42,20 @@ export type SetDevices = {
 };
 
 export type Fetch = {
-  fetchList: (searchValue: string) => Promise<{
-    id: number;
-    deviceName: string;
-    streetAddress: string;
-    city: string;
-    country: string;
-    model: string;
-    owner: string | null;
-    SIM: string;
-    status: $Enums.STATUS;
-}[]>
-}
+  fetchList: (searchValue: string) => Promise<
+    {
+      id: number;
+      deviceName: string;
+      streetAddress: string;
+      city: string;
+      country: string;
+      model: string;
+      owner: string | null;
+      SIM: string;
+      status: $Enums.STATUS;
+    }[]
+  >;
+};
 
 export type Users = {
   id: number;
@@ -73,7 +75,7 @@ export type devices = {
   status: $Enums.STATUS;
   state: $Enums.STATE;
   ownerId: number;
-}[]
+}[];
 
 export type device = {
   id: number;
@@ -86,4 +88,14 @@ export type device = {
   status: $Enums.STATUS;
   state: $Enums.STATE;
   ownerId: number;
-}
+};
+
+export type user = {
+  id: number;
+  email: string;
+  name: string | null;
+  password: string;
+  role: $Enums.ROLE;
+  createdAt: Date;
+  updatedAt: Date;
+};

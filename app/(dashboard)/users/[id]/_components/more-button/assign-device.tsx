@@ -60,7 +60,7 @@ export const AssignDevice = ({
     assignDevice(userId, deviceId);
     setTimeout(() => {
       setOpen(false);
-      toast.success("Device reassigned successfully!");
+      toast.success("Device assigned successfully!");
       router.refresh();
     }, 500);
   }

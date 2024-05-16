@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-
+import { Heading, Paragraph } from "@/components/typography";
 import {
   Card,
   CardContent,
@@ -9,28 +8,14 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Heading, Paragraph } from "@/components/typography";
-import { $Enums } from "@prisma/client";
+import { device } from "@/types";
 
 interface DetailsCardProps {
   role: unknown;
-  device: {
-    id: number;
-    deviceName: string;
-    streetAddress: string;
-    city: string;
-    country: string;
-    model: string;
-    SIM: string;
-    status: $Enums.STATUS;
-    state: $Enums.STATE;
-    ownerId: number;
-  } | null;
+  device: device | null;
 }
 
 export const DetailsCard = ({ role, device }: DetailsCardProps) => {
-  const [isEditDetailsDialogOpen, setIsEditDetailsDialogOpen] = useState(false);
-
   return (
     <div className="border border-border shadow-black shadow-2xl rounded-lg">
       <Card className="flex flex-col col-span-1 bg-transparent border-none">
@@ -88,12 +73,3 @@ export const DetailsCard = ({ role, device }: DetailsCardProps) => {
     </div>
   );
 };
-
-const details = [
-  { address: "123 Main Street" },
-  { city: "New York" },
-  { country: "USA" },
-  { model: "NS1928" },
-  { SIM: "555-1234" },
-  { owner: "John Doe" },
-];
