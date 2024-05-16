@@ -36,7 +36,7 @@ export const MoreButton = ({ devices, userId }: MoreButtonProps) => {
           devices={devices}
           setOpen={setOpen}
         />
-        <Separator />
+        <Separator className="my-1" />
         <Delete />
       </DropdownMenuContent>
     </DropdownMenu>

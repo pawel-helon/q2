@@ -2,11 +2,7 @@
 
 import { db } from "@/lib/db";
 
-export async function assignDevice(formData: FormData) {
-  const userId = Number(formData.get("userId"));
-  const deviceId = Number(formData.get("device"));
-
-
+export async function assignDevice(userId: number, deviceId: number) {
   await db.device.update({
     where: { id: deviceId },
     data: {

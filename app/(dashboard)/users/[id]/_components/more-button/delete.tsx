@@ -13,7 +13,7 @@ export const Delete = () => {
             "data-[disabled]:opacity-50 hover:bg-accent"
           )}
         >
-          Delete device
+          Delete user
         </button>
       </DialogTrigger>
       <DialogContent title="Delete device">
