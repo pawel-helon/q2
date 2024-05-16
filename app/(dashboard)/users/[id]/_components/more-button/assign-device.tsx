@@ -44,18 +44,18 @@ export const AssignDevice = ({
   const router = useRouter();
 
   async function onSubmit(state: FormState, formData: FormData) {
-    const userId = Number(formData.get("userId"));
-    const deviceId = Number(formData.get("deviceId"));
-
     const validatedFields = AssignDeviceSchema.safeParse({
       deviceId: formData.get("deviceId"),
     });
-
+    
     if (!validatedFields.success) {
       return {
         errors: validatedFields.error.flatten().fieldErrors,
       };
     }
+    
+    const userId = Number(formData.get("userId"));
+    const deviceId = Number(formData.get("deviceId"));
 
     assignDevice(userId, deviceId);
     setTimeout(() => {

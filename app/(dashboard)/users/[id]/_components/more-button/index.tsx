@@ -31,13 +31,9 @@ export const MoreButton = ({ devices, userId }: MoreButtonProps) => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" sideOffset={8}>
-        <AssignDevice
-          userId={userId}
-          devices={devices}
-          setOpen={setOpen}
-        />
+        <AssignDevice userId={userId} devices={devices} setOpen={setOpen} />
         <Separator className="my-1" />
-        <Delete />
+        <Delete userId={userId} setOpen={setOpen} />
       </DropdownMenuContent>
     </DropdownMenu>
   );
