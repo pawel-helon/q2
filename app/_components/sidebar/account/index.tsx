@@ -31,7 +31,7 @@ export const Account = ({ collapsed, email }: AccountProps) => {
             <AvatarFallback>JD</AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
-        <DropdownMenuContent side="right" sideOffset={7} align="end">
+        <DropdownMenuContent side="right" sideOffset={12} align="end">
           <div className="flex gap-2 items-center rounded-sm px-2 py-1.5 text-xs text-muted-foreground">
             <Avatar className="size-6">
               <AvatarImage src="/user.png" alt="user" />

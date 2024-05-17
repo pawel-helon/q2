@@ -27,7 +27,7 @@ export const PasswordInput = ({id, name}: PasswordInputProps) => {
         onClick={() => setVisibility(!visibility)}
         className={cn(
             "absolute top-1/2 transform -translate-y-1/2 right-1",
-            "hover:bg-transparent text-muted-foreground"
+            "hover:bg-transparent text-muted-foreground",
         )}
         size="icon"
         variant="ghost"
