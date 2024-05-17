@@ -16,6 +16,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
+import { PhoneNumberField } from "@/components/form/phone-number-field";
 
 interface AddDeviceFormEndUserProps {
   userId: number;
@@ -36,10 +37,10 @@ export const AddDeviceFormEndUser = ({ userId }: AddDeviceFormEndUserProps) => {
           placeholder="Enter device name"
           spellCheck="false"
         />
+        {state?.errors?.deviceName && (
+          <FieldDescription>{state.errors.deviceName}</FieldDescription>
+        )}
       </FormField>
-      {state?.errors?.deviceName && (
-        <FieldDescription>{state.errors.deviceName}</FieldDescription>
-      )}
       <FormField>
         <Label htmlFor="streetAddress">Street address</Label>
         <Input
@@ -48,10 +49,10 @@ export const AddDeviceFormEndUser = ({ userId }: AddDeviceFormEndUserProps) => {
           placeholder="Enter street address"
           spellCheck="false"
         />
+        {state?.errors?.streetAddress && (
+          <FieldDescription>{state.errors.streetAddress}</FieldDescription>
+        )}
       </FormField>
-      {state?.errors?.streetAddress && (
-        <FieldDescription>{state.errors.streetAddress}</FieldDescription>
-      )}
       <FormField>
         <Label htmlFor="city">City</Label>
         <Select name="city">
@@ -66,6 +67,9 @@ export const AddDeviceFormEndUser = ({ userId }: AddDeviceFormEndUserProps) => {
             </SelectGroup>
           </SelectContent>
         </Select>
+        {state?.errors?.city && (
+          <FieldDescription>{state.errors.city}</FieldDescription>
+        )}
       </FormField>
       <FormField>
         <Label htmlFor="country">Country</Label>
@@ -81,6 +85,9 @@ export const AddDeviceFormEndUser = ({ userId }: AddDeviceFormEndUserProps) => {
             </SelectGroup>
           </SelectContent>
         </Select>
+        {state?.errors?.country && (
+          <FieldDescription>{state.errors.country}</FieldDescription>
+        )}
       </FormField>
       <FormField>
         <Label htmlFor="model">Model</Label>
@@ -96,13 +103,15 @@ export const AddDeviceFormEndUser = ({ userId }: AddDeviceFormEndUserProps) => {
             </SelectGroup>
           </SelectContent>
         </Select>
+        {state?.errors?.model && (
+          <FieldDescription>{state.errors.model}</FieldDescription>
+        )}
       </FormField>
-      <FormField>
-        <Label htmlFor="SIM">SIM</Label>
-        <Input id="SIM" name="SIM" placeholder="Enter SIM" spellCheck="false" />
-      </FormField>
+      <PhoneNumberField />
       {state?.errors?.SIM && (
-        <FieldDescription>{state.errors.SIM}</FieldDescription>
+        <FieldDescription className="-mt-2">
+          {state.errors.SIM}
+        </FieldDescription>
       )}
       <Button type="submit" disabled={pending} aria-disabled={pending}>
         Add device

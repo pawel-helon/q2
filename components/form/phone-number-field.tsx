@@ -18,7 +18,7 @@ export function PhoneNumberField() {
     <FormField>
       <Label htmlFor="SIM">Phone number</Label>
       <div className="flex gap-2">
-        <Select defaultValue="+1">
+        <Select name="prefix" defaultValue="+1">
           <SelectTrigger className="w-[100px]">
             <SelectValue />
           </SelectTrigger>

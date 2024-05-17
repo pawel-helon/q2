@@ -17,6 +17,9 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { addDeviceAdmin } from "@/app/actions/devices/add-device-admin";
+import { cn } from "@/lib/utils";
+import { PasswordInput } from "@/components/form/password-input";
+import { PhoneNumberField } from "@/components/form/phone-number-field";
 
 interface AddDeviceFormAdminProps {
   owners: {
@@ -33,9 +36,9 @@ interface AddDeviceFormAdminProps {
 export const AddDeviceFormAdmin = ({ owners }: AddDeviceFormAdminProps) => {
   const [state, action] = useFormState(addDeviceAdmin, undefined);
   const { pending } = useFormStatus();
-  
+
   return (
-    <form action={action} className="flex flex-col gap-5">
+    <form action={action} className={cn("relative flex flex-col gap-5")}>
       <FormField>
         <Label htmlFor="owner">Owner</Label>
         <Select name="owner">
@@ -54,6 +57,9 @@ export const AddDeviceFormAdmin = ({ owners }: AddDeviceFormAdminProps) => {
             </SelectGroup>
           </SelectContent>
         </Select>
+        {state?.errors?.owner && (
+          <FieldDescription>{state.errors.owner}</FieldDescription>
+        )}
       </FormField>
       <FormField>
         <Label htmlFor="deviceName">Device name</Label>
@@ -63,10 +69,10 @@ export const AddDeviceFormAdmin = ({ owners }: AddDeviceFormAdminProps) => {
           placeholder="Enter device name"
           spellCheck="false"
         />
+        {state?.errors?.deviceName && (
+          <FieldDescription>{state.errors.deviceName}</FieldDescription>
+        )}
       </FormField>
-      {state?.errors?.deviceName && (
-        <FieldDescription>{state.errors.deviceName}</FieldDescription>
-      )}
       <FormField>
         <Label htmlFor="streetAddress">Street address</Label>
         <Input
@@ -75,10 +81,10 @@ export const AddDeviceFormAdmin = ({ owners }: AddDeviceFormAdminProps) => {
           placeholder="Enter street address"
           spellCheck="false"
         />
+        {state?.errors?.streetAddress && (
+          <FieldDescription>{state.errors.streetAddress}</FieldDescription>
+        )}
       </FormField>
-      {state?.errors?.streetAddress && (
-        <FieldDescription>{state.errors.streetAddress}</FieldDescription>
-      )}
       <FormField>
         <Label htmlFor="city">City</Label>
         <Select name="city">
@@ -93,6 +99,9 @@ export const AddDeviceFormAdmin = ({ owners }: AddDeviceFormAdminProps) => {
             </SelectGroup>
           </SelectContent>
         </Select>
+        {state?.errors?.city && (
+          <FieldDescription>{state.errors.city}</FieldDescription>
+        )}
       </FormField>
       <FormField>
         <Label htmlFor="country">Country</Label>
@@ -108,6 +117,9 @@ export const AddDeviceFormAdmin = ({ owners }: AddDeviceFormAdminProps) => {
             </SelectGroup>
           </SelectContent>
         </Select>
+        {state?.errors?.country && (
+          <FieldDescription>{state.errors.country}</FieldDescription>
+        )}
       </FormField>
       <FormField>
         <Label htmlFor="model">Model</Label>
@@ -123,13 +135,13 @@ export const AddDeviceFormAdmin = ({ owners }: AddDeviceFormAdminProps) => {
             </SelectGroup>
           </SelectContent>
         </Select>
+        {state?.errors?.model && (
+          <FieldDescription>{state.errors.model}</FieldDescription>
+        )}
       </FormField>
-      <FormField>
-        <Label htmlFor="SIM">SIM</Label>
-        <Input id="SIM" name="SIM" placeholder="Enter SIM" spellCheck="false" />
-      </FormField>
+      <PhoneNumberField />
       {state?.errors?.SIM && (
-        <FieldDescription>{state.errors.SIM}</FieldDescription>
+        <FieldDescription className="-mt-2">{state.errors.SIM}</FieldDescription>
       )}
       <Button type="submit" disabled={pending} aria-disabled={pending}>
         Add device

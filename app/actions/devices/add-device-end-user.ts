@@ -3,31 +3,31 @@
 import { redirect } from "next/navigation";
 import { STATE, STATUS } from "@prisma/client";
 import {
-    AddDeviceSchema,
+    AddDeviceSchemaEndUser,
     FormState,
 } from "@/lib/schemas/add-device-schema";
 import { db } from "@/lib/db";
 
 export async function addDeviceEndUser(state: FormState, formData: FormData) {
-  const userId = Number(formData.get("userId"));
-
-  const city = String(formData.get("city"));
-  const country = String(formData.get("country"));
-  const model = String(formData.get("model"));
-
-  const validatedFields = AddDeviceSchema.safeParse({
+  const validatedFields = AddDeviceSchemaEndUser.safeParse({
+    city: formData.get("city"),
+    country: formData.get("country"),
+    model: formData.get("model"),
     deviceName: formData.get("deviceName"),
     streetAddress: formData.get("streetAddress"),
     SIM: formData.get("SIM"),
   });
-
+  
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
     };
   }
+  const userId = Number(formData.get("userId"));
 
-  const { deviceName, streetAddress, SIM } = validatedFields.data;
+  const { city, country, model, deviceName, streetAddress, SIM } = validatedFields.data;
+  const prefix = formData.get("prefix");
+  const phoneNumber = `${prefix}-${SIM}`;
 
   const newDevice = await db.device.create({
     data: {
@@ -36,7 +36,7 @@ export async function addDeviceEndUser(state: FormState, formData: FormData) {
       city: city,
       country: country,
       model: model,
-      SIM: SIM,
+      SIM: phoneNumber,
       owner: {
         connect: {
           id: userId,
@@ -46,6 +46,8 @@ export async function addDeviceEndUser(state: FormState, formData: FormData) {
       state: STATE.CLOSED,
     },
   });
+
+  console.log(newDevice);
 
   if (!newDevice) {
     return {
