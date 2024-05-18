@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { DialogClose } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { Name } from "@/components/form/user/full-name";
 
 interface ChangeNameFormProps {
   userId: number;
@@ -53,13 +54,7 @@ export const ChangeNameForm = ({ userId, setOpen }: ChangeNameFormProps) => {
     <form action={action} className="flex flex-col gap-5">
       <input type="hidden" name="userId" value={userId} />
       <FormField className="mb-6">
-        <Label htmlFor="name">Full Name</Label>
-        <Input
-          id="name"
-          name="name"
-          placeholder="Enter new name"
-          spellCheck="false"
-        />
+        <Name />
         {state?.errors?.name && (
           <FieldDescription>{state.errors.name}</FieldDescription>
         )}

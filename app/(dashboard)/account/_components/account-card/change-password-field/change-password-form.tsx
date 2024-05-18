@@ -12,13 +12,13 @@ import {
 } from "@/lib/schemas/change-password-schema";
 import { updateUser } from "@/app/actions/auth/change-password";
 
-import { PasswordInput } from "@/components/form/password-input";
 import { FormField } from "@/components/form/form-field";
 import { FieldDescription } from "@/components/form/field-description";
 
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
 import { DialogClose } from "@/components/ui/dialog";
+import { Password } from "@/components/form/user/password";
+import { PasswordConfirmation } from "@/components/form/user/password-confirmation";
 
 interface ChangePasswordFormProps {
   userId: number;
@@ -64,8 +64,7 @@ export const ChangePasswordForm = ({
       <input type="hidden" name="userId" value={userId} />
       <div className="flex flex-col">
         <FormField className="mb-6">
-          <Label htmlFor="password">Password</Label>
-          <PasswordInput id="password" name="password" />
+          <Password />
           {state?.errors?.password && (
             <div>
               <FieldDescription className="text-foreground">
@@ -78,8 +77,7 @@ export const ChangePasswordForm = ({
           )}
         </FormField>
         <FormField className="mb-6">
-          <Label htmlFor="confirm">Confirm password</Label>
-          <PasswordInput id="confirm" name="confirm" />
+          <PasswordConfirmation />
           {state?.errors?.confirm && (
             <div>
               <FieldDescription className="text-foreground">

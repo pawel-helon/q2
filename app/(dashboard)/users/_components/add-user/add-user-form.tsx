@@ -3,32 +3,27 @@
 import bcrypt from "bcryptjs";
 import { useFormState, useFormStatus } from "react-dom";
 import { useRouter } from "next/navigation";
-import { Dispatch, SetStateAction } from "react";
 import { toast } from "sonner";
 import { ROLE } from "@prisma/client";
 
 import { createAccount } from "@/app/actions/auth/create-account";
 import { AddUserSchema, FormState } from "@/lib/schemas/add-user-schema";
 
+import { Name } from "@/components/form/user/full-name";
+import { Email } from "@/components/form/user/email";
+import { Role } from "@/components/form/user/role";
+import { Password } from "@/components/form/user/password";
+import { PasswordConfirmation } from "@/components/form/user/password-confirmation";
+
 import { FormField } from "@/components/form/form-field";
 import { FieldDescription } from "@/components/form/field-description";
-import { PasswordInput } from "@/components/form/password-input";
 import { DialogClose } from "@/components/ui/dialog";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { setOpen } from "@/types";
 
 interface AddUserFormProps {
   open: boolean;
-  setOpen: Dispatch<SetStateAction<boolean>>;
+  setOpen: setOpen;
 }
 
 export const AddUserForm = ({ open, setOpen }: AddUserFormProps) => {
@@ -38,22 +33,23 @@ export const AddUserForm = ({ open, setOpen }: AddUserFormProps) => {
   const router = useRouter();
 
   async function addUser(state: FormState, formData: FormData) {
-    const role = formData.get("role") as ROLE;
-
+    
     const validatedFields = AddUserSchema.safeParse({
       name: formData.get("name"),
       email: formData.get("email"),
+      role: formData.get("role"),
       password: formData.get("password"),
       confirm: formData.get("confirm"),
     });
-
+    
     if (!validatedFields.success) {
       return {
         errors: validatedFields.error.flatten().fieldErrors,
       };
     }
-
+    
     const { name, email, password } = validatedFields.data;
+    const role = formData.get("role") as ROLE;
     const hashedPassword = await bcrypt.hash(password, 10);
 
     createAccount(name, email, role, hashedPassword);
@@ -68,47 +64,25 @@ export const AddUserForm = ({ open, setOpen }: AddUserFormProps) => {
   return (
     <form action={action} className="flex flex-col gap-5">
       <FormField>
-        <Label htmlFor="name">Full name</Label>
-        <Input
-          id="name"
-          name="name"
-          placeholder="Enter full name"
-          spellCheck="false"
-        />
+        <Name />
         {state?.errors?.name && (
           <FieldDescription>{state.errors.name}</FieldDescription>
         )}
       </FormField>
       <FormField>
-        <Label htmlFor="email">Email</Label>
-        <Input
-          id="email"
-          name="email"
-          placeholder="Enter email address"
-          spellCheck="false"
-        />
+        <Email />
         {state?.errors?.email && (
           <FieldDescription>{state.errors.email}</FieldDescription>
         )}
       </FormField>
       <FormField>
-        <Label htmlFor="email">Role</Label>
-        <Select defaultValue="ENDUSER" name="role">
-          <SelectTrigger>
-            <SelectValue placeholder="Select role" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectItem value="ADMIN">Admin</SelectItem>
-              <SelectItem value="OWNER">Owner</SelectItem>
-              <SelectItem value="ENDUSER">End user</SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
+        <Role />
+        {state?.errors?.role && (
+          <FieldDescription>{state.errors.role}</FieldDescription>
+        )}
       </FormField>
       <FormField>
-        <Label htmlFor="password">Password</Label>
-        <PasswordInput id="password" name="password" />
+        <Password />
         {state?.errors?.password && (
           <div>
             <FieldDescription className="text-foreground">
@@ -121,8 +95,7 @@ export const AddUserForm = ({ open, setOpen }: AddUserFormProps) => {
         )}
       </FormField>
       <FormField className="mb-6">
-        <Label htmlFor="confirm">Confirm password</Label>
-        <PasswordInput id="confirm" name="confirm" />
+        <PasswordConfirmation />
         {state?.errors?.confirm && (
           <div>
             <FieldDescription className="text-foreground">
@@ -138,7 +111,7 @@ export const AddUserForm = ({ open, setOpen }: AddUserFormProps) => {
         <DialogClose asChild>
           <Button variant="ghost">Cancel</Button>
         </DialogClose>
-        <Button disabled={pending} aria-disabled={pending} type="submit">
+        <Button type="submit" disabled={pending} aria-disabled={pending}>
           {pending ? "Submitting..." : "Add user"}
         </Button>
       </div>

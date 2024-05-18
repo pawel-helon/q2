@@ -114,3 +114,13 @@ export type notifications = {
 }[];
 
 export type setOpen = Dispatch<SetStateAction<boolean>>
+
+export type owners = {
+  id: number;
+  email: string;
+  name: string | null;
+  password: string;
+  role: $Enums.ROLE;
+  createdAt: Date;
+  updatedAt: Date;
+}[];

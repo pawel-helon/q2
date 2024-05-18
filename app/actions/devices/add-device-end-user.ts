@@ -47,8 +47,6 @@ export async function addDeviceEndUser(state: FormState, formData: FormData) {
     },
   });
 
-  console.log(newDevice);
-
   if (!newDevice) {
     return {
       message: "An error occurred while adding new device.",

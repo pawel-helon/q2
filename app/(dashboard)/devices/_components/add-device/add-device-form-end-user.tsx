@@ -16,7 +16,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { PhoneNumberField } from "@/components/form/phone-number-field";
+import { SIM } from "@/components/form/device/SIM";
+import { DeviceName } from "@/components/form/device/name";
+import { Address } from "@/components/form/device/address";
+import { City } from "@/components/form/device/city";
+import { Country } from "@/components/form/device/country";
+import { Model } from "@/components/form/device/model";
 
 interface AddDeviceFormEndUserProps {
   userId: number;
@@ -30,91 +35,43 @@ export const AddDeviceFormEndUser = ({ userId }: AddDeviceFormEndUserProps) => {
     <form action={action} className="flex flex-col gap-5">
       <input type="hidden" name="userId" value={userId} />
       <FormField>
-        <Label htmlFor="deviceName">Device name</Label>
-        <Input
-          id="deviceName"
-          name="deviceName"
-          placeholder="Enter device name"
-          spellCheck="false"
-        />
+        <DeviceName />
         {state?.errors?.deviceName && (
           <FieldDescription>{state.errors.deviceName}</FieldDescription>
         )}
       </FormField>
       <FormField>
-        <Label htmlFor="streetAddress">Street address</Label>
-        <Input
-          id="streetAddress"
-          name="streetAddress"
-          placeholder="Enter street address"
-          spellCheck="false"
-        />
+        <Address />
         {state?.errors?.streetAddress && (
           <FieldDescription>{state.errors.streetAddress}</FieldDescription>
         )}
       </FormField>
       <FormField>
-        <Label htmlFor="city">City</Label>
-        <Select name="city">
-          <SelectTrigger>
-            <SelectValue placeholder="Select city" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectItem value="Austin">Austin</SelectItem>
-              <SelectItem value="Dallas">Dallas</SelectItem>
-              <SelectItem value="Boston">Boston</SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
+        <City />
         {state?.errors?.city && (
           <FieldDescription>{state.errors.city}</FieldDescription>
         )}
       </FormField>
       <FormField>
-        <Label htmlFor="country">Country</Label>
-        <Select name="country" defaultValue="USA">
-          <SelectTrigger>
-            <SelectValue placeholder="Select country" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectItem value="USA">USA</SelectItem>
-              <SelectItem value="France">France</SelectItem>
-              <SelectItem value="Germany">Germany</SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
+        <Country />
         {state?.errors?.country && (
           <FieldDescription>{state.errors.country}</FieldDescription>
         )}
       </FormField>
       <FormField>
-        <Label htmlFor="model">Model</Label>
-        <Select name="model">
-          <SelectTrigger>
-            <SelectValue placeholder="Select model" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectItem value="MP-28">MP-28</SelectItem>
-              <SelectItem value="NX-356">NX-356</SelectItem>
-              <SelectItem value="MZ-12">MZ-12</SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
+        <Model />
         {state?.errors?.model && (
           <FieldDescription>{state.errors.model}</FieldDescription>
         )}
       </FormField>
-      <PhoneNumberField />
+      <SIM />
       {state?.errors?.SIM && (
         <FieldDescription className="-mt-2">
           {state.errors.SIM}
         </FieldDescription>
       )}
       <Button type="submit" disabled={pending} aria-disabled={pending}>
-        Add device
+        {pending ? "Submitting..." : "Add device"}
       </Button>
     </form>
   );

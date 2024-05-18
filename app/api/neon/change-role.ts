@@ -3,11 +3,7 @@
 import { db } from "@/lib/db";
 import { ROLE } from "@prisma/client";
 
-export async function changeRoles(formData: FormData) {
-  const role = formData.get("role");
-  const ids = formData.get("ids");
-  const idsArray = ids!.toString().split(",").map((string) => parseInt(string));
-
+export async function changeRoles(idsArray: number[], role: string) {
   if (role === "ADMIN") {
     for (const index of idsArray) {
       await db.user.update({

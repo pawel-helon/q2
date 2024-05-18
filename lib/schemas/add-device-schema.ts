@@ -11,7 +11,7 @@ export const AddDeviceSchemaAdmin = z.object({
     .trim(),
   streetAddress: z
     .string()
-    .min(2, { message: "Street address must be at least 2 characters long" })
+    .min(2, { message: "Address must be at least 2 characters long" })
     .trim(),
   SIM: z.string().min(1, { message: "Enter SIM card number" }).trim(),
 });
@@ -26,7 +26,7 @@ export const AddDeviceSchemaEndUser = z.object({
     .trim(),
   streetAddress: z
     .string()
-    .min(2, { message: "Street address must be at least 2 characters long" })
+    .min(2, { message: "Address must be at least 2 characters long" })
     .trim(),
   SIM: z.string().min(1, { message: "Enter SIM card number" }).trim(),
 });

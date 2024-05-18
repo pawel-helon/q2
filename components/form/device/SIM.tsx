@@ -11,9 +11,9 @@ import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-import { FormField } from "./form-field";
+import { FormField } from "../form-field";
 
-export function PhoneNumberField() {
+export function SIM() {
   return (
     <FormField>
       <Label htmlFor="SIM">Phone number</Label>

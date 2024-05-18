@@ -1,24 +1,16 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { toast } from "sonner";
-
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { DialogClose } from "@/components/ui/dialog";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { useFormState, useFormStatus } from "react-dom";
 import { ChangeRoleSchema, FormState } from "@/lib/schemas/change-role-schema";
-import { FieldDescription } from "@/components/form/field-description";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import { ROLE } from "@prisma/client";
+
 import { changeRole } from "@/app/actions/users/change-role";
+import { Role } from "@/components/form/user/role";
+import { DialogClose } from "@/components/ui/dialog";
+import { FieldDescription } from "@/components/form/field-description";
+import { Button } from "@/components/ui/button";
 
 interface ChangeRoleForm {
   userId: number;
@@ -41,7 +33,7 @@ export const ChangeRoleForm = ({ userId, setOpen }: ChangeRoleForm) => {
 
     const role = formData.get("role") as ROLE;
 
-    changeRole(userId, role)
+    changeRole(userId, role);
     setTimeout(() => {
       setOpen(false);
       toast.success("Role has been updated.");
@@ -56,18 +48,7 @@ export const ChangeRoleForm = ({ userId, setOpen }: ChangeRoleForm) => {
     <form action={action}>
       <input type="hidden" name="id" value={userId} />
       <div className="flex flex-col gap-2">
-        <Select name="role">
-          <SelectTrigger>
-            <SelectValue placeholder="Select role" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectItem value="ADMIN">Admin</SelectItem>
-              <SelectItem value="OWNER">Owner</SelectItem>
-              <SelectItem value="ENDUSER">End user</SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
+        <Role />
         {state?.errors?.role && (
           <FieldDescription>{state.errors.role}</FieldDescription>
         )}

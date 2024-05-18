@@ -7,6 +7,9 @@ export const AddUserSchema = z
       .min(2, { message: "Name must be at least 2 characters long." })
       .trim(),
     email: z.string().email({ message: "Please enter a valid email." }).trim(),
+    role: z.
+      string()
+      .min(1, { message: "Please select a role." }),
     password: z
       .string()
       .min(8, { message: "be at least 8 characters long" })
@@ -36,6 +39,7 @@ export type FormState =
       errors?: {
         name?: string[];
         email?: string[];
+        role?: string[];
         password?: string[];
         confirm?: string[];
       };

@@ -17,6 +17,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { requestRoleChangeEndUser } from "@/app/actions/auth/request-role-change-end-user";
+import { Role } from "@/components/form/user/role";
 
 interface ChangeRoleForm {
   userId: number;
@@ -37,19 +38,7 @@ export const ChangeRoleForm = ({ userId, setOpen }: ChangeRoleForm) => {
     <form action={requestRoleChangeEndUser}>
       <input type="hidden" name="id" value={userId} />
       <div className="flex flex-col gap-2">
-        <Label>Select role</Label>
-        <Select defaultValue="OWNER" name="role">
-          <SelectTrigger>
-            <SelectValue placeholder="Select role" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectItem value="ADMIN">Admin</SelectItem>
-              <SelectItem value="OWNER">Owner</SelectItem>
-              <SelectItem value="ENDUSER">End user</SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
+        <Role />
       </div>
       <div className="w-full flex justify-end gap-2 mt-10">
         <DialogClose asChild>
