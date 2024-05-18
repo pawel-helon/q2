@@ -1,3 +1,5 @@
+"use client";
+
 import { useFormState, useFormStatus } from "react-dom";
 
 import { signup } from "@/app/actions/auth/sign-up";
@@ -7,8 +9,6 @@ import { Name } from "@/components/form/user/full-name";
 import { Password } from "@/components/form/user/password";
 import { SignInRedirect } from "@/components/form/user/sign-in-redirect";
 import { Button } from "@/components/ui/button";
-import { FormField } from "@/components/form/form-field";
-import { FieldDescription } from "@/components/form/field-description";
 import { PasswordConfirmation } from "@/components/form/user/password-confirmation";
 
 interface SignUpFormProps {
@@ -20,45 +20,45 @@ export const SignUpForm = ({ children }: SignUpFormProps) => {
   const { pending } = useFormStatus();
 
   return (
-    <form action={action} className="flex flex-col gap-5">
-      <FormField>
-        <Name />
-        {state?.errors?.name && (
-          <FieldDescription>{state.errors.name}</FieldDescription>
-        )}
-      </FormField>
-      <FormField>
-        <Email />
-        {state?.errors?.email && (
-          <FieldDescription>{state.errors.email}</FieldDescription>
-        )}
-      </FormField>
-      <FormField>
-        <Password />
+    <form action={action} className="flex flex-col gap-8">
+      <Name>{state?.errors?.name && <>{state.errors.name}</>}</Name>
+      <Email>{state?.errors?.email && <>{state.errors.email}</>}</Email>
+      <Password>
         {state?.errors?.password && (
           <div>
-            <FieldDescription className="text-foreground">
+            <p className="text-[0.8rem] text-muted-foreground font-semibold inline">
               Password must:
-            </FieldDescription>
-            {state.errors.password.map((error) => (
-              <FieldDescription key={error}>{error}</FieldDescription>
+            </p>
+            {state.errors.password.map((error, index) => (
+              <p
+                className="inline text-[0.8rem] leading-none text-muted-foreground"
+                key={error}
+              >
+                {index === 0 ? " " : ", "}
+                {error}
+              </p>
             ))}
           </div>
         )}
-      </FormField>
-      <FormField className="mb-6">
-        <PasswordConfirmation />
+      </Password>
+      <PasswordConfirmation>
         {state?.errors?.confirm && (
           <div>
-            <FieldDescription className="text-foreground">
+            <p className="text-[0.8rem] text-muted-foreground font-semibold inline">
               Password must:
-            </FieldDescription>
-            {state.errors.confirm.map((error) => (
-              <FieldDescription key={error}>{error}</FieldDescription>
+            </p>
+            {state.errors.confirm.map((error, index) => (
+              <p
+                className="inline text-[0.8rem] leading-none text-muted-foreground"
+                key={error}
+              >
+                {index === 0 ? " " : ", "}
+                {error}
+              </p>
             ))}
           </div>
         )}
-      </FormField>
+      </PasswordConfirmation>
       <SignInRedirect />
       <div className="flex gap-2 w-full justify-end">
         {children}

@@ -1,16 +1,25 @@
-import { Label } from "@/components/ui/label"; 
+import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 
-export const Email = () => {
+interface Props {
+  children?: React.ReactNode;
+}
+
+export const Email = ({ children }: Props) => {
   return (
-    <>
-      <Label htmlFor="email">Email</Label>
+    <div className="flex flex-col gap-2">
+      <div className="flex justify-between items-end">
+        <Label htmlFor="name">Email</Label>
+        <p className="text-[0.8rem] leading-none text-muted-foreground">
+          {children}
+        </p>
+      </div>
       <Input
         id="email"
         name="email"
         placeholder="Enter email address"
         spellCheck="false"
       />
-    </>
+    </div>
   );
 };

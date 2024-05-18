@@ -8,10 +8,19 @@ import {
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 
-export const City = () => {
+interface Props {
+  children?: React.ReactNode;
+}
+
+export const City = ({ children }: Props) => {
   return (
-    <>
-      <Label htmlFor="city">City</Label>
+    <div className="flex flex-col gap-2">
+      <div className="flex justify-between items-end">
+        <Label htmlFor="city">City</Label>
+        <p className="text-[0.8rem] leading-none text-muted-foreground">
+          {children}
+        </p>
+      </div>
       <Select name="city">
         <SelectTrigger>
           <SelectValue placeholder="Select city" />
@@ -24,6 +33,6 @@ export const City = () => {
           </SelectGroup>
         </SelectContent>
       </Select>
-    </>
+    </div>
   );
 };

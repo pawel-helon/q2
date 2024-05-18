@@ -2,24 +2,19 @@
 
 import { useFormState, useFormStatus } from "react-dom";
 import { useRouter } from "next/navigation";
-import { Dispatch, SetStateAction } from "react";
 import { toast } from "sonner";
 
 import { ChangeNameSchema, FormState } from "@/lib/schemas/change-name-schema";
 import { updateUser } from "@/app/actions/auth/change-name";
 
-import { FormField } from "@/components/form/form-field";
-import { FieldDescription } from "@/components/form/field-description";
-
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Name } from "@/components/form/user/full-name";
 import { DialogClose } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Name } from "@/components/form/user/full-name";
+import { setOpen } from "@/types";
 
 interface ChangeNameFormProps {
   userId: number;
-  setOpen: Dispatch<SetStateAction<boolean>>;
+  setOpen: setOpen;
 }
 
 export const ChangeNameForm = ({ userId, setOpen }: ChangeNameFormProps) => {
@@ -51,14 +46,9 @@ export const ChangeNameForm = ({ userId, setOpen }: ChangeNameFormProps) => {
   }
 
   return (
-    <form action={action} className="flex flex-col gap-5">
+    <form action={action} className="flex flex-col gap-8">
       <input type="hidden" name="userId" value={userId} />
-      <FormField className="mb-6">
-        <Name />
-        {state?.errors?.name && (
-          <FieldDescription>{state.errors.name}</FieldDescription>
-        )}
-      </FormField>
+      <Name>{state?.errors?.name && <>{state.errors.name}</>}</Name>
       <div className="flex gap-2 w-full justify-end">
         <DialogClose asChild>
           <Button variant="ghost">Cancel</Button>

@@ -8,10 +8,19 @@ import {
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 
-export const Country = () => {
+interface Props {
+  children?: React.ReactNode;
+}
+
+export const Country = ({ children }: Props) => {
   return (
-    <>
-      <Label htmlFor="country">Country</Label>
+    <div className="flex flex-col gap-2">
+      <div className="flex justify-between items-end">
+        <Label htmlFor="country">Country</Label>
+        <p className="text-[0.8rem] leading-none text-muted-foreground">
+          {children}
+        </p>
+      </div>
       <Select name="country" defaultValue="USA">
         <SelectTrigger>
           <SelectValue placeholder="Select country" />
@@ -24,6 +33,6 @@ export const Country = () => {
           </SelectGroup>
         </SelectContent>
       </Select>
-    </>
+    </div>
   );
 };

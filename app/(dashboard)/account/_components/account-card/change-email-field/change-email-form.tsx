@@ -1,28 +1,23 @@
 "use client";
 
 import { useFormState, useFormStatus } from "react-dom";
-import { Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
+import { updateUser } from "@/app/actions/auth/change-email";
 import {
   ChangeEmailSchema,
   FormState,
 } from "@/lib/schemas/change-email-schema";
-import { updateUser } from "@/app/actions/auth/change-email";
 
-import { FormField } from "@/components/form/form-field";
-import { FieldDescription } from "@/components/form/field-description";
-
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { DialogClose } from "@/components/ui/dialog";
 import { Email } from "@/components/form/user/email";
+import { Button } from "@/components/ui/button";
+import { DialogClose } from "@/components/ui/dialog";
+import { setOpen } from "@/types";
 
 interface ChangeNameFormProps {
   userId: number;
-  setOpen: Dispatch<SetStateAction<boolean>>;
+  setOpen: setOpen;
 }
 
 export const ChangeEmailForm = ({ userId, setOpen }: ChangeNameFormProps) => {
@@ -54,14 +49,9 @@ export const ChangeEmailForm = ({ userId, setOpen }: ChangeNameFormProps) => {
   }
 
   return (
-    <form action={action} className="flex flex-col gap-5">
+    <form action={action} className="flex flex-col gap-8">
       <input type="hidden" name="userId" value={userId} />
-      <FormField className="mb-6">
-        <Email />
-        {state?.errors?.email && (
-          <FieldDescription>{state.errors.email}</FieldDescription>
-        )}
-      </FormField>
+      <Email>{state?.errors?.email && <>{state.errors.email}</>}</Email>
       <div className="flex gap-2 w-full justify-end">
         <DialogClose asChild>
           <Button variant="ghost">Cancel</Button>

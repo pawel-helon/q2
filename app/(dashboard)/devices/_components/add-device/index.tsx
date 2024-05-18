@@ -1,8 +1,7 @@
 "use client";
 
-import { Plus } from "lucide-react";
 import { useState } from "react";
-import { $Enums } from "@prisma/client";
+import { Plus } from "lucide-react";
 
 import { AddDeviceFormAdmin } from "./add-device-form-admin";
 import { AddDeviceFormEndUser } from "./add-device-form-end-user";
@@ -12,22 +11,15 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { owners } from "@/types";
 
-interface AddDeviceProps {
+interface Props {
   role: string;
   userId: number;
-  owners: {
-    id: number;
-    email: string;
-    name: string | null;
-    password: string;
-    role: $Enums.ROLE;
-    createdAt: Date;
-    updatedAt: Date;
-  }[];
+  owners: owners;
 }
 
-export const AddDevice = ({ role, userId, owners }: AddDeviceProps) => {
+export const AddDevice = ({ role, userId, owners }: Props) => {
   const [open, setOpen] = useState(false);
 
   return (

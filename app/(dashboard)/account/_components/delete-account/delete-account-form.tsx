@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 
 import { deleteAccount } from "@/app/api/neon/delete-account";
-import { FieldDescription } from "@/components/form/field-description";
 import { Checkbox } from "@/components/ui/checkbox";
 import { DialogClose, DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -15,7 +14,7 @@ export const DeleteAccountForm = ({ userId }: DeleteAccountFormProps) => {
   const [state, action] = useFormState(deleteAccount, undefined);
   const { pending } = useFormStatus();
 
-  const [value, setValue] = useState(false);
+  const [checked, setChecked] = useState(false);
 
   return (
     <form action={action}>
@@ -24,8 +23,8 @@ export const DeleteAccountForm = ({ userId }: DeleteAccountFormProps) => {
         <Checkbox
           id="confirm"
           name="confirm"
-          checked={value}
-          onCheckedChange={() => setValue(!value)}
+          checked={checked}
+          onCheckedChange={() => setChecked(!checked)}
         />
         <label
           htmlFor="confirm"
@@ -33,9 +32,7 @@ export const DeleteAccountForm = ({ userId }: DeleteAccountFormProps) => {
         >
           I am sure
         </label>
-        {state?.errors?.confirm && (
-          <FieldDescription>{state.errors.confirm}</FieldDescription>
-        )}
+        {state?.errors?.confirm && <>{state.errors.confirm}</>}
       </div>
       <DialogFooter className="mt-6">
         <DialogClose asChild>

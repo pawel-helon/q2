@@ -10,7 +10,6 @@ import { Button } from "@/components/ui/button";
 import { DialogClose } from "@/components/ui/dialog";
 import { useFormState, useFormStatus } from "react-dom";
 import { ChangeRoleSchema, FormState } from "@/lib/schemas/change-role-schema";
-import { FieldDescription } from "@/components/form/field-description";
 
 interface ChangeRoleProps {
   ids: any[];
@@ -51,15 +50,10 @@ export const ChangeRoleForm = ({ ids, setOpen }: ChangeRoleProps) => {
   const { pending } = useFormStatus();
 
   return (
-    <form action={action}>
+    <form action={action} className="flex flex-col gap-8">
       <input type="hidden" name="ids" value={ids} />
-      <div className="flex flex-col gap-2">
-        <Role />
-        {state?.errors?.role && (
-          <FieldDescription>{state.errors.role}</FieldDescription>
-        )}
-      </div>
-      <div className="w-full flex justify-end gap-2 mt-10">
+      <Role>{state?.errors?.role && <>{state.errors.role}</>}</Role>
+      <div className="flex gap-2 w-full justify-end">
         <DialogClose asChild>
           <Button variant="ghost">Cancel</Button>
         </DialogClose>

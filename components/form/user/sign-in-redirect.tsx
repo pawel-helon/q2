@@ -7,7 +7,7 @@ export const SignInRedirect = () => {
   const router = useRouter();
 
   return (
-    <div className="flex items-center -my-5">
+    <div className="flex items-center my-4">
       <p className="text-[0.8rem] text-muted-foreground">
         Already have an account?
       </p>

@@ -9,14 +9,20 @@ import {
 import { Label } from "@/components/ui/label";
 import { owners } from "@/types";
 
-interface OwnerProps {
+interface Props {
   owners: owners;
+  children?: React.ReactNode;
 }
 
-export const Owner = ({ owners }: OwnerProps) => {
+export const Owner = ({ owners, children }: Props) => {
   return (
-    <>
-      <Label htmlFor="owner">Owner</Label>
+    <div className="flex flex-col gap-2">
+      <div className="flex justify-between items-end">
+        <Label htmlFor="owner">Owner</Label>
+        <p className="text-[0.8rem] leading-none text-muted-foreground">
+          {children}
+        </p>
+      </div>
       <Select name="owner">
         <SelectTrigger>
           <SelectValue placeholder="Select owner" />
@@ -33,6 +39,6 @@ export const Owner = ({ owners }: OwnerProps) => {
           </SelectGroup>
         </SelectContent>
       </Select>
-    </>
+    </div>
   );
 };

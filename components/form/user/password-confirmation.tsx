@@ -8,11 +8,15 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Label } from "@/components/ui/label";
 
-export const PasswordConfirmation = () => {
+interface Props {
+  children?: React.ReactNode;
+}
+
+export const PasswordConfirmation = ({ children }: Props) => {
   const [visibility, setVisibility] = useState(false);
 
   return (
-    <>
+    <div className="flex flex-col gap-2">
       <Label htmlFor="confirm">Confirm password</Label>
       <div className="relative">
         <Input
@@ -34,6 +38,7 @@ export const PasswordConfirmation = () => {
           {visibility ? <EyeOff /> : <Eye />}
         </Button>
       </div>
-    </>
+      {children}
+    </div>
   );
 };

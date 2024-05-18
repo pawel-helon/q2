@@ -8,10 +8,19 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export const Role = () => {
+interface Props {
+  children?: React.ReactNode;
+}
+
+export const Role = ({ children }: Props) => {
   return (
-    <>
-      <Label>Select role</Label>
+    <div className="flex flex-col gap-2">
+      <div className="flex justify-between items-end">
+        <Label>Select role</Label>
+        <p className="text-[0.8rem] leading-none text-muted-foreground">
+          {children}
+        </p>
+      </div>
       <Select name="role">
         <SelectTrigger>
           <SelectValue placeholder="Select role" />
@@ -24,6 +33,6 @@ export const Role = () => {
           </SelectGroup>
         </SelectContent>
       </Select>
-    </>
+    </div>
   );
 };

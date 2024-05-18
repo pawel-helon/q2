@@ -1,28 +1,25 @@
 "use client";
 
-import { useFormState, useFormStatus } from "react-dom";
 import bcrypt from "bcryptjs";
-import { Dispatch, SetStateAction } from "react";
+import { useFormState, useFormStatus } from "react-dom";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
+import { updateUser } from "@/app/actions/auth/change-password";
 import {
   ChangePasswordSchema,
   FormState,
 } from "@/lib/schemas/change-password-schema";
-import { updateUser } from "@/app/actions/auth/change-password";
 
-import { FormField } from "@/components/form/form-field";
-import { FieldDescription } from "@/components/form/field-description";
-
-import { Button } from "@/components/ui/button";
-import { DialogClose } from "@/components/ui/dialog";
 import { Password } from "@/components/form/user/password";
 import { PasswordConfirmation } from "@/components/form/user/password-confirmation";
+import { Button } from "@/components/ui/button";
+import { DialogClose } from "@/components/ui/dialog";
+import { setOpen } from "@/types";
 
 interface ChangePasswordFormProps {
   userId: number;
-  setOpen: Dispatch<SetStateAction<boolean>>;
+  setOpen: setOpen;
 }
 
 export const ChangePasswordForm = ({
@@ -60,36 +57,44 @@ export const ChangePasswordForm = ({
   }
 
   return (
-    <form action={action} className="flex flex-col gap-5">
+    <form action={action} className="flex flex-col gap-8">
       <input type="hidden" name="userId" value={userId} />
-      <div className="flex flex-col">
-        <FormField className="mb-6">
-          <Password />
-          {state?.errors?.password && (
-            <div>
-              <FieldDescription className="text-foreground">
-                Password must:
-              </FieldDescription>
-              {state.errors.password.map((error) => (
-                <FieldDescription key={error}>{error}</FieldDescription>
-              ))}
-            </div>
-          )}
-        </FormField>
-        <FormField className="mb-6">
-          <PasswordConfirmation />
-          {state?.errors?.confirm && (
-            <div>
-              <FieldDescription className="text-foreground">
-                Password must:
-              </FieldDescription>
-              {state.errors.confirm.map((error) => (
-                <FieldDescription key={error}>{error}</FieldDescription>
-              ))}
-            </div>
-          )}
-        </FormField>
-      </div>
+      <Password>
+        {state?.errors?.password && (
+          <div>
+            <p className="text-[0.8rem] text-muted-foreground font-semibold inline">
+              Password must:
+            </p>
+            {state.errors.password.map((error, index) => (
+              <p
+                className="inline text-[0.8rem] leading-none text-muted-foreground"
+                key={error}
+              >
+                {index === 0 ? " " : ", "}
+                {error}
+              </p>
+            ))}
+          </div>
+        )}
+      </Password>
+      <PasswordConfirmation>
+        {state?.errors?.confirm && (
+          <div>
+            <p className="text-[0.8rem] text-muted-foreground font-semibold inline">
+              Password must:
+            </p>
+            {state.errors.confirm.map((error, index) => (
+              <p
+                className="inline text-[0.8rem] leading-none text-muted-foreground"
+                key={error}
+              >
+                {index === 0 ? " " : ", "}
+                {error}
+              </p>
+            ))}
+          </div>
+        )}
+      </PasswordConfirmation>
       <div className="flex gap-2 w-full justify-end">
         <DialogClose asChild>
           <Button variant="ghost">Cancel</Button>

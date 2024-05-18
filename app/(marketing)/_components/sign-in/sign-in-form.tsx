@@ -6,8 +6,6 @@ import { Email } from "@/components/form/user/email";
 import { Password } from "@/components/form/user/password";
 import { SignUpRedirect } from "@/components/form/user/sign-up-redirect";
 import { Button } from "@/components/ui/button";
-import { FormField } from "@/components/form/form-field";
-import { FieldDescription } from "@/components/form/field-description";
 
 interface SignInFormProps {
   children?: React.ReactNode;
@@ -19,28 +17,25 @@ export function SignInForm({ children }: SignInFormProps) {
 
   return (
     <form action={action} className="flex flex-col gap-5">
-      <FormField>
-        <Email />
-      </FormField>
-      {state?.errors?.email && (
-        <FieldDescription>{state.errors.email}</FieldDescription>
-      )}
-
-      <FormField className="mb-6">
-        <Password />
+      <Email>{state?.errors?.email && <>{state.errors.email}</>}</Email>
+      <Password>
         {state?.errors?.password && (
           <div>
-            <FieldDescription className="text-foreground">
+            <p className="text-[0.8rem] text-muted-foreground font-semibold inline">
               Password must:
-            </FieldDescription>
-            <FieldDescription>
-              {state.errors.password.map((error) => (
-                <FieldDescription key={error}>{error}</FieldDescription>
-              ))}
-            </FieldDescription>
+            </p>
+            {state.errors.password.map((error, index) => (
+              <p
+                className="inline text-[0.8rem] leading-none text-muted-foreground"
+                key={error}
+              >
+                {index === 0 ? " " : ", "}
+                {error}
+              </p>
+            ))}
           </div>
         )}
-      </FormField>
+      </Password>
       <SignUpRedirect />
       <div className="flex gap-2 w-full justify-end">
         {children}
@@ -50,4 +45,4 @@ export function SignInForm({ children }: SignInFormProps) {
       </div>
     </form>
   );
-};
+}

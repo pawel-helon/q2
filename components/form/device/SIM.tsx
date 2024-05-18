@@ -11,12 +11,19 @@ import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-import { FormField } from "../form-field";
+interface Props {
+  children?: React.ReactNode;
+}
 
-export function SIM() {
+export function SIM({ children }: Props) {
   return (
-    <FormField>
-      <Label htmlFor="SIM">Phone number</Label>
+    <div className="flex flex-col gap-2">
+      <div className="flex justify-between items-end">
+        <Label htmlFor="SIM">Phone number</Label>
+        <p className="text-[0.8rem] leading-none text-muted-foreground">
+          {children}
+        </p>
+      </div>
       <div className="flex gap-2">
         <Select name="prefix" defaultValue="+1">
           <SelectTrigger className="w-[100px]">
@@ -35,6 +42,7 @@ export function SIM() {
             <Separator className="my-1" />
             <SelectGroup>
               <SelectLabel>Europe</SelectLabel>
+              <Separator className="my-1" />
               {phonePrefixesEurope.map((prefix) => (
                 <SelectItem key={prefix.value} value={prefix.value}>
                   {prefix.value}
@@ -43,16 +51,16 @@ export function SIM() {
             </SelectGroup>
           </SelectContent>
         </Select>
-        <FormField className="w-full">
+        <div className="w-full">
           <Input
             id="SIM"
             name="SIM"
             placeholder="Enter phone number"
             spellCheck="false"
           />
-        </FormField>
+        </div>
       </div>
-    </FormField>
+    </div>
   );
 }
 

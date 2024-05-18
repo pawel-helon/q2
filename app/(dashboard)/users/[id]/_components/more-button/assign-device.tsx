@@ -1,15 +1,13 @@
 "use client";
 
 import { useFormState, useFormStatus } from "react-dom";
-import { Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 import { assignDevice } from "@/app/actions/devices/assign-device";
 import { AssignDeviceSchema, FormState } from "@/lib/schemas/assign-device";
 
-import { FieldDescription } from "@/components/form/field-description";
-import { FormField } from "@/components/form/form-field";
+import { Device } from "@/components/form/device/device";
 import { DialogContent } from "@/components/dialog-content";
 import {
   Dialog,
@@ -17,42 +15,30 @@ import {
   DialogFooter,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { devices } from "@/types";
+import { devices, setOpen } from "@/types";
 import { cn } from "@/lib/utils";
 
-interface AssignDeviceProps {
+interface Props {
   devices: devices;
   userId: number;
-  setOpen: Dispatch<SetStateAction<boolean>>;
+  setOpen: setOpen;
 }
 
-export const AssignDevice = ({
-  userId,
-  devices,
-  setOpen,
-}: AssignDeviceProps) => {
+export function AssignDevice({ userId, devices, setOpen }: Props) {
   const router = useRouter();
 
   async function onSubmit(state: FormState, formData: FormData) {
     const validatedFields = AssignDeviceSchema.safeParse({
       deviceId: formData.get("deviceId"),
     });
-    
+
     if (!validatedFields.success) {
       return {
         errors: validatedFields.error.flatten().fieldErrors,
       };
     }
-    
+
     const userId = Number(formData.get("userId"));
     const deviceId = Number(formData.get("deviceId"));
 
@@ -82,27 +68,9 @@ export const AssignDevice = ({
       <DialogContent title="Assign device">
         <form action={action}>
           <input type="hidden" name="userId" value={userId} />
-          <FormField>
-            <Select name="deviceId">
-              <SelectTrigger>
-                <SelectValue placeholder="Select device" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  {devices.map((device) => {
-                    return (
-                      <SelectItem key={device.id} value={String(device.id)}>
-                        {device.deviceName}
-                      </SelectItem>
-                    );
-                  })}
-                </SelectGroup>
-              </SelectContent>
-              {state?.errors?.deviceId && (
-                <FieldDescription>{state.errors.deviceId}</FieldDescription>
-              )}
-            </Select>
-          </FormField>
+          <Device devices={devices}>
+            {state?.errors?.deviceId && <>{state.errors.deviceId}</>}
+          </Device>
           <DialogFooter className="flex justify-end gap-2 mt-6">
             <DialogClose asChild>
               <Button variant="ghost">Cancel</Button>
@@ -115,4 +83,4 @@ export const AssignDevice = ({
       </DialogContent>
     </Dialog>
   );
-};
+}

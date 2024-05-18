@@ -8,11 +8,15 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Label } from "@/components/ui/label";
 
-export const Password = () => {
+interface Props {
+  children?: React.ReactNode;
+}
+
+export const Password = ({ children }: Props) => {
   const [visibility, setVisibility] = useState(false);
 
   return (
-    <>
+    <div className="flex flex-col gap-2">
       <Label htmlFor="password">Password</Label>
       <div className="relative">
         <Input
@@ -34,6 +38,7 @@ export const Password = () => {
           {visibility ? <EyeOff /> : <Eye />}
         </Button>
       </div>
-    </>
+      {children}
+    </div>
   );
 };

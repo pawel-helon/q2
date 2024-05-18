@@ -84,7 +84,7 @@ export const MoreButton = ({ device }: MoreButtonProps) => {
             action={handleActivateDevice}
           />
         )}
-        <Separator />
+        <Separator className="my-1"/>
         <Item
           cta="Delete"
           dialogTitle="Delete device"
