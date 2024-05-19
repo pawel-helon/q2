@@ -19,19 +19,19 @@ import { DialogClose } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { setOpen } from "@/types";
 
-interface AddUserFormProps {
+export function AddUserForm({
+  open,
+  setOpen,
+}: {
   open: boolean;
   setOpen: setOpen;
-}
-
-export const AddUserForm = ({ open, setOpen }: AddUserFormProps) => {
+}) {
   const [state, action] = useFormState(addUser, undefined);
   const { pending } = useFormStatus();
 
   const router = useRouter();
 
   async function addUser(state: FormState, formData: FormData) {
-    
     const validatedFields = AddUserSchema.safeParse({
       name: formData.get("name"),
       email: formData.get("email"),
@@ -39,13 +39,13 @@ export const AddUserForm = ({ open, setOpen }: AddUserFormProps) => {
       password: formData.get("password"),
       confirm: formData.get("confirm"),
     });
-    
+
     if (!validatedFields.success) {
       return {
         errors: validatedFields.error.flatten().fieldErrors,
       };
     }
-    
+
     const { name, email, password } = validatedFields.data;
     const role = formData.get("role") as ROLE;
     const hashedPassword = await bcrypt.hash(password, 10);

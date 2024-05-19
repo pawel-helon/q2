@@ -13,11 +13,7 @@ import { SIM } from "@/components/form/device/SIM";
 
 import { Button } from "@/components/ui/button";
 
-interface Props {
-  userId: number;
-}
-
-export function AddDeviceFormEndUser({ userId }: Props) {
+export function AddDeviceFormEndUser({ userId }: { userId: number }) {
   const [state, action] = useFormState(addDeviceEndUser, undefined);
   const { pending } = useFormStatus();
 
@@ -39,4 +35,4 @@ export function AddDeviceFormEndUser({ userId }: Props) {
       </Button>
     </form>
   );
-};
+}

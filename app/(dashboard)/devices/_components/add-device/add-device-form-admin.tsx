@@ -15,11 +15,7 @@ import { SIM } from "@/components/form/device/SIM";
 import { Button } from "@/components/ui/button";
 import { owners } from "@/types";
 
-interface Props {
-  owners: owners;
-}
-
-export function AddDeviceFormAdmin({ owners }: Props) {
+export function AddDeviceFormAdmin({ owners }: { owners: owners }) {
   const [state, action] = useFormState(addDeviceAdmin, undefined);
   const { pending } = useFormStatus();
 
@@ -43,4 +39,4 @@ export function AddDeviceFormAdmin({ owners }: Props) {
       </Button>
     </form>
   );
-};
+}

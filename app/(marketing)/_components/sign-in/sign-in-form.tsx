@@ -7,11 +7,7 @@ import { Password } from "@/components/form/user/password";
 import { SignUpRedirect } from "@/components/form/user/sign-up-redirect";
 import { Button } from "@/components/ui/button";
 
-interface SignInFormProps {
-  children?: React.ReactNode;
-}
-
-export function SignInForm({ children }: SignInFormProps) {
+export function SignInForm({ children }: { children?: React.ReactNode }) {
   const [state, action] = useFormState(signin, undefined);
   const { pending } = useFormStatus();
 

@@ -9,12 +9,10 @@ import {
 import { Label } from "@/components/ui/label";
 import { owners } from "@/types";
 
-interface Props {
+export function Owner({ owners, children }: {
   owners: owners;
   children?: React.ReactNode;
-}
-
-export const Owner = ({ owners, children }: Props) => {
+}) {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex justify-between items-end">

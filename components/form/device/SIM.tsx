@@ -11,11 +11,7 @@ import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-interface Props {
-  children?: React.ReactNode;
-}
-
-export function SIM({ children }: Props) {
+export function SIM({ children }: { children?: React.ReactNode }) {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex justify-between items-end">

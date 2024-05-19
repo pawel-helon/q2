@@ -12,7 +12,7 @@ interface Props {
   children?: React.ReactNode;
 }
 
-export const Password = ({ children }: Props) => {
+export function Password({ children }: { children?: React.ReactNode }) {
   const [visibility, setVisibility] = useState(false);
 
   return (
@@ -41,4 +41,4 @@ export const Password = ({ children }: Props) => {
       {children}
     </div>
   );
-};
+}

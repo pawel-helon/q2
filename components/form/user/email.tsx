@@ -5,7 +5,7 @@ interface Props {
   children?: React.ReactNode;
 }
 
-export const Email = ({ children }: Props) => {
+export function Email({ children }: { children?: React.ReactNode }) {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex justify-between items-end">
@@ -22,4 +22,4 @@ export const Email = ({ children }: Props) => {
       />
     </div>
   );
-};
+}

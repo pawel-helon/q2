@@ -8,11 +8,9 @@ import {
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 
-interface Props {
+export function City({ children }: {
   children?: React.ReactNode;
-}
-
-export const City = ({ children }: Props) => {
+}) {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex justify-between items-end">

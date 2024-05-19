@@ -6,11 +6,8 @@ import { Heading } from "@/components/typography";
 import { user } from "@/types";
 import { Card, CardContent, CardHeader } from "@/components/card";
 import { ChangeRoleField } from "./change-role-field";
-interface UserCardProps {
-  user: user | null;
-}
 
-export const UserCard = ({ user }: UserCardProps) => {
+export async function UserCard({ user }: { user: user | null }) {
   return (
     <Card className="col-span-2">
       <CardHeader>
@@ -38,4 +35,4 @@ export const UserCard = ({ user }: UserCardProps) => {
       </CardContent>
     </Card>
   );
-};
+}

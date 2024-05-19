@@ -8,11 +8,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-interface Props {
-  children?: React.ReactNode;
-}
-
-export const Role = ({ children }: Props) => {
+export function Role({ children }: { children?: React.ReactNode }) {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex justify-between items-end">
@@ -35,4 +31,4 @@ export const Role = ({ children }: Props) => {
       </Select>
     </div>
   );
-};
+}

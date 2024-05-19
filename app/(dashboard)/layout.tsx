@@ -23,7 +23,8 @@ const DashboardLayout = async ({ children }: DashboardLayoutProps) => {
     <div
       className={cn(
         "relative min-h-screen flex mx-auto xl:max-w-[1280px] 2xl:max-w-[1536px]",
-        "scrollbar scrollbar-thumb-muted scrollbar-track-background h-32 overflow-y-scroll"
+        "scrollbar max-h-[100vh] overflow-y-scroll scrollbar-w-2 scrollbar-h-2",
+        "scrollbar-track-card-background scrollbar-thumb-rounded-full scrollbar-thumb-muted"
       )}
     >
       <Sidebar role={role} email={email} notifications={notifications} />

@@ -11,18 +11,17 @@ import { UserCard } from "./_components/user-card";
 import { DeviceCard } from "./_components/device-card";
 import { Role } from "@/types";
 
-
-interface UserPageProps {
+export default async function UserPage({
+  params,
+}: {
   params: {
     id: number;
   };
-}
-
-export default async function UserPage({ params }: UserPageProps) {
+}) {
   const userId = Number(params.id);
   const user = await fetchUser(userId);
   const userName = String(user?.name);
-  const role = user?.role as Role; 
+  const role = user?.role as Role;
 
   const devices = await fetchDevices();
 
@@ -34,9 +33,9 @@ export default async function UserPage({ params }: UserPageProps) {
       <Header title={userName}>
         <Badge variant={role}>{role}</Badge>
       </Header>
-      <div className="mt-[5.5rem] pt-[5.5rem] border-t w-full grid grid-cols-3 gap-4">
-        <UserCard user={user}/>
-        <DeviceCard user={user}/>
+      <div className="mt-[5.5rem] pt-[3rem] border-t w-full flex flex-col gap-4 md:grid md:grid-cols-3 mb-12">
+        <UserCard user={user} />
+        <DeviceCard user={user} />
       </div>
     </div>
   );

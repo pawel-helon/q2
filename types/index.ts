@@ -124,3 +124,7 @@ export type owners = {
   createdAt: Date;
   updatedAt: Date;
 }[];
+
+export type email =  {
+  email: string;
+} | null

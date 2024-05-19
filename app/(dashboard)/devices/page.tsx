@@ -20,7 +20,7 @@ export default async function DevicesPage() {
   const allDevices = await fetchDevices();
 
   return (
-    <div>
+    <>
       <Navbar>
         <AddDevice role={role} userId={userId} owners={owners} />
       </Navbar>
@@ -30,6 +30,6 @@ export default async function DevicesPage() {
       ) : (
         <DataTable columns={columns} data={allDevices} />
       )}
-    </div>
+    </>
   );
 }

@@ -5,12 +5,9 @@ import { Heading } from "@/components/typography";
 import { user } from "@/types";
 import { Item } from "./item";
 import { fetchDevice } from "@/app/actions/users/find-device";
+import { cn } from "@/lib/utils";
 
-interface DeviceCardProps {
-  user: user | null;
-}
-
-export async function DeviceCard({ user }: DeviceCardProps) {
+export async function DeviceCard({ user }: { user: user | null }) {
   const device = await fetchDevice(user!.id);
 
   return (
@@ -29,11 +26,11 @@ export async function DeviceCard({ user }: DeviceCardProps) {
           </CardContent>
         </Card>
       ) : (
-        <Card className="relative">
+        <Card className={cn("", "col-span-1 relative")}>
           <CardHeader>
             <Heading variant="h3">Device</Heading>
           </CardHeader>
-          <CardContent className="h-[240px] justify-center items-center">
+          <CardContent className="h-[180px] justify-center items-center">
             <p className="absolute top-1/2 text-center text-xs text-white px-8">
               No device has been assigned yet.
             </p>

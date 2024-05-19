@@ -7,13 +7,13 @@ import { verifySession } from "@/lib/data-access-layer";
 import { Navbar } from "@/components/navbar";
 import { Actions } from "./_components/actions";
 
-interface DevicePageProps {
+export default async function DevicePage({
+  params,
+}: {
   params: {
     id: number;
   };
-}
-
-export default async function DevicePage({ params }: DevicePageProps) {
+}) {
   const session = await verifySession();
   const role = session?.role;
 

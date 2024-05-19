@@ -7,25 +7,17 @@ import { Items } from "./items";
 import { ChevronButton } from "./chevron-button";
 import { Account } from "./account";
 import { Notifications } from "./notifications";
-import { $Enums } from "@prisma/client";
+import { email, notifications } from "@/types";
 
-interface SidebarProps {
+export function Sidebar({
+  email,
+  role,
+  notifications,
+}: {
   role: string;
-  email: {
-    email: string;
-  } | null;
-  notifications: {
-    id: number;
-    title: string;
-    userId: number;
-    requester: number;
-    requestedRole: $Enums.ROLE;
-    createdAt: Date;
-    updatedAt: Date;
-}[]
-}
-
-export const Sidebar = ({ email, role, notifications }: SidebarProps) => {
+  email: email;
+  notifications: notifications;
+}) {
   const [collapsed, setCollapsed] = useState(true);
 
   const handleCollapse = () => {
@@ -43,12 +35,9 @@ export const Sidebar = ({ email, role, notifications }: SidebarProps) => {
         <Items collapsed={collapsed} role={role} />
       </div>
       <div className="flex flex-col gap-0">
-        <Notifications
-          collapsed={collapsed}
-          notifications={notifications}
-        />
+        <Notifications collapsed={collapsed} notifications={notifications} />
         <Account collapsed={collapsed} email={email} />
       </div>
     </motion.div>
   );
-};
+}

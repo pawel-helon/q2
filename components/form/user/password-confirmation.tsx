@@ -8,11 +8,11 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Label } from "@/components/ui/label";
 
-interface Props {
+export function PasswordConfirmation({
+  children,
+}: {
   children?: React.ReactNode;
-}
-
-export const PasswordConfirmation = ({ children }: Props) => {
+}) {
   const [visibility, setVisibility] = useState(false);
 
   return (
@@ -41,4 +41,4 @@ export const PasswordConfirmation = ({ children }: Props) => {
       {children}
     </div>
   );
-};
+}

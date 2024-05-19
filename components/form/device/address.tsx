@@ -1,11 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-interface Props {
-  children?: React.ReactNode;
-}
-
-export const Address = ({ children }: Props) => {
+export function Address({ children }: { children?: React.ReactNode }) {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex justify-between items-end">
@@ -23,4 +19,4 @@ export const Address = ({ children }: Props) => {
       />
     </div>
   );
-};
+}

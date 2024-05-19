@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 
-export const SignInRedirect = () => {
+export function SignInRedirect() {
   const router = useRouter();
 
   return (
@@ -20,4 +20,4 @@ export const SignInRedirect = () => {
       </Button>
     </div>
   );
-};
+}

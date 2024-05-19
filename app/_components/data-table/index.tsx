@@ -74,21 +74,32 @@ export function DataTable<TData, TValue>({
   }
 
   return (
-    <Div duration=".6">
-      <DataTableSearch table={table} />
-      <div className="mt-12 py-4 border border-border shadow-black shadow-2xl rounded-lg">
-        <DataTableHeader
-          table={table}
-          numberOfResults={numberOfResults}
-          anySelectedRow={anySelectedRow}
-        />
-        <DataTableBody table={table} />
-        <DataTableFooter
-          table={table}
-          pagination={pagination}
-          setPagination={setPagination}
-        />
-      </div>
-    </Div>
+    <>
+      <Div duration=".6" className="hidden lg:block">
+        <DataTableSearch table={table} />
+        <div className="mt-12 py-4 border border-border shadow-black shadow-2xl rounded-lg mb-12">
+          <DataTableHeader
+            table={table}
+            numberOfResults={numberOfResults}
+            anySelectedRow={anySelectedRow}
+          />
+
+          <DataTableBody table={table} />
+          <DataTableFooter
+            table={table}
+            pagination={pagination}
+            setPagination={setPagination}
+          />
+        </div>
+      </Div>
+      <Div duration=".6" className="lg:hidden w-full">
+        <DataTableSearch table={table} />
+        <div className=" h-[240px] mt-12 py-4 border border-border shadow-black shadow-2xl rounded-lg flex items-center justify-center">
+          <p className="text-center text-xs text-white px-8">
+            Window is to small to view content.
+          </p>
+        </div>
+      </Div>
+    </>
   );
 }

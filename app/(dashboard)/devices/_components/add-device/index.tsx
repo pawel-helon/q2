@@ -6,20 +6,19 @@ import { Plus } from "lucide-react";
 import { AddDeviceFormAdmin } from "./add-device-form-admin";
 import { AddDeviceFormEndUser } from "./add-device-form-end-user";
 import { DialogContent } from "@/components/dialog-content";
-import {
-  Dialog,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { owners } from "@/types";
 
-interface Props {
+export function AddDevice({
+  role,
+  userId,
+  owners,
+}: {
   role: string;
   userId: number;
   owners: owners;
-}
-
-export const AddDevice = ({ role, userId, owners }: Props) => {
+}) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -39,4 +38,4 @@ export const AddDevice = ({ role, userId, owners }: Props) => {
       </DialogContent>
     </Dialog>
   );
-};
+}

@@ -9,12 +9,13 @@ import {
 import { Label } from "@/components/ui/label";
 import { devices } from "@/types";
 
-interface Props {
+export function Device({
+  devices,
+  children,
+}: {
   devices: devices;
   children?: React.ReactNode;
-}
-
-export const Device = ({ devices, children }: Props) => {
+}) {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex justify-between items-end">
@@ -41,4 +42,4 @@ export const Device = ({ devices, children }: Props) => {
       </Select>
     </div>
   );
-};
+}

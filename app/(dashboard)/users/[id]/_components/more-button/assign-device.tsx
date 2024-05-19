@@ -19,13 +19,15 @@ import { Button } from "@/components/ui/button";
 import { devices, setOpen } from "@/types";
 import { cn } from "@/lib/utils";
 
-interface Props {
+export function AssignDevice({
+  userId,
+  devices,
+  setOpen,
+}: {
   devices: devices;
   userId: number;
   setOpen: setOpen;
-}
-
-export function AssignDevice({ userId, devices, setOpen }: Props) {
+}) {
   const router = useRouter();
 
   async function onSubmit(state: FormState, formData: FormData) {

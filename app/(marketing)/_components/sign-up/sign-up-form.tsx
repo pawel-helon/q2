@@ -11,11 +11,7 @@ import { SignInRedirect } from "@/components/form/user/sign-in-redirect";
 import { Button } from "@/components/ui/button";
 import { PasswordConfirmation } from "@/components/form/user/password-confirmation";
 
-interface SignUpFormProps {
-  children?: React.ReactNode;
-}
-
-export const SignUpForm = ({ children }: SignUpFormProps) => {
+export function SignUpForm({ children }: { children?: React.ReactNode }) {
   const [state, action] = useFormState(signup, undefined);
   const { pending } = useFormStatus();
 
@@ -68,4 +64,4 @@ export const SignUpForm = ({ children }: SignUpFormProps) => {
       </div>
     </form>
   );
-};
+}
