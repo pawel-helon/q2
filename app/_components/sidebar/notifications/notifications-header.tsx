@@ -3,21 +3,13 @@ import { X } from "lucide-react";
 import { Heading } from "@/components/typography";
 import { setOpen } from "@/types";
 
-interface NotificationsHeaderProps {
-  open: boolean;
-  setOpen: setOpen;
-}
-
-export const NotificationsHeader = ({
-  open,
-  setOpen,
-}: NotificationsHeaderProps) => {
+export function NotificationsHeader({ setOpen }: { setOpen: setOpen }) {
   return (
-    <div className="flex justify-between border-b px-4 pb-4 mb-4">
+    <div className="flex justify-between border-b p-4 shadow shadow-black">
       <Heading variant="h4">Notifications</Heading>
-      <button onClick={() => setOpen(!open)}>
+      <button onClick={() => setOpen(false)}>
         <X size={16} />
       </button>
     </div>
   );
-};
+}

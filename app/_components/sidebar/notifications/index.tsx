@@ -14,17 +14,14 @@ import { NotificationsHeader } from "./notifications-header";
 import { useState } from "react";
 import { notifications } from "@/types";
 
-interface NotificationsProps {
-  collapsed: boolean;
-  notifications: notifications;
-}
-
-export const Notifications = ({
+export function Notifications({
   collapsed,
   notifications,
-}: NotificationsProps) => {
+}: {
+  collapsed: boolean;
+  notifications: notifications;
+}) {
   const hasNotifications = notifications.length > 0;
-
   const [open, setOpen] = useState(false);
 
   return (
@@ -50,9 +47,9 @@ export const Notifications = ({
           side="right"
           sideOffset={12}
           align="end"
-          className="py-4"
+          className="p-0"
         >
-          <NotificationsHeader open={open} setOpen={setOpen} />
+          <NotificationsHeader setOpen={setOpen} />
           {hasNotifications ? (
             <Items notifications={notifications} />
           ) : (
@@ -63,4 +60,4 @@ export const Notifications = ({
       <div className="w-full" />
     </div>
   );
-};
+}

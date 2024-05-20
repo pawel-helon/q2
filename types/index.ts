@@ -128,3 +128,13 @@ export type owners = {
 export type email =  {
   email: string;
 } | null
+
+export type notification = {
+  id: number;
+  title: string;
+  userId: number;
+  requester: number;
+  requestedRole: $Enums.ROLE;
+  createdAt: Date;
+  updatedAt: Date;
+};

@@ -1,19 +1,11 @@
-"use server"
+"use server";
 
-import { $Enums } from "@prisma/client";
 import { db } from "@/lib/db";
+import { notification } from "@/types";
 
-export async function approveRoleChange(notification: {
-    id: number;
-    title: string;
-    userId: number;
-    requester: number;
-    requestedRole: $Enums.ROLE;
-    createdAt: Date;
-    updatedAt: Date;
-}) {
+export async function approveRoleChange(notification: notification) {
   const newRole = notification.requestedRole;
-    
+
   await db.user.update({
     where: {
       id: notification.requester,
@@ -30,5 +22,3 @@ export async function approveRoleChange(notification: {
     },
   });
 }
-
-  
