@@ -1,14 +1,18 @@
 "use server";
 
 import { Card, CardContent, CardHeader } from "@/components/card";
-import { Heading } from "@/components/typography";
+import { Heading, Paragraph } from "@/components/typography";
 import { user } from "@/types";
 import { Item } from "./item";
 import { fetchDevice } from "@/app/actions/users/find-device";
 import { cn } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge";
 
 export async function DeviceCard({ user }: { user: user | null }) {
   const device = await fetchDevice(user!.id);
+
+  const status = device[0].status as "ACTIVE" | "INACTIVE";
+  const state = device[0].state as "OPENED" | "CLOSED";
 
   return (
     <>
@@ -20,8 +24,14 @@ export async function DeviceCard({ user }: { user: user | null }) {
           <CardContent>
             <Item title="Name" value={device[0].deviceName} />
             <Item title="Model" value={device[0].model} />
-            <Item title="Status" value={device[0].status} />
-            <Item title="State" value={device[0].state} />
+            <div className="w-full flex justify-between">
+              <Paragraph variant="base-thin">Status</Paragraph>
+              <Badge variant={status}>{device[0].status.toLowerCase()}</Badge>
+            </div>
+            <div className="w-full flex justify-between">
+              <Paragraph variant="base-thin">State</Paragraph>
+              <Badge variant={state}>{device[0].state.toLowerCase()}</Badge>
+            </div>
             <Item title="SIM" value={device[0].SIM} />
           </CardContent>
         </Card>

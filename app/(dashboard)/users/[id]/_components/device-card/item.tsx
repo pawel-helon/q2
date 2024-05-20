@@ -2,12 +2,7 @@
 
 import { Paragraph } from "@/components/typography";
 
-interface ItemProps {
-  title: string;
-  value: string;
-}
-
-export const Item = ({ title, value }: ItemProps) => {
+export function Item({ title, value }: { title: string; value: string }) {
   return (
     <div className="w-full flex justify-between">
       <Paragraph variant="base-thin">{title}</Paragraph>
@@ -16,4 +11,4 @@ export const Item = ({ title, value }: ItemProps) => {
       </Paragraph>
     </div>
   );
-};
+}

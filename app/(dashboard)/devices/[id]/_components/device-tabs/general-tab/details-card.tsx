@@ -9,13 +9,19 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { device } from "@/types";
+import { Badge } from "@/components/ui/badge";
 
-interface DetailsCardProps {
+export function DetailsCard({
+  role,
+  device,
+}: {
   role: unknown;
   device: device | null;
-}
+}) {
+  console.log(device);
 
-export const DetailsCard = ({ role, device }: DetailsCardProps) => {
+  const state = device!.state as "OPENED" | "CLOSED";
+
   return (
     <div className="border border-border shadow-black shadow-2xl rounded-lg">
       <Card className="flex flex-col col-span-1 bg-transparent border-none">
@@ -29,6 +35,10 @@ export const DetailsCard = ({ role, device }: DetailsCardProps) => {
               <Paragraph variant="base-thick" className="text-right">
                 {device?.deviceName}
               </Paragraph>
+            </li>
+            <li className="w-full flex justify-between">
+              <Paragraph variant="base-thin">State</Paragraph>
+              <Badge variant={state}>{device?.state.toLowerCase()}</Badge>
             </li>
             <li className="w-full flex justify-between">
               <Paragraph variant="base-thin">Street address</Paragraph>
@@ -72,4 +82,4 @@ export const DetailsCard = ({ role, device }: DetailsCardProps) => {
       </Card>
     </div>
   );
-};
+}

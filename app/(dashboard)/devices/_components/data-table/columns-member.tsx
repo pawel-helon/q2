@@ -139,15 +139,16 @@ export const columnsMember: ColumnDef<Device>[] = [
       );
     },
     cell: (info) => {
-      const value = info.getValue();
+      const value = info.getValue() as $Enums.STATUS;
       return (
-        <Badge className={cn(
-          value === "ACTIVE" ? "bg-emerald-500" : "bg-destructive"
-        )}>
-          {value === "ACTIVE" ? "Active" : "Inactive"}
+        <Badge
+          variant={value}
+          className="w-[72px] justify-center"
+        >
+          {value.toLowerCase()}
         </Badge>
-      )
-    }
+      );
+    },
   },
   {
     accessorKey: "id",

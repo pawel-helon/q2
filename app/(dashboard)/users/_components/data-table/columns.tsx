@@ -1,5 +1,6 @@
 "use client";
 
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { $Enums } from "@prisma/client";
@@ -88,6 +89,17 @@ export const columns: ColumnDef<User>[] = [
           Role
           <CaretSortIcon className="ml-2 size-4" />
         </Button>
+      );
+    },
+    cell: (info) => {
+      const value = info.getValue() as $Enums.ROLE;
+      return (
+        <Badge
+          variant={value}
+          className="w-[72px] justify-center"
+        >
+          {value.toLowerCase()}
+        </Badge>
       );
     },
   },

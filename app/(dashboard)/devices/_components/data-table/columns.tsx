@@ -166,13 +166,13 @@ export const columns: ColumnDef<Device>[] = [
       );
     },
     cell: (info) => {
-      const value = info.getValue();
+      const value = info.getValue() as $Enums.STATUS;
       return (
         <Badge
-          variant={value === "ACTIVE" ? "success" : "destructive"}
+          variant={value}
           className="w-[72px] justify-center"
         >
-          {value === "ACTIVE" ? "active" : "inactive"}
+          {value.toLowerCase()}
         </Badge>
       );
     },
