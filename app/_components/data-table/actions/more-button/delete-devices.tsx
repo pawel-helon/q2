@@ -1,27 +1,28 @@
-"use client"
+"use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { toast } from "sonner";
 
 import { deleteDevices } from "@/app/api/neon/delete-device";
 
 import { DialogContent } from "@/components/dialog-content";
 import {
-    Dialog,
-    DialogClose,
-    DialogDescription,
-    DialogFooter,
-    DialogTrigger,
+  Dialog,
+  DialogClose,
+  DialogDescription,
+  DialogFooter,
+  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { setOpen } from "@/types";
 
-interface DeleteProps {
+export const DeleteDevices = ({
+  ids,
+  setOpen,
+}: {
   ids: any[];
-}
-
-export const Delete = ({ ids }: DeleteProps) => {
-  const [open, setOpen] = useState(false);
+  setOpen: setOpen;
+}) => {
   const router = useRouter();
   const handleDeleteDevice = () => {
     deleteDevices(ids);
@@ -33,15 +34,17 @@ export const Delete = ({ ids }: DeleteProps) => {
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog>
       <DialogTrigger asChild>
-        <Button variant="ghost" size="sm">
+        <Button variant="ghost" size="sm" className="w-full justify-start">
           Delete
         </Button>
       </DialogTrigger>
-      <DialogContent title="Delete device">
+      <DialogContent title="Delete device(s)">
         <DialogDescription>
-          Are you sure you want to delete this device?
+          {" "}
+          This action cannot be undone. This will permanently delete device(s)
+          and remove data from our servers.
         </DialogDescription>
         <DialogFooter>
           <DialogClose asChild>

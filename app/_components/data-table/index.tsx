@@ -96,7 +96,7 @@ export function DataTable<TData, TValue>({
         <DataTableSearch table={table} />
         <div className=" h-[240px] mt-12 py-4 border border-border shadow-black shadow-2xl rounded-lg flex items-center justify-center">
           <p className="text-center text-xs text-white px-8">
-            Window is to small to view content.
+            Window is to small to display content.
           </p>
         </div>
       </Div>

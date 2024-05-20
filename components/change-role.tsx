@@ -13,7 +13,7 @@ import { changeRoles } from "@/app/api/neon/change-role";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
-export function ChangeRoleButton({ ids }: { ids: any[] }) {
+export function ChangeRole({ ids }: { ids: any[] }) {
   const [visibility, setVisibilty] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -32,15 +32,15 @@ export function ChangeRoleButton({ ids }: { ids: any[] }) {
           variant="ghost"
           onMouseEnter={() => setVisibilty(true)}
           onMouseLeave={() => setVisibilty(false)}
-          className="flex items-center w-[124px] justify-start pr-0"
+          className="flex items-center w-[116px] justify-start pr-0"
         >
-          Change Role
+          Change role
           {visibility && <ChevronDown className="ml-1" />}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="start"
-        className="min-w-[1rem] w-[124px] bg-background shadow-black shadow-lg"
+        className="min-w-[1rem] w-[116px] bg-background shadow-black shadow-lg"
       >
         <Button
           variant="ghost"
@@ -50,7 +50,7 @@ export function ChangeRoleButton({ ids }: { ids: any[] }) {
             changeRoles(idsArray, "ADMIN");
             setTimeout(() => {
               setOpen(false);
-              toast.success("Role(s) has been changed to Admin");
+              toast.success("Role has been changed to: Admin");
               router.refresh();
             }, 500);
           }}
@@ -65,7 +65,7 @@ export function ChangeRoleButton({ ids }: { ids: any[] }) {
             changeRoles(idsArray, "OWNER");
             setTimeout(() => {
               setOpen(false);
-              toast.success("Role(s) has been changed to Owner");
+              toast.success("Role has been changed to: Owner");
               router.refresh();
             }, 500);
           }}
@@ -80,7 +80,7 @@ export function ChangeRoleButton({ ids }: { ids: any[] }) {
             changeRoles(idsArray, "ENDUSER");
             setTimeout(() => {
               setOpen(false);
-              toast.success("Role(s) has been changed to End user");
+              toast.success("Role has been changed to: End user");
               router.refresh();
             }, 500);
           }}

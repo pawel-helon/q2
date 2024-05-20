@@ -13,14 +13,15 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { setOpen } from "@/types";
 
-interface DeleteUsersProps {
+export function DeleteUsers({
+  ids,
+  setOpen,
+}: {
   ids: any[];
-  open: boolean;
-  setOpen: Dispatch<SetStateAction<boolean>>;
-}
-
-export const DeleteUsers = ({ ids, open, setOpen }: DeleteUsersProps) => {
+  setOpen: setOpen;
+}) {
   const router = useRouter();
 
   const handleDeleteUsers = () => {
@@ -49,9 +50,9 @@ export const DeleteUsers = ({ ids, open, setOpen }: DeleteUsersProps) => {
           <DialogClose asChild>
             <Button variant="ghost">Cancel</Button>
           </DialogClose>
-            <Button onClick={handleDeleteUsers}>Continue</Button>
+          <Button onClick={handleDeleteUsers}>Continue</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
   );
-};
+}
