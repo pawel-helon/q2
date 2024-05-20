@@ -1,7 +1,6 @@
 import { Status } from "./status";
 import { DetailsCard } from "./details-card";
 import { device } from "@/types";
-import { cn } from "@/lib/utils";
 
 export function GeneralTab({
   role,

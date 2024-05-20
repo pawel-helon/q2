@@ -7,11 +7,7 @@ import { verifySession } from "@/lib/data-access-layer";
 import { fetchNotifications } from "../api/neon/fetch-notifications";
 import { cn } from "@/lib/utils";
 
-interface DashboardLayoutProps {
-  children: React.ReactNode;
-}
-
-const DashboardLayout = async ({ children }: DashboardLayoutProps) => {
+async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const session = await verifySession();
   const ownerId = Number(session?.userId);
   const role = String(session?.role);
@@ -41,6 +37,6 @@ const DashboardLayout = async ({ children }: DashboardLayoutProps) => {
       />
     </div>
   );
-};
+}
 
 export default DashboardLayout;

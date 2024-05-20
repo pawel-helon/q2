@@ -23,7 +23,7 @@ export default async function DevicePage({
   const status = device?.status.toLowerCase();
 
   return (
-    <div>
+    <>
       <Navbar>
         <Actions device={device} role={role} />
       </Navbar>
@@ -39,6 +39,6 @@ export default async function DevicePage({
       ) : (
         <DeviceTabs role={role} device={device} />
       )}
-    </div>
+    </>
   );
 }

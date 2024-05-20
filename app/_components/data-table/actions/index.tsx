@@ -15,6 +15,7 @@ import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { ChangeRole } from "./change-role";
 import { Delete } from "./delete";
+import { ChangeRoleButton } from "@/components/change-role-button";
 
 
 interface ActionsProps<TData> {
@@ -63,7 +64,8 @@ export function Actions<TData>({
             </>
           ) : (
             <div className="flex items-center">
-              <ChangeRole ids={ids} />
+              <ChangeRoleButton ids={ids}/>
+              {/* <ChangeRole ids={ids} /> */}
               <Separator orientation="vertical" className="mx-1" />
               <MoreButton ids={ids}/>
             </div>
