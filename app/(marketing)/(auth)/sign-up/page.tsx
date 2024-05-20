@@ -6,8 +6,8 @@ import { Navbar } from "@/components/navbar";
 
 export default function SignUpPage() {
   return (
-    <div className="w-full flex relative justify-center items-center">
-      <Navbar />
+    <div className="w-full flex relative justify-center items-center px-4">
+      <Navbar className="py-[30px]"/>
       <div
         className={cn(
           "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%]",
@@ -27,4 +27,4 @@ export default function SignUpPage() {
       </div>
     </div>
   );
-};
+}

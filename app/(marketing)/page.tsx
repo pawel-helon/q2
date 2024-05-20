@@ -1,8 +1,8 @@
-import { Navbar } from "@/components/navbar"
-import { SignIn } from "./_components/sign-in"
-import { SignUp } from "./_components/sign-up"
+import { Navbar } from "@/components/navbar";
+import { SignIn } from "./_components/sign-in";
+import { SignUp } from "./_components/sign-up";
 
-const HomePage = () => {
+export default function HomePage() {
   return (
     <div className="px-4">
       <Navbar>
@@ -10,7 +10,5 @@ const HomePage = () => {
         <SignIn />
       </Navbar>
     </div>
-  )
+  );
 }
-
-export default HomePage

@@ -18,8 +18,6 @@ export function DetailsCard({
   role: unknown;
   device: device | null;
 }) {
-  console.log(device);
-
   const state = device!.state as "OPENED" | "CLOSED";
 
   return (
