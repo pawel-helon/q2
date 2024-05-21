@@ -29,13 +29,15 @@ export function SignInForm({ children }: { children?: React.ReactNode }) {
     }
 
     const { email, password } = validatedFields.data;
-    signin(email, password).then((response) => {
-      if (response === false) {
-        setTimeout(() => {
-          toast.error("Invalid email or password. Please try again.");
-        }, 500);
-      }
-    });
+    
+    signin(email, password)
+      .then((response) => {
+        if (response === false) {
+          setTimeout(() => {
+            toast.error("Invalid email or password. Please try again.");
+          }, 500);
+        }
+      });
   }
 
   const [state, action] = useFormState(onSubmit, undefined);
