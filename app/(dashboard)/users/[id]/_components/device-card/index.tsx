@@ -11,8 +11,8 @@ import { Badge } from "@/components/ui/badge";
 export async function DeviceCard({ user }: { user: user | null }) {
   const device = await fetchDevice(user!.id);
 
-  const status = device[0].status as "ACTIVE" | "INACTIVE";
-  const state = device[0].state as "OPENED" | "CLOSED";
+  const status = device[0]?.status as "ACTIVE" | "INACTIVE";
+  const state = device[0]?.state as "OPENED" | "CLOSED";
 
   return (
     <>

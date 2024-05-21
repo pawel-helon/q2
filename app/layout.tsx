@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+import { Toaster } from "sonner";
 
 import "@/app/globals.css";
 import { cn } from "@/lib/utils";
@@ -21,7 +22,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn(poppins.className, "antialiased")}>{children}</body>
+      <body className={cn(poppins.className, "antialiased")}>
+        {children}
+        <Toaster
+          position="top-center"
+          toastOptions={{className:"bg-background p-4 border-border text-xs font-bold text-white p-2 rounded-lg shadow-black shadow-lg"}}
+        />
+      </body>
     </html>
   );
 }

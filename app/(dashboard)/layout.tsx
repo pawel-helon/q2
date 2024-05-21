@@ -1,10 +1,10 @@
-import { Toaster } from "sonner";
+"use server";
 
-import { fetchUserEmail } from "../api/neon/fetchUserEmail";
-import { Assistant } from "../_components/assistant";
-import { Sidebar } from "../_components/sidebar";
+import { fetchUserEmail } from "@/app/api/neon/fetchUserEmail";
+import { Sidebar } from "@/app/_components/sidebar";
 import { verifySession } from "@/lib/data-access-layer";
-import { fetchNotifications } from "../api/neon/fetch-notifications";
+import { fetchNotifications } from "@/app/api/neon/fetch-notifications";
+import { Assistant } from "@/app/_components/assistant";
 import { cn } from "@/lib/utils";
 
 async function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -28,13 +28,6 @@ async function DashboardLayout({ children }: { children: React.ReactNode }) {
         {children}
       </div>
       {/* <Assistant /> */}
-      <Toaster
-        position="top-center"
-        toastOptions={{
-          className:
-            "bg-background p-4 border-border text-xs font-bold text-white p-2 rounded-lg shadow-black shadow-lg",
-        }}
-      />
     </div>
   );
 }
