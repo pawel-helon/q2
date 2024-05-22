@@ -15,7 +15,7 @@ import { Label } from "@/components/ui/label";
 
 interface ChangeNameFieldProps {
   label: string;
-  placeholder: any;
+  placeholder: string;
   dialogTitle: string;
   userId: number;
 }

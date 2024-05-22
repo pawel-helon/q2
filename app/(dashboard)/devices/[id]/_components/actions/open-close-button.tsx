@@ -1,39 +1,33 @@
-"use client"
+"use client";
+
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 import { openCloseDevice } from "@/app/api/neon/open-close-device";
-import { Button } from "@/components/ui/button"
-import { Device } from "@/types";
-import { $Enums, STATUS } from "@prisma/client"
-import { useRouter } from "next/navigation";
-import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 
-interface OpenCloseButtonProps {
-  device: Device | null
-}
+import { $Enums, STATUS } from "@prisma/client";
+import { device } from "@/types";
 
-export const OpenCloseButton = ({ device }: OpenCloseButtonProps) => {
-  const state = device?.state
-  const status = device?.status
-  const router = useRouter()
-  const id = Number(device?.id)
-  
+export function OpenCloseButton({ device }: { device: device }) {
+  const router = useRouter();
+
   const handleOpenClose = () => {
-    openCloseDevice(id, state);
+    openCloseDevice(device.id, device.state);
     setTimeout(() => {
-      state === $Enums.STATE.OPENED
+      device.state === $Enums.STATE.OPENED
         ? toast("Device has been closed")
         : toast("Device has been opened");
     }, 500);
     router.refresh();
-  }
-  
+  };
 
   return (
     <Button
-      disabled={status === STATUS.INACTIVE}
+      disabled={device.status === STATUS.INACTIVE}
       onClick={handleOpenClose}
     >
-      {state === $Enums.STATE.OPENED ? "Close" : "Open"}
+      {device.state === $Enums.STATE.OPENED ? "Close" : "Open"}
     </Button>
-  )
+  );
 }

@@ -3,97 +3,53 @@
 import Link from "next/link";
 
 import { Edit } from "./edit";
-import { Heading, Paragraph } from "@/components/typography";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
+import { Item } from "@/components/item";
+import { Heading } from "@/components/typography";
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/card";
+
 import { Badge } from "@/components/ui/badge";
-import { device, owners } from "@/types";
+
+import { ROLE } from "@prisma/client";
+import { device, owner, owners } from "@/types";
 
 export function DetailsCard({
-  role,
   device,
-  ownerName,
-  ownerEmail,
+  role,
+  owner,
   owners,
 }: {
-  role: unknown;
-  device: device | null;
-  ownerName: string;
-  ownerEmail: string;
+  role: ROLE;
+  device: device;
+  owner: owner;
   owners: owners;
 }) {
-  const state = device!.state as "OPENED" | "CLOSED";
-
   return (
-    <div className="border border-border shadow-black shadow-2xl rounded-lg">
-      <Card className="flex flex-col col-span-1 bg-transparent border-none">
-        <CardHeader className="mb-4 p-4">
-          <div className="w-full flex justify-between">
-            <Heading variant="h3">Details</Heading>
-            <div className="flex items-center gap-2">
-              <Paragraph variant="base-thin">State</Paragraph>
-              <Badge variant={state}>{device?.state.toLowerCase()}</Badge>
-            </div>
-          </div>
-        </CardHeader>
-        <CardContent className="grow mb-4 p-4">
-          <ul className="flex flex-col gap-3">
-            <li className="w-full flex justify-between">
-              <Paragraph variant="base-thin">Name</Paragraph>
-              <Paragraph variant="base-thick" className="text-right">
-                {device?.deviceName}
-              </Paragraph>
-            </li>
-            <li className="w-full flex justify-between">
-              <Paragraph variant="base-thin">Owner</Paragraph>
-              <Paragraph variant="base-thick" className="text-right underline">
-                <Link href={`/users/${device?.ownerId}`}>{ownerName}</Link>
-              </Paragraph>
-            </li>
-            <li className="w-full flex justify-between">
-              <Paragraph variant="base-thin">Street address</Paragraph>
-              <Paragraph variant="base-thick" className="text-right">
-                {device?.streetAddress}
-              </Paragraph>
-            </li>
-            <li className="w-full flex justify-between">
-              <Paragraph variant="base-thin">City</Paragraph>
-              <Paragraph variant="base-thick" className="text-right">
-                {device?.city}
-              </Paragraph>
-            </li>
-            <li className="w-full flex justify-between">
-              <Paragraph variant="base-thin">Country</Paragraph>
-              <Paragraph variant="base-thick" className="text-right">
-                {device?.country}
-              </Paragraph>
-            </li>
-            <li className="w-full flex justify-between">
-              <Paragraph variant="base-thin">Model</Paragraph>
-              <Paragraph variant="base-thick" className="text-right">
-                {device?.model}
-              </Paragraph>
-            </li>
-            <li className="w-full flex justify-between">
-              <Paragraph variant="base-thin">SIM</Paragraph>
-              <Paragraph variant="base-thick" className="text-right">
-                {device?.SIM}
-              </Paragraph>
-            </li>
-          </ul>
-        </CardContent>
-        {role === "ADMIN" && (
-          <CardFooter className="p-4">
-            <div className="w-full flex justify-end">
-              <Edit device={device} ownerEmail={ownerEmail} owners={owners}/>
-            </div>
-          </CardFooter>
-        )}
-      </Card>
-    </div>
+    <Card className="col-span-1">
+      <CardHeader className="flex-row gap-2 justify-between items-center">
+        <Heading variant="h3">Details</Heading>
+        <Badge variant={device.state}>{device.state.toLowerCase()}</Badge>
+      </CardHeader>
+      <CardContent className="mb-0">
+        <Item title="Name" value={device.deviceName} />
+        <Item title="Owner">
+          <Link
+            href={`/users/${device.ownerId}`}
+            className="text-sm leading-snug font-medium text-foreground underline"
+          >
+            {owner.name}
+          </Link>
+        </Item>
+        <Item title="Address" value={device.streetAddress} />
+        <Item title="City" value={device.city} />
+        <Item title="Country" value={device.country} />
+        <Item title="Model" value={device.model} />
+        <Item title="SIM" value={device.SIM} />
+      </CardContent>
+      {role === "ADMIN" && (
+        <CardFooter className="justify-end gap-2">
+          <Edit device={device} ownerEmail={owner.email} owners={owners} />
+        </CardFooter>
+      )}
+    </Card>
   );
 }

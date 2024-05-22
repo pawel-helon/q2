@@ -2,21 +2,22 @@
 
 import { fetchUser } from "@/app/actions/fetchUser";
 
+import { fetchOwners } from "@/app/api/neon";
+
 import { Status } from "./status";
 import { DetailsCard } from "./details-card";
-import { device } from "@/types";
-import { fetchOwners } from "@/app/api/neon";
+
+import { ROLE } from "@prisma/client";
+import { device, owner } from "@/types";
 
 export async function GeneralTab({
   role,
   device,
 }: {
-  role: unknown;
-  device: device | null;
+  role: ROLE;
+  device: device;
 }) {
-  const owner  = await fetchUser(device!.ownerId);
-  const ownerName = String(owner?.name);
-  const ownerEmail = String(owner?.email);
+  const owner  = await fetchUser(device.ownerId) as owner;
   const owners = await fetchOwners();
 
   return (
@@ -25,8 +26,7 @@ export async function GeneralTab({
       <DetailsCard
         device={device}
         role={role}
-        ownerName={ownerName}
-        ownerEmail={ownerEmail}
+        owner={owner}
         owners={owners}
       />
     </div>

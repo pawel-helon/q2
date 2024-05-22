@@ -1,21 +1,21 @@
 "use server";
 
+import { fetchDevice } from "@/app/actions/users/find-device";
+
+import { UsersDevices } from "./users-devices";
 import { Card, CardContent, CardHeader } from "@/components/card";
 import { Heading } from "@/components/typography";
 import { user } from "@/types";
-import { fetchDevice } from "@/app/actions/users/find-device";
-import { cn } from "@/lib/utils";
-import { UsersDevices } from "./users-devices";
 
-export async function DeviceCard({ user }: { user: user | null }) {
-  const devices = await fetchDevice(user!.id);
+export async function DeviceCard({ user }: { user: user }) {
+  const devices = await fetchDevice(user.id);
 
   return (
     <>
       {devices.length > 0 ? (
         <UsersDevices devices={devices} />
       ) : (
-        <Card className={cn("", "col-span-1 relative")}>
+        <Card className="col-span-1 relative">
           <CardHeader>
             <Heading variant="h3">Device</Heading>
           </CardHeader>

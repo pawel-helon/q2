@@ -10,6 +10,9 @@ import { Navbar } from "@/components/navbar";
 import { Header } from "@/app/_components/header";
 import { Badge } from "@/components/ui/badge";
 
+import { device } from "@/types";
+import { ROLE } from "@prisma/client";
+
 export default async function DevicePage({
   params,
 }: {
@@ -18,21 +21,18 @@ export default async function DevicePage({
   };
 }) {
   const session = await verifySession();
-  const role = session?.role;
-
+  const role = session.role as ROLE;
   const id = Number(params.id);
-  const device = await fetchDevice(id);
-  const deviceName = device?.deviceName;
-  const status = device?.status.toLowerCase();
+  const device = await fetchDevice(id) as device
 
   return (
     <>
       <Navbar>
         <Actions device={device} role={role} />
       </Navbar>
-      <Header title={deviceName}>
-        <Badge variant={status === "active" ? "success" : "destructive"}>
-          {status}
+      <Header title={device.deviceName}>
+        <Badge variant={device.status}>
+          {device.status.toLowerCase()}
         </Badge>
       </Header>
       {role !== "ADMIN" ? (

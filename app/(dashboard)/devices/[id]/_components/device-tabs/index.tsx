@@ -5,13 +5,14 @@ import { AccessTab } from "./access-tab";
 import { GeneralTab } from "./general-tab";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { device } from "@/types";
+import { ROLE } from "@prisma/client";
 
 export async function DeviceTabs({
   role,
   device,
 }: {
-  role: string | null | undefined;
-  device: device | null;
+  role: ROLE;
+  device: device;
 }) {
   return (
     <div className="mt-14">

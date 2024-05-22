@@ -13,6 +13,7 @@ import { Model } from "@/components/form/device/model";
 import { SIM } from "@/components/form/device/SIM";
 
 import { Button } from "@/components/ui/button";
+import { DialogClose } from "@/components/ui/dialog";
 import { owners } from "@/types";
 
 export function AddDeviceFormAdmin({ owners }: { owners: owners }) {
@@ -34,9 +35,14 @@ export function AddDeviceFormAdmin({ owners }: { owners: owners }) {
       <Country>{state?.errors?.country && <>{state.errors.country}</>}</Country>
       <Model>{state?.errors?.model && <>{state.errors.model}</>}</Model>
       <SIM>{state?.errors?.SIM && <>{state.errors.SIM}</>}</SIM>
-      <Button type="submit" disabled={pending} aria-disabled={pending}>
-        {pending ? "Submitting..." : "Add device"}
-      </Button>
+      <div className="flex gap-2 w-full justify-end">
+        <DialogClose asChild>
+          <Button variant="ghost">Cancel</Button>
+        </DialogClose>
+        <Button type="submit" disabled={pending} aria-disabled={pending}>
+          {pending ? "Submitting..." : "Add device"}
+        </Button>
+      </div>
     </form>
   );
 }

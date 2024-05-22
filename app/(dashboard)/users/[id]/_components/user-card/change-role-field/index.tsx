@@ -14,7 +14,7 @@ import { Label } from "@/components/ui/label";
 
 interface ChangeRoleField {
   label: string;
-  placeholder: any;
+  placeholder: string;
   dialogTitle: string;
   userId: number;
 }

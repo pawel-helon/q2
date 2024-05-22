@@ -94,7 +94,7 @@ export type device = {
 export type user = {
   id: number;
   email: string;
-  name: string | null;
+  name: string;
   password: string;
   role: $Enums.ROLE;
   createdAt: Date;
@@ -114,6 +114,16 @@ export type notifications = {
 }[];
 
 export type setOpen = Dispatch<SetStateAction<boolean>>
+
+export type owner = {
+  id: number;
+  email: string;
+  name: string;
+  password: string;
+  role: $Enums.ROLE;
+  createdAt: Date;
+  updatedAt: Date;
+};
 
 export type owners = {
   id: number;

@@ -5,10 +5,11 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { EllipsisVertical } from "lucide-react";
 
-import { Item } from "./item";
 import { activateDevice } from "@/app/api/neon/activate-device-mb";
 import { deactivateDevice } from "@/app/api/neon/deactivate-device";
 import { deleteDevice } from "@/app/api/neon/delete-device";
+
+import { Item } from "./item";
 
 import {
   DropdownMenu,
@@ -16,47 +17,40 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { Device } from "@/types";
 import { Separator } from "@/components/ui/separator";
 
-interface MoreButtonProps {
-  device: Device | null;
-}
+import { device } from "@/types";
 
-export const MoreButton = ({ device }: MoreButtonProps) => {
-  const deviceStatus = device?.status;
-  const id = Number(device?.id);
-
+export function MoreButton({ device }: { device: device }) {
+  const [open, setOpen] = useState(false);
   const router = useRouter();
 
-  const [open, setOpen] = useState(false);
-
   const handleActivateDevice = () => {
-    activateDevice(id).then(() => {
+    activateDevice(device.id).then(() => {
       setTimeout(() => {
         toast("Device has been activated");
       }, 500);
-      setOpen(!open);
+      setOpen(false);
       router.refresh();
     });
   };
 
   const handleDeactivateDevice = () => {
-    deactivateDevice(id).then(() => {
+    deactivateDevice(device.id).then(() => {
       setTimeout(() => {
         toast("Device has been deactivated");
       }, 500);
-      setOpen(!open);
+      setOpen(false);
       router.refresh();
     });
   };
 
   const handleDeleteDevice = () => {
-    deleteDevice(id).then(() => {
+    deleteDevice(device.id).then(() => {
       setTimeout(() => {
         toast("Device has been deleted");
       }, 500);
-      setOpen(!open);
+      setOpen(false);
       router.push("/devices");
     });
   };
@@ -69,7 +63,7 @@ export const MoreButton = ({ device }: MoreButtonProps) => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" sideOffset={8}>
-        {deviceStatus === "ACTIVE" ? (
+        {device.status === "ACTIVE" ? (
           <Item
             cta="Deactivate"
             dialogTitle="Deactivate device"
@@ -84,7 +78,7 @@ export const MoreButton = ({ device }: MoreButtonProps) => {
             action={handleActivateDevice}
           />
         )}
-        <Separator className="my-1"/>
+        <Separator className="my-1" />
         <Item
           cta="Delete"
           dialogTitle="Delete device"
@@ -94,4 +88,4 @@ export const MoreButton = ({ device }: MoreButtonProps) => {
       </DropdownMenuContent>
     </DropdownMenu>
   );
-};
+}

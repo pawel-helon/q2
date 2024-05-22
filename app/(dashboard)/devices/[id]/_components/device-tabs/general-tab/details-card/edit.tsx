@@ -1,15 +1,24 @@
 "use client";
 
+import { toast } from "sonner";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useFormState, useFormStatus } from "react-dom";
+
+import {
+  AddDeviceSchemaAdmin,
+  FormState,
+} from "@/lib/schemas/add-device-schema";
+
+import { editDeviceDetails } from "@/app/actions/devices/edit-device-details";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { useFormState, useFormStatus } from "react-dom";
-import { device, owners } from "@/types";
 import { Owner } from "@/components/form/device/owner";
 import { DeviceName } from "@/components/form/device/name";
 import { Address } from "@/components/form/device/address";
@@ -18,21 +27,16 @@ import { Country } from "@/components/form/device/country";
 import { Model } from "@/components/form/device/model";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  AddDeviceSchemaAdmin,
-  FormState,
-} from "@/lib/schemas/add-device-schema";
-import { editDeviceDetails } from "@/app/actions/devices/edit-device-details";
-import { toast } from "sonner";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+
+import { device, owners } from "@/types";
 
 export function Edit({
   device,
   ownerEmail,
   owners,
 }: {
-  device: device | null;
+  device: device;
   ownerEmail: string;
   owners: owners;
 }) {
@@ -67,12 +71,13 @@ export function Edit({
       deviceName,
       streetAddress,
       SIM
-    );
-    setTimeout(() => {
-      toast.success("Details have been updated.");
-      setOpen(false);
-      router.refresh();
-    }, 500);
+    ).then(() => {
+      setTimeout(() => {
+        toast.success("Details have been updated.");
+        setOpen(false);
+        router.refresh();
+      }, 500);
+    });
   }
 
   const [state, action] = useFormState(onSubmit, undefined);
@@ -87,23 +92,23 @@ export function Edit({
           <DialogTitle>Edit details</DialogTitle>
         </DialogHeader>
         <form action={action} className="relative flex flex-col gap-8">
-          <input hidden name="deviceId" value={device?.id} />
+          <input hidden name="deviceId" value={device.id} />
           <Owner owners={owners} defaultValue={ownerEmail}>
             {state?.errors?.owner && <>{state.errors.owner}</>}
           </Owner>
-          <DeviceName defaultValue={device?.deviceName}>
+          <DeviceName defaultValue={device.deviceName}>
             {state?.errors?.deviceName && <>{state.errors.deviceName}</>}
           </DeviceName>
-          <Address defaultValue={device?.streetAddress}>
+          <Address defaultValue={device.streetAddress}>
             {state?.errors?.streetAddress && <>{state.errors.streetAddress}</>}
           </Address>
-          <City defaultValue={device?.city}>
+          <City defaultValue={device.city}>
             {state?.errors?.city && <>{state.errors.city}</>}
           </City>
-          <Country defaultValue={device?.country}>
+          <Country defaultValue={device.country}>
             {state?.errors?.country && <>{state.errors.country}</>}
           </Country>
-          <Model defaultValue={device?.model}>
+          <Model defaultValue={device.model}>
             {state?.errors?.model && <>{state.errors.model}</>}
           </Model>
           <div className="flex flex-col gap-2">
@@ -120,9 +125,14 @@ export function Edit({
               spellCheck="false"
             />
           </div>
-          <Button type="submit" disabled={pending} aria-disabled={pending}>
-            {pending ? "Submitting..." : "Save changes"}
-          </Button>
+          <div className="flex gap-2 w-full justify-end">
+            <DialogClose asChild>
+              <Button variant="ghost">Cancel</Button>
+            </DialogClose>
+            <Button type="submit" disabled={pending} aria-disabled={pending}>
+              {pending ? "Submitting..." : "Save changes"}
+            </Button>
+          </div>
         </form>
       </DialogContent>
     </Dialog>

@@ -25,10 +25,7 @@ export const Status = () => {
         className="border border-border shadow-black shadow-2xl rounded-lg"
       >
         <AccordionTrigger className="p-4">
-          <div className="flex gap-4">
-            <Heading variant="h3">Current status</Heading>
-            <Badge variant="success">connected</Badge>
-          </div>
+          <Heading variant="h3">Current status</Heading>
         </AccordionTrigger>
       </AccordionItem>
 

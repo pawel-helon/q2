@@ -20,10 +20,8 @@ import { Button } from "@/components/ui/button";
 import { setOpen } from "@/types";
 
 export function AddUserForm({
-  open,
   setOpen,
 }: {
-  open: boolean;
   setOpen: setOpen;
 }) {
   const [state, action] = useFormState(addUser, undefined);
@@ -66,7 +64,7 @@ export function AddUserForm({
       <Role>{state?.errors?.role && <>{state.errors.role}</>}</Role>
       <Password>
         {state?.errors?.password && (
-          <div>
+          <>
             <p className="text-[0.8rem] text-muted-foreground font-semibold inline">
               Password must:
             </p>
@@ -79,12 +77,12 @@ export function AddUserForm({
                 {error}
               </p>
             ))}
-          </div>
+          </>
         )}
       </Password>
       <PasswordConfirmation>
         {state?.errors?.confirm && (
-          <div>
+          <>
             <p className="text-[0.8rem] text-muted-foreground font-semibold inline">
               Password must:
             </p>
@@ -97,7 +95,7 @@ export function AddUserForm({
                 {error}
               </p>
             ))}
-          </div>
+          </>
         )}
       </PasswordConfirmation>
       <div className="flex gap-2 w-full justify-end">

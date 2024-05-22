@@ -9,7 +9,7 @@ import { Header } from "@/app/_components/header";
 import { Badge } from "@/components/ui/badge";
 import { UserCard } from "./_components/user-card";
 import { DeviceCard } from "./_components/device-card";
-import { Role } from "@/types";
+import { Role, user } from "@/types";
 
 export default async function UserPage({
   params,
@@ -19,9 +19,9 @@ export default async function UserPage({
   };
 }) {
   const userId = Number(params.id);
-  const user = await fetchUser(userId);
-  const userName = String(user?.name);
-  const role = user?.role as Role;
+  const user = await fetchUser(userId) as user;
+  const userName = String(user.name);
+  const role = user.role as Role;
 
   const devices = await fetchDevices();
 
@@ -31,7 +31,7 @@ export default async function UserPage({
         <MoreButton userId={userId} devices={devices} />
       </Navbar>
       <Header title={userName}>
-        <Badge variant={role}>{role}</Badge>
+        <Badge variant={role}>{role.toLocaleLowerCase()}</Badge>
       </Header>
       <div className="mt-[5.5rem] pt-[3rem] border-t w-full flex flex-col gap-4 md:grid md:grid-cols-3 mb-12">
         <UserCard user={user} />

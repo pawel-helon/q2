@@ -1,19 +1,16 @@
 "use client";
 
-import { MoreButton } from "./more-button";
-import { Device } from "@/types";
 import { OpenCloseButton } from "./open-close-button";
+import { MoreButton } from "./more-button";
 
-interface ActionsProps {
-  device: Device | null;
-  role: unknown;
-}
+import { ROLE } from "@prisma/client";
+import { device } from "@/types";
 
-export const Actions = ({ device, role }: ActionsProps) => {
+export function Actions({ device, role }: { device: device; role: ROLE }) {
   return (
     <div className="flex gap-2 justify-end">
       <OpenCloseButton device={device} />
       {role === "ADMIN" && <MoreButton device={device} />}
     </div>
   );
-};
+}
