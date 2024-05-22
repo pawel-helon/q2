@@ -20,7 +20,7 @@ export const AddUser = () => {
         </Button>
       </DialogTrigger>
       <DialogContent title="Add new user">
-        <AddUserForm open={open} setOpen={setOpen} />
+        <AddUserForm setOpen={setOpen} />
       </DialogContent>
     </Dialog>
   );
