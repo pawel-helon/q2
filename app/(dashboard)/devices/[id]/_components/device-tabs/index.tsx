@@ -1,26 +1,18 @@
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+"use server"
+
 import { SettingsTab } from "./settings-tab";
 import { AccessTab } from "./access-tab";
 import { GeneralTab } from "./general-tab";
-import { $Enums } from "@prisma/client";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { device } from "@/types";
 
-interface DeviceTabsProps {
+export async function DeviceTabs({
+  role,
+  device,
+}: {
   role: string | null | undefined;
-  device: {
-    id: number;
-    deviceName: string;
-    streetAddress: string;
-    city: string;
-    country: string;
-    model: string;
-    SIM: string;
-    status: $Enums.STATUS;
-    state: $Enums.STATE;
-    ownerId: number;
-  } | null;
-}
-
-export const DeviceTabs = ({ role, device }: DeviceTabsProps) => {
+  device: device | null;
+}) {
   return (
     <div className="mt-14">
       <Tabs defaultValue="general">
@@ -30,7 +22,7 @@ export const DeviceTabs = ({ role, device }: DeviceTabsProps) => {
           <TabsTrigger value="settings">Settings</TabsTrigger>
         </TabsList>
         <TabsContent value="general">
-          <GeneralTab role={role} device={device}/>
+          <GeneralTab role={role} device={device} />
         </TabsContent>
         <TabsContent value="access">
           <AccessTab />
@@ -41,4 +33,4 @@ export const DeviceTabs = ({ role, device }: DeviceTabsProps) => {
       </Tabs>
     </div>
   );
-};
+}

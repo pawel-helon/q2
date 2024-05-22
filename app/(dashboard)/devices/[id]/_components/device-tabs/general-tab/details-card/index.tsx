@@ -1,5 +1,8 @@
 "use client";
 
+import Link from "next/link";
+
+import { Edit } from "./edit";
 import { Heading, Paragraph } from "@/components/typography";
 import {
   Card,
@@ -7,16 +10,21 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { device } from "@/types";
 import { Badge } from "@/components/ui/badge";
+import { device, owners } from "@/types";
 
 export function DetailsCard({
   role,
   device,
+  ownerName,
+  ownerEmail,
+  owners,
 }: {
   role: unknown;
   device: device | null;
+  ownerName: string;
+  ownerEmail: string;
+  owners: owners;
 }) {
   const state = device!.state as "OPENED" | "CLOSED";
 
@@ -24,7 +32,13 @@ export function DetailsCard({
     <div className="border border-border shadow-black shadow-2xl rounded-lg">
       <Card className="flex flex-col col-span-1 bg-transparent border-none">
         <CardHeader className="mb-4 p-4">
-          <Heading variant="h3">Details</Heading>
+          <div className="w-full flex justify-between">
+            <Heading variant="h3">Details</Heading>
+            <div className="flex items-center gap-2">
+              <Paragraph variant="base-thin">State</Paragraph>
+              <Badge variant={state}>{device?.state.toLowerCase()}</Badge>
+            </div>
+          </div>
         </CardHeader>
         <CardContent className="grow mb-4 p-4">
           <ul className="flex flex-col gap-3">
@@ -35,8 +49,10 @@ export function DetailsCard({
               </Paragraph>
             </li>
             <li className="w-full flex justify-between">
-              <Paragraph variant="base-thin">State</Paragraph>
-              <Badge variant={state}>{device?.state.toLowerCase()}</Badge>
+              <Paragraph variant="base-thin">Owner</Paragraph>
+              <Paragraph variant="base-thick" className="text-right underline">
+                <Link href={`/users/${device?.ownerId}`}>{ownerName}</Link>
+              </Paragraph>
             </li>
             <li className="w-full flex justify-between">
               <Paragraph variant="base-thin">Street address</Paragraph>
@@ -73,7 +89,7 @@ export function DetailsCard({
         {role === "ADMIN" && (
           <CardFooter className="p-4">
             <div className="w-full flex justify-end">
-              <Button variant="secondary">Edit</Button>
+              <Edit device={device} ownerEmail={ownerEmail} owners={owners}/>
             </div>
           </CardFooter>
         )}

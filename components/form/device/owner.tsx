@@ -9,9 +9,10 @@ import {
 import { Label } from "@/components/ui/label";
 import { owners } from "@/types";
 
-export function Owner({ owners, children }: {
+export function Owner({ owners, children, defaultValue }: {
   owners: owners;
   children?: React.ReactNode;
+  defaultValue?: string
 }) {
   return (
     <div className="flex flex-col gap-2">
@@ -21,7 +22,7 @@ export function Owner({ owners, children }: {
           {children}
         </p>
       </div>
-      <Select name="owner">
+      <Select name="owner" defaultValue={defaultValue}>
         <SelectTrigger>
           <SelectValue placeholder="Select owner" />
         </SelectTrigger>

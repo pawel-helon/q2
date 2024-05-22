@@ -5,7 +5,7 @@ import { Heading } from "@/components/typography";
 import { user } from "@/types";
 import { fetchDevice } from "@/app/actions/users/find-device";
 import { cn } from "@/lib/utils";
-import { AllDevices } from "./all-devices";
+import { UsersDevices } from "./users-devices";
 
 export async function DeviceCard({ user }: { user: user | null }) {
   const devices = await fetchDevice(user!.id);
@@ -13,7 +13,7 @@ export async function DeviceCard({ user }: { user: user | null }) {
   return (
     <>
       {devices.length > 0 ? (
-        <AllDevices devices={devices} />
+        <UsersDevices devices={devices} />
       ) : (
         <Card className={cn("", "col-span-1 relative")}>
           <CardHeader>

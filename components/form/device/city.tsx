@@ -8,7 +8,8 @@ import {
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 
-export function City({ children }: {
+export function City({ defaultValue, children }: {
+  defaultValue?: string;
   children?: React.ReactNode;
 }) {
   return (
@@ -19,7 +20,7 @@ export function City({ children }: {
           {children}
         </p>
       </div>
-      <Select name="city">
+      <Select name="city" defaultValue={defaultValue}>
         <SelectTrigger>
           <SelectValue placeholder="Select city" />
         </SelectTrigger>

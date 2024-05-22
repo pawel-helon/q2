@@ -1,7 +1,13 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-export function Address({ children }: { children?: React.ReactNode }) {
+export function Address({
+  defaultValue,
+  children,
+}: {
+  defaultValue?: string;
+  children?: React.ReactNode;
+}) {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex justify-between items-end">
@@ -14,6 +20,7 @@ export function Address({ children }: { children?: React.ReactNode }) {
       <Input
         id="streetAddress"
         name="streetAddress"
+        defaultValue={defaultValue}
         placeholder="Enter address"
         spellCheck="false"
       />

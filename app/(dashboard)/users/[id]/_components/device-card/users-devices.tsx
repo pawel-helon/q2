@@ -9,8 +9,9 @@ import { device } from "@/types";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Link from "next/link";
 
-export function AllDevices({ devices }: { devices: device[] }) {
+export function UsersDevices({ devices }: { devices: device[] }) {
   const [item, setItem] = useState(0);
 
   const status = devices[item]?.status as "ACTIVE" | "INACTIVE";
@@ -28,7 +29,14 @@ export function AllDevices({ devices }: { devices: device[] }) {
           </div>
         </CardHeader>
         <CardContent className="mb-0">
-          <Item title="Name" value={devices[item].deviceName} />
+          <li className="w-full flex justify-between">
+            <Paragraph variant="base-thin">Name</Paragraph>
+            <Paragraph variant="base-thick" className="text-right underline">
+              <Link href={`/devices/${devices[item].id}`}>
+                {devices[item].deviceName}
+              </Link>
+            </Paragraph>
+          </li>
           <Item title="Model" value={devices[item].model} />
           <div className="w-full flex justify-between">
             <Paragraph variant="base-thin">Status</Paragraph>
@@ -39,15 +47,19 @@ export function AllDevices({ devices }: { devices: device[] }) {
             <Badge variant={state}>{devices[item].state.toLowerCase()}</Badge>
           </div>
           <Item title="SIM" value={devices[item].SIM} />
-          <div className="flex justify-end gap-1 mt-8">
+          <div className="flex justify-end gap-2 mt-8">
             <Button
+              disabled={devices.length === 1}
               variant="outline"
               size="icon"
-              onClick={() => setItem(item - 1 >= 0 ? item - 1 : devices.length - 1)}
+              onClick={() =>
+                setItem(item - 1 >= 0 ? item - 1 : devices.length - 1)
+              }
             >
               <ChevronLeft />
             </Button>
             <Button
+              disabled={devices.length === 1}
               variant="outline"
               size="icon"
               onClick={() => setItem(item + 1 < devices.length ? item + 1 : 0)}

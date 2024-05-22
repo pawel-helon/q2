@@ -1,7 +1,13 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-export function DeviceName({ children }: { children?: React.ReactNode }) {
+export function DeviceName({
+  defaultValue,
+  children,
+}: {
+  defaultValue?: string | undefined;
+  children?: React.ReactNode;
+}) {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex justify-between items-end">
@@ -13,6 +19,7 @@ export function DeviceName({ children }: { children?: React.ReactNode }) {
       <Input
         id="deviceName"
         name="deviceName"
+        defaultValue={defaultValue}
         placeholder="Enter device name"
         spellCheck="false"
       />

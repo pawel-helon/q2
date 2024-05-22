@@ -1,11 +1,14 @@
+"use server"
+
 import { fetchDevice } from "@/app/api/neon/find-device";
-import { Header } from "@/app/_components/header";
-import { Badge } from "@/components/ui/badge";
+import { verifySession } from "@/lib/data-access-layer";
+
 import { DeviceTabs } from "./_components/device-tabs";
 import { GeneralTab } from "./_components/device-tabs/general-tab";
-import { verifySession } from "@/lib/data-access-layer";
-import { Navbar } from "@/components/navbar";
 import { Actions } from "./_components/actions";
+import { Navbar } from "@/components/navbar";
+import { Header } from "@/app/_components/header";
+import { Badge } from "@/components/ui/badge";
 
 export default async function DevicePage({
   params,
