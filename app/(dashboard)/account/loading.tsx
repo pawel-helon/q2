@@ -13,10 +13,10 @@ export default async function Loading() {
       <Navbar>
         <Button>
           <Plus className="-ml-2 mr-2" />
-          Add device
+          Delete account
         </Button>
       </Navbar>
-      <Header title="Devices" />
+      <Header title="Account" />
       <div className="h-10 flex justify-between border-b border-border pb-1 my-12" />
       <div className="w-full h-[400px] flex items-center justify-center mt-12 py-4 border border-border shadow-black shadow-2xl rounded-lg">
         <Loader className="animate-spin"/>

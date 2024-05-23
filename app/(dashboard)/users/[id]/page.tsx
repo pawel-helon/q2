@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { UserCard } from "./_components/user-card";
 import { DeviceCard } from "./_components/device-card";
 import { Role, user } from "@/types";
+import { Div } from "@/components/motion-ui/div";
 
 export default async function UserPage({
   params,
@@ -19,7 +20,7 @@ export default async function UserPage({
   };
 }) {
   const userId = Number(params.id);
-  const user = await fetchUser(userId) as user;
+  const user = (await fetchUser(userId)) as user;
   const userName = String(user.name);
   const role = user.role as Role;
 

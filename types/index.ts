@@ -148,3 +148,7 @@ export type notification = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type emails = {
+  email: string;
+}[]

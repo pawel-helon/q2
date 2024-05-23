@@ -12,7 +12,7 @@ import { Role } from "@/types";
 export default async function AccountPage() {
   const session = await verifySession();
   const userId = Number(session.userId);
-  const role = session?.role as Role;
+  const role = session.role as Role;
 
   return (
     <div>
@@ -20,7 +20,7 @@ export default async function AccountPage() {
         <DeleteAccount userId={userId} />
       </Navbar>
       <Header title="Account">
-        <Badge variant={role}>{role}</Badge>
+        <Badge variant={role}>{role.toLocaleLowerCase()}</Badge>
       </Header>
       <div className="mt-[5.5rem] border-t">
         <AccountCard userId={userId} role={role} />

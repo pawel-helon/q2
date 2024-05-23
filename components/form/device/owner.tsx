@@ -7,12 +7,16 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-import { owners } from "@/types";
+import { emails, owners } from "@/types";
 
-export function Owner({ owners, children, defaultValue }: {
+export function Owner({
+  owners,
+  children,
+  defaultValue,
+}: {
   owners: owners;
   children?: React.ReactNode;
-  defaultValue?: string
+  defaultValue?: string;
 }) {
   return (
     <div className="flex flex-col gap-2">
@@ -40,4 +44,33 @@ export function Owner({ owners, children, defaultValue }: {
       </Select>
     </div>
   );
-};
+}
+
+export function OwnerEmail({
+  users,
+  children,
+  defaultValue,
+}: {
+  users: emails;
+  children?: React.ReactNode;
+  defaultValue?: string;
+}) {
+  return (
+    <Select name="ownerEmail" defaultValue={defaultValue}>
+      <SelectTrigger>
+        <SelectValue placeholder={defaultValue}/>
+      </SelectTrigger>
+      <SelectContent className="h-[180px]">
+        <SelectGroup>
+          {users.map((user) => {
+            return (
+              <SelectItem key={user.email} value={user.email}>
+                {user.email}
+              </SelectItem>
+            );
+          })}
+        </SelectGroup>
+      </SelectContent>
+    </Select>
+  );
+}

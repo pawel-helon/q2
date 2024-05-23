@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 
 import { device } from "@/types";
 import { STATE, STATUS } from "@prisma/client";
+import { Div } from "@/components/motion-ui/div";
 
 export function UsersDevices({ devices }: { devices: device[] }) {
   const [item, setItem] = useState(0);
@@ -33,19 +34,23 @@ export function UsersDevices({ devices }: { devices: device[] }) {
       </CardHeader>
       <CardContent className="mb-0">
         <Item title="Name">
-          <Link
-            href={`/devices/${devices[item].id}`}
-            className="text-sm leading-snug font-medium text-foreground underline"
-          >
-            {devices[item].deviceName}
-          </Link>
+            <Link
+              href={`/devices/${devices[item].id}`}
+              className="text-sm leading-snug font-medium text-foreground underline"
+            >
+              {devices[item].deviceName}
+            </Link>
         </Item>
         <Item title="Model" value={devices[item].model} />
         <Item title="Status">
-          <Badge variant={status}>{devices[item].status.toLowerCase()}</Badge>
+          <Div duration=".3">
+            <Badge variant={status}>{devices[item].status.toLowerCase()}</Badge>
+          </Div>
         </Item>
         <Item title="State">
-          <Badge variant={state}>{devices[item].state.toLowerCase()}</Badge>
+          <Div duration=".3">
+            <Badge variant={state}>{devices[item].state.toLowerCase()}</Badge>
+          </Div>
         </Item>
         <Item title="SIM" value={devices[item].SIM} />
       </CardContent>

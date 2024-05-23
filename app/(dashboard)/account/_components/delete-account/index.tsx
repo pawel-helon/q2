@@ -17,7 +17,7 @@ export const DeleteAccount = ({ userId }: DeleteAccountDialog) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>Delete Account</Button>
+        <Button>Delete account</Button>
       </DialogTrigger>
       <DialogContent title="Delete account">
         <DialogDescription>

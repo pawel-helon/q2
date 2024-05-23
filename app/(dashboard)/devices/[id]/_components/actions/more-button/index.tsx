@@ -19,9 +19,18 @@ import {
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
-import { device } from "@/types";
+import { device, emails } from "@/types";
+import { AssignOwner } from "./assign-owner";
 
-export function MoreButton({ device }: { device: device }) {
+export function MoreButton({
+  device,
+  users,
+  ownerEmail,
+}: {
+  device: device;
+  users: emails;
+  ownerEmail: string;
+}) {
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
@@ -78,6 +87,12 @@ export function MoreButton({ device }: { device: device }) {
             action={handleActivateDevice}
           />
         )}
+        <AssignOwner
+          users={users}
+          deviceId={device.id}
+          ownerEmail={ownerEmail}
+          setOpen={setOpen}
+        />
         <Separator className="my-1" />
         <Item
           cta="Delete"

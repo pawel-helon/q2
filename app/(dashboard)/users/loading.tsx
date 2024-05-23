@@ -1,34 +1,26 @@
-import React from "react";
-import { Loader, Plus, Search } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Header } from "@/app/_components/header";
+"use server"
+
+import { Loader, Plus } from "lucide-react";
+
 import { Navbar } from "@/components/navbar";
+import { Header } from "@/app/_components/header";
+
 import { Button } from "@/components/ui/button";
 
 export default async function Loading() {
   return (
-    <div>
+    <>
       <Navbar>
-        <div className="flex gap-2 justify-end">
-          <Button>
-            <Plus className="-ml-2 mr-2" />
-            Add user
-          </Button>
-        </div>
+        <Button>
+          <Plus className="-ml-2 mr-2" />
+          Add user
+        </Button>
       </Navbar>
       <Header title="Users" />
-      <div className="flex justify-between border-b border-border pb-1 my-12">
-        <div className="flex items-center">
-          <Search className="text-muted-foreground" />
-          <Input
-            placeholder="Search by name"
-            className="h-9 flex items-center border-none bg-background text-white"
-          />
-        </div>
-      </div>
+      <div className="h-10 flex justify-between border-b border-border pb-1 my-12" />
       <div className="w-full h-[400px] flex items-center justify-center mt-12 py-4 border border-border shadow-black shadow-2xl rounded-lg">
-        <Loader />
+        <Loader className="animate-spin"/>
       </div>
-    </div>
+    </>
   );
 }

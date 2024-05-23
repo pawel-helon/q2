@@ -15,7 +15,7 @@ export default async function Loading() {
           <EllipsisVertical />
         </Button>
       </Navbar>
-      <Header title="Device" />
+      <Header title="User" />
       <div className="h-10 flex justify-between border-b border-border pb-1 my-12" />
       <div className="w-full flex flex-col gap-4 md:grid md:grid-cols-3 mb-12">
         <div className="w-full h-[240px] flex col-span-2 items-center justify-center py-4 border border-border shadow-black shadow-2xl rounded-lg">

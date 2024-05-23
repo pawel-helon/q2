@@ -52,3 +52,12 @@ export async function fetchOwners() {
   const users = await db.user.findMany();
   return users;
 }
+
+export async function fetchUsersEmails() {
+  const emails = await db.user.findMany({
+    select: {
+      email: true,
+    },
+  });
+  return emails
+}
