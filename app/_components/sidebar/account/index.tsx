@@ -8,11 +8,10 @@ import {
 import { cn } from "@/lib/utils";
 import { SignOutItem } from "./sign-out-item";
 import { AccountItem } from "./account-item";
-import { email } from "@/types";
 
 interface AccountProps {
   collapsed: boolean;
-  email: email;
+  email: string;
 }
 
 export const Account = ({ collapsed, email }: AccountProps) => {
@@ -36,7 +35,7 @@ export const Account = ({ collapsed, email }: AccountProps) => {
               <AvatarImage src="/user.png" alt="user" />
               <AvatarFallback>JD</AvatarFallback>
             </Avatar>
-            {email?.email}
+            {email}
           </div>
           <DropdownMenuSeparator />
           <AccountItem />

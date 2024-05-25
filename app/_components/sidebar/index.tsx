@@ -15,7 +15,7 @@ export function Sidebar({
   notifications,
 }: {
   role: string;
-  email: email;
+  email: string;
   notifications: notifications;
 }) {
   const [collapsed, setCollapsed] = useState(true);
