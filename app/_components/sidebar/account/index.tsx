@@ -8,12 +8,11 @@ import {
 import { cn } from "@/lib/utils";
 import { SignOutItem } from "./sign-out-item";
 import { AccountItem } from "./account-item";
+import { email } from "@/types";
 
 interface AccountProps {
   collapsed: boolean;
-  email: {
-    email: string;
-} | null;
+  email: email;
 }
 
 export const Account = ({ collapsed, email }: AccountProps) => {
