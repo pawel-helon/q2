@@ -3,13 +3,14 @@
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
-import { changeRoles } from "@/app/api/neon/change-role";
 
 import { Role } from "@/components/form/user/role";
 import { Button } from "@/components/ui/button";
 import { DialogClose } from "@/components/ui/dialog";
 import { useFormState, useFormStatus } from "react-dom";
 import { ChangeRoleSchema, FormState } from "@/lib/schemas/change-role-schema";
+import { updateRoles } from "@/lib/data/update";
+import { ROLE } from "@prisma/client";
 
 interface ChangeRoleProps {
   ids: any[];
@@ -35,15 +36,16 @@ export const ChangeRoleForm = ({ ids, setOpen }: ChangeRoleProps) => {
       .toString()
       .split(",")
       .map((string) => parseInt(string));
-    const { role } = validatedFields.data;
+    const { role } = validatedFields.data as { role: ROLE };
 
-    changeRoles(idsArray, role);
+    updateRoles(idsArray, role).then(() => {
+      setTimeout(() => {
+        setOpen(false);
+        toast.success("Role(s) has been updated");
+        router.refresh();
+      }, 500);
+    })
 
-    setTimeout(() => {
-      setOpen(false);
-      toast.success("Role(s) has been updated");
-      router.refresh();
-    }, 500);
   };
 
   const [state, action] = useFormState(onSubmit, undefined);
