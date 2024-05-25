@@ -136,7 +136,7 @@ export type owners = {
 }[];
 
 export type email =  {
-  email: string | null;
+  email: string;
 }
 
 export type notification = {
