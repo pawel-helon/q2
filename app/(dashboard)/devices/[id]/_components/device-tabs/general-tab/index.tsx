@@ -18,7 +18,7 @@ export async function GeneralTab({
   device: device;
 }) {
   const owner  = await fetchUser(device.ownerId) as owner;
-  const owners = await fetchOwners();
+  const owners = (await fetchOwners()) as owner[];
 
   return (
     <div className="mt-12 w-full flex flex-col gap-4 md:grid md:grid-cols-3 mb-12">

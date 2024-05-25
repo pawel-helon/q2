@@ -1,14 +1,13 @@
 "use server";
 
 import { db } from "@/lib/db";
-import { notification } from "@/types";
 
-export async function declineRoleChange(notification: notification) {
+export async function declineRoleChange(id: number) {
     //create a new notification for the user
     //send email to the user
     await db.notification.delete({
       where: {
-        id: notification.id,
+        id: id,
       },
     });
   }

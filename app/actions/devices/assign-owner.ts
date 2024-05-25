@@ -4,7 +4,7 @@ import { db } from "@/lib/db";
 
 export async function assignOwner(
   deviceId: number,
-  userId: number | undefined
+  userId: number
 ) {
   await db.device.update({
     where: { id: deviceId },

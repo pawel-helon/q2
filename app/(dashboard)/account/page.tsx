@@ -15,16 +15,16 @@ export default async function AccountPage() {
   const role = session.role as Role;
 
   return (
-    <div>
+    <>
       <Navbar>
         <DeleteAccount userId={userId} />
       </Navbar>
       <Header title="Account">
         <Badge variant={role}>{role.toLocaleLowerCase()}</Badge>
       </Header>
-      <div className="mt-[5.5rem] border-t">
+      <div className="mt-[5.5rem] pt-[3rem] border-t">
         <AccountCard userId={userId} role={role} />
       </div>
-    </div>
+    </>
   );
 }

@@ -1,7 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 import { ChevronDown } from "lucide-react";
+
+import { changeStatus } from "@/app/api/neon/change-status";
 
 import {
   DropdownMenu,
@@ -9,9 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
-import { changeStatus } from "@/app/api/neon/change-status";
+import { STATUS } from "@prisma/client";
 
 export function ChangeStatus({ ids }: { ids: any[] }) {
   const [visibility, setVisibilty] = useState(false);
@@ -42,7 +44,7 @@ export function ChangeStatus({ ids }: { ids: any[] }) {
           size="sm"
           className="w-full justify-start"
           onClick={() => {
-            changeStatus(ids, "ACTIVE");
+            changeStatus(ids, STATUS.ACTIVE);
             setTimeout(() => {
               setOpen(false);
               toast.success("Status has been changed to: Active");
@@ -57,7 +59,7 @@ export function ChangeStatus({ ids }: { ids: any[] }) {
           size="sm"
           className="w-full justify-start"
           onClick={() => {
-            changeStatus(ids, "INACTIVE");
+            changeStatus(ids, STATUS.INACTIVE);
             setTimeout(() => {
               setOpen(false);
               toast.success("Status has been changed to: Inactive");

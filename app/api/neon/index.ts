@@ -1,4 +1,5 @@
 import { db } from "@/lib/db";
+import { User } from "@prisma/client";
 
 export async function fetchDevices() {
   const devices = await db.device.findMany();
@@ -49,7 +50,7 @@ export async function fetchUsers() {
 }
 
 export async function fetchOwners() {
-  const users = await db.user.findMany();
+  const users = (await db.user.findMany()) as User[];
   return users;
 }
 

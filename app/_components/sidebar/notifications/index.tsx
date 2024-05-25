@@ -1,27 +1,28 @@
 "use client";
 
+import { useState } from "react";
+import { Bell } from "lucide-react";
+
+import { Items } from "./items";
+import { NotificationsHeader } from "./notifications-header";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { cn } from "@/lib/utils";
 import { EmptyItem } from "./empty-item";
-import { Items } from "./items";
 import { Button } from "@/components/ui/button";
-import { Bell } from "lucide-react";
-import { NotificationsHeader } from "./notifications-header";
-import { useState } from "react";
-import { notifications } from "@/types";
+
+import { cn } from "@/lib/utils";
+import { Notification } from "@prisma/client";
 
 export function Notifications({
   collapsed,
   notifications,
 }: {
   collapsed: boolean;
-  notifications: notifications;
+  notifications: Notification[];
 }) {
-  const hasNotifications = notifications.length > 0;
   const [open, setOpen] = useState(false);
 
   return (
@@ -38,7 +39,7 @@ export function Notifications({
             className="relative rounded-full bg-muted hover:bg-muted min-w-9 size-9 p-0"
           >
             <Bell />
-            {hasNotifications && (
+            {notifications.length > 0 && (
               <div className="absolute top-0.5 right-0.5 size-2 bg-primary rounded-full" />
             )}
           </Button>
@@ -50,7 +51,7 @@ export function Notifications({
           className="p-0"
         >
           <NotificationsHeader setOpen={setOpen} />
-          {hasNotifications ? (
+          {notifications.length > 0 ? (
             <Items notifications={notifications} />
           ) : (
             <EmptyItem />

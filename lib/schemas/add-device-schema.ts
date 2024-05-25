@@ -46,3 +46,18 @@ export type FormState =
     }
   | undefined;
 
+  export type CreateDeviceFormState =
+  | {
+      errors?: {
+        owner?: string[];
+        city?: string[];
+        country?: string[];
+        model?: string[];
+        deviceName?: string[];
+        streetAddress?: string[];
+        SIM?: string[];
+      };
+      message?: string;
+    }
+  | undefined;
+

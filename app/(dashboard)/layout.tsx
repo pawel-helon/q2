@@ -6,6 +6,7 @@ import { verifySession } from "@/lib/data-access-layer";
 import { fetchNotifications } from "@/app/api/neon/fetch-notifications";
 import { Assistant } from "@/app/_components/assistant";
 import { cn } from "@/lib/utils";
+import { Notification } from "@prisma/client";
 
 async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const session = await verifySession();
@@ -13,7 +14,7 @@ async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const role = String(session?.role);
   const email = await fetchUserEmail(ownerId);
 
-  const notifications = await fetchNotifications(ownerId);
+  const notifications = (await fetchNotifications(ownerId)) as Notification[];
 
   return (
     <div

@@ -1,6 +1,7 @@
 "use server"
 
 import { db } from "@/lib/db";
+import { STATUS } from "@prisma/client";
 
 export async function activateDevice(ids: any[]) {
   for (const index of ids) {
@@ -9,7 +10,7 @@ export async function activateDevice(ids: any[]) {
         id: index,
       },
       data: {
-        status: "ACTIVE",
+        status: STATUS.ACTIVE,
       },
     });
   }

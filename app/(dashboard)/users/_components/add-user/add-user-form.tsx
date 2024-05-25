@@ -19,11 +19,7 @@ import { DialogClose } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { setOpen } from "@/types";
 
-export function AddUserForm({
-  setOpen,
-}: {
-  setOpen: setOpen;
-}) {
+export function AddUserForm({ setOpen }: { setOpen: setOpen }) {
   const [state, action] = useFormState(addUser, undefined);
   const { pending } = useFormStatus();
 
@@ -48,13 +44,16 @@ export function AddUserForm({
     const role = formData.get("role") as ROLE;
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    createAccount(name, email, role, hashedPassword);
-
-    setTimeout(() => {
-      setOpen(false);
-      toast.success("New account has been created.");
-      router.refresh();
-    }, 500);
+    createAccount(name, email, role, hashedPassword)
+      .then((response) => {
+        if (response === true) {
+          setTimeout(() => {
+            setOpen(false);
+            toast.success("New account has been created.");
+            router.refresh();
+          }, 500);
+        }
+      });
   }
 
   return (
@@ -108,4 +107,4 @@ export function AddUserForm({
       </div>
     </form>
   );
-};
+}

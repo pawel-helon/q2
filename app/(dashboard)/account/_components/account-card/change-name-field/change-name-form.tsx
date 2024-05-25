@@ -11,6 +11,7 @@ import { Name } from "@/components/form/user/full-name";
 import { DialogClose } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { setOpen } from "@/types";
+import { update } from "@/lib/data/update";
 
 interface ChangeNameFormProps {
   userId: number;
@@ -36,13 +37,15 @@ export const ChangeNameForm = ({ userId, setOpen }: ChangeNameFormProps) => {
     const userId = Number(formData.get("userId"));
     const { name } = validatedField.data;
 
-    updateUser(userId, name);
-
-    setTimeout(() => {
-      setOpen(false);
-      toast.success("Name has been updated.");
-      router.refresh();
-    }, 500);
+    // updateUser(userId, name);
+    update(userId, "user", "name", name)
+      .then(() => {
+        setTimeout(() => {
+          setOpen(false);
+          toast.success("Name has been updated.");
+          router.refresh();
+        }, 500);
+      });
   }
 
   return (

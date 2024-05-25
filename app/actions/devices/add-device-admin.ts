@@ -1,8 +1,8 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { STATE, STATUS } from "@prisma/client";
 import { AddDeviceSchemaAdmin, FormState } from "@/lib/schemas/add-device-schema";
+import { STATE, STATUS } from "@prisma/client";
 import { db } from "@/lib/db";
 
 export async function addDeviceAdmin(state: FormState, formData: FormData) {

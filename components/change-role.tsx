@@ -2,6 +2,10 @@
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+
+import { changeRoles } from "@/app/api/neon/change-role";
 
 import {
   DropdownMenu,
@@ -9,9 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { changeRoles } from "@/app/api/neon/change-role";
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { ROLE } from "@prisma/client";
 
 export function ChangeRole({ ids }: { ids: any[] }) {
   const [visibility, setVisibilty] = useState(false);
@@ -47,7 +49,7 @@ export function ChangeRole({ ids }: { ids: any[] }) {
           size="sm"
           className="w-full justify-start"
           onClick={() => {
-            changeRoles(idsArray, "ADMIN");
+            changeRoles(idsArray, ROLE.ADMIN);
             setTimeout(() => {
               setOpen(false);
               toast.success("Role has been changed to: Admin");
@@ -62,7 +64,7 @@ export function ChangeRole({ ids }: { ids: any[] }) {
           size="sm"
           className="w-full justify-start"
           onClick={() => {
-            changeRoles(idsArray, "OWNER");
+            changeRoles(idsArray, ROLE.OWNER);
             setTimeout(() => {
               setOpen(false);
               toast.success("Role has been changed to: Owner");
@@ -77,7 +79,7 @@ export function ChangeRole({ ids }: { ids: any[] }) {
           size="sm"
           className="w-full justify-start"
           onClick={() => {
-            changeRoles(idsArray, "ENDUSER");
+            changeRoles(idsArray, ROLE.ENDUSER);
             setTimeout(() => {
               setOpen(false);
               toast.success("Role has been changed to: End user");

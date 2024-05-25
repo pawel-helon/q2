@@ -1,17 +1,15 @@
 "use server";
 
 import { db } from "@/lib/db";
-import { notification } from "@/types";
+import { Notification } from "@prisma/client";
 
-export async function approveRoleChange(notification: notification) {
-  const newRole = notification.requestedRole;
-
+export async function approveRoleChange(notification: Notification) {
   await db.user.update({
     where: {
       id: notification.requester,
     },
     data: {
-      role: newRole,
+      role: notification.requestedRole,
     },
   });
   //create a new notification for the user

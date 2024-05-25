@@ -1,11 +1,10 @@
 "use client";
 
-import { useFormState, useFormStatus } from "react-dom";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
-import { assignDevice } from "@/app/actions/devices/assign-device";
-import { AssignDeviceSchema, FormState } from "@/lib/schemas/assign-device";
+import { readUserByEmail } from "@/lib/data/read";
+import { update } from "@/lib/data/update";
 
 import { OwnerEmail } from "@/components/form/device/owner";
 import { DialogContent } from "@/components/dialog-content";
@@ -16,10 +15,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+
 import { emails, setOpen } from "@/types";
-import { cn } from "@/lib/utils";
-import { assignOwner } from "@/app/actions/devices/assign-owner";
-import { fetchOwnerByEmail } from "@/app/api/neon/fetch-owner";
 
 export function AssignOwner({
   users,
@@ -38,29 +35,23 @@ export function AssignOwner({
     const deviceId = Number(formData.get("deviceId"));
     const ownerEmail = formData.get("ownerEmail") as string;
 
-    fetchOwnerByEmail(ownerEmail)
+    readUserByEmail(ownerEmail, "id")
       .then((userId) => {
-        assignOwner(deviceId, userId)
+        update(deviceId, "device", "owner", userId)
           .then(() => {
             setTimeout(() => {
               setOpen(false);
               toast.success("Device reassigned successfully!");
               router.refresh();
             }, 500);
-          })
-    });
+          });
+      });
   }
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button
-          className={cn(
-            "w-full relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none",
-            "transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none",
-            "data-[disabled]:opacity-50 hover:bg-accent"
-          )}
-        >
+        <button className="w-full relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-accent">
           Assign owner
         </button>
       </DialogTrigger>

@@ -17,7 +17,7 @@ export const Heading = ({ variant, className, children }: HeadingProps) => {
       return (
         <h1
           className={cn(
-            "text-4xl leading-none font-semibold text-foreground antialiased",
+            "text-4xl leading-tight font-semibold text-foreground antialiased",
             inter.className,
             className
           )}
@@ -29,7 +29,7 @@ export const Heading = ({ variant, className, children }: HeadingProps) => {
       return (
         <h2
           className={cn(
-            "text-2xl leading-none font-semibold text-foreground antialiased",
+            "text-2xl leading-tight font-semibold text-foreground antialiased",
             inter.className,
             className
           )}
@@ -41,7 +41,7 @@ export const Heading = ({ variant, className, children }: HeadingProps) => {
       return (
         <h3
           className={cn(
-            "text-xl leading-none font-semibold text-foreground antialiased",
+            "text-xl leading-tight font-semibold text-foreground antialiased",
             inter.className,
             className
           )}
@@ -53,7 +53,7 @@ export const Heading = ({ variant, className, children }: HeadingProps) => {
       return (
         <h3
           className={cn(
-            "text-lg leading-none font-semibold text-foreground antialiased",
+            "text-lg leading-tight font-semibold text-foreground antialiased",
             inter.className,
             className
           )}

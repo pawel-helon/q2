@@ -7,10 +7,8 @@ import { Item } from "@/components/item";
 import { Heading } from "@/components/typography";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/card";
 
-import { Badge } from "@/components/ui/badge";
-
 import { ROLE } from "@prisma/client";
-import { device, owner, owners } from "@/types";
+import { device, owner } from "@/types";
 
 export function DetailsCard({
   device,
@@ -21,7 +19,7 @@ export function DetailsCard({
   role: ROLE;
   device: device;
   owner: owner;
-  owners: owners;
+  owners: owner[];
 }) {
   return (
       <Card className="col-span-1 h-min">

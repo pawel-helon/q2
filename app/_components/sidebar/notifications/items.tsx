@@ -4,14 +4,18 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
 import { approveRoleChange } from "@/app/actions/auth/approve-role-change";
-import { SplitButton } from "@/components/split-button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { cn } from "@/lib/utils";
-import { notifications } from "@/types";
 import { declineRoleChange } from "@/app/actions/auth/decline-role-change";
 
-export function Items({ notifications }: { notifications: notifications }) {
+import { SplitButton } from "@/components/split-button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+import { cn } from "@/lib/utils";
+import { Notification } from "@prisma/client";
+
+export function Items({ notifications }: { notifications: Notification[] }) {
   const router = useRouter();
+
+  console.log(notifications);
 
   return (
     <div
@@ -27,12 +31,14 @@ export function Items({ notifications }: { notifications: notifications }) {
           className="flex flex-col gap-4 items-center rounded-sm text-xs text-muted-foreground mb-1"
         >
           <div className="w-full flex justify-between items-center">
-            <p className="text-sm text-white">Role change request</p>
+            <p className="text-sm text-foreground">Role change request</p>
             <p className="text-foreground-muted">
-              {new Date(notification.createdAt).toLocaleDateString("en-US", {
+              {new Date(notification.createdAt).toLocaleString("en-US", {
                 day: "numeric",
                 month: "long",
                 year: "numeric",
+                hour: "numeric",
+                minute: "numeric",
               })}
             </p>
           </div>
@@ -59,7 +65,7 @@ export function Items({ notifications }: { notifications: notifications }) {
               }}
               primaryActionLabel="Accept"
               secondaryAction={() =>
-                declineRoleChange(notification)
+                declineRoleChange(notification.id)
                   .then(() => {
                     setTimeout(() => {
                       toast.success("Request has been declined!");
@@ -74,7 +80,7 @@ export function Items({ notifications }: { notifications: notifications }) {
             />
           </div>
         </div>
-      ))}
+      )).reverse()}
     </div>
   );
 }

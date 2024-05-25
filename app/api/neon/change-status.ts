@@ -3,8 +3,8 @@
 import { db } from "@/lib/db";
 import { STATUS } from "@prisma/client";
 
-export async function changeStatus(ids: number[], status: string) {
-  if (status === "ACTIVE") {
+export async function changeStatus(ids: number[], status: STATUS) {
+  if (status === STATUS.ACTIVE) {
     for (const index of ids) {
       await db.device.update({
         where: {

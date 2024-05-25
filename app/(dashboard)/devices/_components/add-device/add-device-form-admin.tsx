@@ -14,9 +14,9 @@ import { SIM } from "@/components/form/device/SIM";
 
 import { Button } from "@/components/ui/button";
 import { DialogClose } from "@/components/ui/dialog";
-import { owners } from "@/types";
+import { User } from "@prisma/client";
 
-export function AddDeviceFormAdmin({ owners }: { owners: owners }) {
+export function AddDeviceFormAdmin({ owners }: { owners: User[] }) {
   const [state, action] = useFormState(addDeviceAdmin, undefined);
   const { pending } = useFormStatus();
 

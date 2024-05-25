@@ -7,7 +7,7 @@ import { db } from "@/lib/db";
 export async function createAccount(
   name: string,
   email: string,
-  role: ROLE | undefined,
+  role: ROLE,
   hashedPassword: string
 ) {
   const newUser = await db.user.create({
@@ -19,9 +19,7 @@ export async function createAccount(
     },
   });
 
-  if (!newUser) {
-    return {
-      message: "An error occurred while creating your account.",
-    };
+  if (newUser) {
+    return true
   }
 }

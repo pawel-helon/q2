@@ -25,7 +25,7 @@ export function DataTableHeader<TData>({
 
   return (
     <div className="flex px-4 justify-between items-center">
-      <div className="flex gap-2 items-end">
+      <div className="flex gap-2 items-center">
         <Heading variant="h3">{title}</Heading>
         <Paragraph variant="small-thick" className="text-muted-foreground">
           ({numberOfResults})

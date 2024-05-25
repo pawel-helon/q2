@@ -42,3 +42,15 @@ export type FormState =
       message?: string;
     }
   | undefined;
+
+export type CreateUserFormState =
+  | {
+      errors?: {
+        name?: string[];
+        email?: string[];
+        password?: string[];
+        confirm?: string[];
+      };
+      message?: string;
+    }
+  | undefined;

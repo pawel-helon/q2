@@ -3,8 +3,8 @@
 import { db } from "@/lib/db";
 import { ROLE } from "@prisma/client";
 
-export async function changeRoles(idsArray: number[], role: string) {
-  if (role === "ADMIN") {
+export async function changeRoles(idsArray: number[], role: ROLE) {
+  if (role === ROLE.ADMIN) {
     for (const index of idsArray) {
       await db.user.update({
         where: {
@@ -15,7 +15,7 @@ export async function changeRoles(idsArray: number[], role: string) {
         },
       });
     }
-  } else if (role === "OWNER") {
+  } else if (role === ROLE.OWNER) {
     for (const index of idsArray) {
       await db.user.update({
         where: {
