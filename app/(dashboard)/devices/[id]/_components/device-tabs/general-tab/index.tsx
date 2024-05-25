@@ -1,24 +1,23 @@
-"use server"
-
-import { fetchUser } from "@/app/actions/fetchUser";
-
-import { fetchOwners } from "@/app/api/neon";
+"use server";
 
 import { Status } from "./status";
 import { DetailsCard } from "./details-card";
 
-import { ROLE } from "@prisma/client";
-import { device, owner } from "@/types";
+import { readMany, readUnique } from "@/lib/data/read";
+
+import { Device, ROLE } from "@prisma/client";
+import { email } from "@/types";
 
 export async function GeneralTab({
   role,
   device,
 }: {
   role: ROLE;
-  device: device;
+  device: Device;
 }) {
-  const owner  = await fetchUser(device.ownerId) as owner;
-  const owners = (await fetchOwners()) as owner[];
+  const ownerName = (await readUnique(device.ownerId, "user", "name")) as string;
+  const ownerEmail = (await readUnique(device.ownerId, "user", "email")) as string;
+  const users = (await readMany("users", "email")) as email[];
 
   return (
     <div className="mt-12 w-full flex flex-col gap-4 md:grid md:grid-cols-3 mb-12">
@@ -26,8 +25,9 @@ export async function GeneralTab({
       <DetailsCard
         device={device}
         role={role}
-        owner={owner}
-        owners={owners}
+        ownerEmail={ownerEmail}
+        ownerName={ownerName}
+        users={users}
       />
     </div>
   );

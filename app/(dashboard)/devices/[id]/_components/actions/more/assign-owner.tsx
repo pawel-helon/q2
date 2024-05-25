@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { readUserByEmail } from "@/lib/data/read";
 import { update } from "@/lib/data/update";
 
-import { OwnerEmail } from "@/components/form/device/owner";
+import { Owners } from "@/components/form/device/owner";
 import { DialogContent } from "@/components/dialog-content";
 import {
   Dialog,
@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
-import { emails, setOpen } from "@/types";
+import { email, setOpen } from "@/types";
 
 export function AssignOwner({
   users,
@@ -24,7 +24,7 @@ export function AssignOwner({
   ownerEmail,
   setOpen,
 }: {
-  users: emails;
+  users: email[];
   deviceId: number;
   ownerEmail: string;
   setOpen: setOpen;
@@ -33,19 +33,17 @@ export function AssignOwner({
 
   async function onSubmit(formData: FormData) {
     const deviceId = Number(formData.get("deviceId"));
-    const ownerEmail = formData.get("ownerEmail") as string;
+    const ownerEmail = formData.get("owner") as string;
 
-    readUserByEmail(ownerEmail, "id")
-      .then((userId) => {
-        update(deviceId, "device", "owner", userId)
-          .then(() => {
-            setTimeout(() => {
-              setOpen(false);
-              toast.success("Device reassigned successfully!");
-              router.refresh();
-            }, 500);
-          });
+    readUserByEmail(ownerEmail, "id").then((userId) => {
+      update(deviceId, "device", "owner", userId).then(() => {
+        setTimeout(() => {
+          setOpen(false);
+          toast.success("Device reassigned successfully!");
+        }, 500);
+        router.refresh();
       });
+    });
   }
 
   return (
@@ -58,7 +56,7 @@ export function AssignOwner({
       <DialogContent title="Assign owner">
         <form action={onSubmit}>
           <input type="hidden" name="deviceId" value={deviceId} />
-          <OwnerEmail users={users} defaultValue={ownerEmail} />
+          <Owners users={users} defaultValue={ownerEmail} />
           <DialogFooter className="flex justify-end gap-1 mt-6">
             <DialogClose asChild>
               <Button variant="ghost">Cancel</Button>

@@ -5,11 +5,11 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { EllipsisVertical } from "lucide-react";
 
-import { activateDevice } from "@/app/api/neon/activate-device-mb";
-import { deactivateDevice } from "@/app/api/neon/deactivate-device";
-import { deleteDevice } from "@/app/api/neon/delete-device";
+import { update } from "@/lib/data/update";
+import { remove } from "@/lib/data/delete";
 
 import { Item } from "./item";
+import { AssignOwner } from "./assign-owner";
 
 import {
   DropdownMenu,
@@ -19,50 +19,20 @@ import {
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
-import { device, emails } from "@/types";
-import { AssignOwner } from "./assign-owner";
+import { email } from "@/types";
+import { Device, STATUS } from "@prisma/client";
 
-export function MoreButton({
+export function More({
   device,
   users,
   ownerEmail,
 }: {
-  device: device;
-  users: emails;
+  device: Device;
+  users: email[];
   ownerEmail: string;
 }) {
   const [open, setOpen] = useState(false);
   const router = useRouter();
-
-  const handleActivateDevice = () => {
-    activateDevice(device.id).then(() => {
-      setTimeout(() => {
-        toast("Device has been activated");
-      }, 500);
-      setOpen(false);
-      router.refresh();
-    });
-  };
-
-  const handleDeactivateDevice = () => {
-    deactivateDevice(device.id).then(() => {
-      setTimeout(() => {
-        toast("Device has been deactivated");
-      }, 500);
-      setOpen(false);
-      router.refresh();
-    });
-  };
-
-  const handleDeleteDevice = () => {
-    deleteDevice(device.id).then(() => {
-      setTimeout(() => {
-        toast("Device has been deleted");
-      }, 500);
-      setOpen(false);
-      router.push("/devices");
-    });
-  };
 
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
@@ -72,19 +42,35 @@ export function MoreButton({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" sideOffset={8}>
-        {device.status === "ACTIVE" ? (
+        {device.status === STATUS.ACTIVE ? (
           <Item
             cta="Deactivate"
             dialogTitle="Deactivate device"
             dialogDescription="Are you sure you want to deactivate this device?"
-            action={handleDeactivateDevice}
+            action={() => {
+              update(device.id, "device", "status", "INACTIVE").then(() => {
+                setTimeout(() => {
+                  toast.success("Device has been deactivated");
+                }, 500);
+                setOpen(false);
+                router.refresh();
+              });
+            }}
           />
         ) : (
           <Item
             cta="Activate"
             dialogTitle="Activate device"
             dialogDescription="Are you sure you want to activate this device?"
-            action={handleActivateDevice}
+            action={() => {
+              update(device.id, "device", "status", "ACTIVE").then(() => {
+                setTimeout(() => {
+                  toast.success("Device has been activated");
+                }, 500);
+                setOpen(false);
+                router.refresh();
+              });
+            }}
           />
         )}
         <AssignOwner
@@ -98,7 +84,15 @@ export function MoreButton({
           cta="Delete"
           dialogTitle="Delete device"
           dialogDescription="Are you sure you want to delete this device?"
-          action={handleDeleteDevice}
+          action={() => {
+            remove(device.id, "device").then(() => {
+              setTimeout(() => {
+                setOpen(false);
+                toast.success("Device has been deleted");
+              }, 500);
+              router.push("/devices");
+            });
+          }}
         />
       </DropdownMenuContent>
     </DropdownMenu>

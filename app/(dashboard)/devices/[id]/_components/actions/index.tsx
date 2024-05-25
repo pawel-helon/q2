@@ -1,10 +1,10 @@
 "use client";
 
-import { OpenCloseButton } from "./open-close-button";
-import { MoreButton } from "./more-button";
+import { ChangeState } from "./change-state";
+import { More } from "./more";
 
-import { ROLE } from "@prisma/client";
-import { device, emails } from "@/types";
+import { Device, ROLE } from "@prisma/client";
+import { email } from "@/types";
 
 export function Actions({
   device,
@@ -12,16 +12,16 @@ export function Actions({
   users,
   ownerEmail,
 }: {
-  device: device;
+  device: Device;
   role: ROLE;
-  users: emails;
+  users: email[];
   ownerEmail: string;
 }) {
   return (
     <div className="flex gap-2 justify-end">
-      <OpenCloseButton device={device} />
-      {role === "ADMIN" && (
-        <MoreButton device={device} users={users} ownerEmail={ownerEmail} />
+      <ChangeState device={device} />
+      {role === ROLE.ADMIN && (
+        <More device={device} users={users} ownerEmail={ownerEmail} />
       )}
     </div>
   );

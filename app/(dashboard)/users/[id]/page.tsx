@@ -10,7 +10,6 @@ import { Badge } from "@/components/ui/badge";
 import { UserCard } from "./_components/user-card";
 import { DeviceCard } from "./_components/device-card";
 import { Role, user } from "@/types";
-import { Div } from "@/components/motion-ui/div";
 
 export default async function UserPage({
   params,

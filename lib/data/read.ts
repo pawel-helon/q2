@@ -3,13 +3,15 @@
 import { db } from "@/lib/db";
 import { Device, User } from "@prisma/client";
 
-export async function read(
+export async function readUnique(
   id: number,
   entity: "user" | "device",
   property?:
-    | "role"
     | "name"
     | "email"
+    | "password"
+    | "role"
+
     | "deviceName"
     | "streetAddress"
     | "city"
@@ -30,14 +32,17 @@ export async function read(
       return user;
     }
     switch (property) {
-      case "role":
-        result = user.role;
+      case "email":
+        result = user.email;
         break;
       case "name":
         result = user.name;
         break;
-      case "email":
-        result = user.email;
+      case "role":
+        result = user.role;
+        break;
+      case "password":
+        result = user.password;
         break;
     }
   } else if (entity === "device") {
@@ -50,8 +55,23 @@ export async function read(
       return device;
     }
     switch (property) {
-      case "status":
+      case "deviceName":
+        result = device.deviceName;
+        break;
+      case "streetAddress":
         result = device.status;
+        break;
+      case "city":
+        result = device.city;
+        break;
+      case "country":
+        result = device.country;
+        break;
+      case "model":
+        result = device.model;
+        break;
+      case "SIM":
+        result = device.SIM;
         break;
       case "state":
         result = device.state;
@@ -64,6 +84,55 @@ export async function read(
   return result;
 }
 
+export async function readMany(entity: string, field: string) {
+  let result;
+  switch (entity) {
+    case "users":
+      switch (field) {
+        case "email":
+          result = await db.user.findMany({
+            select: {
+              email: true,
+            },
+          });
+          break;
+        case "name":
+          result = await db.user.findMany({
+            select: {
+              name: true,
+            },
+          });
+          break;
+        default:
+          throw new Error(`Invalid field '${field}' for entity '${entity}'.`);
+      }
+      break;
+    case "devices":
+      switch (field) {
+        case "status":
+          result = await db.device.findMany({
+            select: {
+              status: true,
+            },
+          });
+          break;
+        case "state":
+          result = await db.device.findMany({
+            select: {
+              state: true,
+            },
+          });
+          break;
+        default:
+          throw new Error(`Invalid field '${field}' for entity '${entity}'.`);
+      }
+      break;
+    default:
+      throw new Error(`Invalid entity '${entity}'.`);
+  }
+  return result;
+}
+
 export async function readUserByEmail(email: string, column: keyof User) {
   const user = await db.user.findUnique({
     where: {
@@ -72,3 +141,4 @@ export async function readUserByEmail(email: string, column: keyof User) {
   });
   return user![column];
 }
+

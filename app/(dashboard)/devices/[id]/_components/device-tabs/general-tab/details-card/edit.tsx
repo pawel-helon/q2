@@ -19,7 +19,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Owner } from "@/components/form/device/owner";
+import { Owners } from "@/components/form/device/owner";
 import { DeviceName } from "@/components/form/device/name";
 import { Address } from "@/components/form/device/address";
 import { City } from "@/components/form/device/city";
@@ -29,16 +29,17 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 
-import { device, owners } from "@/types";
+import { email } from "@/types";
+import { Device } from "@prisma/client";
 
 export function Edit({
   device,
   ownerEmail,
-  owners,
+  users
 }: {
-  device: device;
+  device: Device;
   ownerEmail: string;
-  owners: owners;
+  users: email[];
 }) {
   const [open, setOpen] = useState(false);
   const router = useRouter();
@@ -73,15 +74,16 @@ export function Edit({
       SIM
     ).then(() => {
       setTimeout(() => {
-        toast.success("Details have been updated.");
         setOpen(false);
-        router.refresh();
+        toast.success("Details have been updated.");
       }, 500);
+      router.refresh();
     });
   }
 
   const [state, action] = useFormState(onSubmit, undefined);
   const { pending } = useFormStatus();
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -93,9 +95,9 @@ export function Edit({
         </DialogHeader>
         <form action={action} className="relative flex flex-col gap-8">
           <input hidden name="deviceId" value={device.id} />
-          <Owner owners={owners} defaultValue={ownerEmail}>
+          <Owners users={users} defaultValue={ownerEmail}>
             {state?.errors?.owner && <>{state.errors.owner}</>}
-          </Owner>
+          </Owners>
           <DeviceName defaultValue={device.deviceName}>
             {state?.errors?.deviceName && <>{state.errors.deviceName}</>}
           </DeviceName>
@@ -121,7 +123,7 @@ export function Edit({
             <Input
               id="SIM"
               name="SIM"
-              defaultValue={device?.SIM}
+              defaultValue={device.SIM}
               spellCheck="false"
             />
           </div>

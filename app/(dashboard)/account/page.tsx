@@ -11,8 +11,9 @@ import { Role } from "@/types";
 
 export default async function AccountPage() {
   const session = await verifySession();
-  const userId = Number(session.userId);
   const role = session.role as Role;
+  
+  const userId = Number(session.userId);
 
   return (
     <>

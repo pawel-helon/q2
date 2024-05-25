@@ -38,14 +38,14 @@ export const ChangeRoleForm = ({ ids, setOpen }: ChangeRoleProps) => {
       .map((string) => parseInt(string));
     const { role } = validatedFields.data as { role: ROLE };
 
-    updateRoles(idsArray, role).then(() => {
-      setTimeout(() => {
-        setOpen(false);
-        toast.success("Role(s) has been updated");
-        router.refresh();
-      }, 500);
+    updateRoles(idsArray, role)
+      .then(() => {
+        setTimeout(() => {
+          setOpen(false);
+          toast.success("Role(s) has been updated");
+          router.refresh();
+        }, 500);
     })
-
   };
 
   const [state, action] = useFormState(onSubmit, undefined);

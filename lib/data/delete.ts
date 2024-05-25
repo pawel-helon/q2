@@ -3,10 +3,36 @@
 import { db } from "@/lib/db";
 import { Notification } from "@prisma/client";
 
-export async function deleteUser(id: number) {
-  await db.user.delete({
+export async function remove(id: number, entity: string) {
+  switch (entity) {
+    case "user":
+      await db.user.delete({
+        where: {
+          id: id,
+        },
+      });
+      break;
+    case "device":
+      await db.device.delete({
+        where: {
+          id: id,
+        },
+      });
+      break;
+    case "notification":
+      await db.notification.delete({
+        where: {
+          id: id,
+        },
+      });
+      break;
+  }
+}
+
+export async function deleteNotification(notificaction: Notification) {
+  await db.notification.delete({
     where: {
-      id: id,
+      id: notificaction.id,
     },
   });
 }
@@ -21,14 +47,6 @@ export async function deleteUserTanstack(ids: any[]) {
   }
 }
 
-export async function deleteDevice(id: number) {
-  await db.device.delete({
-    where: {
-      id: id,
-    },
-  });
-}
-
 export async function deleteDeviceTanstack(ids: any[]) {
   for (const index of ids) {
     await db.device.delete({
@@ -38,12 +56,3 @@ export async function deleteDeviceTanstack(ids: any[]) {
     });
   }
 }
-
-export async function deleteNotification(notificaction: Notification) {
-  await db.notification.delete({
-    where: {
-      id: notificaction.id,
-    },
-  });
-}
-  

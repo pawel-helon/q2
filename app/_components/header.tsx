@@ -2,7 +2,7 @@ import { Heading } from "@/components/typography";
 
 interface HeaderProps {
   children?: React.ReactNode;
-  title: string | undefined
+  title: string;
 }
 
 export const Header = ({ title, children }: HeaderProps) => {

@@ -1,7 +1,7 @@
 "use server";
 
-import { fetchDevice } from "@/app/api/neon/find-device";
 import { verifySession } from "@/lib/data-access-layer";
+import { readUnique, readMany } from "@/lib/data/read";
 
 import { DeviceTabs } from "./_components/device-tabs";
 import { GeneralTab } from "./_components/device-tabs/general-tab";
@@ -10,11 +10,8 @@ import { Navbar } from "@/components/navbar";
 import { Header } from "@/app/_components/header";
 import { Badge } from "@/components/ui/badge";
 
-import { fetchUsersEmails } from "@/app/api/neon";
-import { fetchOwner } from "@/app/api/neon/fetch-owner";
-
-import { emails } from "@/types";
-import { Device, ROLE, User } from "@prisma/client";
+import { email } from "@/types";
+import { Device, ROLE } from "@prisma/client";
 
 export default async function DevicePage({
   params,
@@ -25,21 +22,19 @@ export default async function DevicePage({
 }) {
   const session = await verifySession();
   const role = session.role as ROLE;
-  
-  const deviceId = Number(params.id);
-  
-  const device = (await fetchDevice(deviceId)) as Device;
-  const users = (await fetchUsersEmails()) as emails;
-  const owner = (await fetchOwner(device.ownerId)) as User;
+
+  const device = (await readUnique(Number(params.id), "device")) as Device;
+  const ownerEmail = (await readUnique(device.ownerId, "user", "email")) as string;
+  const users = (await readMany("users", "email")) as email[];
 
   return (
     <>
       <Navbar>
         <Actions
-          device={device}
           role={role}
+          device={device}
+          ownerEmail={ownerEmail}
           users={users}
-          ownerEmail={owner.email}
         />
       </Navbar>
       <Header title={device.deviceName}>
@@ -50,7 +45,7 @@ export default async function DevicePage({
       </Header>
       {role !== ROLE.ADMIN ? (
         <div className="mt-[84px] border-t">
-          <GeneralTab device={device} role={role} />
+          <GeneralTab role={role} device={device} />
         </div>
       ) : (
         <DeviceTabs role={role} device={device} />
