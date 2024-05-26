@@ -5,27 +5,22 @@ import { useState } from "react";
 import { ChangeEmailForm } from "./change-email-form";
 
 import { DialogContent } from "@/components/dialog-content";
-import {
-  Dialog,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-interface ChangeNameFieldProps {
-  label: string;
-  placeholder: string;
-  dialogTitle: string;
-  userId: number;
-}
-
-export const ChangeEmailField = ({
+export function ChangeEmailField({
   label,
   placeholder,
   dialogTitle,
   userId,
-}: ChangeNameFieldProps) => {
+}: {
+  label: string;
+  placeholder: string;
+  dialogTitle: string;
+  userId: number;
+}) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -50,4 +45,4 @@ export const ChangeEmailField = ({
       </div>
     </li>
   );
-};
+}

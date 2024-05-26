@@ -10,19 +10,17 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-interface ChangeNameFieldProps {
-  label: string;
-  placeholder: string;
-  dialogTitle: string;
-  userId: number;
-}
-
-export const ChangeNameField = ({
+export function ChangeNameField({
   label,
   placeholder,
   dialogTitle,
   userId,
-}: ChangeNameFieldProps) => {
+}: {
+  label: string;
+  placeholder: string;
+  dialogTitle: string;
+  userId: number;
+}) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -47,4 +45,4 @@ export const ChangeNameField = ({
       </div>
     </li>
   );
-};
+}

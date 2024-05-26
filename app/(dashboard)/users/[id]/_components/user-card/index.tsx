@@ -6,6 +6,7 @@ import { ChangeRoleField } from "./change-role-field";
 
 import { Heading } from "@/components/typography";
 import { Card, CardContent, CardHeader } from "@/components/card";
+
 import { User } from "@prisma/client";
 
 export async function UserCard({ user }: { user: User }) {

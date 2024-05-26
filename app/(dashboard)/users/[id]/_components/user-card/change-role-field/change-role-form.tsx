@@ -3,21 +3,24 @@
 import { useFormState, useFormStatus } from "react-dom";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { ROLE } from "@prisma/client";
 
-import { changeRole } from "@/app/actions/users/change-role";
+import { update } from "@/lib/data/update";
 import { ChangeRoleSchema, FormState } from "@/lib/schemas/change-role-schema";
+
 import { Role } from "@/components/form/user/role";
 import { DialogClose } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+
+import { ROLE } from "@prisma/client";
 import { setOpen } from "@/types";
 
-interface ChangeRoleForm {
+export function ChangeRoleForm({
+  userId,
+  setOpen,
+}: {
   userId: number;
   setOpen: setOpen;
-}
-
-export const ChangeRoleForm = ({ userId, setOpen }: ChangeRoleForm) => {
+}) {
   const router = useRouter();
 
   const onSubmit = (state: FormState, formData: FormData) => {
@@ -33,12 +36,13 @@ export const ChangeRoleForm = ({ userId, setOpen }: ChangeRoleForm) => {
 
     const role = formData.get("role") as ROLE;
 
-    changeRole(userId, role);
-    setTimeout(() => {
-      setOpen(false);
-      toast.success("Role has been updated.");
+    update(userId, "user", "role", role).then(() => {
+      setTimeout(() => {
+        setOpen(false);
+        toast.success("Role has been updated.");
+      }, 500);
       router.refresh();
-    }, 500);
+    });
   };
 
   const [state, action] = useFormState(onSubmit, undefined);
@@ -58,4 +62,4 @@ export const ChangeRoleForm = ({ userId, setOpen }: ChangeRoleForm) => {
       </div>
     </form>
   );
-};
+}

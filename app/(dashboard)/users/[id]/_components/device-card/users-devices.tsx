@@ -1,21 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { Item } from "@/components/item";
-
 import { Heading, Paragraph } from "@/components/typography";
+import { Div } from "@/components/motion-ui/div";
+
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
-import { device } from "@/types";
-import { STATE, STATUS } from "@prisma/client";
-import { Div } from "@/components/motion-ui/div";
+import { Device, STATE, STATUS } from "@prisma/client";
 
-export function UsersDevices({ devices }: { devices: device[] }) {
+export function UsersDevices({ devices }: { devices: Device[] }) {
   const [item, setItem] = useState(0);
 
   const status = devices[item]?.status as STATUS;
@@ -59,9 +58,7 @@ export function UsersDevices({ devices }: { devices: device[] }) {
           <Button
             variant="outline"
             size="icon"
-            onClick={() =>
-              setItem(item - 1 >= 0 ? item - 1 : devices.length - 1)
-            }
+            onClick={() => setItem(item - 1 >= 0 ? item - 1 : devices.length - 1)}
           >
             <ChevronLeft />
           </Button>

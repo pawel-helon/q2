@@ -25,7 +25,7 @@ export default async function UserPage({
   const userId = Number(params.id);
   const user = (await readUnique(Number(userId), "user")) as User
 
-  const devices = await readMany("devices") as Device[]
+  const devices = (await readMany("devices")) as Device[]
 
   return (
     <>

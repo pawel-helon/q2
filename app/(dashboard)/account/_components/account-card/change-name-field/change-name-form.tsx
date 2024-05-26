@@ -4,21 +4,22 @@ import { useFormState, useFormStatus } from "react-dom";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
+import { update } from "@/lib/data/update";
 import { ChangeNameSchema, FormState } from "@/lib/schemas/change-name-schema";
-import { updateUser } from "@/app/actions/auth/change-name";
 
 import { Name } from "@/components/form/user/full-name";
 import { DialogClose } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { setOpen } from "@/types";
-import { update } from "@/lib/data/update";
 
-interface ChangeNameFormProps {
+import { setOpen } from "@/types";
+
+export function ChangeNameForm({
+  userId,
+  setOpen,
+}: {
   userId: number;
   setOpen: setOpen;
-}
-
-export const ChangeNameForm = ({ userId, setOpen }: ChangeNameFormProps) => {
+}) {
   const [state, action] = useFormState(changeName, undefined);
   const { pending } = useFormStatus();
   const router = useRouter();
@@ -37,15 +38,13 @@ export const ChangeNameForm = ({ userId, setOpen }: ChangeNameFormProps) => {
     const userId = Number(formData.get("userId"));
     const { name } = validatedField.data;
 
-    // updateUser(userId, name);
-    update(userId, "user", "name", name)
-      .then(() => {
-        setTimeout(() => {
-          setOpen(false);
-          toast.success("Name has been updated.");
-          router.refresh();
-        }, 500);
-      });
+    update(userId, "user", "name", name).then(() => {
+      setTimeout(() => {
+        setOpen(false);
+        toast.success("Name has been updated.");
+      }, 500);
+      router.refresh();
+    });
   }
 
   return (
@@ -62,4 +61,4 @@ export const ChangeNameForm = ({ userId, setOpen }: ChangeNameFormProps) => {
       </div>
     </form>
   );
-};
+}

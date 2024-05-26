@@ -4,27 +4,22 @@ import { useState } from "react";
 
 import { ChangeRoleForm } from "./change-role-form";
 import { DialogContent } from "@/components/dialog-content";
-import {
-  Dialog,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-interface ChangeRoleField {
-  label: string;
-  placeholder: string;
-  dialogTitle: string;
-  userId: number;
-}
-
-export const ChangeRoleField = ({
+export function ChangeRoleField({
   label,
   placeholder,
   dialogTitle,
   userId,
-}: ChangeRoleField) => {
+}: {
+  label: string;
+  placeholder: string;
+  dialogTitle: string;
+  userId: number;
+}) {
   const [open, setOpen] = useState(false);
   return (
     <li className="flex flex-col gap-2">
@@ -48,4 +43,4 @@ export const ChangeRoleField = ({
       </div>
     </li>
   );
-};
+}

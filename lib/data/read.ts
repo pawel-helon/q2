@@ -218,3 +218,12 @@ export async function readUserByEmail(email: string, column: keyof User) {
   });
   return user![column];
 }
+
+export async function readDeviceByUser(userId: number) {
+  const devices = await db.device.findMany({
+    where: {
+      ownerId: userId,
+    },
+  });
+  return devices;
+}

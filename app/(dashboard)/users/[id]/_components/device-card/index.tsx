@@ -1,14 +1,15 @@
 "use server";
 
-import { fetchDevice } from "@/app/actions/users/find-device";
+import { readDeviceByUser } from "@/lib/data/read";
 
 import { UsersDevices } from "./users-devices";
-import { Card, CardContent, CardHeader } from "@/components/card";
 import { Heading } from "@/components/typography";
+import { Card, CardContent, CardHeader } from "@/components/card";
+
 import { User } from "@prisma/client";
 
 export async function DeviceCard({ user }: { user: User }) {
-  const devices = await fetchDevice(user.id);
+  const devices = await readDeviceByUser(user.id);
 
   return (
     <>

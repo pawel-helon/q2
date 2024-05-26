@@ -4,7 +4,7 @@ import { useFormState, useFormStatus } from "react-dom";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
-import { updateUser } from "@/app/actions/auth/change-email";
+import { update } from "@/lib/data/update";
 import {
   ChangeEmailSchema,
   FormState,
@@ -13,14 +13,16 @@ import {
 import { Email } from "@/components/form/user/email";
 import { Button } from "@/components/ui/button";
 import { DialogClose } from "@/components/ui/dialog";
+
 import { setOpen } from "@/types";
 
-interface ChangeNameFormProps {
+export function ChangeEmailForm({
+  userId,
+  setOpen,
+}: {
   userId: number;
   setOpen: setOpen;
-}
-
-export const ChangeEmailForm = ({ userId, setOpen }: ChangeNameFormProps) => {
+}) {
   const [state, action] = useFormState(changeEmail, undefined);
   const { pending } = useFormStatus();
   const router = useRouter();
@@ -39,13 +41,13 @@ export const ChangeEmailForm = ({ userId, setOpen }: ChangeNameFormProps) => {
     const userId = Number(formData.get("userId"));
     const { email } = validatedField.data;
 
-    updateUser(userId, email);
-
-    setTimeout(() => {
-      setOpen(false);
-      toast.success("Email has been updated.");
+    update(userId, "user", "email", email).then(() => {
+      setTimeout(() => {
+        setOpen(false);
+        toast.success("Email has been updated.");
+      }, 500);
       router.refresh();
-    }, 500);
+    });
   }
 
   return (
@@ -62,4 +64,4 @@ export const ChangeEmailForm = ({ userId, setOpen }: ChangeNameFormProps) => {
       </div>
     </form>
   );
-};
+}
