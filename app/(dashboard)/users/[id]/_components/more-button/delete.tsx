@@ -1,4 +1,10 @@
-import { deleteAccount } from "@/app/actions/users/delete-account";
+"use client"
+
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+
+import { remove } from "@/lib/data/delete";
+
 import { DialogContent } from "@/components/dialog-content";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,24 +15,25 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
-import { useRouter } from "next/navigation";
-import { Dispatch, SetStateAction } from "react";
-import { toast } from "sonner";
+import { setOpen } from "@/types";
 
-interface DeleteProps {
+export function Delete({
+  userId,
+  setOpen,
+}: {
   userId: number;
-  setOpen: Dispatch<SetStateAction<boolean>>;
-}
-
-export const Delete = ({ userId, setOpen }: DeleteProps) => {
+  setOpen: setOpen;
+}) {
   const router = useRouter();
 
   function onSubmit() {
-    deleteAccount(userId);
-    setTimeout(() => {
-      setOpen(false);
-      toast.success("Account deleted successfully");
-      router.push("/users");
+    remove(userId, "user").then(() => {
+      setTimeout(() => {
+        setOpen(false);
+        toast.success("Account deleted successfully");
+      });
+      router.push("/users")
+      router.refresh()
     });
   }
 
@@ -57,4 +64,4 @@ export const Delete = ({ userId, setOpen }: DeleteProps) => {
       </DialogContent>
     </Dialog>
   );
-};
+}

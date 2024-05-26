@@ -13,14 +13,16 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
-import { devices } from "@/types";
 
-interface MoreButtonProps {
-  devices: devices;
+import { Device } from "@prisma/client";
+
+export function MoreButton({
+  userId,
+  devices,
+}: {
   userId: number;
-}
-
-export const MoreButton = ({ devices, userId }: MoreButtonProps) => {
+  devices: Device[];
+}) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -37,4 +39,4 @@ export const MoreButton = ({ devices, userId }: MoreButtonProps) => {
       </DropdownMenuContent>
     </DropdownMenu>
   );
-};
+}

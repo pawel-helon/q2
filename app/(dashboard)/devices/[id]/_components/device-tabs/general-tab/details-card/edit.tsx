@@ -94,7 +94,7 @@ export function Edit({
           <DialogTitle>Edit details</DialogTitle>
         </DialogHeader>
         <form action={action} className="relative flex flex-col gap-8">
-          <input hidden name="deviceId" value={device.id} />
+          <input hidden name="deviceId" defaultValue={device.id} />
           <Owners users={users} defaultValue={ownerEmail}>
             {state?.errors?.owner && <>{state.errors.owner}</>}
           </Owners>

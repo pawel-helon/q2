@@ -7,22 +7,18 @@ import { Items } from "./items";
 import { ChevronButton } from "./chevron-button";
 import { Account } from "./account";
 import { Notifications } from "./notifications";
-import { email, notifications } from "@/types";
+import { Notification, ROLE } from "@prisma/client";
 
 export function Sidebar({
   email,
   role,
   notifications,
 }: {
-  role: string;
+  role: ROLE;
   email: string;
-  notifications: notifications;
+  notifications: Notification[];
 }) {
   const [collapsed, setCollapsed] = useState(true);
-
-  const handleCollapse = () => {
-    setCollapsed(!collapsed);
-  };
 
   return (
     <motion.div
@@ -31,10 +27,10 @@ export function Sidebar({
       className="flex flex-col justify-between border-l-[1px] border-r-[1px] border-border"
     >
       <div className="flex flex-col gap-10">
-        <ChevronButton collapsed={collapsed} handleCollapse={handleCollapse} />
-        <Items collapsed={collapsed} role={role} />
+        <ChevronButton collapsed={collapsed} handleCollapse={() => setCollapsed(!collapsed)} />
+        <Items role={role} collapsed={collapsed} />
       </div>
-      <div className="flex flex-col gap-0">
+      <div className="flex flex-col gap-2">
         <Notifications collapsed={collapsed} notifications={notifications} />
         <Account collapsed={collapsed} email={email} />
       </div>

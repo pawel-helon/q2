@@ -2,7 +2,7 @@ import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { CircleUserRound } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-export const AccountItem = () => {
+export function AccountItem() {
   const router = useRouter();
 
   return (

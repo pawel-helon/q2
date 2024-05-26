@@ -9,7 +9,7 @@ import {
 import { Label } from "@/components/ui/label";
 import { devices } from "@/types";
 
-export function Device({
+export function Devices({
   devices,
   children,
 }: {

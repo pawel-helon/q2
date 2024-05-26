@@ -1,5 +1,5 @@
-import { signout } from "@/app/actions/auth/sign-out";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
+import { signout } from "@/lib/data/auth/sign-out";
 import { LogOut } from "lucide-react";
 
 export const SignOutItem = () => {

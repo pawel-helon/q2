@@ -6,9 +6,9 @@ import { ChangeRoleField } from "./change-role-field";
 
 import { Heading } from "@/components/typography";
 import { Card, CardContent, CardHeader } from "@/components/card";
-import { user } from "@/types";
+import { User } from "@prisma/client";
 
-export async function UserCard({ user }: { user: user }) {
+export async function UserCard({ user }: { user: User }) {
   return (
     <Card className="col-span-2">
       <CardHeader>
@@ -17,7 +17,7 @@ export async function UserCard({ user }: { user: user }) {
       <CardContent className="gap-5">
         <ChangeNameField
           label="Full name"
-          placeholder={user.name}
+          placeholder={user.name as string}
           dialogTitle="Change name"
           userId={user.id}
         />

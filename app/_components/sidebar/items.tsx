@@ -2,54 +2,23 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { UsersRound, Vault } from "lucide-react";
 
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
-interface ItemsProps {
-  role: string;
-  collapsed: boolean;
-}
+import { cn } from "@/lib/utils";
+import { ROLE } from "@prisma/client";
 
-export const Items = ({ role, collapsed }: ItemsProps) => {
+export function Items({ role, collapsed }: { role: ROLE; collapsed: boolean }) {
   const pathname = usePathname();
 
   return (
-    <ul
-      className={cn(
-        collapsed
-          ? "flex flex-col gap-2 w-full items-center"
-          : "flex flex-col gap-2 w-full px-2"
-      )}
-    >
-      {/* {items.map((item, i) => (
-        <li key={i}>
-          <Link href={item.href}>
-            <Button
-              size="icon"
-              className={cn(
-                !collapsed &&
-                  "h-9 w-full justify-between px-2 bg-primary text-whiteQ shadow hover:bg-primary/90",
-                pathname.includes(item.href)
-                  ? "bg-primary hover:bg-primary/90"
-                  : "bg-border/80 hover:bg-border/60"
-              )}
-            >
-              {!collapsed && item.label}
-              {item.icon}
-            </Button>
-          </Link>
-        </li>
-      ))} */}
+    <ul className={collapsed ? "flex flex-col gap-2 w-full items-center" : "flex flex-col gap-2 w-full px-2"}>
       <li>
         <Link href="/devices">
           <Button
             size="icon"
             className={cn(
-              !collapsed &&
-                "h-9 w-full justify-between px-2 bg-primary text-whiteQ shadow hover:bg-primary/90",
-              pathname.includes("/devices")
-                ? "bg-primary hover:bg-primary/90"
-                : "bg-border/80 hover:bg-border/60"
+              !collapsed && "h-9 w-full justify-between px-2 bg-primary text-whiteQ shadow hover:bg-primary/90",
+              pathname.includes("/devices") ? "bg-primary hover:bg-primary/90" : "bg-border/80 hover:bg-border/60"
             )}
           >
             {!collapsed && "Devices"}
@@ -57,17 +26,14 @@ export const Items = ({ role, collapsed }: ItemsProps) => {
           </Button>
         </Link>
       </li>
-      {role === "ADMIN" && (
+      {role === ROLE.ADMIN && (
         <li>
           <Link href="/users">
             <Button
               size="icon"
               className={cn(
-                !collapsed &&
-                  "h-9 w-full justify-between px-2 bg-primary text-whiteQ shadow hover:bg-primary/90",
-                pathname.includes("/users")
-                  ? "bg-primary hover:bg-primary/90"
-                  : "bg-border/80 hover:bg-border/60"
+                !collapsed && "h-9 w-full justify-between px-2 bg-primary text-whiteQ shadow hover:bg-primary/90",
+                pathname.includes("/users") ? "bg-primary hover:bg-primary/90" : "bg-border/80 hover:bg-border/60"
               )}
             >
               {!collapsed && "Users"}
@@ -78,9 +44,4 @@ export const Items = ({ role, collapsed }: ItemsProps) => {
       )}
     </ul>
   );
-};
-
-const items = [
-  { href: "/devices", label: "Devices", icon: <Vault /> },
-  { href: "/users", label: "Users", icon: <UsersRound /> },
-];
+}

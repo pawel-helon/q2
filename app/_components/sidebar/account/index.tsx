@@ -1,3 +1,8 @@
+"use client";
+
+import { SignOutItem } from "./sign-out-item";
+import { AccountItem } from "./account-item";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -6,15 +11,14 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { SignOutItem } from "./sign-out-item";
-import { AccountItem } from "./account-item";
 
-interface AccountProps {
+export function Account({
+  collapsed,
+  email,
+}: {
   collapsed: boolean;
   email: string;
-}
-
-export const Account = ({ collapsed, email }: AccountProps) => {
+}) {
   return (
     <div
       className={cn(
@@ -45,4 +49,4 @@ export const Account = ({ collapsed, email }: AccountProps) => {
       <div className="w-full" />
     </div>
   );
-};
+}

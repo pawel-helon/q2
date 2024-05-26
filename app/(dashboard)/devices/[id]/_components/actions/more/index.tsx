@@ -48,13 +48,14 @@ export function More({
             dialogTitle="Deactivate device"
             dialogDescription="Are you sure you want to deactivate this device?"
             action={() => {
-              update(device.id, "device", "status", "INACTIVE").then(() => {
-                setTimeout(() => {
-                  toast.success("Device has been deactivated");
-                }, 500);
-                setOpen(false);
-                router.refresh();
-              });
+              update(device.id, "device", "status", "INACTIVE")
+                .then(() => {
+                  setTimeout(() => {
+                    toast.success("Device has been deactivated");
+                  }, 500);
+                  setOpen(false);
+                  router.refresh();
+                });
             }}
           />
         ) : (

@@ -2,27 +2,25 @@
 
 import { ChevronDown } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-
-interface SplitButtonProps {
-  primaryAction: () => void;
-  primaryActionLabel: string;
-  secondaryAction: () => void;
-  secondaryActionLabel: string;
-}
+import { Button } from "@/components/ui/button";
 
 export function SplitButton({
   primaryAction,
   primaryActionLabel,
   secondaryAction,
   secondaryActionLabel,
-}: SplitButtonProps) {
+}: {
+  primaryAction: () => void;
+  primaryActionLabel: string;
+  secondaryAction: () => void;
+  secondaryActionLabel: string;
+}) {
   return (
     <div className="flex w-[98px]">
       <Button
@@ -39,7 +37,10 @@ export function SplitButton({
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="min-w-[1rem] w-[98px] p-0">
-          <DropdownMenuItem onSelect={secondaryAction} className="text-xs px-3 py-2">
+          <DropdownMenuItem
+            onSelect={secondaryAction}
+            className="text-xs px-3 py-2"
+          >
             {secondaryActionLabel}
           </DropdownMenuItem>
         </DropdownMenuContent>

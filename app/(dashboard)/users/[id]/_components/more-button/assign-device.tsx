@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { assignDevice } from "@/app/actions/devices/assign-device";
 import { AssignDeviceSchema, FormState } from "@/lib/schemas/assign-device";
 
-import { Device } from "@/components/form/device/device";
+import { Devices } from "@/components/form/device/device";
 import { DialogContent } from "@/components/dialog-content";
 import {
   Dialog,
@@ -16,15 +16,18 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { devices, setOpen } from "@/types";
 import { cn } from "@/lib/utils";
+
+import { setOpen } from "@/types";
+import { Device } from "@prisma/client";
+import { update } from "@/lib/data/update";
 
 export function AssignDevice({
   userId,
   devices,
   setOpen,
 }: {
-  devices: devices;
+  devices: Device[];
   userId: number;
   setOpen: setOpen;
 }) {
@@ -44,12 +47,13 @@ export function AssignDevice({
     const userId = Number(formData.get("userId"));
     const deviceId = Number(formData.get("deviceId"));
 
-    assignDevice(userId, deviceId);
-    setTimeout(() => {
-      setOpen(false);
-      toast.success("Device assigned successfully!");
+    update(deviceId, "device", "owner", userId).then(() => {
+      setTimeout(() => {
+        setOpen(false);
+        toast.success("Device assigned successfully!");
+      }, 500);
       router.refresh();
-    }, 500);
+    });
   }
   const [state, action] = useFormState(onSubmit, undefined);
   const { pending } = useFormStatus();
@@ -69,10 +73,10 @@ export function AssignDevice({
       </DialogTrigger>
       <DialogContent title="Assign device">
         <form action={action}>
-          <input type="hidden" name="userId" value={userId} />
-          <Device devices={devices}>
+          <input type="hidden" name="userId" defaultValue={userId} />
+          <Devices devices={devices}>
             {state?.errors?.deviceId && <>{state.errors.deviceId}</>}
-          </Device>
+          </Devices>
           <DialogFooter className="flex justify-end gap-2 mt-6">
             <DialogClose asChild>
               <Button variant="ghost">Cancel</Button>

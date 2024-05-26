@@ -1,17 +1,16 @@
 import { Heading } from "@/components/typography";
 
-interface HeaderProps {
+export function Header({
+  title,
+  children,
+}: {
   children?: React.ReactNode;
   title: string;
-}
-
-export const Header = ({ title, children }: HeaderProps) => {
+}) {
   return (
     <div className="mt-12 flex gap-4 items-start">
-      <Heading variant="h1">
-        {title}
-      </Heading>
+      <Heading variant="h1">{title}</Heading>
       {children}
     </div>
   );
-};
+}

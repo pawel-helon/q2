@@ -5,9 +5,9 @@ import { fetchDevice } from "@/app/actions/users/find-device";
 import { UsersDevices } from "./users-devices";
 import { Card, CardContent, CardHeader } from "@/components/card";
 import { Heading } from "@/components/typography";
-import { user } from "@/types";
+import { User } from "@prisma/client";
 
-export async function DeviceCard({ user }: { user: user }) {
+export async function DeviceCard({ user }: { user: User }) {
   const devices = await fetchDevice(user.id);
 
   return (
