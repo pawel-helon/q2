@@ -2,11 +2,11 @@
 
 import { Table } from "@tanstack/react-table";
 
+import { ChangeRole } from "@/components/change-role";
+import { ChangeStatus } from "@/components/change-status";
 import { TableColumns } from "../table-columns";
 import { MoreButton } from "./more-button";
 import { Div } from "@/components/motion-ui/div";
-import { ChangeRole } from "@/components/change-role";
-import { ChangeStatus } from "@/components/change-status";
 
 interface ActionsProps<TData> {
   table: Table<TData>;
