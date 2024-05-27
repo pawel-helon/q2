@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { ChevronDown } from "lucide-react";
 
-import { changeStatus } from "@/app/api/neon/change-status";
+import { updateStatus } from "@/lib/data/update";
 
 import {
   DropdownMenu,
@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
+
 import { STATUS } from "@prisma/client";
 
 export function ChangeStatus({ ids }: { ids: any[] }) {
@@ -44,12 +45,12 @@ export function ChangeStatus({ ids }: { ids: any[] }) {
           size="sm"
           className="w-full justify-start"
           onClick={() => {
-            changeStatus(ids, STATUS.ACTIVE);
+            updateStatus(ids, STATUS.ACTIVE);
             setTimeout(() => {
               setOpen(false);
               toast.success("Status has been changed to: Active");
-              router.refresh();
             }, 500);
+            router.refresh();
           }}
         >
           Active
@@ -59,12 +60,12 @@ export function ChangeStatus({ ids }: { ids: any[] }) {
           size="sm"
           className="w-full justify-start"
           onClick={() => {
-            changeStatus(ids, STATUS.INACTIVE);
+            updateStatus(ids, STATUS.INACTIVE);
             setTimeout(() => {
               setOpen(false);
               toast.success("Status has been changed to: Inactive");
-              router.refresh();
             }, 500);
+            router.refresh();
           }}
         >
           Inactive

@@ -5,12 +5,13 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useFormState, useFormStatus } from "react-dom";
 
+import { updateDeviceDetails } from "@/lib/data/update";
+
 import {
   AddDeviceSchemaAdmin,
   FormState,
 } from "@/lib/schemas/add-device-schema";
 
-import { editDeviceDetails } from "@/app/actions/devices/edit-device-details";
 import {
   Dialog,
   DialogClose,
@@ -63,7 +64,7 @@ export function Edit({
       validatedFields.data;
     const deviceId = Number(formData.get("deviceId"));
 
-    editDeviceDetails(
+    updateDeviceDetails(
       deviceId,
       owner,
       city,

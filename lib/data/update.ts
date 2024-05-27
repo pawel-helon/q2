@@ -153,7 +153,7 @@ export async function update(
   }
 }
 
-export async function updateRoles(idsArray: number[], role: ROLE) {
+export async function updateRole(idsArray: number[], role: ROLE) {
   if (role === ROLE.ADMIN) {
     for (const index of idsArray) {
       await db.user.update({
@@ -214,4 +214,42 @@ export async function updateStatus(ids: number[], status: STATUS) {
       });
     }
   }
+}
+
+export async function updateDeviceDetails(
+  deviceId: number,
+  owner: string,
+  city: string,
+  country: string,
+  model: string,
+  deviceName: string,
+  streetAddress: string,
+  SIM: string
+) {
+  const updatedDevice = await db.device.update({
+    where: {
+      id: deviceId,
+    },
+    data: {
+      owner: {
+        connect: {
+          email: owner,
+        },
+      },
+      city: city,
+      country: country,
+      model: model,
+      deviceName: deviceName,
+      streetAddress: streetAddress,
+      SIM: SIM,
+    },
+  });
+
+  if (!updatedDevice) {
+    return {
+      message: "An error occurred while updating device details.",
+    };
+  }
+
+  return updatedDevice;
 }

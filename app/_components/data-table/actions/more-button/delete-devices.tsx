@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
-import { deleteDevices } from "@/app/api/neon/delete-device";
+import { deleteDeviceTanstack } from "@/lib/data/delete";
 
 import { DialogContent } from "@/components/dialog-content";
 import {
@@ -14,6 +14,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+
 import { setOpen } from "@/types";
 
 export const DeleteDevices = ({
@@ -24,14 +25,6 @@ export const DeleteDevices = ({
   setOpen: setOpen;
 }) => {
   const router = useRouter();
-  const handleDeleteDevice = () => {
-    deleteDevices(ids);
-    setTimeout(() => {
-      setOpen(false);
-      toast.success("Device(s) deleted");
-      router.refresh();
-    }, 500);
-  };
 
   return (
     <Dialog>
@@ -50,7 +43,19 @@ export const DeleteDevices = ({
           <DialogClose asChild>
             <Button variant="ghost">Cancel</Button>
           </DialogClose>
-          <Button onClick={handleDeleteDevice}>Delete</Button>
+          <Button
+            onClick={() => {
+              deleteDeviceTanstack(ids).then(() => {
+                setTimeout(() => {
+                  setOpen(false);
+                  toast.success("Device(s) deleted");
+                }, 500);
+                router.refresh();
+              });
+            }}
+          >
+            Delete
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

@@ -31,7 +31,7 @@ export async function UserCard({ user }: { user: User }) {
         <ChangeRoleField
           label="Role"
           placeholder={user.role}
-          dialogTitle="Request change"
+          dialogTitle="Change role"
           userId={user.id}
         />
       </CardContent>

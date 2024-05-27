@@ -5,7 +5,7 @@ import { ChevronDown } from "lucide-react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
-import { changeRoles } from "@/app/api/neon/change-role";
+import { updateRole } from "@/lib/data/update";
 
 import {
   DropdownMenu,
@@ -49,12 +49,13 @@ export function ChangeRole({ ids }: { ids: any[] }) {
           size="sm"
           className="w-full justify-start"
           onClick={() => {
-            changeRoles(idsArray, ROLE.ADMIN);
-            setTimeout(() => {
-              setOpen(false);
-              toast.success("Role has been changed to: Admin");
+            updateRole(idsArray, ROLE.ADMIN).then(() => {
+              setTimeout(() => {
+                setOpen(false);
+                toast.success("Role has been changed to: Admin");
+              }, 500);
               router.refresh();
-            }, 500);
+            });
           }}
         >
           Admin
@@ -64,12 +65,13 @@ export function ChangeRole({ ids }: { ids: any[] }) {
           size="sm"
           className="w-full justify-start"
           onClick={() => {
-            changeRoles(idsArray, ROLE.OWNER);
-            setTimeout(() => {
-              setOpen(false);
-              toast.success("Role has been changed to: Owner");
+            updateRole(idsArray, ROLE.OWNER).then(() => {
+              setTimeout(() => {
+                setOpen(false);
+                toast.success("Role has been changed to: Owner");
+              }, 500);
               router.refresh();
-            }, 500);
+            });
           }}
         >
           Owner
@@ -79,12 +81,13 @@ export function ChangeRole({ ids }: { ids: any[] }) {
           size="sm"
           className="w-full justify-start"
           onClick={() => {
-            changeRoles(idsArray, ROLE.ENDUSER);
-            setTimeout(() => {
-              setOpen(false);
-              toast.success("Role has been changed to: End user");
+            updateRole(idsArray, ROLE.ENDUSER).then(() => {
+              setTimeout(() => {
+                setOpen(false);
+                toast.success("Role has been changed to: End user");
+              }, 500);
               router.refresh();
-            }, 500);
+            });
           }}
         >
           End user

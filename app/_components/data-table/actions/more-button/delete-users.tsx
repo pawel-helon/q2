@@ -1,8 +1,7 @@
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { Dispatch, SetStateAction } from "react";
 
-import { deleteUsers } from "@/app/api/neon/delete-user";
+import { deleteUserTanstack } from "@/lib/data/delete";
 
 import { DialogContent } from "@/components/dialog-content";
 import {
@@ -13,6 +12,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+
 import { setOpen } from "@/types";
 
 export function DeleteUsers({
@@ -23,15 +23,6 @@ export function DeleteUsers({
   setOpen: setOpen;
 }) {
   const router = useRouter();
-
-  const handleDeleteUsers = () => {
-    deleteUsers(ids);
-    setOpen(false);
-    setTimeout(() => {
-      toast.success("User(s) deleted");
-      router.refresh();
-    }, 500);
-  };
 
   return (
     <Dialog>
@@ -50,7 +41,19 @@ export function DeleteUsers({
           <DialogClose asChild>
             <Button variant="ghost">Cancel</Button>
           </DialogClose>
-          <Button onClick={handleDeleteUsers}>Continue</Button>
+          <Button
+            onClick={() => {
+              deleteUserTanstack(ids).then(() => {
+                setOpen(false);
+                setTimeout(() => {
+                  toast.success("User(s) deleted");
+                }, 500);
+                router.refresh();
+              });
+            }}
+          >
+            Continue
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
