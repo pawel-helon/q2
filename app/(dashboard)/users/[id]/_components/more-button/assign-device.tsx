@@ -4,7 +4,7 @@ import { useFormState, useFormStatus } from "react-dom";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
-import { assignDevice } from "@/app/actions/devices/assign-device";
+import { update } from "@/lib/data/update";
 import { AssignDeviceSchema, FormState } from "@/lib/schemas/assign-device";
 
 import { Devices } from "@/components/form/device/device";
@@ -16,11 +16,10 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 
 import { setOpen } from "@/types";
 import { Device } from "@prisma/client";
-import { update } from "@/lib/data/update";
+import { cn } from "@/lib/utils";
 
 export function AssignDevice({
   userId,

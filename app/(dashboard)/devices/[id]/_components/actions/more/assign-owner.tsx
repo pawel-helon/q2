@@ -3,8 +3,8 @@
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
-import { readUserByEmail } from "@/lib/data/read";
 import { update } from "@/lib/data/update";
+import { readUserByEmail } from "@/lib/data/read";
 
 import { Owners } from "@/components/form/device/owner";
 import { DialogContent } from "@/components/dialog-content";
