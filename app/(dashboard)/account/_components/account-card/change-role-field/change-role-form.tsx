@@ -3,16 +3,16 @@
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
+import { createNotificationByEndUser } from "@/lib/data/create";
+
+import { useFormState, useFormStatus } from "react-dom";
+import { ChangeRoleSchema, FormState } from "@/lib/schemas/change-role-schema";
+
+import { Role } from "@/components/form/user/role";
 import { Button } from "@/components/ui/button";
 import { DialogClose } from "@/components/ui/dialog";
 
-import { requestRoleChangeEndUser } from "@/app/actions/auth/request-role-change-end-user";
-import { Role } from "@/components/form/user/role";
-import { useFormState, useFormStatus } from "react-dom";
-import { ChangeRoleSchema, FormState } from "@/lib/schemas/change-role-schema";
 import { setOpen } from "@/types";
-import { update } from "@/lib/data/update";
-import { createNotificationByEndUser } from "@/lib/data/create";
 import { ROLE } from "@prisma/client";
 
 export function ChangeRoleForm({
