@@ -2,7 +2,7 @@
 
 import { useFormState, useFormStatus } from "react-dom";
 
-import { addDeviceEndUser } from "@/app/actions/devices/add-device-end-user";
+import { createDeviceByEndUser } from "@/lib/data/create";
 
 import { DeviceName } from "@/components/form/device/name";
 import { Address } from "@/components/form/device/address";
@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button";
 import { DialogClose } from "@/components/ui/dialog";
 
 export function AddDeviceFormEndUser({ userId }: { userId: number }) {
-  const [state, action] = useFormState(addDeviceEndUser, undefined);
+  const [state, action] = useFormState(createDeviceByEndUser, undefined);
   const { pending } = useFormStatus();
 
   return (

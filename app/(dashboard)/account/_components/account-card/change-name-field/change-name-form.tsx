@@ -20,11 +20,11 @@ export function ChangeNameForm({
   userId: number;
   setOpen: setOpen;
 }) {
-  const [state, action] = useFormState(changeName, undefined);
+  const [state, action] = useFormState(onSubmit, undefined);
   const { pending } = useFormStatus();
   const router = useRouter();
 
-  async function changeName(state: FormState, formData: FormData) {
+  async function onSubmit(state: FormState, formData: FormData) {
     const validatedField = ChangeNameSchema.safeParse({
       name: formData.get("name"),
     });

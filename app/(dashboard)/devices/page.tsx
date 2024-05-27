@@ -1,35 +1,37 @@
 "use server";
 
-import { Header } from "@/app/_components/header";
+import { readMany, readDevicesWithUsersNames } from "@/lib/data/read";
+import { verifySession } from "@/lib/data-access-layer";
+
+import { AddDevice } from "./_components/add-device";
 import { DataTable } from "@/app/_components/data-table";
-import { fetchDevices, fetchOwners } from "@/app/api/neon";
+import { Navbar } from "@/components/navbar";
+import { Header } from "@/app/_components/header";
 
 import { columns } from "./_components/data-table/columns";
 import { columnsMember } from "./_components/data-table/columns-member";
-import { verifySession } from "@/lib/data-access-layer";
-import { Navbar } from "@/components/navbar";
-import { AddDevice } from "./_components/add-device";
-import { ROLE, User } from "@prisma/client";
+
+import { User, ROLE } from "@prisma/client";
 
 export default async function DevicesPage() {
   const session = await verifySession();
 
-  const role = session?.role as ROLE
-  const userId = Number(session?.userId);
-  const owners = (await fetchOwners()) as User[];
+  const role = session.role as ROLE;
+  const userId = Number(session.userId);
 
-  const allDevices = await fetchDevices();
+  const users = (await readMany("users")) as User[];
+  const devices = await readDevicesWithUsersNames();
 
   return (
     <>
       <Navbar>
-        <AddDevice role={role} userId={userId} owners={owners} />
+        <AddDevice role={role} userId={userId} users={users} />
       </Navbar>
       <Header title="Devices" />
       {role !== ROLE.ADMIN ? (
-        <DataTable columns={columnsMember} data={allDevices} />
+        <DataTable columns={columnsMember} data={devices} />
       ) : (
-        <DataTable columns={columns} data={allDevices} />
+        <DataTable columns={columns} data={devices} />
       )}
     </>
   );

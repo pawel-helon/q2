@@ -1,13 +1,14 @@
 "use server";
 
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 
+import { remove } from "@/lib/data/delete";
 import { deleteSession } from "@/lib/session";
+
 import {
   DeleteAccountSchema,
   FormState,
 } from "@/lib/schemas/delete-account-schema";
-import { db } from "@/lib/db";
 
 export async function deleteAccount(state: FormState, formData: FormData) {
   const userId = Number(formData.get("userId"));
@@ -22,12 +23,12 @@ export async function deleteAccount(state: FormState, formData: FormData) {
     };
   }
 
-  await db.user.delete({
-    where: {
-      id: userId,
-    },
-  });
-
-  deleteSession();
-  redirect("/");
+  // removeUser(userId).then((response) => {
+  //   if (response === true) {
+  //     deleteSession();
+  //     redirect("/");
+  //   }
+  // })
+  // deleteSession();
+  // redirect("/");
 }

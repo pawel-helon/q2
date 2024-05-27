@@ -6,11 +6,9 @@ export async function fetchDevices() {
 
   const devicesWithOwners = await Promise.all(
     devices.map(async (device) => {
-      const ownerId = device.ownerId;
-
       const owner = await db.user.findUnique({
         where: {
-          id: ownerId,
+          id: device.ownerId,
         },
       });
 

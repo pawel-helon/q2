@@ -8,16 +8,17 @@ import { AddDeviceFormEndUser } from "./add-device-form-end-user";
 import { DialogContent } from "@/components/dialog-content";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+
 import { ROLE, User } from "@prisma/client";
 
 export function AddDevice({
   role,
   userId,
-  owners,
+  users,
 }: {
   role: ROLE;
   userId: number;
-  owners: User[];
+  users: User[];
 }) {
   const [open, setOpen] = useState(false);
 
@@ -31,7 +32,7 @@ export function AddDevice({
       </DialogTrigger>
       <DialogContent title="Add new device">
         {role !== ROLE.ENDUSER ? (
-          <AddDeviceFormAdmin owners={owners} />
+          <AddDeviceFormAdmin users={users} />
         ) : (
           <AddDeviceFormEndUser userId={userId} />
         )}

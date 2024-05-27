@@ -7,6 +7,7 @@ import { AccountCard } from "./_components/account-card";
 import { Header } from "@/app/_components/header";
 import { Navbar } from "@/components/navbar";
 import { Badge } from "@/components/ui/badge";
+
 import { Role } from "@/types";
 
 export default async function AccountPage() {

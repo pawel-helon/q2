@@ -23,11 +23,11 @@ export function ChangeEmailForm({
   userId: number;
   setOpen: setOpen;
 }) {
-  const [state, action] = useFormState(changeEmail, undefined);
+  const [state, action] = useFormState(onSubmit, undefined);
   const { pending } = useFormStatus();
   const router = useRouter();
 
-  async function changeEmail(state: FormState, formData: FormData) {
+  async function onSubmit(state: FormState, formData: FormData) {
     const validatedField = ChangeEmailSchema.safeParse({
       email: formData.get("email"),
     });

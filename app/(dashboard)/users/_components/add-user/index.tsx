@@ -3,10 +3,10 @@
 import { useState } from "react";
 import { Plus } from "lucide-react";
 
+import { AddUserForm } from "./add-user-form";
 import { DialogContent } from "@/components/dialog-content";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { AddUserForm } from "./add-user-form";
 
 export const AddUser = () => {
   const [open, setOpen] = useState(false);

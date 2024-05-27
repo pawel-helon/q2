@@ -2,30 +2,31 @@
 
 import { db } from "@/lib/db";
 import { Notification } from "@prisma/client";
+import { deleteSession } from "@/lib/session";
 
 export async function remove(id: number, entity: string) {
-  switch (entity) {
-    case "user":
-      await db.user.delete({
-        where: {
-          id: id,
-        },
-      });
-      break;
-    case "device":
-      await db.device.delete({
-        where: {
-          id: id,
-        },
-      });
-      break;
-    case "notification":
-      await db.notification.delete({
-        where: {
-          id: id,
-        },
-      });
-      break;
+  if (entity === "user") {
+    await db.user.delete({
+      where: {
+        id: id,
+      },
+    });
+    deleteSession();
+    return true;
+  } else if (entity === "device") {
+    await db.device.delete({
+      where: {
+        id: id,
+      },
+    });
+    return true;
+  } else if (entity === "notification") {
+    await db.notification.delete({
+      where: {
+        id: id,
+      },
+    });
+    return true;
   }
 }
 

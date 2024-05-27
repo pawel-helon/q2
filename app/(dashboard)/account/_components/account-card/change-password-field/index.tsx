@@ -5,27 +5,22 @@ import { useState } from "react";
 import { ChangePasswordForm } from "./change-password-form";
 
 import { DialogContent } from "@/components/dialog-content";
-import {
-  Dialog,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-interface ChangeNameFieldProps {
-  label: string;
-  placeholder: any;
-  dialogTitle: string;
-  userId: number;
-}
-
-export const ChangePasswordField = ({
+export function ChangePasswordField({
   label,
   placeholder,
   dialogTitle,
   userId,
-}: ChangeNameFieldProps) => {
+}: {
+  label: string;
+  placeholder: any;
+  dialogTitle: string;
+  userId: number;
+}) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -44,13 +39,10 @@ export const ChangePasswordField = ({
             </Button>
           </DialogTrigger>
           <DialogContent title={dialogTitle}>
-            <ChangePasswordForm
-              userId={userId}
-              setOpen={setOpen}
-            />
+            <ChangePasswordForm userId={userId} setOpen={setOpen} />
           </DialogContent>
         </Dialog>
       </div>
     </li>
   );
-};
+}

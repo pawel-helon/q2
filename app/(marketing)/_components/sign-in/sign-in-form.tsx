@@ -2,7 +2,6 @@
 
 import { useFormState, useFormStatus } from "react-dom";
 
-import { signin } from "@/app/actions/auth/sign-in";
 import { SignInFormSchema, FormState } from "@/lib/schemas/sign-in";
 
 import { Email } from "@/components/form/user/email";
@@ -10,11 +9,9 @@ import { Password } from "@/components/form/user/password";
 import { SignUpRedirect } from "@/components/form/user/sign-up-redirect";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { signin } from "@/lib/data/auth/sign-in";
 
 export function SignInForm({ children }: { children?: React.ReactNode }) {
-  const router = useRouter();
-
   function onSubmit(state: FormState, formData: FormData) {
     const validatedFields = SignInFormSchema.safeParse({
       name: formData.get("name"),
@@ -49,16 +46,10 @@ export function SignInForm({ children }: { children?: React.ReactNode }) {
       <Password>
         {state?.errors?.password && (
           <div>
-            <p className="text-[0.8rem] text-muted-foreground font-semibold inline">
-              Password must:
-            </p>
+            <p className="text-[0.8rem] text-muted-foreground font-semibold inline">Password must:</p>
             {state.errors.password.map((error, index) => (
-              <p
-                className="inline text-[0.8rem] leading-none text-muted-foreground"
-                key={error}
-              >
-                {index === 0 ? " " : ", "}
-                {error}
+              <p key={error} className="inline text-[0.8rem] leading-none text-muted-foreground">
+                {index === 0 ? " " : ", "}{error}
               </p>
             ))}
           </div>

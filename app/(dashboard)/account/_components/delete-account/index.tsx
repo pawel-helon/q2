@@ -1,5 +1,6 @@
 "use client";
 
+import { DeleteAccountForm } from "./delete-account-form";
 import { DialogContent } from "@/components/dialog-content";
 import {
   Dialog,
@@ -7,13 +8,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { DeleteAccountForm } from "./delete-account-form";
 
-interface DeleteAccountDialog {
-  userId: number;
-}
-
-export const DeleteAccount = ({ userId }: DeleteAccountDialog) => {
+export function DeleteAccount({ userId }: { userId: number }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -28,4 +24,4 @@ export const DeleteAccount = ({ userId }: DeleteAccountDialog) => {
       </DialogContent>
     </Dialog>
   );
-};
+}

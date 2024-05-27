@@ -5,7 +5,8 @@ import { useFormState, useFormStatus } from "react-dom";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
-import { updateUser } from "@/app/actions/auth/change-password";
+import { update } from "@/lib/data/update";
+
 import {
   ChangePasswordSchema,
   FormState,
@@ -15,22 +16,21 @@ import { Password } from "@/components/form/user/password";
 import { PasswordConfirmation } from "@/components/form/user/password-confirmation";
 import { Button } from "@/components/ui/button";
 import { DialogClose } from "@/components/ui/dialog";
+
 import { setOpen } from "@/types";
 
-interface ChangePasswordFormProps {
-  userId: number;
-  setOpen: setOpen;
-}
-
-export const ChangePasswordForm = ({
+export function ChangePasswordForm({
   userId,
   setOpen,
-}: ChangePasswordFormProps) => {
-  const [state, action] = useFormState(changePassword, undefined);
+}: {
+  userId: number;
+  setOpen: setOpen;
+}) {
+  const [state, action] = useFormState(onSubmit, undefined);
   const { pending } = useFormStatus();
   const router = useRouter();
 
-  async function changePassword(state: FormState, formData: FormData) {
+  async function onSubmit(state: FormState, formData: FormData) {
     const validatedField = ChangePasswordSchema.safeParse({
       password: formData.get("password"),
       confirm: formData.get("confirm"),
@@ -47,13 +47,13 @@ export const ChangePasswordForm = ({
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    updateUser(userId, hashedPassword);
-
-    setTimeout(() => {
-      setOpen(false);
-      toast.success("Password has been updated.");
+    update(userId, "user", "password", hashedPassword).then(() => {
+      setTimeout(() => {
+        setOpen(false);
+        toast.success("Password has been updated.");
+      }, 500);
       router.refresh();
-    }, 500);
+    });
   }
 
   return (
@@ -62,16 +62,10 @@ export const ChangePasswordForm = ({
       <Password>
         {state?.errors?.password && (
           <div>
-            <p className="text-[0.8rem] text-muted-foreground font-semibold inline">
-              Password must:
-            </p>
+            <p className="text-[0.8rem] text-muted-foreground font-semibold inline">Password must:</p>
             {state.errors.password.map((error, index) => (
-              <p
-                className="inline text-[0.8rem] leading-none text-muted-foreground"
-                key={error}
-              >
-                {index === 0 ? " " : ", "}
-                {error}
+              <p key={error} className="inline text-[0.8rem] leading-none text-muted-foreground">
+                {index === 0 ? " " : ", "}{error}
               </p>
             ))}
           </div>
@@ -80,16 +74,10 @@ export const ChangePasswordForm = ({
       <PasswordConfirmation>
         {state?.errors?.confirm && (
           <div>
-            <p className="text-[0.8rem] text-muted-foreground font-semibold inline">
-              Password must:
-            </p>
+            <p className="text-[0.8rem] text-muted-foreground font-semibold inline">Password must:</p>
             {state.errors.confirm.map((error, index) => (
-              <p
-                className="inline text-[0.8rem] leading-none text-muted-foreground"
-                key={error}
-              >
-                {index === 0 ? " " : ", "}
-                {error}
+              <p key={error} className="inline text-[0.8rem] leading-none text-muted-foreground">
+                {index === 0 ? " " : ", "}{error}
               </p>
             ))}
           </div>
@@ -105,4 +93,4 @@ export const ChangePasswordForm = ({
       </div>
     </form>
   );
-};
+}

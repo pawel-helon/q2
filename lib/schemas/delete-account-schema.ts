@@ -2,13 +2,11 @@ import { z } from "zod";
 
 export const DeleteAccountSchema = z
   .object({
-    confirm: z.boolean({
-      required_error: "Confirmation is required",
-    }),
+    confirm: z.boolean(),
   })
   .refine((data) => data.confirm === true, {
     message: "Confirmation is required",
-    path: ["deleteAccount"],
+    path: ["confirm"],
   });
 
 export type FormState =

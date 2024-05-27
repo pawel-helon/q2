@@ -4,27 +4,24 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
 import { DialogClose } from "@/components/ui/dialog";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 import { requestRoleChangeEndUser } from "@/app/actions/auth/request-role-change-end-user";
 import { Role } from "@/components/form/user/role";
 import { useFormState, useFormStatus } from "react-dom";
 import { ChangeRoleSchema, FormState } from "@/lib/schemas/change-role-schema";
+import { setOpen } from "@/types";
+import { update } from "@/lib/data/update";
+import { createNotificationByEndUser } from "@/lib/data/create";
+import { ROLE } from "@prisma/client";
 
-interface ChangeRoleForm {
+export function ChangeRoleForm({
+  userId,
+  setOpen,
+}: {
   userId: number;
-  setOpen: (open: boolean) => void;
-}
-
-export const ChangeRoleForm = ({ userId, setOpen }: ChangeRoleForm) => {
+  setOpen: setOpen;
+}) {
   const router = useRouter();
 
   const onSubmit = (state: FormState, formData: FormData) => {
@@ -38,15 +35,15 @@ export const ChangeRoleForm = ({ userId, setOpen }: ChangeRoleForm) => {
       };
     }
     const userId = Number(formData.get("id"));
-    const { role } = validatedFields.data;
-
-    requestRoleChangeEndUser(role, userId);
-
-    setTimeout(() => {
-      setOpen(false);
-      toast.success("Request has been submitted.");
+    const role = validatedFields.data.role as ROLE;
+    
+    createNotificationByEndUser(role, userId).then(() => {
+      setTimeout(() => {
+        setOpen(false);
+        toast.success("Request has been submitted.");
+      }, 500);
       router.refresh();
-    }, 500);
+    });
   };
   const [state, action] = useFormState(onSubmit, undefined);
   const { pending } = useFormStatus();
@@ -65,4 +62,4 @@ export const ChangeRoleForm = ({ userId, setOpen }: ChangeRoleForm) => {
       </div>
     </form>
   );
-};
+}

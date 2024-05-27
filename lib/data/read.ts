@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/lib/db";
-import { Device, User } from "@prisma/client";
+import { Device, Notification, User } from "@prisma/client";
 
 export async function readUnique(
   id: number,
@@ -226,4 +226,58 @@ export async function readDeviceByUser(userId: number) {
     },
   });
   return devices;
+}
+
+export async function readDevicesWithUsersNames() {
+  const devices = await db.device.findMany();
+
+  const devicesWithUsersNames = await Promise.all(
+    devices.map(async (device) => {
+      const owner = await db.user.findUnique({
+        where: {
+          id: device.ownerId,
+        },
+      });
+
+      return {
+        id: device.id,
+        deviceName: device.deviceName,
+        streetAddress: device.streetAddress,
+        city: device.city,
+        country: device.country,
+        model: device.model,
+        SIM: device.SIM,
+        status: device.status,
+        owner: owner?.name || null,
+      };
+    })
+  );
+
+  return devicesWithUsersNames;
+}
+
+export async function readUsersWithDevices() {
+  const users = await db.user.findMany({
+    include: {
+      devices: true,
+    },
+  });
+
+  const usersWithDevices = users.map((user) => ({
+    id: user.id,
+    email: user.email,
+    name: user.name,
+    role: user.role,
+    devices: user.devices[0]?.deviceName || null,
+  }));
+
+  return usersWithDevices;
+}
+
+export async function readNotificationsForUser(userId: number) {
+  const notifications = (await db.notification.findMany({
+    where: { userId: userId },
+  })) as Notification[];
+
+  return notifications;
 }

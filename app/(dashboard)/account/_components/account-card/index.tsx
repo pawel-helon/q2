@@ -1,6 +1,6 @@
 "use server";
 
-import { fetchUser } from "@/app/actions/fetchUser";
+import { readUnique } from "@/lib/data/read";
 
 import { ChangeNameField } from "./change-name-field/index.";
 import { ChangeEmailField } from "./change-email-field";
@@ -8,6 +8,7 @@ import { ChangePasswordField } from "./change-password-field";
 import { ChangeRoleField } from "./change-role-field";
 import { Heading } from "@/components/typography";
 import { Card, CardContent, CardHeader } from "@/components/card";
+
 import { ROLE, User } from "@prisma/client";
 
 export async function AccountCard({
@@ -17,8 +18,7 @@ export async function AccountCard({
   userId: number;
   role: ROLE;
 }) {
-  const user = (await fetchUser(userId)) as User;
-  const userName = user.name as string;
+  const user = await readUnique(userId, "user") as User
 
   return (
     <Card>
@@ -28,7 +28,7 @@ export async function AccountCard({
       <CardContent>
         <ChangeNameField
           label="Full name"
-          placeholder={userName}
+          placeholder={user.name!}
           dialogTitle="Change name"
           userId={userId}
         />

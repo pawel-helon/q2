@@ -1,16 +1,39 @@
+"use client";
+
 import { useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 
-import { deleteAccount } from "@/app/api/neon/delete-account";
+import {
+  DeleteAccountSchema,
+  FormState,
+} from "@/lib/schemas/delete-account-schema";
+
 import { Checkbox } from "@/components/ui/checkbox";
 import { DialogClose, DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import { remove } from "@/lib/data/delete";
 
-interface DeleteAccountFormProps {
-  userId: number;
-}
+export function DeleteAccountForm({ userId }: { userId: number }) {
+  const router = useRouter();
 
-export const DeleteAccountForm = ({ userId }: DeleteAccountFormProps) => {
+  function deleteAccount(state: FormState, formData: FormData) {
+    const userId = Number(formData.get("userId"));
+
+    const validatedFields = DeleteAccountSchema.safeParse({
+      confirm: Boolean(formData.get("confirm")),
+    });
+
+    if (!validatedFields.success) {
+      return {
+        errors: validatedFields.error.flatten().fieldErrors,
+      };
+    }
+    remove(userId, "user").then((response) => {
+      if (response === true) router.push("/");
+    });
+  }
+
   const [state, action] = useFormState(deleteAccount, undefined);
   const { pending } = useFormStatus();
 
@@ -19,7 +42,7 @@ export const DeleteAccountForm = ({ userId }: DeleteAccountFormProps) => {
   return (
     <form action={action}>
       <input type="hidden" name="userId" value={userId} />
-      <div className="flex gap-2 my-8">
+      <div className="flex gap-2 mb-8 items-center">
         <Checkbox
           id="confirm"
           name="confirm"
@@ -30,9 +53,13 @@ export const DeleteAccountForm = ({ userId }: DeleteAccountFormProps) => {
           htmlFor="confirm"
           className="text-sm text-muted-foreground leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
         >
-          I am sure
+          I understand
         </label>
-        {state?.errors?.confirm && <>{state.errors.confirm}</>}
+        {state?.errors?.confirm && (
+          <p className="text-[0.8rem] leading-none text-muted-foreground ml-2">
+            ({state.errors.confirm})
+          </p>
+        )}
       </div>
       <DialogFooter className="mt-6">
         <DialogClose asChild>
@@ -44,4 +71,4 @@ export const DeleteAccountForm = ({ userId }: DeleteAccountFormProps) => {
       </DialogFooter>
     </form>
   );
-};
+}

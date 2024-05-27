@@ -2,7 +2,7 @@
 
 import { useFormState, useFormStatus } from "react-dom";
 
-import { addDeviceAdmin } from "@/app/actions/devices/add-device-admin";
+import { createDeviceByAdmin } from "@/lib/data/create";
 
 import { Owner } from "@/components/form/device/owner";
 import { DeviceName } from "@/components/form/device/name";
@@ -14,15 +14,16 @@ import { SIM } from "@/components/form/device/SIM";
 
 import { Button } from "@/components/ui/button";
 import { DialogClose } from "@/components/ui/dialog";
+
 import { User } from "@prisma/client";
 
-export function AddDeviceFormAdmin({ owners }: { owners: User[] }) {
-  const [state, action] = useFormState(addDeviceAdmin, undefined);
+export function AddDeviceFormAdmin({ users }: { users: User[] }) {
+  const [state, action] = useFormState(createDeviceByAdmin, undefined);
   const { pending } = useFormStatus();
 
   return (
     <form action={action} className="relative flex flex-col gap-8">
-      <Owner owners={owners}>
+      <Owner owners={users}>
         {state?.errors?.owner && <>{state.errors.owner}</>}
       </Owner>
       <DeviceName>
