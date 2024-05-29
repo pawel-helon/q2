@@ -19,6 +19,7 @@ import { DataTableFooter } from "./data-table-footer";
 import { DataTableBody } from "./data-table-body";
 import { DataTableSearch } from "./data-table-search";
 import { Div } from "@/components/motion-ui/div";
+import { usePathname } from "next/navigation";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -30,7 +31,9 @@ export function DataTable<TData, TValue>({
   data,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+    []
+  );
   const [pagination, setPagination] = useState({
     pageIndex: 0,
     pageSize: 5,
@@ -70,11 +73,11 @@ export function DataTable<TData, TValue>({
       break;
     }
   }
-
+  const pathname = usePathname();
   return (
     <>
       <Div duration=".6" className="hidden lg:block">
-        <DataTableSearch table={table} />
+        {!pathname.startsWith("/devices/") && <DataTableSearch table={table} />}
         <div className="mt-12 py-4 border border-border shadow-black shadow-2xl rounded-lg mb-12">
           <DataTableHeader
             table={table}
@@ -91,7 +94,7 @@ export function DataTable<TData, TValue>({
         </div>
       </Div>
       <Div duration=".6" className="lg:hidden w-full">
-        <DataTableSearch table={table} />
+        {!pathname.startsWith("/devices/") && <DataTableSearch table={table} />}
         <div className=" h-[240px] mt-12 py-4 border border-border shadow-black shadow-2xl rounded-lg flex items-center justify-center">
           <p className="text-center text-xs text-white px-8">
             Window is too narrow to display content.

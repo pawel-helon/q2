@@ -7,6 +7,8 @@ import { ChangeStatus } from "@/components/change-status";
 import { TableColumns } from "../table-columns";
 import { MoreButton } from "./more-button";
 import { Div } from "@/components/motion-ui/div";
+import { Button } from "@/components/ui/button";
+import { DisableDevice } from "./disable-device";
 
 interface ActionsProps<TData> {
   table: Table<TData>;
@@ -27,15 +29,26 @@ export function Actions<TData>({
     <div className="relative flex h-8">
       {anySelectedRow ? (
         <Div duration=".3" className="flex min-w-sm">
-          {title === "Devices" ? (
-            <ChangeStatus ids={ids} />
-          ) : (
-            <ChangeRole ids={ids} />
+          {title === "Devices" && <ChangeStatus ids={ids} />}
+          {title === "Users" && <ChangeRole ids={ids} />}
+          {title === "Access" && (
+            <>
+              <Button size="sm" variant="ghost" className="flex items-center justify-start">
+                Remove
+              </Button>
+            </>
           )}
-          <MoreButton title={title} ids={ids} />
+          {title !== "Access" && <MoreButton title={title} ids={ids} />}
         </Div>
       ) : (
-        <div className="size-[32px]" />
+        <>
+          {title === "Access" && (
+            <>
+              {/* <Button variant="ghost">Add user</Button> */}
+            </>
+          )}
+          {title !== "Access" && <div className="size-[32px]" />}
+        </>
       )}
       <TableColumns table={table} />
     </div>

@@ -1,18 +1,20 @@
 "use server";
 
-import { SettingsTab } from "./settings-tab";
-import { AccessTab } from "./access-tab";
 import { GeneralTab } from "./general-tab";
+import { AccessTab } from "./access-tab";
+import { SettingsTab } from "./settings-tab";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
-import { Device, ROLE } from "@prisma/client";
+import { Device, ROLE, User } from "@prisma/client";
 
 export async function DeviceTabs({
   role,
   device,
+  users,
 }: {
   role: ROLE;
   device: Device;
+  users: User[];
 }) {
   return (
     <Tabs defaultValue="general" className="mt-14">
@@ -25,7 +27,7 @@ export async function DeviceTabs({
         <GeneralTab role={role} device={device} />
       </TabsContent>
       <TabsContent value="access">
-        <AccessTab />
+        <AccessTab users={users}/>
       </TabsContent>
       <TabsContent value="settings">
         <SettingsTab />

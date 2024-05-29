@@ -5,13 +5,14 @@ import { readUnique, readMany } from "@/lib/data/read";
 
 import { DeviceTabs } from "./_components/device-tabs";
 import { GeneralTab } from "./_components/device-tabs/general-tab";
+import { Tooltip } from "@/components/tooltip";
 import { Actions } from "./_components/actions";
 import { Navbar } from "@/components/navbar";
 import { Header } from "@/app/_components/header";
 import { Badge } from "@/components/ui/badge";
 
 import { email } from "@/types";
-import { Device, ROLE } from "@prisma/client";
+import { Device, ROLE, User } from "@prisma/client";
 
 export default async function DevicePage({
   params,
@@ -24,8 +25,13 @@ export default async function DevicePage({
   const role = session.role as ROLE;
 
   const device = (await readUnique(Number(params.id), "device")) as Device;
-  const ownerEmail = (await readUnique(device.ownerId, "user", "email")) as string;
+  const ownerEmail = (await readUnique(
+    device.ownerId,
+    "user",
+    "email"
+  )) as string;
   const users = (await readMany("users", "email")) as email[];
+  const usersWithAccess = await readMany("users") as User[];
 
   return (
     <>
@@ -39,8 +45,12 @@ export default async function DevicePage({
       </Navbar>
       <Header title={device.deviceName}>
         <div className="flex gap-1">
-          <Badge variant={device.status}>{device.status.toLowerCase()}</Badge>
-          <Badge variant={device.state}>{device.state.toLowerCase()}</Badge>
+          <Tooltip title="Device status">
+            <Badge variant={device.status}>{device.status.toLowerCase()}</Badge>
+          </Tooltip>
+          <Tooltip title="Device state">
+            <Badge variant={device.state}>{device.state.toLowerCase()}</Badge>
+          </Tooltip>
         </div>
       </Header>
       {role !== ROLE.ADMIN ? (
@@ -48,7 +58,7 @@ export default async function DevicePage({
           <GeneralTab role={role} device={device} />
         </div>
       ) : (
-        <DeviceTabs role={role} device={device} />
+        <DeviceTabs role={role} device={device} users={usersWithAccess}/>
       )}
     </>
   );

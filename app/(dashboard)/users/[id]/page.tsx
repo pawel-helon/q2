@@ -7,6 +7,7 @@ import { UserCard } from "./_components/user-card";
 import { DeviceCard } from "./_components/device-card";
 import { MoreButton } from "./_components/more-button";
 import { Navbar } from "@/components/navbar";
+import { Tooltip } from "@/components/tooltip";
 import { Header } from "@/app/_components/header";
 import { Badge } from "@/components/ui/badge";
 
@@ -23,9 +24,9 @@ export default async function UserPage({
   const role = session.role as ROLE;
 
   const userId = Number(params.id);
-  const user = (await readUnique(Number(userId), "user")) as User
+  const user = (await readUnique(Number(userId), "user")) as User;
 
-  const devices = (await readMany("devices")) as Device[]
+  const devices = (await readMany("devices")) as Device[];
 
   return (
     <>
@@ -35,7 +36,9 @@ export default async function UserPage({
             <MoreButton userId={userId} devices={devices} />
           </Navbar>
           <Header title={user.name as string}>
-            <Badge variant={user.role}>{user.role.toLocaleLowerCase()}</Badge>
+            <Tooltip title="User role">
+              <Badge variant={user.role}>{user.role.toLocaleLowerCase()}</Badge>
+            </Tooltip>
           </Header>
           <div className="mt-[5.5rem] pt-[3rem] border-t w-full flex flex-col gap-4 md:grid md:grid-cols-3 mb-12">
             <UserCard user={user} />

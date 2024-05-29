@@ -32,7 +32,7 @@ export function MoreButton({
           <EllipsisVertical />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" sideOffset={8}>
+      <DropdownMenuContent align="end" sideOffset={8} className="bg-background shadow-black shadow-lg">
         <AssignDevice userId={userId} devices={devices} setOpen={setOpen} />
         <Separator className="my-1" />
         <Delete userId={userId} setOpen={setOpen} />

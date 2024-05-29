@@ -105,106 +105,111 @@ export async function readMany(
 ) {
   let result;
   if (entity === "users") {
-    const users = (await db.user.findMany()) as User[];
     if (!property) {
-      return users;
-    }
-    switch (property) {
-      case "email":
-        result = await db.user.findMany({
-          select: {
-            email: true,
-          },
-        });
-        break;
-      case "name":
-        result = await db.user.findMany({
-          select: {
-            name: true,
-          },
-        });
-        break;
-      case "password":
-        result = await db.user.findMany({
-          select: {
-            password: true,
-          },
-        });
-        break;
-      case "role":
-        result = await db.user.findMany({
-          select: {
-            role: true,
-          },
-        });
-        break;
-      default:
-        throw new Error("Invalid property");
+      result = (await db.user.findMany()) as User[];
+      return result;
+    } else if (property === "email") {
+      result = await db.user.findMany({
+        select: {
+          id: true,
+          email: true,
+        },
+      });
+      return result;
+    } else if (property === "name") {
+      result = await db.user.findMany({
+        select: {
+          id: true,
+          name: true,
+        },
+      });
+      return result;
+    } else if (property === "password") {
+      result = await db.user.findMany({
+        select: {
+          id: true,
+          password: true,
+        },
+      });
+      return result;
+    } else if (property === "role") {
+      result = await db.user.findMany({
+        select: {
+          id: true,
+          role: true,
+        },
+      });
+      return result;
+    } else {
+      throw new Error(`Invalid proerty`);
     }
   } else if (entity === "devices") {
-    const devices = (await db.device.findMany()) as Device[];
     if (!property) {
-      return devices;
-    }
-    switch (property) {
-      case "deviceName":
-        result = await db.device.findMany({
-          select: {
-            deviceName: true,
-          },
-        });
-        break;
-      case "streetAddress":
-        result = await db.device.findMany({
-          select: {
-            streetAddress: true,
-          },
-        });
-        break;
-      case "city":
-        result = await db.device.findMany({
-          select: {
-            city: true,
-          },
-        });
-        break;
-      case "country":
-        result = await db.device.findMany({
-          select: {
-            country: true,
-          },
-        });
-        break;
-      case "model":
-        result = await db.device.findMany({
-          select: {
-            model: true,
-          },
-        });
-        break;
-      case "SIM":
-        result = await db.device.findMany({
-          select: {
-            SIM: true,
-          },
-        });
-        break;
-      case "status":
-        result = await db.device.findMany({
-          select: {
-            status: true,
-          },
-        });
-        break;
-      case "state":
-        result = await db.device.findMany({
-          select: {
-            state: true,
-          },
-        });
-        break;
-      default:
-        throw new Error("Invalid property");
+      result = (await db.device.findMany()) as Device[];
+      return result;
+    } else if (property === "deviceName") {
+      result = await db.device.findMany({
+        select: {
+          id: true,
+          deviceName: true,
+        },
+      });
+      return result;
+    } else if (property === "streetAddress") {
+      result = await db.device.findMany({
+        select: {
+          id: true,
+          streetAddress: true,
+        },
+      });
+      return result;
+    } else if (property === "city") {
+      result = await db.device.findMany({
+        select: {
+          id: true,
+          city: true,
+        },
+      });
+      return result;
+    } else if (property === "country") {
+      result = await db.device.findMany({
+        select: {
+          id: true,
+          country: true,
+        },
+      });
+      return result;
+    } else if (property === "SIM") {
+      result = await db.device.findMany({
+        select: {
+          id: true,
+          SIM: true,
+        },
+      });
+    } else if (property === "status") {
+      result = await db.device.findMany({
+        select: {
+          id: true,
+          status: true,
+        },
+      });
+      return result;
+    } else if (property === "state") {
+      result = await db.device.findMany({
+        select: {
+          id: true,
+          state: true,
+        },
+      });
+    } else if (property === "model") {
+      result = await db.device.findMany({
+        select: {
+          id: true,
+          model: true,
+        },
+      });
+    } else {
+      throw new Error(`Invalid property`);
     }
   }
   return result;
@@ -280,4 +285,14 @@ export async function readNotificationsForUser(userId: number) {
   })) as Notification[];
 
   return notifications;
+}
+
+export async function readEmails() {
+  const emails = await db.user.findMany({
+    select: {
+      email: true,
+    },
+  });
+
+  return emails;
 }

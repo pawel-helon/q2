@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Select,
   SelectContent,
@@ -7,7 +9,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-import { email, owners } from "@/types";
+import { email } from "@/types";
+import { Device, User } from "@prisma/client";
+import { ChangeEvent, useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Search } from "lucide-react";
 
 export function Owners({
   users,
@@ -51,7 +57,7 @@ export function Owner({
   children,
   defaultValue,
 }: {
-  owners: owners;
+  owners: User[];
   children?: React.ReactNode;
   defaultValue?: string;
 }) {
@@ -72,7 +78,7 @@ export function Owner({
             {owners.map((owner) => {
               return (
                 <SelectItem key={owner.id} value={owner.email}>
-                  {owner.email}
+                  {owner.name}
                 </SelectItem>
               );
             })}
@@ -82,4 +88,3 @@ export function Owner({
     </div>
   );
 }
-

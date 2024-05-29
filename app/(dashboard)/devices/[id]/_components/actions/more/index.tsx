@@ -41,7 +41,7 @@ export function More({
           <EllipsisVertical />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" sideOffset={8}>
+      <DropdownMenuContent align="end" sideOffset={8} className="bg-background shadow-black shadow-lg">
         {device.status === STATUS.ACTIVE ? (
           <Item
             cta="Deactivate"

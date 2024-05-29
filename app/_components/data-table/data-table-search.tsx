@@ -10,11 +10,11 @@ interface DataTableSearchProps<TData> {
 export function DataTableSearch<TData>({ table }: DataTableSearchProps<TData>) {
   const pathname = usePathname()
   
-  let searchColumn: string
+  let searchColumn: string = ""
 
   if (pathname === "/users") {
     searchColumn = "name"
-  } else {
+  } else if (pathname === "/devices") {
     searchColumn = "deviceName"
   }
   

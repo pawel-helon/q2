@@ -18,9 +18,11 @@ export function DataTableHeader<TData>({
 
   let title;
   if (pathname === "/users") {
-    title = "Users";
+    title = "Users"
+  } else if (pathname === "/devices") {
+    title = "Devices"
   } else {
-    title = "Devices";
+    title = "Access"
   }
 
   return (
