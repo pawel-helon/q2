@@ -2,6 +2,7 @@
 
 import { db } from "@/lib/db";
 import { STATUS, ROLE } from "@prisma/client";
+import { readUnique } from "./read";
 
 export async function update(
   id: number,
@@ -11,6 +12,7 @@ export async function update(
     | "email"
     | "password"
     | "role"
+
     | "deviceName"
     | "streetAddress"
     | "city"
@@ -20,6 +22,8 @@ export async function update(
     | "status"
     | "state"
     | "owner"
+    | "users"
+    
     | "requestedRole",
   value: any
 ) {
@@ -132,6 +136,14 @@ export async function update(
             id: id,
           },
           data: { ownerId: value },
+        });
+        break;
+        case "users":
+        await db.device.update({
+          where: {
+            id: id,
+          },
+          data: { usersIds: value },
         });
         break;
       default:
@@ -252,4 +264,19 @@ export async function updateDeviceDetails(
   }
 
   return updatedDevice;
+}
+
+export async function updateUsersWithAccess(deviceId: number, userId: number) {
+  const currentUsersWithAccess = await readUnique(deviceId, "device", "users") as number[]
+
+  const updatedUsersWithAccess = Array.from(new Set([...currentUsersWithAccess, userId]))
+
+  await db.device.update({
+    where: {
+      id: deviceId,
+    },
+    data: {
+      usersIds: updatedUsersWithAccess,
+    },
+  });
 }

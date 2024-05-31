@@ -26,8 +26,8 @@ export async function signup(state: FormState, formData: FormData) {
 
   const newUser = await db.user.create({
     data: {
-      name: name,
       email: email,
+      name: name,
       password: hashedPassword,
       role: ROLE.ENDUSER,
     },

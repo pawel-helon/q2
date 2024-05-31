@@ -1,7 +1,7 @@
 "use server";
 
 import { verifySession } from "@/lib/data-access-layer";
-import { readUnique, readMany } from "@/lib/data/read";
+import { readUnique, readMany, readUsersWithAccess } from "@/lib/data/read";
 
 import { DeviceTabs } from "./_components/device-tabs";
 import { GeneralTab } from "./_components/device-tabs/general-tab";
@@ -31,7 +31,7 @@ export default async function DevicePage({
     "email"
   )) as string;
   const users = (await readMany("users", "email")) as email[];
-  const usersWithAccess = await readMany("users") as User[];
+  const usersWithAccess = await readUsersWithAccess(Number(params.id)) as User[];
 
   return (
     <>

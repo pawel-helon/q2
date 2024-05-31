@@ -10,10 +10,7 @@ import {
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { email } from "@/types";
-import { Device, User } from "@prisma/client";
-import { ChangeEvent, useState } from "react";
-import { Input } from "@/components/ui/input";
-import { Search } from "lucide-react";
+import { User } from "@prisma/client";
 
 export function Owners({
   users,
@@ -36,7 +33,7 @@ export function Owners({
         <SelectTrigger>
           <SelectValue placeholder={defaultValue} />
         </SelectTrigger>
-        <SelectContent className="h-[180px]">
+        <SelectContent className="h-min">
           <SelectGroup>
             {users.map((user) => {
               return (
@@ -79,6 +76,43 @@ export function Owner({
               return (
                 <SelectItem key={owner.id} value={owner.email}>
                   {owner.name}
+                </SelectItem>
+              );
+            })}
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+    </div>
+  );
+}
+
+export function Users({
+  users,
+  children,
+  defaultValue,
+}: {
+  users: email[];
+  children?: React.ReactNode;
+  defaultValue?: string;
+}) {
+  return (
+    <div className="flex flex-col gap-2">
+      <div className="flex justify-between items-end">
+        <Label htmlFor="owner">User</Label>
+        <p className="text-[0.8rem] leading-none text-muted-foreground">
+          {children}
+        </p>
+      </div>
+      <Select name="user" defaultValue={defaultValue}>
+        <SelectTrigger>
+          <SelectValue placeholder="Select user" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            {users.map((user) => {
+              return (
+                <SelectItem key={user.email} value={user.email}>
+                  {user.email}
                 </SelectItem>
               );
             })}

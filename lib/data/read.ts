@@ -19,6 +19,7 @@ export async function readUnique(
     | "status"
     | "state"
     | "model"
+    | "users"
 ) {
   let result;
   if (entity === "user") {
@@ -79,6 +80,9 @@ export async function readUnique(
         break;
       case "model":
         result = device.model;
+        break;
+      case "users":
+        result = device.usersIds;
         break;
       default:
         throw new Error("Invalid property");
@@ -215,13 +219,13 @@ export async function readMany(
   return result;
 }
 
-export async function readUserByEmail(email: string, column: keyof User) {
+export async function readUserByEmail(email: string) {
   const user = await db.user.findUnique({
     where: {
       email: email,
     },
   });
-  return user![column];
+  return user!.id;
 }
 
 export async function readDeviceByUser(userId: number) {
@@ -295,4 +299,18 @@ export async function readEmails() {
   });
 
   return emails;
+}
+
+export async function readUsersWithAccess(deviceId: number) {
+  const array = (await readUnique(deviceId, "device", "users")) as number[];
+
+  const users = await db.user.findMany({
+    where: {
+      id: {
+        in: array,
+      },
+    },
+  });
+
+  return users;
 }

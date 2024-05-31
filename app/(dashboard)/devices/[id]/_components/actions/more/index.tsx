@@ -10,6 +10,7 @@ import { remove } from "@/lib/data/delete";
 
 import { Item } from "./item";
 import { AssignOwner } from "./assign-owner";
+import { AddUser } from "./add-user";
 
 import {
   DropdownMenu,
@@ -41,21 +42,24 @@ export function More({
           <EllipsisVertical />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" sideOffset={8} className="bg-background shadow-black shadow-lg">
+      <DropdownMenuContent
+        align="end"
+        sideOffset={8}
+        className="bg-background shadow-black shadow-lg"
+      >
         {device.status === STATUS.ACTIVE ? (
           <Item
             cta="Deactivate"
             dialogTitle="Deactivate device"
             dialogDescription="Are you sure you want to deactivate this device?"
             action={() => {
-              update(device.id, "device", "status", "INACTIVE")
-                .then(() => {
-                  setTimeout(() => {
-                    toast.success("Device has been deactivated");
-                  }, 500);
-                  setOpen(false);
-                  router.refresh();
-                });
+              update(device.id, "device", "status", "INACTIVE").then(() => {
+                setTimeout(() => {
+                  toast.success("Device has been deactivated");
+                }, 500);
+                setOpen(false);
+                router.refresh();
+              });
             }}
           />
         ) : (
@@ -80,6 +84,7 @@ export function More({
           ownerEmail={ownerEmail}
           setOpen={setOpen}
         />
+        <AddUser users={users} deviceId={device.id} setOpen={setOpen}/>
         <Separator className="my-1" />
         <Item
           cta="Delete"
