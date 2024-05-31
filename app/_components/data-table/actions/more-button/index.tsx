@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 
-export const MoreButton = ({ ids, title }: { ids: any[]; title: string }) => {
+export const MoreButton = ({ ids, pathname }: { ids: any[]; pathname: string }) => {
   const [open, setOpen] = useState(false);
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
@@ -26,7 +26,7 @@ export const MoreButton = ({ ids, title }: { ids: any[]; title: string }) => {
         sideOffset={2}
         className="bg-background shadow-black shadow-lg"
       >
-        {title === "Devices" ? (
+        {pathname === "/devices" ? (
           <DeleteDevices ids={ids} setOpen={setOpen} />
         ) : (
           <DeleteUsers ids={ids} setOpen={setOpen} />

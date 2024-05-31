@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import React, { useState } from "react";
 
@@ -83,9 +83,10 @@ export function DataTable<TData, TValue>({
             table={table}
             numberOfResults={numberOfResults}
             anySelectedRow={anySelectedRow}
+            pathname={pathname}
           />
 
-          <DataTableBody table={table} />
+          <DataTableBody table={table} pathname={pathname}/>
           <DataTableFooter
             table={table}
             pagination={pagination}
@@ -93,7 +94,7 @@ export function DataTable<TData, TValue>({
           />
         </div>
       </Div>
-      <Div duration=".6" className="lg:hidden w-full">
+      <Div duration=".6" className="w-full lg:hidden">
         {!pathname.startsWith("/devices/") && <DataTableSearch table={table} />}
         <div className=" h-[240px] mt-12 py-4 border border-border shadow-black shadow-2xl rounded-lg flex items-center justify-center">
           <p className="text-center text-xs text-white px-8">

@@ -1,3 +1,8 @@
+"use client";
+
+import { Table, flexRender } from "@tanstack/react-table";
+import { useRouter } from "next/navigation";
+
 import {
   TableShad,
   TableHeader,
@@ -6,26 +11,13 @@ import {
   TableBody,
   TableCell,
 } from "@/components/ui/table";
-import { Row, Table, flexRender } from "@tanstack/react-table";
 import { columns } from "@/app/(dashboard)/devices/_components/data-table/columns";
-import { usePathname, useRouter } from "next/navigation";
 
-interface DataTableBodyProps<TData> {
+export function DataTableBody<TData>({ table, pathname }: {
   table: Table<TData>;
-}
-
-export function DataTableBody<TData>({ table }: DataTableBodyProps<TData>) {
-  const pathname = usePathname()
+  pathname: string;
+}) {
   const router = useRouter();
-  const handleRowClick = (row: Row<TData>) => {
-    if (pathname === "/devices") {
-      //@ts-ignore
-      router.push(`/devices/${row.original.id}`);
-    } else {
-      //@ts-ignore
-      router.push(`/users/${row.original.id}`);
-    }
-  };
 
   return (
     <div className="px-4 mt-6">
@@ -54,7 +46,13 @@ export function DataTableBody<TData>({ table }: DataTableBodyProps<TData>) {
               <TableRow
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
-                onClick={() => handleRowClick(row)}
+                onClick={
+                  pathname === "/devices"
+                    //@ts-ignore
+                    ? () => router.push(`/devices/${row.original.id}`)
+                    //@ts-ignore
+                    : () => router.push(`/users/${row.original.id}`)
+                }
               >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id}>

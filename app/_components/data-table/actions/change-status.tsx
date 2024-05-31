@@ -16,7 +16,7 @@ import { Button } from "@/components/ui/button";
 
 import { STATUS } from "@prisma/client";
 
-export function ChangeStatus({ ids }: { ids: any[] }) {
+export function ChangeStatus({ ids }: { ids: number[] }) {
   const [visibility, setVisibilty] = useState(false);
   const [open, setOpen] = useState(false);
 

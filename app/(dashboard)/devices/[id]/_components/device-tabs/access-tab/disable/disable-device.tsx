@@ -1,5 +1,11 @@
 "use client";
 
+import { Dispatch, SetStateAction, useState } from "react";
+import { DateRange } from "react-day-picker";
+import { toast } from "sonner";
+
+import { Calendar } from "@/components/ui/calendar";
+import { Heading } from "@/components/typography";
 import {
   Dialog,
   DialogClose,
@@ -9,11 +15,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
-import { Dispatch, SetStateAction, useState } from "react";
-import { DateRange } from "react-day-picker";
-import { Heading } from "@/components/typography";
-import { toast } from "sonner";
 
 export function DisableDevice({
   dateRange,

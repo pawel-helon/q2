@@ -1,6 +1,6 @@
 "use client";
 
-import { Owners, Users } from "@/components/form/device/owner";
+import { Users } from "@/components/form/device/owner";
 import { DialogContent } from "@/components/dialog-content";
 import {
   Dialog,
@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 
 import { email, setOpen } from "@/types";
 import { readUserByEmail } from "@/lib/data/read";
-import { update, updateUsersWithAccess } from "@/lib/data/update";
+import { updateUsersWithAccess } from "@/lib/data/update";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 

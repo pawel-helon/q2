@@ -2,53 +2,37 @@
 
 import { Table } from "@tanstack/react-table";
 
-import { ChangeRole } from "@/components/change-role";
-import { ChangeStatus } from "@/components/change-status";
+import { ChangeRole } from "@/app/_components/data-table/actions/change-role";
+import { ChangeStatus } from "@/app/_components/data-table/actions/change-status";
+import { RemoveUsers } from "./remove-users";
 import { TableColumns } from "../table-columns";
 import { MoreButton } from "./more-button";
 import { Div } from "@/components/motion-ui/div";
-import { Button } from "@/components/ui/button";
-import { DisableDevice } from "./disable-device";
-
-interface ActionsProps<TData> {
-  table: Table<TData>;
-  anySelectedRow: boolean;
-  title: string;
-}
 
 export function Actions<TData>({
   table,
   anySelectedRow,
-  title,
-}: ActionsProps<TData>) {
+  pathname,
+}: {
+  table: Table<TData>;
+  anySelectedRow: boolean;
+  pathname: string;
+}) {
   const selectedRowsActions = table.getSelectedRowModel().rows;
   // @ts-ignore
-  const ids = selectedRowsActions.map((row) => row.original.id);
+  const ids = selectedRowsActions.map((row) => row.original.id) as number[];
 
   return (
-    <div className="relative flex h-8">
+    <div className="relative">
       {anySelectedRow ? (
-        <Div duration=".3" className="flex min-w-sm">
-          {title === "Devices" && <ChangeStatus ids={ids} />}
-          {title === "Users" && <ChangeRole ids={ids} />}
-          {title === "Access" && (
-            <>
-              <Button size="sm" variant="ghost" className="flex items-center justify-start">
-                Remove
-              </Button>
-            </>
-          )}
-          {title !== "Access" && <MoreButton title={title} ids={ids} />}
+        <Div duration=".3" className="flex min-w-sm h-8">
+          {pathname === "/devices" && <ChangeStatus ids={ids} />}
+          {pathname === "/users" && <ChangeRole ids={ids} />}
+          {pathname.startsWith("/devices/") && <RemoveUsers ids={ids} />}
+          {!pathname.startsWith("/devices/") && (<MoreButton pathname={pathname} ids={ids} />)}
         </Div>
       ) : (
-        <>
-          {title === "Access" && (
-            <>
-              {/* <Button variant="ghost">Add user</Button> */}
-            </>
-          )}
-          {title !== "Access" && <div className="size-[32px]" />}
-        </>
+        <div className="size-[32px]" />
       )}
       <TableColumns table={table} />
     </div>

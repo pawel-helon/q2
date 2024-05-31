@@ -13,18 +13,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
+
 import { ROLE } from "@prisma/client";
 
-export function ChangeRole({ ids }: { ids: any[] }) {
+export function ChangeRole({ ids }: { ids: number[] }) {
   const [visibility, setVisibilty] = useState(false);
   const [open, setOpen] = useState(false);
 
   const router = useRouter();
-
-  const idsArray = ids!
-    .toString()
-    .split(",")
-    .map((string) => parseInt(string));
 
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
@@ -49,7 +45,7 @@ export function ChangeRole({ ids }: { ids: any[] }) {
           size="sm"
           className="w-full justify-start"
           onClick={() => {
-            updateRole(idsArray, ROLE.ADMIN).then(() => {
+            updateRole(ids, ROLE.ADMIN).then(() => {
               setTimeout(() => {
                 setOpen(false);
                 toast.success("Role has been changed to: Admin");
@@ -65,7 +61,7 @@ export function ChangeRole({ ids }: { ids: any[] }) {
           size="sm"
           className="w-full justify-start"
           onClick={() => {
-            updateRole(idsArray, ROLE.OWNER).then(() => {
+            updateRole(ids, ROLE.OWNER).then(() => {
               setTimeout(() => {
                 setOpen(false);
                 toast.success("Role has been changed to: Owner");
@@ -81,7 +77,7 @@ export function ChangeRole({ ids }: { ids: any[] }) {
           size="sm"
           className="w-full justify-start"
           onClick={() => {
-            updateRole(idsArray, ROLE.ENDUSER).then(() => {
+            updateRole(ids, ROLE.ENDUSER).then(() => {
               setTimeout(() => {
                 setOpen(false);
                 toast.success("Role has been changed to: End user");
