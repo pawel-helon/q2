@@ -7,13 +7,15 @@ import { Device, ROLE } from "@prisma/client";
 import { email } from "@/types";
 
 export function Actions({
-  device,
   role,
+  userId,
+  device,
   users,
   ownerEmail,
 }: {
-  device: Device;
   role: ROLE;
+  userId: number;
+  device: Device;
   users: email[];
   ownerEmail: string;
 }) {
@@ -21,7 +23,7 @@ export function Actions({
     <div className="flex gap-2 justify-end">
       <ChangeState device={device} />
       {role === ROLE.ADMIN && (
-        <More device={device} users={users} ownerEmail={ownerEmail} />
+        <More userId={userId} device={device} users={users} ownerEmail={ownerEmail} />
       )}
     </div>
   );

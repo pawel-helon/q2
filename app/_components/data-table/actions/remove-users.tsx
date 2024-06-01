@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
-import { updateUsersWithAccessRemove } from "@/lib/data/update";
+import { updateUsersWithAccess } from "@/lib/data/update";
 
 export function RemoveUsers({
   ids,
@@ -22,7 +22,7 @@ export function RemoveUsers({
       variant="ghost"
       className="flex items-center justify-start"
       onClick={() => {
-        updateUsersWithAccessRemove(deviceId, ids).then(() => {
+        updateUsersWithAccess(deviceId, ids).then(() => {
           setTimeout(() => {
             toast.success("User(s) removed successfully!");
           }, 500);

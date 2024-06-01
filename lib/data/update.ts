@@ -22,6 +22,8 @@ export async function update(
     | "state"
     | "owner"
     | "users"
+    | "disabledFrom"
+    | "disabledTo"
     | "requestedRole",
   value: any
 ) {
@@ -144,6 +146,22 @@ export async function update(
           data: { usersIds: value },
         });
         break;
+      case "disabledFrom":
+        await db.device.update({
+          where: {
+            id: id,
+          },
+          data: { disabledFrom: value },
+        });
+        break;
+      case "disabledTo":
+        await db.device.update({
+          where: {
+            id: id,
+          },
+          data: { disabledTo: value },
+        });
+        break;
       default:
         throw new Error(`Invalid field: ${field}`);
     }
@@ -264,14 +282,26 @@ export async function updateDeviceDetails(
   return updatedDevice;
 }
 
-export async function updateUsersWithAccessAdd(deviceId: number, userId: number) {
-  const currentUsersWithAccess = (await readUnique(deviceId, "device", "users")) as number[];
-  const updatedUsersWithAccess = Array.from(new Set([...currentUsersWithAccess, userId]));
-  await update(deviceId, "device", "users", updatedUsersWithAccess);
-}
+export async function updateUsersWithAccess(
+  deviceId: number,
+  ids: number | number[]
+) {
+  const currentUsersWithAccess = (await readUnique(
+    deviceId,
+    "device",
+    "users"
+  )) as number[];
 
-export async function updateUsersWithAccessRemove(deviceId: number, ids: number[]) {
-  const currentUsersWithAccess = (await readUnique( deviceId, "device", "users")) as number[];
-  const updatedUsersWithAccess = currentUsersWithAccess.filter((id) => !ids.includes(id));
+  let updatedUsersWithAccess;
+  if (typeof ids === "number") {
+    updatedUsersWithAccess = Array.from(
+      new Set([...currentUsersWithAccess, ids])
+    ); // Add users (dropdown menu)
+  } else {
+    updatedUsersWithAccess = currentUsersWithAccess.filter(
+      (id) => !ids.includes(id)
+    ); // Remove users (table)
+  }
+
   await update(deviceId, "device", "users", updatedUsersWithAccess);
 }

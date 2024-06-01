@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
 import { readUserByEmail } from "@/lib/data/read";
-import { updateUsersWithAccessAdd } from "@/lib/data/update";
+import { updateUsersWithAccess } from "@/lib/data/update";
 
 import { Users } from "@/components/form/device/owner";
 import { DialogContent } from "@/components/dialog-content";
@@ -18,7 +18,7 @@ import { Button } from "@/components/ui/button";
 
 import { email, setOpen } from "@/types";
 
-export function AddUser({
+export function GiveAccess({
   deviceId,
   users,
   setOpen,
@@ -34,7 +34,7 @@ export function AddUser({
     const userEmail = formData.get("user") as string;
 
     readUserByEmail(userEmail).then((userId) => {
-      updateUsersWithAccessAdd(deviceId, userId).then(() => {
+      updateUsersWithAccess(deviceId, userId).then(() => {
         setTimeout(() => {
           setOpen(false);
           toast.success("User added successfully!");
@@ -48,10 +48,10 @@ export function AddUser({
     <Dialog>
       <DialogTrigger asChild>
         <button className="w-full relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-accent">
-          Add user
+          Give access
         </button>
       </DialogTrigger>
-      <DialogContent title="Add user">
+      <DialogContent title="Give access">
         <form action={onSubmit}>
           <input type="hidden" name="deviceId" value={deviceId} />
           <Users users={users} />

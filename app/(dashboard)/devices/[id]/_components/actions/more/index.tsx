@@ -10,7 +10,7 @@ import { remove } from "@/lib/data/delete";
 
 import { Item } from "./item";
 import { AssignOwner } from "./assign-owner";
-import { AddUser } from "./add-user";
+import { GiveAccess } from "./give-access";
 
 import {
   DropdownMenu,
@@ -24,10 +24,12 @@ import { email } from "@/types";
 import { Device, STATUS } from "@prisma/client";
 
 export function More({
+  userId,
   device,
   users,
   ownerEmail,
 }: {
+  userId: number;
   device: Device;
   users: email[];
   ownerEmail: string;
@@ -84,7 +86,7 @@ export function More({
           ownerEmail={ownerEmail}
           setOpen={setOpen}
         />
-        <AddUser users={users} deviceId={device.id} setOpen={setOpen}/>
+        {device.ownerId === userId && <GiveAccess users={users} deviceId={device.id} setOpen={setOpen}/>}
         <Separator className="my-1" />
         <Item
           cta="Delete"

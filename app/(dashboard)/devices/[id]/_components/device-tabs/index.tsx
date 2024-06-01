@@ -27,7 +27,7 @@ export async function DeviceTabs({
         <GeneralTab role={role} device={device} />
       </TabsContent>
       <TabsContent value="access">
-        <AccessTab users={users}/>
+        <AccessTab users={users} device={device}/>
       </TabsContent>
       <TabsContent value="settings">
         <SettingsTab />

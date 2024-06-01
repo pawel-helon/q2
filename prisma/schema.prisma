@@ -50,6 +50,8 @@ model Device {
   ownerId         Int
   users           User[] @relation("AccessibleDevices")
   usersIds        Int[]
+  disabledFrom    DateTime?
+  disabledTo      DateTime?
 }
 
 model Notification {

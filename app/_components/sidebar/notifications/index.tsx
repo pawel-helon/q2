@@ -48,7 +48,7 @@ export function Notifications({
           side="right"
           sideOffset={12}
           align="end"
-          className="p-0 w-[427px]"
+          className="p-0 w-[429px] bg-background border border-border shadow-black shadow-lg"
         >
           <NotificationsHeader setOpen={setOpen} />
           {notifications.length > 0 ? (

@@ -23,6 +23,7 @@ export default async function DevicePage({
 }) {
   const session = await verifySession();
   const role = session.role as ROLE;
+  const userId = session.userId as number;
 
   const device = (await readUnique(Number(params.id), "device")) as Device;
   const ownerEmail = (await readUnique(
@@ -30,6 +31,7 @@ export default async function DevicePage({
     "user",
     "email"
   )) as string;
+
   const users = (await readMany("users", "email")) as email[];
   const usersWithAccess = await readUsersWithAccess(Number(params.id)) as User[];
 
@@ -38,6 +40,7 @@ export default async function DevicePage({
       <Navbar>
         <Actions
           role={role}
+          userId={userId}
           device={device}
           ownerEmail={ownerEmail}
           users={users}

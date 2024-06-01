@@ -4,6 +4,8 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { DateRange } from "react-day-picker";
 import { toast } from "sonner";
 
+import { update } from "@/lib/data/update";
+
 import { Calendar } from "@/components/ui/calendar";
 import { Heading } from "@/components/typography";
 import {
@@ -16,19 +18,29 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
+import { Device } from "@prisma/client";
+import { useRouter } from "next/navigation";
+
 export function DisableDevice({
+  device,
   dateRange,
   setDateRange,
+  disabledFrom,
 }: {
+  device: Device;
   dateRange: DateRange | undefined;
   setDateRange: Dispatch<SetStateAction<DateRange | undefined>>;
+  disabledFrom: Date | null;
 }) {
   const [open, setOpen] = useState(false);
+  const router = useRouter();
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button size="sm">Disable</Button>
+        <Button size="sm">
+          {disabledFrom ? "Change time period" : "Disable"}
+        </Button>
       </DialogTrigger>
       <DialogContent className="w-fit">
         <DialogHeader>
@@ -50,8 +62,25 @@ export function DisableDevice({
           </DialogClose>
           <Button
             onClick={() => {
-              toast.success("Time period set successfully!");
-              setOpen(false);
+              update(
+                device.id,
+                "device",
+                "disabledFrom",
+                dateRange?.from as Date
+              )
+                .then(() =>
+                  update(
+                    device.id,
+                    "device",
+                    "disabledTo",
+                    dateRange?.to as Date
+                  )
+                )
+                .then(() => {
+                  toast.success("Time period set successfully!");
+                  setOpen(false);
+                })
+                .then(() => router.refresh());
             }}
           >
             Disable

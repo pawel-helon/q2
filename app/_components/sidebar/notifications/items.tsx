@@ -15,7 +15,7 @@ export function Items({ notifications }: { notifications: Notification[] }) {
   const router = useRouter();
 
   return (
-    <div className="flex flex-col gap-8 rounded-sm pl-4 pr-2 w-[427px] mb-4 pt-4 scrollbar max-h-[64vh] overflow-y-scroll scrollbar-w-2 scrollbar-track-card-background scrollbar-thumb-rounded-full scrollbar-thumb-background/50">
+    <div className="flex flex-col gap-8 rounded-sm pl-4 pr-2 w-[427px] mb-4 pt-4 scrollbar max-h-[64vh] overflow-y-scroll scrollbar-w-2 scrollbar-track-card-background scrollbar-thumb-rounded-full scrollbar-thumb-muted">
       {notifications
         .map((notification) => (
           <div
