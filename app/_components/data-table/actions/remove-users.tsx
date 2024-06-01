@@ -1,13 +1,34 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
-export function RemoveUsers({ ids }: { ids: any[] }) {
+import { Button } from "@/components/ui/button";
+import { updateUsersWithAccessRemove } from "@/lib/data/update";
+
+export function RemoveUsers({
+  ids,
+  pathname,
+}: {
+  ids: any[];
+  pathname: string;
+}) {
+  const deviceId = Number(pathname.split("/")[2]);
+  const router = useRouter();
+
   return (
     <Button
       size="sm"
       variant="ghost"
       className="flex items-center justify-start"
+      onClick={() => {
+        updateUsersWithAccessRemove(deviceId, ids).then(() => {
+          setTimeout(() => {
+            toast.success("User(s) removed successfully!");
+          }, 500);
+          router.refresh();
+        });
+      }}
     >
       Remove
     </Button>

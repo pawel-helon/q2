@@ -28,7 +28,7 @@ export function Actions<TData>({
         <Div duration=".3" className="flex min-w-sm h-8">
           {pathname === "/devices" && <ChangeStatus ids={ids} />}
           {pathname === "/users" && <ChangeRole ids={ids} />}
-          {pathname.startsWith("/devices/") && <RemoveUsers ids={ids} />}
+          {pathname.startsWith("/devices/") && <RemoveUsers ids={ids} pathname={pathname}/>}
           {!pathname.startsWith("/devices/") && (<MoreButton pathname={pathname} ids={ids} />)}
         </Div>
       ) : (

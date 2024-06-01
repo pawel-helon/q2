@@ -1,5 +1,11 @@
 "use client";
 
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+
+import { readUserByEmail } from "@/lib/data/read";
+import { updateUsersWithAccessAdd } from "@/lib/data/update";
+
 import { Users } from "@/components/form/device/owner";
 import { DialogContent } from "@/components/dialog-content";
 import {
@@ -11,10 +17,6 @@ import {
 import { Button } from "@/components/ui/button";
 
 import { email, setOpen } from "@/types";
-import { readUserByEmail } from "@/lib/data/read";
-import { updateUsersWithAccess } from "@/lib/data/update";
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
 
 export function AddUser({
   deviceId,
@@ -32,7 +34,7 @@ export function AddUser({
     const userEmail = formData.get("user") as string;
 
     readUserByEmail(userEmail).then((userId) => {
-      updateUsersWithAccess(deviceId, userId).then(() => {
+      updateUsersWithAccessAdd(deviceId, userId).then(() => {
         setTimeout(() => {
           setOpen(false);
           toast.success("User added successfully!");

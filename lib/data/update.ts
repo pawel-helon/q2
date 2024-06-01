@@ -12,7 +12,6 @@ export async function update(
     | "email"
     | "password"
     | "role"
-
     | "deviceName"
     | "streetAddress"
     | "city"
@@ -23,7 +22,6 @@ export async function update(
     | "state"
     | "owner"
     | "users"
-    
     | "requestedRole",
   value: any
 ) {
@@ -138,7 +136,7 @@ export async function update(
           data: { ownerId: value },
         });
         break;
-        case "users":
+      case "users":
         await db.device.update({
           where: {
             id: id,
@@ -266,17 +264,14 @@ export async function updateDeviceDetails(
   return updatedDevice;
 }
 
-export async function updateUsersWithAccess(deviceId: number, userId: number) {
-  const currentUsersWithAccess = await readUnique(deviceId, "device", "users") as number[]
+export async function updateUsersWithAccessAdd(deviceId: number, userId: number) {
+  const currentUsersWithAccess = (await readUnique(deviceId, "device", "users")) as number[];
+  const updatedUsersWithAccess = Array.from(new Set([...currentUsersWithAccess, userId]));
+  await update(deviceId, "device", "users", updatedUsersWithAccess);
+}
 
-  const updatedUsersWithAccess = Array.from(new Set([...currentUsersWithAccess, userId]))
-
-  await db.device.update({
-    where: {
-      id: deviceId,
-    },
-    data: {
-      usersIds: updatedUsersWithAccess,
-    },
-  });
+export async function updateUsersWithAccessRemove(deviceId: number, ids: number[]) {
+  const currentUsersWithAccess = (await readUnique( deviceId, "device", "users")) as number[];
+  const updatedUsersWithAccess = currentUsersWithAccess.filter((id) => !ids.includes(id));
+  await update(deviceId, "device", "users", updatedUsersWithAccess);
 }
