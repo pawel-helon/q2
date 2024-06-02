@@ -1,6 +1,7 @@
 "use client";
 
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { DateRange } from "react-day-picker";
 import { toast } from "sonner";
 
@@ -19,19 +20,15 @@ import {
 import { Button } from "@/components/ui/button";
 
 import { Device } from "@prisma/client";
-import { useRouter } from "next/navigation";
 
 export function DisableDevice({
   device,
-  dateRange,
-  setDateRange,
   disabledFrom,
 }: {
   device: Device;
-  dateRange: DateRange | undefined;
-  setDateRange: Dispatch<SetStateAction<DateRange | undefined>>;
   disabledFrom: Date | null;
 }) {
+  const [dateRange, setDateRange] = useState<DateRange | undefined>();
   const [open, setOpen] = useState(false);
   const router = useRouter();
 

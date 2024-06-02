@@ -3,6 +3,11 @@ import { Dispatch, SetStateAction } from "react";
 
 export type setOpen = Dispatch<SetStateAction<boolean>>
 
+export type deviceName = {
+  id: number;
+  deviceName: string;
+}
+
 export type Device = {
   id: number;
   deviceName: string;

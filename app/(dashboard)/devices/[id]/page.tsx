@@ -5,13 +5,13 @@ import { readUnique, readMany, readUsersWithAccess } from "@/lib/data/read";
 
 import { DeviceTabs } from "./_components/device-tabs";
 import { GeneralTab } from "./_components/device-tabs/general-tab";
+import { Header } from "./_components/header";
 import { Tooltip } from "@/components/tooltip";
 import { Actions } from "./_components/actions";
 import { Navbar } from "@/components/navbar";
-import { Header } from "@/app/_components/header";
 import { Badge } from "@/components/ui/badge";
 
-import { email } from "@/types";
+import { deviceName, email } from "@/types";
 import { Device, ROLE, User } from "@prisma/client";
 
 export default async function DevicePage({
@@ -33,7 +33,11 @@ export default async function DevicePage({
   )) as string;
 
   const users = (await readMany("users", "email")) as email[];
-  const usersWithAccess = await readUsersWithAccess(Number(params.id)) as User[];
+  const usersWithAccess = (await readUsersWithAccess(
+    Number(params.id)
+  )) as User[];
+
+  const devices = (await readMany("devices", "deviceName")) as deviceName[];
 
   return (
     <>
@@ -46,7 +50,7 @@ export default async function DevicePage({
           users={users}
         />
       </Navbar>
-      <Header title={device.deviceName}>
+      <Header title={device.deviceName} deviceId={device.id} devices={devices}>
         <div className="flex gap-1">
           <Tooltip title="Device status">
             <Badge variant={device.status}>{device.status.toLowerCase()}</Badge>
@@ -61,7 +65,7 @@ export default async function DevicePage({
           <GeneralTab role={role} device={device} />
         </div>
       ) : (
-        <DeviceTabs role={role} device={device} users={usersWithAccess}/>
+        <DeviceTabs role={role} device={device} users={usersWithAccess} />
       )}
     </>
   );
