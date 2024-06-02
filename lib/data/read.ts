@@ -314,3 +314,16 @@ export async function readUsersWithAccess(deviceId: number) {
 
   return users;
 }
+
+export async function readManyDevicesIds() {
+  const devices = await db.device.findMany({
+    select: {
+      id: true,
+    },
+    orderBy: {
+      id: "asc",
+    }
+  });
+
+  return devices;
+}

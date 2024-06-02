@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { Heading } from "@/components/typography";
 import { Button } from "@/components/ui/button";
 
-import { deviceName } from "@/types";
+import { deviceId } from "@/types";
 
 export function Header({
   title,
@@ -16,7 +16,7 @@ export function Header({
 }: {
   title: string;
   deviceId: number;
-  devices: deviceName[];
+  devices: deviceId[];
   children?: React.ReactNode;
 }) {
   const router = useRouter();
@@ -27,8 +27,8 @@ export function Header({
         <Button
           onClick={
             deviceId - 1 > 0
-              ? () => router.push(`/devices/${devices[deviceId - 1].id}`)
-              : () => router.push(`/devices/${devices[devices.length - 1].id}`)
+              ? () => router.push(`/devices/${deviceId - 1}`)
+              : () => router.push(`/devices/${devices.length}`)
           }
           variant="outline"
           size="sm"
@@ -38,9 +38,9 @@ export function Header({
         </Button>
         <Button
           onClick={
-            deviceId + 1 < devices.length
-              ? () => router.push(`/devices/${devices[deviceId + 1].id}`)
-              : () => router.push(`/devices/${devices[0].id}`)
+            deviceId + 1 < devices.length + 1
+              ? () => router.push(`/devices/${deviceId + 1}`)
+              : () => router.push(`/devices/${1}`)
           }
           variant="outline"
           size="sm"
