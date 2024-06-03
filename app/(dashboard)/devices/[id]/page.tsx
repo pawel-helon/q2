@@ -60,7 +60,7 @@ export default async function DevicePage({
           </Tooltip>
         </div>
       </Header>
-      {role !== ROLE.ADMIN ? (
+      {role === ROLE.ENDUSER ? (
         <div className="mt-[84px] border-t">
           <GeneralTab role={role} device={device} />
         </div>

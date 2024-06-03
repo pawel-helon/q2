@@ -38,7 +38,7 @@ export function Header({
         </Button>
         <Button
           onClick={
-            deviceId + 1 < devices.length + 1
+            deviceId < devices.length
               ? () => router.push(`/devices/${deviceId + 1}`)
               : () => router.push(`/devices/${1}`)
           }
