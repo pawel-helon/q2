@@ -69,8 +69,6 @@ export function Disable({ device }: { device: Device }) {
         </div>
         <DisableDevice
           device={device}
-          // dateRange={dateRange}
-          // setDateRange={setDateRange}
           disabledFrom={device?.disabledFrom}
         />
       </CardContent>

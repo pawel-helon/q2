@@ -59,24 +59,12 @@ export function DisableDevice({
           </DialogClose>
           <Button
             onClick={() => {
-              update(
-                device.id,
-                "device",
-                "disabledFrom",
-                dateRange?.from as Date
-              )
+              update(device.id, "device", "disabledFrom", dateRange?.from as Date)
                 .then(() =>
-                  update(
-                    device.id,
-                    "device",
-                    "disabledTo",
-                    dateRange?.to as Date
-                  )
-                )
+                  update(device.id, "device", "disabledTo", dateRange?.to as Date))
                 .then(() => {
                   toast.success("Time period set successfully!");
-                  setOpen(false);
-                })
+                  setOpen(false)})
                 .then(() => router.refresh());
             }}
           >

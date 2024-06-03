@@ -10,13 +10,13 @@ import { id } from "@/types";
 
 export function Header({
   title,
-  deviceId,
-  devices,
+  userId,
+  users,
   children,
 }: {
   title: string;
-  deviceId: number;
-  devices: id[];
+  userId: number;
+  users: id[];
   children?: React.ReactNode;
 }) {
   const router = useRouter();
@@ -26,9 +26,9 @@ export function Header({
       <div className="flex gap-1">
         <Button
           onClick={
-            deviceId - 1 > 0
-              ? () => router.push(`/devices/${deviceId - 1}`)
-              : () => router.push(`/devices/${devices.length}`)
+            userId - 1 > 0
+              ? () => router.push(`/users/${userId - 1}`)
+              : () => router.push(`/users/${users.length}`)
           }
           variant="outline"
           size="sm"
@@ -38,9 +38,9 @@ export function Header({
         </Button>
         <Button
           onClick={
-            deviceId < devices.length
-              ? () => router.push(`/devices/${deviceId + 1}`)
-              : () => router.push(`/devices/${1}`)
+            userId < users.length
+              ? () => router.push(`/users/${userId + 1}`)
+              : () => router.push(`/users/${1}`)
           }
           variant="outline"
           size="sm"

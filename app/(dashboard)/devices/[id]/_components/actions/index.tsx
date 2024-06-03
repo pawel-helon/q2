@@ -22,7 +22,7 @@ export function Actions({
   return (
     <div className="flex gap-2 justify-end">
       <ChangeState device={device} />
-      {role === ROLE.ADMIN && (
+      {role !== ROLE.ENDUSER && (
         <More userId={userId} device={device} users={users} ownerEmail={ownerEmail} />
       )}
     </div>

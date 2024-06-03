@@ -1,17 +1,18 @@
 "use server";
 
-import { readMany, readUnique } from "@/lib/data/read";
 import { verifySession } from "@/lib/data-access-layer";
+import { readMany, readManyIds, readUnique } from "@/lib/data/read";
 
 import { UserCard } from "./_components/user-card";
 import { DeviceCard } from "./_components/device-card";
 import { MoreButton } from "./_components/more-button";
 import { Navbar } from "@/components/navbar";
 import { Tooltip } from "@/components/tooltip";
-import { Header } from "@/app/_components/header";
 import { Badge } from "@/components/ui/badge";
 
 import { $Enums, User, Device, ROLE } from "@prisma/client";
+import { id } from "@/types";
+import { Header } from "./_components/header";
 
 export default async function UserPage({
   params,
@@ -27,6 +28,8 @@ export default async function UserPage({
   const user = (await readUnique(Number(userId), "user")) as User;
 
   const devices = (await readMany("devices")) as Device[];
+  
+  const users = (await readManyIds("users")) as id[];
 
   return (
     <>
@@ -35,7 +38,7 @@ export default async function UserPage({
           <Navbar>
             <MoreButton userId={userId} devices={devices} />
           </Navbar>
-          <Header title={user.name as string}>
+          <Header title={user.name as string} userId={userId} users={users}>
             <Tooltip title="User role">
               <Badge variant={user.role}>{user.role.toLocaleLowerCase()}</Badge>
             </Tooltip>

@@ -1,7 +1,12 @@
 "use server";
 
 import { verifySession } from "@/lib/data-access-layer";
-import { readUnique, readMany, readUsersWithAccess, readManyDevicesIds } from "@/lib/data/read";
+import {
+  readUnique,
+  readMany,
+  readUsersWithAccess,
+  readManyIds,
+} from "@/lib/data/read";
 
 import { DeviceTabs } from "./_components/device-tabs";
 import { GeneralTab } from "./_components/device-tabs/general-tab";
@@ -11,7 +16,7 @@ import { Actions } from "./_components/actions";
 import { Navbar } from "@/components/navbar";
 import { Badge } from "@/components/ui/badge";
 
-import { email, deviceId } from "@/types";
+import { email, id } from "@/types";
 import { Device, ROLE, User } from "@prisma/client";
 
 export default async function DevicePage({
@@ -26,18 +31,12 @@ export default async function DevicePage({
   const userId = session.userId as number;
 
   const device = (await readUnique(Number(params.id), "device")) as Device;
-  const ownerEmail = (await readUnique(
-    device.ownerId,
-    "user",
-    "email"
-  )) as string;
+  const ownerEmail = (await readUnique(device.ownerId, "user", "email")) as string;
 
   const users = (await readMany("users", "email")) as email[];
-  const usersWithAccess = (await readUsersWithAccess(
-    Number(params.id)
-  )) as User[];
+  const usersWithAccess = (await readUsersWithAccess(Number(params.id))) as User[];
 
-  const devices = await readManyDevicesIds() as deviceId[];
+  const devices = (await readManyIds("devices")) as id[];
 
   return (
     <>
