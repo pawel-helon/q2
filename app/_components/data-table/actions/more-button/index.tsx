@@ -1,5 +1,6 @@
 "use client";
 
+import { Table } from "@tanstack/react-table";
 import { useState } from "react";
 import { Ellipsis } from "lucide-react";
 
@@ -12,7 +13,15 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 
-export const MoreButton = ({ ids, pathname }: { ids: any[]; pathname: string }) => {
+export function MoreButton<TData>({
+  table,
+  ids,
+  pathname,
+}: {
+  table: Table<TData>;
+  ids: any[];
+  pathname: string;
+}) {
   const [open, setOpen] = useState(false);
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
@@ -27,9 +36,9 @@ export const MoreButton = ({ ids, pathname }: { ids: any[]; pathname: string }) 
         className="bg-background shadow-black shadow-lg"
       >
         {pathname === "/devices" ? (
-          <DeleteDevices ids={ids} setOpen={setOpen} />
+          <DeleteDevices ids={ids} setOpen={setOpen} table={table}/>
         ) : (
-          <DeleteUsers ids={ids} setOpen={setOpen} />
+          <DeleteUsers ids={ids} setOpen={setOpen} table={table}/>
         )}
       </DropdownMenuContent>
     </DropdownMenu>

@@ -16,14 +16,17 @@ import {
 import { Button } from "@/components/ui/button";
 
 import { setOpen } from "@/types";
+import { Table } from "@tanstack/react-table";
 
-export const DeleteDevices = ({
+export function DeleteDevices<TData>({
+  table,
   ids,
   setOpen,
 }: {
+  table: Table<TData>;
   ids: any[];
   setOpen: setOpen;
-}) => {
+}) {
   const router = useRouter();
 
   return (
@@ -49,6 +52,7 @@ export const DeleteDevices = ({
                 setTimeout(() => {
                   setOpen(false);
                   toast.success("Device(s) deleted");
+                  table.resetRowSelection();
                 }, 500);
                 router.refresh();
               });
@@ -60,4 +64,4 @@ export const DeleteDevices = ({
       </DialogContent>
     </Dialog>
   );
-};
+}

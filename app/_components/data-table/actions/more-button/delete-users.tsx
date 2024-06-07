@@ -1,3 +1,6 @@
+"use client"
+
+import { Table } from "@tanstack/react-table";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
@@ -15,10 +18,12 @@ import { Button } from "@/components/ui/button";
 
 import { setOpen } from "@/types";
 
-export function DeleteUsers({
+export function DeleteUsers<TData>({
+  table,
   ids,
   setOpen,
 }: {
+  table: Table<TData>;
   ids: any[];
   setOpen: setOpen;
 }) {
@@ -47,6 +52,7 @@ export function DeleteUsers({
                 setOpen(false);
                 setTimeout(() => {
                   toast.success("User(s) deleted");
+                  table.resetRowSelection();
                 }, 500);
                 router.refresh();
               });

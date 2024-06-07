@@ -24,10 +24,10 @@ export function Actions<TData>({
     <div className="relative">
       {table.getFilteredSelectedRowModel().rows.length > 0 ? (
         <Div duration=".3" className="flex min-w-sm h-8">
-          {pathname === "/devices" && <ChangeStatus ids={ids} />}
-          {pathname === "/users" && <ChangeRole ids={ids} />}
-          {pathname.startsWith("/devices/") && <RemoveUsers ids={ids} pathname={pathname}/>}
-          {!pathname.startsWith("/devices/") && (<MoreButton pathname={pathname} ids={ids} />)}
+          {pathname === "/devices" && <ChangeStatus table={table} ids={ids} />}
+          {pathname === "/users" && <ChangeRole  table={table} ids={ids} />}
+          {/* {pathname.startsWith("/devices/") && <RemoveUsers ids={ids} pathname={pathname}/>} */}
+          {!pathname.startsWith("/devices/") && (<MoreButton pathname={pathname} ids={ids} table={table}/>)}
         </Div>
       ) : (
         <div className="size-[32px]" />

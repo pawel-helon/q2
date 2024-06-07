@@ -1,5 +1,6 @@
 "use client";
 
+import { Table } from "@tanstack/react-table";
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { toast } from "sonner";
@@ -16,7 +17,13 @@ import { Button } from "@/components/ui/button";
 
 import { ROLE } from "@prisma/client";
 
-export function ChangeRole({ ids }: { ids: number[] }) {
+export function ChangeRole<TData>({
+  table,
+  ids,
+}: {
+  table: Table<TData>;
+  ids: number[];
+}) {
   const [visibility, setVisibilty] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -49,6 +56,7 @@ export function ChangeRole({ ids }: { ids: number[] }) {
               setTimeout(() => {
                 setOpen(false);
                 toast.success("Role has been changed to: Admin");
+                table.resetRowSelection();
               }, 500);
               router.refresh();
             });
@@ -65,6 +73,7 @@ export function ChangeRole({ ids }: { ids: number[] }) {
               setTimeout(() => {
                 setOpen(false);
                 toast.success("Role has been changed to: Owner");
+                table.resetRowSelection();
               }, 500);
               router.refresh();
             });
@@ -81,6 +90,7 @@ export function ChangeRole({ ids }: { ids: number[] }) {
               setTimeout(() => {
                 setOpen(false);
                 toast.success("Role has been changed to: End user");
+                table.resetRowSelection();
               }, 500);
               router.refresh();
             });

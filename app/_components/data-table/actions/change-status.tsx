@@ -1,5 +1,6 @@
 "use client";
 
+import { Table } from "@tanstack/react-table";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
@@ -16,7 +17,13 @@ import { Button } from "@/components/ui/button";
 
 import { STATUS } from "@prisma/client";
 
-export function ChangeStatus({ ids }: { ids: number[] }) {
+export function ChangeStatus<TData>({
+  table,
+  ids,
+}: {
+  table: Table<TData>;
+  ids: number[];
+}) {
   const [visibility, setVisibilty] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -49,6 +56,7 @@ export function ChangeStatus({ ids }: { ids: number[] }) {
             setTimeout(() => {
               setOpen(false);
               toast.success("Status has been changed to: Active");
+              table.resetRowSelection();
             }, 500);
             router.refresh();
           }}
@@ -64,6 +72,7 @@ export function ChangeStatus({ ids }: { ids: number[] }) {
             setTimeout(() => {
               setOpen(false);
               toast.success("Status has been changed to: Inactive");
+              table.resetRowSelection();
             }, 500);
             router.refresh();
           }}
