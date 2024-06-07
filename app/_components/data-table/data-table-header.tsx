@@ -6,13 +6,9 @@ import { Actions } from "./actions";
 
 export function DataTableHeader<TData>({
   table,
-  numberOfResults,
-  anySelectedRow,
   pathname,
 }: {
   table: Table<TData>;
-  numberOfResults: number;
-  anySelectedRow: boolean;
   pathname: string;
 }) {
   return (
@@ -24,12 +20,11 @@ export function DataTableHeader<TData>({
           {pathname.startsWith("/devices/") && "Access list"}
         </Heading>
         <Paragraph variant="small-thick" className="text-muted-foreground">
-          ({numberOfResults})
+          ({table.getCoreRowModel().rows.length})
         </Paragraph>
       </div>
       <Actions
         table={table}
-        anySelectedRow={anySelectedRow}
         pathname={pathname}
       />
     </div>

@@ -18,14 +18,14 @@ export function Disable({ device }: { device: Device }) {
 
   return (
     <Card className="-mb-12">
-      <CardContent className="flex flex-row justify-between items-end mb-0">
+      <CardContent className="flex flex-col sm:flex-row sm:justify-between sm:items-end mb-0">
         <div className="flex flex-col gap-1 mr-4">
           <div className="flex gap-2">
             <Heading variant="h3">Disable access</Heading>
             <Calendar size={16} />
           </div>
           {device.disabledFrom ? (
-            <div className="flex flex-col items-start md:flex-row md:gap-2 md:items-center">
+            <div className="flex flex-row justify-between sm:justify-start gap-2 items-center">
               <Paragraph variant="base-thin">
                 Device will be disabled from{" "}
                 <span className="text-foreground">

@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState } from "react";
+import { usePathname } from "next/navigation";
 
 import {
   ColumnDef,
@@ -19,7 +20,6 @@ import { DataTableFooter } from "./data-table-footer";
 import { DataTableBody } from "./data-table-body";
 import { DataTableSearch } from "./data-table-search";
 import { Div } from "@/components/motion-ui/div";
-import { usePathname } from "next/navigation";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -30,10 +30,9 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  const pathname = usePathname();
   const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  );
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
   const [pagination, setPagination] = useState({
     pageIndex: 0,
     pageSize: 5,
@@ -63,17 +62,6 @@ export function DataTable<TData, TValue>({
     },
   });
 
-  const numberOfResults = data.length;
-
-  const selectedRows = table.getState().rowSelection;
-  let anySelectedRow = false;
-  for (const key in selectedRows) {
-    if (selectedRows[key] === true) {
-      anySelectedRow = true;
-      break;
-    }
-  }
-  const pathname = usePathname();
   return (
     <>
       <Div duration=".6" className="hidden lg:block">
@@ -81,8 +69,6 @@ export function DataTable<TData, TValue>({
         <div className="mt-12 py-4 border border-border shadow-black shadow-2xl rounded-lg mb-12">
           <DataTableHeader
             table={table}
-            numberOfResults={numberOfResults}
-            anySelectedRow={anySelectedRow}
             pathname={pathname}
           />
 

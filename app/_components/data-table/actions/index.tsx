@@ -11,11 +11,9 @@ import { Div } from "@/components/motion-ui/div";
 
 export function Actions<TData>({
   table,
-  anySelectedRow,
   pathname,
 }: {
   table: Table<TData>;
-  anySelectedRow: boolean;
   pathname: string;
 }) {
   const selectedRowsActions = table.getSelectedRowModel().rows;
@@ -24,7 +22,7 @@ export function Actions<TData>({
 
   return (
     <div className="relative">
-      {anySelectedRow ? (
+      {table.getFilteredSelectedRowModel().rows.length > 0 ? (
         <Div duration=".3" className="flex min-w-sm h-8">
           {pathname === "/devices" && <ChangeStatus ids={ids} />}
           {pathname === "/users" && <ChangeRole ids={ids} />}

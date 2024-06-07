@@ -1,10 +1,18 @@
 import { z } from "zod";
 
 export const AddDeviceSchemaAdmin = z.object({
-  owner: z.string().min(1, { message: "Select owner" }),
-  city: z.string().min(1, { message: "Select city" }),
-  country: z.string().min(1, { message: "Select country" }),
-  model: z.string().min(1, { message: "Select model" }),
+  owner: z
+    .string()
+    .min(1, { message: "Select owner" }),
+  city: z
+    .string()
+    .min(1, { message: "Select city" }),
+  country: z
+    .string()
+    .min(1, { message: "Select country" }),
+  model: z
+    .string()
+    .min(1, { message: "Select model" }),
   deviceName: z
     .string()
     .min(2, { message: "Device name must be at least 2 characters long" })
@@ -13,13 +21,22 @@ export const AddDeviceSchemaAdmin = z.object({
     .string()
     .min(2, { message: "Address must be at least 2 characters long" })
     .trim(),
-  SIM: z.string().min(1, { message: "Enter SIM card number" }).trim(),
+  SIM: z
+    .string()
+    .min(1, { message: "Enter SIM card number" })
+    .trim(),
 });
 
 export const AddDeviceSchemaEndUser = z.object({
-  city: z.string().min(1, { message: "Select city" }),
-  country: z.string().min(1, { message: "Select country" }),
-  model: z.string().min(1, { message: "Select model" }),
+  city: z
+    .string()
+    .min(1, { message: "Select city" }),
+  country: z
+    .string()
+    .min(1, { message: "Select country" }),
+  model: z
+    .string()
+    .min(1, { message: "Select model" }),
   deviceName: z
     .string()
     .min(2, { message: "Device name must be at least 2 characters long" })
@@ -28,7 +45,10 @@ export const AddDeviceSchemaEndUser = z.object({
     .string()
     .min(2, { message: "Address must be at least 2 characters long" })
     .trim(),
-  SIM: z.string().min(1, { message: "Enter SIM card number" }).trim(),
+  SIM: z
+    .string()
+    .min(1, { message: "Enter SIM card number" })
+    .trim(),
 });
 
 export type FormState =

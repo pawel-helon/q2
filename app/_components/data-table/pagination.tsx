@@ -1,12 +1,12 @@
-import { Button } from "@/components/ui/button";
 import { Table } from "@tanstack/react-table";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-interface PaginationProps<TData> {
-  table: Table<TData>;
-}
+import { Button } from "@/components/ui/button";
 
-export function Pagination<TData>({ table }: PaginationProps<TData>) {
+
+export function Pagination<TData>({ table }: {
+  table: Table<TData>;
+}) {
   return (
     <div className="flex gap-2">
       <Button

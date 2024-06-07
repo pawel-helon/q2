@@ -26,7 +26,7 @@ export function AddDevice({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button>
-          <Plus className="-ml-2 mr-2" />
+          <Plus className="size-5 -ml-2 mr-2" />
           Add device
         </Button>
       </DialogTrigger>
