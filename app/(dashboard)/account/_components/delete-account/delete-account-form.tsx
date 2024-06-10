@@ -66,7 +66,7 @@ export function DeleteAccountForm({ userId }: { userId: number }) {
           <Button variant="ghost">Cancel</Button>
         </DialogClose>
         <Button disabled={pending} aria-disabled={pending} type="submit">
-          {pending ? "Submitting..." : "Submit"}
+          {pending ? "Submitting..." : "Delete account"}
         </Button>
       </DialogFooter>
     </form>

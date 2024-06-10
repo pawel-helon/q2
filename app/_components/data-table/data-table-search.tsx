@@ -9,15 +9,8 @@ interface DataTableSearchProps<TData> {
 
 export function DataTableSearch<TData>({ table }: DataTableSearchProps<TData>) {
   const pathname = usePathname()
-  
-  let searchColumn: string = ""
+  const searchColumn = pathname === "/users" ? "name" : "deviceName"
 
-  if (pathname === "/users") {
-    searchColumn = "name"
-  } else if (pathname === "/devices") {
-    searchColumn = "deviceName"
-  }
-  
   return (
     <div className="flex justify-between border-b border-border pb-1 my-12">
       <div className="flex items-center">

@@ -6,6 +6,8 @@ import { Sidebar } from "@/app/_components/sidebar";
 import { verifySession } from "@/lib/data-access-layer";
 
 import { Notification, ROLE } from "@prisma/client";
+import { Account } from "../_components/mobile/account";
+import { Nav } from "../_components/mobile/nav";
 
 export default async function DashboardLayout({
   children,
@@ -17,14 +19,25 @@ export default async function DashboardLayout({
   const role = session.role as ROLE;
 
   const email = (await readUnique(userId, "user", "email")) as string;
-  const notifications = (await readNotificationsForUser(userId)) as Notification[];
+  const notifications = (await readNotificationsForUser(
+    userId
+  )) as Notification[];
 
   return (
-    <div className="relative min-h-screen flex mx-auto xl:max-w-screen-2xl 2xl:max-w-screen-2xl scrollbar max-h-[100vh] overflow-y-scroll scrollbar-w-2 scrollbar-h-2 scrollbar-track-card-background scrollbar-thumb-rounded-full scrollbar-thumb-muted">
-      <Sidebar role={role} email={email} notifications={notifications} />
-      <div className="flex flex-col w-full px-6 border-r-[1px] border-border">
+    <>
+      <div className="xs:hidden relative px-3">
+        <div className="flex justify-between py-4">
+          <Nav />
+          <Account email={email} />
+        </div>
         {children}
       </div>
-    </div>
+      <div className="hidden xs:flex relative min-h-screen mx-auto xl:max-w-screen-2xl 2xl:max-w-screen-2xl scrollbar max-h-[100vh] overflow-y-scroll scrollbar-w-2 scrollbar-h-2 scrollbar-track-card-background scrollbar-thumb-rounded-full scrollbar-thumb-muted">
+        <Sidebar role={role} email={email} notifications={notifications} />
+        <div className="flex flex-col w-full px-6 border-r-[1px] border-border">
+          {children}
+        </div>
+      </div>
+    </>
   );
 }

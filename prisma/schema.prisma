@@ -14,16 +14,16 @@ enum ROLE {
 }
 
 model User {
-  id                    Int      @id @default(autoincrement())
-  email                 String   @unique
+  id                    Int             @id @default(autoincrement())
+  email                 String          @unique
   name                  String?
   password              String
   role                  ROLE
-  devices               Device[] @relation("UserDevices")
-  accessibleDevices     Device[] @relation("AccessibleDevices")
+  devices               Device[]        @relation("UserDevices")
+  accessibleDevices     Device[]        @relation("AccessibleDevices")
   notifications         Notification[]
-  createdAt             DateTime @default(now())
-  updatedAt             DateTime @updatedAt
+  createdAt             DateTime        @default(now())
+  updatedAt             DateTime        @updatedAt
 }
 
 enum STATUS {
@@ -46,21 +46,21 @@ model Device {
   SIM             String
   status          STATUS
   state           STATE
-  owner           User @relation(fields: [ownerId], references: [id], onDelete: Cascade, name: "UserDevices")
+  owner           User      @relation(fields: [ownerId], references: [id], onDelete: Cascade, name: "UserDevices")
   ownerId         Int
-  users           User[] @relation("AccessibleDevices")
+  users           User[]    @relation("AccessibleDevices")
   usersIds        Int[]
   disabledFrom    DateTime?
   disabledTo      DateTime?
 }
 
 model Notification {
-  id              Int      @id @default(autoincrement())
+  id              Int       @id @default(autoincrement())
   title           String
-  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId          Int
   requester       Int
   requestedRole   ROLE
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
 }

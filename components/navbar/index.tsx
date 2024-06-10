@@ -17,7 +17,7 @@ export function Navbar({
   const pathname = usePathname();
 
   return (
-    <div className={cn("w-full py-6 flex justify-between items-center", className)}>
+    <div className={cn("hidden xs:flex w-full py-6 justify-between items-center", className)}>
       {pathname === "/" || pathname === "/sign-in" || pathname === "/sign-up" ? (
         <Link href="/">
           <Container />

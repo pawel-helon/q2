@@ -2,7 +2,7 @@
 
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { Calendar } from "lucide-react";
+import { CalendarDays } from "lucide-react";
 
 import { update } from "@/lib/data/update";
 
@@ -18,11 +18,11 @@ export function Disable({ device }: { device: Device }) {
 
   return (
     <Card className="-mb-12">
-      <CardContent className="flex flex-col sm:flex-row sm:justify-between sm:items-end mb-0">
-        <div className="flex flex-col gap-1 mr-4">
-          <div className="flex gap-2">
+      <CardContent className="flex flex-col sm:flex-row sm:justify-between sm:items-end mb-0 gap-4">
+        <div className="flex flex-col gap-2">
+          <div className="flex justify-between sm:justify-start items-center sm:items-start gap-2">
             <Heading variant="h3">Disable access</Heading>
-            <Calendar size={16} />
+            <CalendarDays className="size-5 sm:hidden" />
           </div>
           {device.disabledFrom ? (
             <div className="flex flex-row justify-between sm:justify-start gap-2 items-center">
