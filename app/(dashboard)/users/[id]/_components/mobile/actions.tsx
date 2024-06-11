@@ -29,11 +29,9 @@ export function Actions({
       <DropdownMenu open={open} onOpenChange={setOpen}>
         <DropdownMenuTrigger asChild>
           <Button
-            // variant="secondary"
             size="icon"
             className="size-11 shadow-2xl shadow-black rounded-full"
           >
-            {/* <EllipsisVertical /> */}
             <Plus />
           </Button>
         </DropdownMenuTrigger>

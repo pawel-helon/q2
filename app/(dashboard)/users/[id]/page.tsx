@@ -43,7 +43,7 @@ export default async function UserPage({
               <Badge variant={user.role}>{user.role.toLocaleLowerCase()}</Badge>
             </Tooltip>
           </Header>
-          <div className="flex flex-col gap-4 md:grid md:grid-cols-3 border-t w-full my-12 xs:mt-[5.5rem] pt-8 xs:pt-[3rem]">
+          <div className="flex flex-col-reverse gap-4 md:grid md:grid-cols-3 border-t w-full my-12 xs:mt-[5.5rem] pt-8 xs:pt-[3rem]">
             <UserCard user={user} />
             <DeviceCard user={user} />
           </div>

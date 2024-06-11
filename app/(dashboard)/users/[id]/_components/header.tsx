@@ -27,7 +27,7 @@ export function Header({
 
   return (
     <>
-      <div className="xs:hidden flex flex-col mt-6">
+      <div className="xs:hidden flex flex-col mt-[88px]">
         <div className="flex justify-between">
           <Badge variant={userRole} className="h-min">{userRole.toLocaleLowerCase()}</Badge>
           <div className="flex gap-1">
