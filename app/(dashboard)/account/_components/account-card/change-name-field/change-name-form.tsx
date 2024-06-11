@@ -15,10 +15,12 @@ import { setOpen } from "@/types";
 
 export function ChangeNameForm({
   userId,
-  setOpen,
+  setOpenDialog,
+  setOpenSheet,
 }: {
   userId: number;
-  setOpen: setOpen;
+  setOpenDialog: setOpen;
+  setOpenSheet: setOpen
 }) {
   const [state, action] = useFormState(onSubmit, undefined);
   const { pending } = useFormStatus();
@@ -40,7 +42,8 @@ export function ChangeNameForm({
 
     update(userId, "user", "name", name).then(() => {
       setTimeout(() => {
-        setOpen(false);
+        setOpenSheet(false);
+        setOpenDialog(false);
         toast.success("Name has been updated.");
       }, 500);
       router.refresh();
@@ -48,10 +51,10 @@ export function ChangeNameForm({
   }
 
   return (
-    <form action={action} className="flex flex-col gap-8">
+    <form action={action} className="flex flex-col gap-8 mt-6 xs:mt-0">
       <input type="hidden" name="userId" value={userId} />
       <Name>{state?.errors?.name && <>{state.errors.name}</>}</Name>
-      <div className="flex gap-2 w-full justify-end">
+      <div className="flex flex-col xs:flex-row gap-2 w-full xs:justify-end">
         <DialogClose asChild>
           <Button variant="ghost">Cancel</Button>
         </DialogClose>

@@ -15,11 +15,19 @@ import {
   DialogFooter,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 
-import { setOpen } from "@/types";
-import { Device } from "@prisma/client";
 import { cn } from "@/lib/utils";
+import { Device } from "@prisma/client";
+import { setOpen } from "@/types";
 
 export function AssignDevice({
   userId,
@@ -58,34 +66,76 @@ export function AssignDevice({
   const { pending } = useFormStatus();
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <button
-          className={cn(
-            "w-full relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none",
-            "transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none",
-            "data-[disabled]:opacity-50 hover:bg-accent"
-          )}
-        >
-          Assign device
-        </button>
-      </DialogTrigger>
-      <DialogContent title="Assign device">
-        <form action={action}>
-          <input type="hidden" name="userId" defaultValue={userId} />
-          <Devices devices={devices}>
-            {state?.errors?.deviceId && <>{state.errors.deviceId}</>}
-          </Devices>
-          <DialogFooter className="flex justify-end gap-2 mt-6">
-            <DialogClose asChild>
-              <Button variant="ghost">Cancel</Button>
-            </DialogClose>
-            <Button disabled={pending} aria-disabled={pending} type="submit">
-              {pending ? "Submitting" : "Assign device"}
-            </Button>
-          </DialogFooter>
-        </form>
-      </DialogContent>
-    </Dialog>
+    <>
+      <div className="xs:hidden">
+        <Sheet>
+          <SheetTrigger asChild>
+            <button
+              className={cn(
+                "w-full relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none",
+                "transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none",
+                "data-[disabled]:opacity-50 hover:bg-accent"
+              )}
+            >
+              Assign device
+            </button>
+          </SheetTrigger>
+          <SheetContent side="bottom">
+              <SheetHeader className="text-left mb-6">
+                <SheetTitle>Assign device</SheetTitle>
+              </SheetHeader>
+            <form action={action}>
+              <input type="hidden" name="userId" defaultValue={userId} />
+              <Devices devices={devices}>
+                {state?.errors?.deviceId && <>{state.errors.deviceId}</>}
+              </Devices>
+              <div className="flex flex-col mt-6">
+              <SheetClose asChild>
+                <Button variant="ghost">Cancel</Button>
+              </SheetClose>
+              <Button disabled={pending} aria-disabled={pending} type="submit">
+                {pending ? "Submitting" : "Assign device"}
+              </Button>
+              </div>
+            </form>
+          </SheetContent>
+        </Sheet>
+      </div>
+      <div className="hidden xs:block">
+        <Dialog>
+          <DialogTrigger asChild>
+            <button
+              className={cn(
+                "w-full relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none",
+                "transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none",
+                "data-[disabled]:opacity-50 hover:bg-accent"
+              )}
+            >
+              Assign device
+            </button>
+          </DialogTrigger>
+          <DialogContent title="Assign device">
+            <form action={action}>
+              <input type="hidden" name="userId" defaultValue={userId} />
+              <Devices devices={devices}>
+                {state?.errors?.deviceId && <>{state.errors.deviceId}</>}
+              </Devices>
+              <DialogFooter className="flex justify-end gap-2 mt-6">
+                <DialogClose asChild>
+                  <Button variant="ghost">Cancel</Button>
+                </DialogClose>
+                <Button
+                  disabled={pending}
+                  aria-disabled={pending}
+                  type="submit"
+                >
+                  {pending ? "Submitting" : "Assign device"}
+                </Button>
+              </DialogFooter>
+            </form>
+          </DialogContent>
+        </Dialog>
+      </div>
+    </>
   );
 }
