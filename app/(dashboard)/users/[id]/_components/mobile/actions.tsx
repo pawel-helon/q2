@@ -1,6 +1,6 @@
 "use client";
 
-import { EllipsisVertical } from "lucide-react";
+import { EllipsisVertical, Plus } from "lucide-react";
 import { useState } from "react";
 
 import {
@@ -29,11 +29,12 @@ export function Actions({
       <DropdownMenu open={open} onOpenChange={setOpen}>
         <DropdownMenuTrigger asChild>
           <Button
-            variant="secondary"
+            // variant="secondary"
             size="icon"
-            className="shadow-2xl shadow-black"
+            className="size-11 shadow-2xl shadow-black rounded-full"
           >
-            <EllipsisVertical />
+            {/* <EllipsisVertical /> */}
+            <Plus />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent
