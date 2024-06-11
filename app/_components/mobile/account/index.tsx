@@ -30,7 +30,7 @@ export function Account({ email }: { email: string }) {
         sideOffset={8}
         align="end"
         className="bg-background shadow-black shadow-lg"
-      >
+        >
         <div className="flex gap-2 items-center rounded-sm px-2 py-1.5 text-xs text-muted-foreground">
           <Avatar className="size-6">
             <AvatarImage src="/user.png" alt="user" />
@@ -42,7 +42,7 @@ export function Account({ email }: { email: string }) {
         <DropdownMenuItem
           onSelect={() => router.push("/notifications")}
           className="flex justify-between"
-        >
+          >
           Notifications
           <Bell size={20} />
         </DropdownMenuItem>

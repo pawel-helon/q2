@@ -9,11 +9,11 @@ export function Nav() {
   const pathname = usePathname()
 
   return (
-    <div className="space-x-1 rounded-full bg-secondary p-1">
+    <div className="rounded-full bg-secondary p-1">
       <Button
         onClick={() => router.push("/devices")}
         size="sm"
-        className="rounded-full"
+        className="rounded-full px-2 py-1"
         variant={pathname.startsWith("/devices") ? "default" : "ghost"}
       >
         Devices

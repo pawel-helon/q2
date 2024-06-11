@@ -13,6 +13,7 @@ import { Badge } from "@/components/ui/badge";
 
 import { $Enums, User, Device, ROLE } from "@prisma/client";
 import { id } from "@/types";
+import { Actions } from "./_components/mobile/actions";
 
 export default async function UserPage({
   params,
@@ -28,27 +29,27 @@ export default async function UserPage({
   const user = (await readUnique(Number(userId), "user")) as User;
 
   const devices = (await readMany("devices")) as Device[];
-  
   const users = (await readManyIds("users")) as id[];
 
   return (
     <>
       {role === $Enums.ROLE.ADMIN && (
-        <>
+        <div className="relative">
           <Navbar>
             <MoreButton userId={userId} devices={devices} />
           </Navbar>
-          <Header title={user.name as string} userId={userId} users={users}>
+          <Header title={user.name as string} userId={userId} users={users} userRole={user.role}>
             <Tooltip title="User role">
               <Badge variant={user.role}>{user.role.toLocaleLowerCase()}</Badge>
             </Tooltip>
           </Header>
-          <div className="mt-[5.5rem] pt-[3rem] border-t w-full flex flex-col gap-4 md:grid md:grid-cols-3 mb-12">
+          <div className="flex flex-col gap-4 md:grid md:grid-cols-3 border-t w-full my-12 xs:mt-[5.5rem] pt-8 xs:pt-[3rem]">
             <UserCard user={user} />
             <DeviceCard user={user} />
           </div>
-        </>
+        </div>
       )}
+      <Actions userId={userId} devices={devices} />
     </>
   );
 }

@@ -21,13 +21,13 @@ export default async function UsersPage() {
   return (
     <>
       {role === ROLE.ADMIN && (
-        <>
+        <div className="relative">
           <Navbar>
             <AddUser />
           </Navbar>
           <Header title="Users" />
           <DataTable columns={columns} data={users} />
-        </>
+        </div>
       )}
     </>
   );

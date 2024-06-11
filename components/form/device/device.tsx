@@ -28,7 +28,7 @@ export function Devices({
         <SelectTrigger>
           <SelectValue placeholder="Select device" />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent side="top">
           <SelectGroup>
             {devices.map((device) => {
               return (
