@@ -8,7 +8,13 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export function Role({ children }: { children?: React.ReactNode }) {
+export function Role({
+  side,
+  children,
+}: {
+  side?: "top" | "right" | "bottom" | "left";
+  children?: React.ReactNode;
+}) {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex justify-between items-end">
@@ -21,7 +27,7 @@ export function Role({ children }: { children?: React.ReactNode }) {
         <SelectTrigger>
           <SelectValue placeholder="Select role" />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent side={side}>
           <SelectGroup>
             <SelectItem value="ADMIN">Admin</SelectItem>
             <SelectItem value="OWNER">Owner</SelectItem>

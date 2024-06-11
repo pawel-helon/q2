@@ -16,10 +16,14 @@ import { setOpen } from "@/types";
 
 export function ChangeRoleForm({
   userId,
-  setOpen,
+  side,
+  setOpenDialog,
+  setOpenSheet,
 }: {
   userId: number;
-  setOpen: setOpen;
+  side?: "top" | "right" | "bottom" | "left",
+  setOpenDialog: setOpen;
+  setOpenSheet: setOpen;
 }) {
   const router = useRouter();
 
@@ -38,7 +42,8 @@ export function ChangeRoleForm({
 
     update(userId, "user", "role", role).then(() => {
       setTimeout(() => {
-        setOpen(false);
+        setOpenSheet(false);
+        setOpenDialog(false);
         toast.success("Role has been updated.");
       }, 500);
       router.refresh();
@@ -51,8 +56,8 @@ export function ChangeRoleForm({
   return (
     <form action={action} className="flex flex-col gap-8">
       <input type="hidden" name="id" value={userId} />
-      <Role>{state?.errors?.role && <>{state.errors.role}</>}</Role>
-      <div className="w-full flex justify-end gap-2">
+      <Role side={side}>{state?.errors?.role && <>{state.errors.role}</>}</Role>
+      <div className="flex flex-col xs:flex-row gap-2 w-full xs:justify-end">
         <DialogClose asChild>
           <Button variant="ghost">Cancel</Button>
         </DialogClose>

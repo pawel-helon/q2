@@ -1,6 +1,6 @@
 "use client";
 
-import { EllipsisVertical, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import { useState } from "react";
 
 import {

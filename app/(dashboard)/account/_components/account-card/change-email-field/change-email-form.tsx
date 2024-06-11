@@ -18,10 +18,12 @@ import { setOpen } from "@/types";
 
 export function ChangeEmailForm({
   userId,
-  setOpen,
+  setOpenDialog,
+  setOpenSheet,
 }: {
   userId: number;
-  setOpen: setOpen;
+  setOpenDialog: setOpen;
+  setOpenSheet: setOpen
 }) {
   const [state, action] = useFormState(onSubmit, undefined);
   const { pending } = useFormStatus();
@@ -43,7 +45,8 @@ export function ChangeEmailForm({
 
     update(userId, "user", "email", email).then(() => {
       setTimeout(() => {
-        setOpen(false);
+        setOpenSheet(false);
+        setOpenDialog(false);
         toast.success("Email has been updated.");
       }, 500);
       router.refresh();
@@ -54,7 +57,7 @@ export function ChangeEmailForm({
     <form action={action} className="flex flex-col gap-8">
       <input type="hidden" name="userId" value={userId} />
       <Email>{state?.errors?.email && <>{state.errors.email}</>}</Email>
-      <div className="flex gap-2 w-full justify-end">
+      <div className="flex flex-col xs:flex-row gap-2 w-full xs:justify-end">
         <DialogClose asChild>
           <Button variant="ghost">Cancel</Button>
         </DialogClose>

@@ -6,9 +6,6 @@ import { ChangeNameForm } from "./change-name-form";
 
 import { DialogContent } from "@/components/dialog-content";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Sheet,
   SheetContent,
@@ -16,6 +13,9 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 export function ChangeNameField({
   label,
@@ -49,10 +49,14 @@ export function ChangeNameField({
                 </Button>
               </SheetTrigger>
               <SheetContent side="top">
-                <SheetHeader className="text-left">
+                <SheetHeader className="text-left mb-6">
                   <SheetTitle>Change name</SheetTitle>
                 </SheetHeader>
-                <ChangeNameForm userId={userId} setOpenSheet={setOpenSheet} setOpenDialog={setOpenDialog}/>
+                <ChangeNameForm
+                  userId={userId}
+                  setOpenSheet={setOpenSheet}
+                  setOpenDialog={setOpenDialog}
+                />
               </SheetContent>
             </Sheet>
           </div>
@@ -68,7 +72,11 @@ export function ChangeNameField({
                 </Button>
               </DialogTrigger>
               <DialogContent title={dialogTitle}>
-                <ChangeNameForm userId={userId} setOpenSheet={setOpenSheet} setOpenDialog={setOpenDialog} />
+                <ChangeNameForm
+                  userId={userId}
+                  setOpenSheet={setOpenSheet}
+                  setOpenDialog={setOpenDialog}
+                />
               </DialogContent>
             </Dialog>
           </div>

@@ -3,6 +3,7 @@
 import { verifySession } from "@/lib/data-access-layer";
 import { readMany, readManyIds, readUnique } from "@/lib/data/read";
 
+import { Actions } from "./_components/mobile/actions";
 import { UserCard } from "./_components/user-card";
 import { Header } from "./_components/header";
 import { DeviceCard } from "./_components/device-card";
@@ -13,7 +14,6 @@ import { Badge } from "@/components/ui/badge";
 
 import { $Enums, User, Device, ROLE } from "@prisma/client";
 import { id } from "@/types";
-import { Actions } from "./_components/mobile/actions";
 
 export default async function UserPage({
   params,
