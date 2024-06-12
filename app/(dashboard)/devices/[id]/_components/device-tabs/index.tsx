@@ -17,7 +17,7 @@ export async function DeviceTabs({
   users: User[];
 }) {
   return (
-    <Tabs defaultValue="general" className="mt-14">
+    <Tabs defaultValue="general" className="mt-[20px] xs:mt-14">
       <TabsList className="w-full border-b">
         <TabsTrigger value="general">General</TabsTrigger>
         <TabsTrigger value="access">Access</TabsTrigger>

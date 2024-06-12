@@ -2,6 +2,7 @@ import { Table } from "@tanstack/react-table";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 
 export function Pagination<TData>({ table }: {
@@ -14,7 +15,7 @@ export function Pagination<TData>({ table }: {
         size="icon"
         onClick={() => table.previousPage()}
         disabled={!table.getCanPreviousPage()}
-        className="ml-4"
+        className="ml-4 disabled:bg-transparent"
       >
         <ChevronLeft />
       </Button>
@@ -23,6 +24,7 @@ export function Pagination<TData>({ table }: {
         size="icon"
         onClick={() => table.nextPage()}
         disabled={!table.getCanNextPage()}
+        className="disabled:bg-transparent"
       >
         <ChevronRight />
       </Button>
