@@ -40,26 +40,6 @@ export function Disable({ device }: { device: Device }) {
                   { month: "long" }
                 )} ${device.disabledTo?.getFullYear()}`}</span>
               </Paragraph>
-              <Button
-                onClick={() => {
-                  update(device.id, "device", "disabledFrom", null)
-                    .then(() => {
-                      update(device.id, "device", "disabledTo", null);
-                    })
-                    .then(() => {
-                      toast.success("Disable period has been discarded");
-                    })
-                    .catch(() => {
-                      toast.error("Failed to discard disable period");
-                    });
-                  router.refresh();
-                }}
-                variant="link"
-                size="sm"
-                className="p-0"
-              >
-                Discard
-              </Button>
             </div>
           ) : (
             <Paragraph variant="base-thin">
@@ -67,10 +47,29 @@ export function Disable({ device }: { device: Device }) {
             </Paragraph>
           )}
         </div>
-        <DisableDevice
-          device={device}
-          disabledFrom={device?.disabledFrom}
-        />
+        <DisableDevice device={device} disabledFrom={device?.disabledFrom}>
+          {device.disabledFrom && (
+            <Button
+              onClick={() => {
+                update(device.id, "device", "disabledFrom", null)
+                  .then(() => {
+                    update(device.id, "device", "disabledTo", null);
+                  })
+                  .then(() => {
+                    toast.success("Disable period has been discarded");
+                  })
+                  .catch(() => {
+                    toast.error("Failed to discard disable period");
+                  });
+                router.refresh();
+              }}
+              variant="ghost"
+              size="sm"
+            >
+              Discard
+            </Button>
+          )}
+        </DisableDevice>
       </CardContent>
     </Card>
   );

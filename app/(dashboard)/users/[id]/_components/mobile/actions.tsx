@@ -25,7 +25,7 @@ export function ActionsMobile({
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="xs:hidden fixed bottom-4 z-10 right-4">
+    <div className="z-50 xs:hidden fixed bottom-3 right-3">
       <DropdownMenu open={open} onOpenChange={setOpen}>
         <DropdownMenuTrigger asChild>
           <Button
