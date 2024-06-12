@@ -45,7 +45,7 @@ export function DetailsCard({
         <Item title="SIM" value={device.SIM} />
       </CardContent>
       {role === ROLE.ADMIN && (
-        <CardFooter className="justify-end gap-2">
+        <CardFooter>
           <Edit device={device} ownerEmail={ownerEmail} users={users}/>
         </CardFooter>
       )}

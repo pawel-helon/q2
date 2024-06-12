@@ -96,10 +96,10 @@ export function Edit({
 
   return (
     <>
-      <div className="xs:hidden">
+      <div className="flex w-full xs:hidden">
         <Sheet open={openSheet} onOpenChange={setOpenSheet}>
           <SheetTrigger asChild>
-            <Button variant="secondary" size="sm">
+            <Button variant="secondary" size="sm" className="w-full">
               Edit
             </Button>
           </SheetTrigger>
@@ -159,7 +159,7 @@ export function Edit({
           </SheetContent>
         </Sheet>
       </div>
-      <div className="hidden xs:block">
+      <div className="hidden xs:flex w-full justify-end">
         <Dialog open={openDialog} onOpenChange={setOpenDialog}>
           <DialogTrigger asChild>
             <Button variant="secondary" size="sm">
