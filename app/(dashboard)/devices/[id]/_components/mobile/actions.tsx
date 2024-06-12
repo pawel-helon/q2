@@ -1,12 +1,11 @@
 "use client";
 
-import { ChangeState } from "./change-state";
-import { More } from "./more";
-
 import { Device, ROLE } from "@prisma/client";
 import { email } from "@/types";
+import { ChangeState } from "../actions/change-state";
+import { More } from "../actions/more";
 
-export function Actions({
+export function ActionsMobile({
   role,
   userId,
   device,
@@ -20,7 +19,7 @@ export function Actions({
   ownerEmail: string;
 }) {
   return (
-    <div className="flex gap-2 justify-end">
+    <div className="flex gap-2 justify-end xs:hidden fixed bottom-4 z-10 right-4">
       <ChangeState device={device} />
       {role !== ROLE.ENDUSER && (
         <More

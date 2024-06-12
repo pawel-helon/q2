@@ -8,6 +8,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const Sheet = SheetPrimitive.Root
+const SheetShad = SheetPrimitive.Root
 
 const SheetTrigger = SheetPrimitive.Trigger
 
@@ -128,6 +129,7 @@ SheetDescription.displayName = SheetPrimitive.Description.displayName
 
 export {
   Sheet,
+  SheetShad,
   SheetPortal,
   SheetOverlay,
   SheetTrigger,

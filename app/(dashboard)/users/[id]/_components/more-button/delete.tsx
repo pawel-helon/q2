@@ -59,7 +59,7 @@ export function Delete({
                 "data-[disabled]:opacity-50 hover:bg-accent"
               )}
             >
-              Delete device
+              Delete account
             </button>
           </SheetTrigger>
           <SheetContent side="bottom">

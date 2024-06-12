@@ -50,7 +50,7 @@ export function ChangeEmailField({
               </SheetTrigger>
               <SheetContent side="top">
                 <SheetHeader className="text-left mb-6">
-                  <SheetTitle>Change name</SheetTitle>
+                  <SheetTitle>Change email</SheetTitle>
                 </SheetHeader>
                 <ChangeEmailForm
                   userId={userId}

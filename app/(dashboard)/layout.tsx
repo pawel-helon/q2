@@ -26,7 +26,7 @@ export default async function DashboardLayout({
   return (
     <>
       <div className="xs:hidden relative px-3">
-        <div className="z-50 fixed top-0 left-3 right-3 bg-background/80 flex justify-between py-2">
+        <div className="z-50 fixed top-0 left-3 right-3 bg-black/80 flex justify-between pt-4 pb-2">
           <Nav />
           <Account email={email} />
         </div>

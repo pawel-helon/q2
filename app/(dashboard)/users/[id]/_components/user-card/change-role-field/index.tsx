@@ -49,7 +49,7 @@ export function ChangeRoleField({
               </SheetTrigger>
               <SheetContent side="bottom">
                 <SheetHeader className="text-left mb-6">
-                  <SheetTitle>Change name</SheetTitle>
+                  <SheetTitle>Change role</SheetTitle>
                 </SheetHeader>
                 <ChangeRoleForm
                   userId={userId}
