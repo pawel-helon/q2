@@ -67,7 +67,7 @@ export default async function DevicePage({
         </div>
       </Header>
       {role === ROLE.ENDUSER ? (
-        <div className="flex flex-col-reverse gap-4 md:grid md:grid-cols-3 border-t w-full my-12 xs:mt-[5.5rem] xs:pt-[3rem]">
+        <div className="border-t w-full my-12 xs:mt-[7.5rem]">
           <GeneralTab role={role} device={device} />
         </div>
       ) : (
