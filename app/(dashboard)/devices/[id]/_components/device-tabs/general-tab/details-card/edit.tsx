@@ -20,6 +20,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { Owners } from "@/components/form/device/owner";
 import { DeviceName } from "@/components/form/device/name";
 import { Address } from "@/components/form/device/address";
@@ -36,13 +43,14 @@ import { Device } from "@prisma/client";
 export function Edit({
   device,
   ownerEmail,
-  users
+  users,
 }: {
   device: Device;
   ownerEmail: string;
   users: email[];
 }) {
-  const [open, setOpen] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [openSheet, setOpenSheet] = useState(false);
   const router = useRouter();
 
   function onSubmit(state: FormState, formData: FormData) {
@@ -75,7 +83,8 @@ export function Edit({
       SIM
     ).then(() => {
       setTimeout(() => {
-        setOpen(false);
+        setOpenDialog(false);
+        setOpenSheet(false);
         toast.success("Details have been updated.");
       }, 500);
       router.refresh();
@@ -86,58 +95,133 @@ export function Edit({
   const { pending } = useFormStatus();
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button variant="secondary" size="sm">Edit</Button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader className="mb-6">
-          <DialogTitle>Edit details</DialogTitle>
-        </DialogHeader>
-        <form action={action} className="relative flex flex-col gap-8">
-          <input hidden name="deviceId" defaultValue={device.id} />
-          <Owners users={users} defaultValue={ownerEmail}>
-            {state?.errors?.owner && <>{state.errors.owner}</>}
-          </Owners>
-          <DeviceName defaultValue={device.deviceName}>
-            {state?.errors?.deviceName && <>{state.errors.deviceName}</>}
-          </DeviceName>
-          <Address defaultValue={device.streetAddress}>
-            {state?.errors?.streetAddress && <>{state.errors.streetAddress}</>}
-          </Address>
-          <City defaultValue={device.city}>
-            {state?.errors?.city && <>{state.errors.city}</>}
-          </City>
-          <Country defaultValue={device.country}>
-            {state?.errors?.country && <>{state.errors.country}</>}
-          </Country>
-          <Model defaultValue={device.model}>
-            {state?.errors?.model && <>{state.errors.model}</>}
-          </Model>
-          <div className="flex flex-col gap-2">
-            <div className="flex justify-between items-end">
-              <Label htmlFor="SIM">Phone number</Label>
-              <p className="text-[0.8rem] leading-none text-muted-foreground">
-                {state?.errors?.SIM && <>{state.errors.SIM}</>}
-              </p>
-            </div>
-            <Input
-              id="SIM"
-              name="SIM"
-              defaultValue={device.SIM}
-              spellCheck="false"
-            />
-          </div>
-          <div className="flex gap-2 w-full justify-end">
-            <DialogClose asChild>
-              <Button variant="ghost">Cancel</Button>
-            </DialogClose>
-            <Button type="submit" disabled={pending} aria-disabled={pending}>
-              {pending ? "Submitting..." : "Save changes"}
+    <>
+      <div className="xs:hidden">
+        <Sheet open={openSheet} onOpenChange={setOpenSheet}>
+          <SheetTrigger asChild>
+            <Button variant="secondary" size="sm">
+              Edit
             </Button>
-          </div>
-        </form>
-      </DialogContent>
-    </Dialog>
+          </SheetTrigger>
+          <SheetContent side="bottom">
+            <SheetHeader className="text-left mb-6">
+              <SheetTitle>Edit details</SheetTitle>
+            </SheetHeader>
+            <form action={action} className="relative flex flex-col gap-6">
+              <input hidden name="deviceId" defaultValue={device.id} />
+              <Owners users={users} defaultValue={ownerEmail}>
+                {state?.errors?.owner && <>{state.errors.owner}</>}
+              </Owners>
+              <DeviceName defaultValue={device.deviceName}>
+                {state?.errors?.deviceName && <>{state.errors.deviceName}</>}
+              </DeviceName>
+              <Address defaultValue={device.streetAddress}>
+                {state?.errors?.streetAddress && (
+                  <>{state.errors.streetAddress}</>
+                )}
+              </Address>
+              <City defaultValue={device.city}>
+                {state?.errors?.city && <>{state.errors.city}</>}
+              </City>
+              <Country defaultValue={device.country}>
+                {state?.errors?.country && <>{state.errors.country}</>}
+              </Country>
+              <Model defaultValue={device.model}>
+                {state?.errors?.model && <>{state.errors.model}</>}
+              </Model>
+              <div className="flex flex-col gap-2">
+                <div className="flex justify-between items-end">
+                  <Label htmlFor="SIM">Phone number</Label>
+                  <p className="text-[0.8rem] leading-none text-muted-foreground">
+                    {state?.errors?.SIM && <>{state.errors.SIM}</>}
+                  </p>
+                </div>
+                <Input
+                  id="SIM"
+                  name="SIM"
+                  defaultValue={device.SIM}
+                  spellCheck="false"
+                />
+              </div>
+              <div className="flex flex-col gap-2 w-full">
+                <DialogClose asChild>
+                  <Button variant="ghost">Cancel</Button>
+                </DialogClose>
+                <Button
+                  type="submit"
+                  disabled={pending}
+                  aria-disabled={pending}
+                >
+                  {pending ? "Submitting..." : "Save changes"}
+                </Button>
+              </div>
+            </form>
+          </SheetContent>
+        </Sheet>
+      </div>
+      <div className="hidden xs:block">
+        <Dialog open={openDialog} onOpenChange={setOpenDialog}>
+          <DialogTrigger asChild>
+            <Button variant="secondary" size="sm">
+              Edit
+            </Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader className="mb-6">
+              <DialogTitle>Edit details</DialogTitle>
+            </DialogHeader>
+            <form action={action} className="relative flex flex-col gap-8">
+              <input hidden name="deviceId" defaultValue={device.id} />
+              <Owners users={users} defaultValue={ownerEmail}>
+                {state?.errors?.owner && <>{state.errors.owner}</>}
+              </Owners>
+              <DeviceName defaultValue={device.deviceName}>
+                {state?.errors?.deviceName && <>{state.errors.deviceName}</>}
+              </DeviceName>
+              <Address defaultValue={device.streetAddress}>
+                {state?.errors?.streetAddress && (
+                  <>{state.errors.streetAddress}</>
+                )}
+              </Address>
+              <City defaultValue={device.city}>
+                {state?.errors?.city && <>{state.errors.city}</>}
+              </City>
+              <Country defaultValue={device.country}>
+                {state?.errors?.country && <>{state.errors.country}</>}
+              </Country>
+              <Model defaultValue={device.model}>
+                {state?.errors?.model && <>{state.errors.model}</>}
+              </Model>
+              <div className="flex flex-col gap-2">
+                <div className="flex justify-between items-end">
+                  <Label htmlFor="SIM">Phone number</Label>
+                  <p className="text-[0.8rem] leading-none text-muted-foreground">
+                    {state?.errors?.SIM && <>{state.errors.SIM}</>}
+                  </p>
+                </div>
+                <Input
+                  id="SIM"
+                  name="SIM"
+                  defaultValue={device.SIM}
+                  spellCheck="false"
+                />
+              </div>
+              <div className="flex gap-2 w-full justify-end">
+                <DialogClose asChild>
+                  <Button variant="ghost">Cancel</Button>
+                </DialogClose>
+                <Button
+                  type="submit"
+                  disabled={pending}
+                  aria-disabled={pending}
+                >
+                  {pending ? "Submitting..." : "Save changes"}
+                </Button>
+              </div>
+            </form>
+          </DialogContent>
+        </Dialog>
+      </div>
+    </>
   );
 }

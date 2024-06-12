@@ -3,7 +3,7 @@
 import { verifySession } from "@/lib/data-access-layer";
 import { readMany, readManyIds, readUnique } from "@/lib/data/read";
 
-import { Actions } from "./_components/mobile/actions";
+import { ActionsMobile } from "./_components/mobile/actions";
 import { UserCard } from "./_components/user-card";
 import { Header } from "./_components/header";
 import { DeviceCard } from "./_components/device-card";
@@ -56,7 +56,7 @@ export default async function UserPage({
               <DeviceCard user={user} />
             </div>
           </div>
-          <Actions userId={userId} devices={devices} />
+          <ActionsMobile userId={userId} devices={devices} />
         </>
       )}
     </>

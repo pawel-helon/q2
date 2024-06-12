@@ -6,15 +6,14 @@ import { toast } from "sonner";
 import { update } from "@/lib/data/update";
 import { readUserByEmail } from "@/lib/data/read";
 
+import { Sheet } from "@/components/dial-sheet/sheet";
+import { SheetClose } from "@/components/ui/sheet";
+import { Dialog } from "@/components/dial-sheet/dialog";
+import { DialogClose, DialogFooter } from "@/components/ui/dialog";
+import { Trigger } from "@/components/dial-sheet/trigger";
+import { Button } from "@/components/ui/button";
 import { Owners } from "@/components/form/device/owner";
 import { DialogContent } from "@/components/dialog-content";
-import {
-  Dialog,
-  DialogClose,
-  DialogFooter,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 
 import { email, setOpen } from "@/types";
 
@@ -47,24 +46,38 @@ export function AssignOwner({
   }
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <button className="w-full relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-accent">
-          Assign owner
-        </button>
-      </DialogTrigger>
-      <DialogContent title="Assign owner">
+    <>
+      <Sheet
+        title="Assign owner"
+        trigger={<Trigger title="Assign owner" variant="menuItem" />}
+        side="bottom"
+      >
         <form action={onSubmit}>
           <input type="hidden" name="deviceId" value={deviceId} />
-          <Owners users={users} defaultValue={ownerEmail} />
-          <DialogFooter className="flex justify-end gap-1 mt-6">
+          <Owners users={users} defaultValue={ownerEmail} side="top" />
+          <div className="flex flex-col mt-6">
+            <SheetClose asChild>
+              <Button variant="ghost">Cancel</Button>
+            </SheetClose>
+            <Button type="submit">Assign owner</Button>
+          </div>
+        </form>
+      </Sheet>
+      <Dialog
+        title="Assign owner"
+        trigger={<Trigger title="Assign owner" variant="menuItem" />}
+      >
+        <form action={onSubmit} className="-mt-6">
+          <input type="hidden" name="deviceId" value={deviceId} />
+          <Owners users={users} defaultValue={ownerEmail} side="top" />
+          <DialogFooter className="flex justify-end gap-2 mt-12">
             <DialogClose asChild>
               <Button variant="ghost">Cancel</Button>
             </DialogClose>
-            <Button>Assign</Button>
+            <Button type="submit">Assign owner</Button>
           </DialogFooter>
         </form>
-      </DialogContent>
-    </Dialog>
+      </Dialog>
+    </>
   );
 }

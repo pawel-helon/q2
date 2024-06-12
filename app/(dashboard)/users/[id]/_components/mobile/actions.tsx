@@ -15,7 +15,7 @@ import { Device } from "@prisma/client";
 import { AssignDevice } from "../more-button/assign-device";
 import { Delete } from "../more-button/delete";
 
-export function Actions({
+export function ActionsMobile({
   userId,
   devices,
 }: {

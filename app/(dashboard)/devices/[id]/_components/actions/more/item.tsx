@@ -1,15 +1,11 @@
 "use client";
 
-import { DialogContent } from "@/components/dialog-content";
-import {
-  Dialog,
-  DialogClose,
-  DialogDescription,
-  DialogFooter,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Sheet } from "@/components/dial-sheet/sheet";
+import { SheetClose } from "@/components/ui/sheet";
+import { Dialog } from "@/components/dial-sheet/dialog";
+import { DialogClose, DialogFooter } from "@/components/ui/dialog";
+import { Trigger } from "@/components/dial-sheet/trigger";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 
 interface ActivateProps {
   cta: string;
@@ -25,29 +21,32 @@ export const Item = ({
   action,
 }: ActivateProps) => {
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <button
-          className={cn(
-            "w-full relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none",
-            "transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none",
-            "data-[disabled]:opacity-50 hover:bg-accent"
-          )}
-        >
-          {cta}
-        </button>
-      </DialogTrigger>
-      <DialogContent title={dialogTitle}>
-        <DialogDescription className="mb-4">
-          {dialogDescription}
-        </DialogDescription>
+    <>
+      <Sheet
+        title={dialogTitle}
+        description={dialogDescription}
+        trigger={<Trigger title={cta} variant="menuItem" />}
+        side="bottom"
+      >
+        <div className="flex flex-col mt-6">
+          <SheetClose asChild>
+            <Button variant="ghost">Cancel</Button>
+          </SheetClose>
+          <Button onClick={action}>{cta}</Button>
+        </div>
+      </Sheet>
+      <Dialog
+        title={dialogTitle}
+        description={dialogDescription}
+        trigger={<Trigger title={cta} variant="menuItem" />}
+      >
         <DialogFooter className="flex justify-end gap-2">
           <DialogClose asChild>
             <Button variant="ghost">Cancel</Button>
           </DialogClose>
           <Button onClick={action}>{cta}</Button>
         </DialogFooter>
-      </DialogContent>
-    </Dialog>
+      </Dialog>
+    </>
   );
 };

@@ -22,14 +22,14 @@ export function Sheet({
   title: string;
   description?: string;
   trigger: React.ReactNode;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }) {
   const [openSheet, setOpenSheet] = useState(false);
 
   return (
     <div className="xs:hidden">
       <SheetShad open={openSheet} onOpenChange={setOpenSheet}>
-        <SheetTrigger asChild>{trigger}</SheetTrigger>
+        <SheetTrigger>{trigger}</SheetTrigger>
         <SheetContent side={side}>
           <SheetHeader className="text-left mb-6">
             <SheetTitle>{title}</SheetTitle>

@@ -16,10 +16,12 @@ export function Owners({
   users,
   children,
   defaultValue,
+  side,
 }: {
   users: email[];
   children?: React.ReactNode;
   defaultValue?: string;
+  side?: "top" | "right" | "bottom" | "left";
 }) {
   return (
     <div className="flex flex-col gap-2">
@@ -33,7 +35,7 @@ export function Owners({
         <SelectTrigger>
           <SelectValue placeholder={defaultValue} />
         </SelectTrigger>
-        <SelectContent className="h-min">
+        <SelectContent className="h-min" side={side}>
           <SelectGroup>
             {users.map((user) => {
               return (
