@@ -26,15 +26,14 @@ export function SignInForm({ children }: { children?: React.ReactNode }) {
     }
 
     const { email, password } = validatedFields.data;
-    
-    signin(email, password)
-      .then((response) => {
-        if (response === false) {
-          setTimeout(() => {
-            toast.error("Invalid email or password. Please try again.");
-          }, 500);
-        }
-      });
+
+    signin(email, password).then((response) => {
+      if (response === false) {
+        setTimeout(() => {
+          toast.error("Invalid email or password. Please try again.");
+        }, 500);
+      }
+    });
   }
 
   const [state, action] = useFormState(onSubmit, undefined);
@@ -46,16 +45,24 @@ export function SignInForm({ children }: { children?: React.ReactNode }) {
       <Password>
         {state?.errors?.password && (
           <div>
-            <p className="text-[0.8rem] text-muted-foreground font-semibold inline">Password must:</p>
+            <p className="text-[0.8rem] text-muted-foreground font-semibold inline">
+              Password must:
+            </p>
             {state.errors.password.map((error, index) => (
-              <p key={error} className="inline text-[0.8rem] leading-none text-muted-foreground">
-                {index === 0 ? " " : ", "}{error}
+              <p
+                key={error}
+                className="inline text-[0.8rem] leading-none text-muted-foreground"
+              >
+                {index === 0 ? " " : ", "}
+                {error}
               </p>
             ))}
           </div>
         )}
       </Password>
-      <SignUpRedirect />
+      <div className="hidden xs:flex">
+        <SignUpRedirect />
+      </div>
       <div className="flex flex-col xs:flex-row gap-2 w-full xs:justify-end">
         {children}
         <Button disabled={pending} aria-disabled={pending} type="submit">

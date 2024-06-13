@@ -22,10 +22,16 @@ export function SignUpForm({ children }: { children?: React.ReactNode }) {
       <Password>
         {state?.errors?.password && (
           <div>
-            <p className="text-[0.8rem] text-muted-foreground font-semibold inline">Password must:</p>
+            <p className="text-[0.8rem] text-muted-foreground font-semibold inline">
+              Password must:
+            </p>
             {state.errors.password.map((error, index) => (
-              <p key={error} className="inline text-[0.8rem] leading-none text-muted-foreground">
-                {index === 0 ? " " : ", "}{error}
+              <p
+                key={error}
+                className="inline text-[0.8rem] leading-none text-muted-foreground"
+              >
+                {index === 0 ? " " : ", "}
+                {error}
               </p>
             ))}
           </div>
@@ -34,16 +40,24 @@ export function SignUpForm({ children }: { children?: React.ReactNode }) {
       <PasswordConfirmation>
         {state?.errors?.confirm && (
           <div>
-            <p className="text-[0.8rem] text-muted-foreground font-semibold inline">Password must:</p>
+            <p className="text-[0.8rem] text-muted-foreground font-semibold inline">
+              Password must:
+            </p>
             {state.errors.confirm.map((error, index) => (
-              <p key={error} className="inline text-[0.8rem] leading-none text-muted-foreground">
-                {index === 0 ? " " : ", "}{error}
+              <p
+                key={error}
+                className="inline text-[0.8rem] leading-none text-muted-foreground"
+              >
+                {index === 0 ? " " : ", "}
+                {error}
               </p>
             ))}
           </div>
         )}
       </PasswordConfirmation>
-      <SignInRedirect />
+      <div className="hidden xs:flex">
+        <SignInRedirect />
+      </div>
       <div className="flex flex-col xs:flex-row gap-2 w-full xs:justify-end">
         {children}
         <Button disabled={pending} aria-disabled={pending} type="submit">
