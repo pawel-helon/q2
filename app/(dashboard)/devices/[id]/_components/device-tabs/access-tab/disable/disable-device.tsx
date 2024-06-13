@@ -54,9 +54,9 @@ export function DisableDevice({
                 {disabledFrom ? "Change time period" : "Disable"}
               </Button>
             </SheetTrigger>
-            <SheetContent side="right">
+            <SheetContent side="right" className="w-fit h-[100vh]">
               <SheetHeader className="text-left mb-6">
-                <SheetTitle>Assign device</SheetTitle>
+                <SheetTitle>Disable device</SheetTitle>
               </SheetHeader>
               <Calendar
                 initialFocus
