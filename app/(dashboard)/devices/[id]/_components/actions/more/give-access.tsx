@@ -14,9 +14,6 @@ import {
   DialogFooter,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-
-import { email, setOpen } from "@/types";
 import {
   Sheet,
   SheetClose,
@@ -24,7 +21,10 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
+  } from "@/components/ui/sheet";
+  import { Button } from "@/components/ui/button";
+  
+import { email, setOpen } from "@/types";
 
 export function GiveAccess({
   deviceId,
