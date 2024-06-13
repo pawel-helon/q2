@@ -6,12 +6,12 @@ import { verifySession } from "@/lib/data-access-layer";
 import { AddDevice } from "./_components/add-device";
 import { DataTable } from "@/app/_components/data-table";
 import { Navbar } from "@/components/navbar";
-import { Header } from "@/app/_components/header";
 
 import { columns } from "./_components/data-table/columns";
 import { columnsMember } from "./_components/data-table/columns-member";
 
 import { User, ROLE } from "@prisma/client";
+import { Heading } from "@/components/typography";
 
 export default async function DevicesPage() {
   const session = await verifySession();
@@ -27,7 +27,9 @@ export default async function DevicesPage() {
       <Navbar>
         <AddDevice role={role} userId={userId} users={users} />
       </Navbar>
-      <Header title="Devices" />
+      <Heading variant="h1" className="mt-20 pt-8 xs:mt-12 xs:pt-0">
+        Devices
+      </Heading>
       {role !== ROLE.ADMIN ? (
         <DataTable columns={columnsMember} data={devices} />
       ) : (

@@ -6,11 +6,11 @@ import { verifySession } from "@/lib/data-access-layer";
 import { DataTable } from "@/app/_components/data-table";
 import { Navbar } from "@/components/navbar";
 import { AddUser } from "./_components/add-user";
-import { Header } from "@/app/_components/header";
 
 import { columns } from "./_components/data-table/columns";
 
 import { ROLE } from "@prisma/client";
+import { Heading } from "@/components/typography";
 
 export default async function UsersPage() {
   const session = await verifySession();
@@ -25,7 +25,9 @@ export default async function UsersPage() {
           <Navbar>
             <AddUser />
           </Navbar>
-          <Header title="Users" />
+          <Heading variant="h1" className="mt-20 pt-8 xs:mt-12 xs:pt-0">
+            Users
+          </Heading>
           <DataTable columns={columns} data={users} />
         </div>
       )}

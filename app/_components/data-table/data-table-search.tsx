@@ -12,7 +12,7 @@ export function DataTableSearch<TData>({ table }: DataTableSearchProps<TData>) {
   const searchColumn = pathname === "/users" ? "name" : "deviceName"
 
   return (
-    <div className="flex justify-between border-b border-border pb-1 my-12">
+    <div className="flex justify-between border-b border-border pb-1 my-4 xs:my-12">
       <div className="flex items-center">
         <Search className="text-muted-foreground" />
         <Input
