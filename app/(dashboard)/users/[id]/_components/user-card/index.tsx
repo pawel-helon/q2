@@ -1,6 +1,6 @@
 "use server";
 
-import { ChangeNameField } from "@/app/(dashboard)/account/_components/account-card/change-name-field/index.";
+import { ChangeNameField } from "@/app/(dashboard)/account/_components/account-card/change-name-field";
 import { ChangeEmailField } from "@/app/(dashboard)/account/_components/account-card/change-email-field";
 import { ChangeRoleField } from "./change-role-field";
 

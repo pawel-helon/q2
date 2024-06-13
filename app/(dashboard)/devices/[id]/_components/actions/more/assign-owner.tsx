@@ -13,7 +13,6 @@ import { DialogClose, DialogFooter } from "@/components/ui/dialog";
 import { Trigger } from "@/components/dial-sheet/trigger";
 import { Button } from "@/components/ui/button";
 import { Owners } from "@/components/form/device/owner";
-import { DialogContent } from "@/components/dialog-content";
 
 import { email, setOpen } from "@/types";
 

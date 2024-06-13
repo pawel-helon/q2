@@ -2,7 +2,7 @@
 
 import { readUnique } from "@/lib/data/read";
 
-import { ChangeNameField } from "./change-name-field/index.";
+import { ChangeNameField } from "./change-name-field";
 import { ChangeEmailField } from "./change-email-field";
 import { ChangePasswordField } from "./change-password-field";
 import { ChangeRoleField } from "./change-role-field";

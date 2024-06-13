@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
 import { Bell } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import { AccountItem } from "@/app/_components/sidebar/account/account-item";
 import { SignOutItem } from "@/app/_components/sidebar/account/sign-out-item";
@@ -16,9 +16,9 @@ import {
 
 export function Account({ email }: { email: string }) {
   const router = useRouter();
-
+  const pathname = usePathname();
   return (
-    <DropdownMenu >
+    <DropdownMenu>
       <DropdownMenuTrigger>
         <Avatar>
           <AvatarImage src="/user.png" alt="user" />
@@ -30,7 +30,7 @@ export function Account({ email }: { email: string }) {
         sideOffset={8}
         align="end"
         className="bg-background shadow-black shadow-lg"
-        >
+      >
         <div className="flex gap-2 items-center rounded-sm px-2 py-1.5 text-xs text-muted-foreground">
           <Avatar className="size-6">
             <AvatarImage src="/user.png" alt="user" />
@@ -42,11 +42,11 @@ export function Account({ email }: { email: string }) {
         <DropdownMenuItem
           onSelect={() => router.push("/notifications")}
           className="flex justify-between"
-          >
+        >
           Notifications
           <Bell size={20} />
         </DropdownMenuItem>
-        <AccountItem />
+        {!pathname.startsWith("/account") && <AccountItem />}
         <SignOutItem />
       </DropdownMenuContent>
     </DropdownMenu>

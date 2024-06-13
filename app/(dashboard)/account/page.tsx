@@ -1,14 +1,9 @@
 "use server";
 
+import { Desktop } from "./_components/desktop";
+import { Mobile } from "./_components/mobile";
+
 import { verifySession } from "@/lib/data-access-layer";
-
-import { DeleteAccount } from "./_components/delete-account";
-import { Tooltip } from "@/components/tooltip";
-import { AccountCard } from "./_components/account-card";
-import { Header } from "@/app/_components/header";
-import { Navbar } from "@/components/navbar";
-import { Badge } from "@/components/ui/badge";
-
 import { Role } from "@/types";
 
 export default async function AccountPage() {
@@ -19,17 +14,8 @@ export default async function AccountPage() {
 
   return (
     <>
-      <Navbar>
-        <DeleteAccount userId={userId} />
-      </Navbar>
-      <Header title="Account">
-        <Tooltip title="User role">
-          <Badge variant={role}>{role.toLocaleLowerCase()}</Badge>
-        </Tooltip>
-      </Header>
-      <div className="mt-[5.5rem] pt-[3rem] border-t">
-        <AccountCard userId={userId} role={role} />
-      </div>
+      <Mobile userId={userId} role={role} />
+      <Desktop userId={userId} role={role} />
     </>
   );
 }

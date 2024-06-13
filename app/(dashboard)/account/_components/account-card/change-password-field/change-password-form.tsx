@@ -83,7 +83,7 @@ export function ChangePasswordForm({
           </div>
         )}
       </PasswordConfirmation>
-      <div className="flex gap-2 w-full justify-end">
+      <div className="flex flex-col xs:flex-row gap-2 w-full xs:justify-end">
         <DialogClose asChild>
           <Button variant="ghost">Cancel</Button>
         </DialogClose>

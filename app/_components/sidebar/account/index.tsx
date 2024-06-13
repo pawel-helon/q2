@@ -1,5 +1,7 @@
 "use client";
 
+import { usePathname } from "next/navigation";
+
 import { SignOutItem } from "./sign-out-item";
 import { AccountItem } from "./account-item";
 
@@ -19,6 +21,8 @@ export function Account({
   collapsed: boolean;
   email: string;
 }) {
+  const pathname = usePathname();
+
   return (
     <div
       className={cn(
@@ -47,7 +51,7 @@ export function Account({
             {email}
           </div>
           <DropdownMenuSeparator />
-          <AccountItem />
+          {!pathname.startsWith("/account") && <AccountItem />}
           <SignOutItem />
         </DropdownMenuContent>
       </DropdownMenu>
