@@ -3,7 +3,7 @@
 import { readMany, readDevicesWithUsersNames } from "@/lib/data/read";
 import { verifySession } from "@/lib/data-access-layer";
 
-import { AddDevice } from "./_components/add-device";
+import { AddDevice, AddDeviceMobile } from "./_components/add-device";
 import { DataTable } from "@/app/_components/data-table";
 import { Navbar } from "@/components/navbar";
 
@@ -35,6 +35,7 @@ export default async function DevicesPage() {
       ) : (
         <DataTable columns={columns} data={devices} />
       )}
+      <AddDeviceMobile role={role} userId={userId} users={users} />
     </>
   );
 }

@@ -57,7 +57,7 @@ export function AddUserForm({ setOpen }: { setOpen: setOpen }) {
   }
 
   return (
-    <form action={action} className="flex flex-col gap-8">
+    <form action={action} className="flex flex-col gap-4 xs:gap-8">
       <Name>{state?.errors?.name && <>{state.errors.name}</>}</Name>
       <Email>{state?.errors?.email && <>{state.errors.email}</>}</Email>
       <Role>{state?.errors?.role && <>{state.errors.role}</>}</Role>
@@ -85,7 +85,7 @@ export function AddUserForm({ setOpen }: { setOpen: setOpen }) {
           </div>
         )}
       </PasswordConfirmation>
-      <div className="flex gap-2 w-full justify-end">
+      <div className="flex flex-col xs:flex-row gap-1 xs:gap-2 w-full justify-end">
         <DialogClose asChild>
           <Button variant="ghost">Cancel</Button>
         </DialogClose>

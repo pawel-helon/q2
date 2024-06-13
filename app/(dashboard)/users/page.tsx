@@ -5,7 +5,7 @@ import { verifySession } from "@/lib/data-access-layer";
 
 import { DataTable } from "@/app/_components/data-table";
 import { Navbar } from "@/components/navbar";
-import { AddUser } from "./_components/add-user";
+import { AddUser, AddUserMobile } from "./_components/add-user";
 
 import { columns } from "./_components/data-table/columns";
 
@@ -31,6 +31,7 @@ export default async function UsersPage() {
           <DataTable columns={columns} data={users} />
         </div>
       )}
+      <AddUserMobile />
     </>
   );
 }

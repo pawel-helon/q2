@@ -17,6 +17,14 @@ import {
 import { Button } from "@/components/ui/button";
 
 import { email, setOpen } from "@/types";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 export function GiveAccess({
   deviceId,
@@ -45,24 +53,52 @@ export function GiveAccess({
   }
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <button className="w-full relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-accent">
-          Give access
-        </button>
-      </DialogTrigger>
-      <DialogContent title="Give access">
-        <form action={onSubmit}>
-          <input type="hidden" name="deviceId" value={deviceId} />
-          <Users users={users} />
-          <DialogFooter className="flex justify-end gap-1 mt-6">
-            <DialogClose asChild>
-              <Button variant="ghost">Cancel</Button>
-            </DialogClose>
-            <Button>Add user</Button>
-          </DialogFooter>
-        </form>
-      </DialogContent>
-    </Dialog>
+    <>
+      <div className="xs:hidden">
+        <Sheet>
+          <SheetTrigger asChild>
+            <button className="w-full relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-accent">
+              Give access
+            </button>
+          </SheetTrigger>
+          <SheetContent side="bottom">
+            <SheetHeader>
+              <SheetTitle>Give access</SheetTitle>
+              <form action={onSubmit}>
+                <input type="hidden" name="deviceId" value={deviceId} />
+                <Users users={users} />
+                <div className="flex flex-col xs:flex-row justify-end gap-2 mt-6">
+                  <SheetClose asChild>
+                    <Button variant="ghost">Cancel</Button>
+                  </SheetClose>
+                  <Button>Give access</Button>
+                </div>
+              </form>
+            </SheetHeader>
+          </SheetContent>
+        </Sheet>
+      </div>
+      <div className="hidden xs:block">
+        <Dialog>
+          <DialogTrigger asChild>
+            <button className="w-full relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-accent">
+              Give access
+            </button>
+          </DialogTrigger>
+          <DialogContent title="Give access">
+            <form action={onSubmit}>
+              <input type="hidden" name="deviceId" value={deviceId} />
+              <Users users={users} />
+              <DialogFooter className="flex justify-end gap-1 mt-6">
+                <DialogClose asChild>
+                  <Button variant="ghost">Cancel</Button>
+                </DialogClose>
+                <Button>Give access</Button>
+              </DialogFooter>
+            </form>
+          </DialogContent>
+        </Dialog>
+      </div>
+    </>
   );
 }

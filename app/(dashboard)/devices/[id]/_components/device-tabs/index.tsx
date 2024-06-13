@@ -2,7 +2,6 @@
 
 import { GeneralTab } from "./general-tab";
 import { AccessTab } from "./access-tab";
-import { SettingsTab } from "./settings-tab";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
 import { Device, ROLE, User } from "@prisma/client";
@@ -21,16 +20,12 @@ export async function DeviceTabs({
       <TabsList className="w-full border-b">
         <TabsTrigger value="general">General</TabsTrigger>
         <TabsTrigger value="access">Access</TabsTrigger>
-        <TabsTrigger value="settings">Settings</TabsTrigger>
       </TabsList>
       <TabsContent value="general">
         <GeneralTab role={role} device={device} />
       </TabsContent>
       <TabsContent value="access">
         <AccessTab users={users} device={device}/>
-      </TabsContent>
-      <TabsContent value="settings">
-        <SettingsTab />
       </TabsContent>
     </Tabs>
   );

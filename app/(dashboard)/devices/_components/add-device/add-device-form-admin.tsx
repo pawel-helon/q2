@@ -22,7 +22,7 @@ export function AddDeviceFormAdmin({ users }: { users: User[] }) {
   const { pending } = useFormStatus();
 
   return (
-    <form action={action} className="relative flex flex-col gap-8">
+    <form action={action} className="relative flex flex-col gap-4 xs:gap-8">
       <Owner owners={users}>
         {state?.errors?.owner && <>{state.errors.owner}</>}
       </Owner>
@@ -36,7 +36,7 @@ export function AddDeviceFormAdmin({ users }: { users: User[] }) {
       <Country>{state?.errors?.country && <>{state.errors.country}</>}</Country>
       <Model>{state?.errors?.model && <>{state.errors.model}</>}</Model>
       <SIM>{state?.errors?.SIM && <>{state.errors.SIM}</>}</SIM>
-      <div className="flex gap-2 w-full justify-end">
+      <div className="flex flex-col xs:flex-row gap-1 xs:gap-2 w-full justify-end">
         <DialogClose asChild>
           <Button variant="ghost">Cancel</Button>
         </DialogClose>
