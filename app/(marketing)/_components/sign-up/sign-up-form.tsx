@@ -44,7 +44,7 @@ export function SignUpForm({ children }: { children?: React.ReactNode }) {
         )}
       </PasswordConfirmation>
       <SignInRedirect />
-      <div className="flex gap-2 w-full justify-end">
+      <div className="flex flex-col xs:flex-row gap-2 w-full xs:justify-end">
         {children}
         <Button disabled={pending} aria-disabled={pending} type="submit">
           {pending ? "Submitting..." : "Sign up"}

@@ -7,7 +7,7 @@ export function SignUpRedirect() {
   const router = useRouter();
 
   return (
-    <div className="flex items-center my-4">
+    <div className="flex items-center xs:my-4">
       <p className="text-[0.8rem] text-muted-foreground">
         Don&apos;t have account?
       </p>
