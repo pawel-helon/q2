@@ -52,13 +52,13 @@ export function ChangeRoleForm({
     <form action={action}>
       <input type="hidden" name="id" value={userId} />
       <div className="flex flex-col gap-2">
-        <Role>{state?.errors?.role && <>{state.errors.role}</>}</Role>
+        <Role side="top">{state?.errors?.role && <>{state.errors.role}</>}</Role>
       </div>
-      <div className="w-full flex justify-end gap-2 mt-10">
+      <div className="w-full flex flex-col xs:flex-row justify-end gap-2 mt-6">
         <DialogClose asChild>
           <Button variant="ghost">Cancel</Button>
         </DialogClose>
-        <Button type="submit">Submit</Button>
+        <Button type="submit">Submit request</Button>
       </div>
     </form>
   );

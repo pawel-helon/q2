@@ -73,7 +73,6 @@ export function DataTable<TData, TValue>({
           )}
           <div className="mt-12 py-4 border border-border shadow-black shadow-2xl rounded-lg mb-12">
             <DataTableHeader table={table} pathname={pathname} />
-
             <DataTableBody table={table} pathname={pathname} />
             <DataTableFooter
               table={table}

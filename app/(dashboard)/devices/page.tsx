@@ -1,6 +1,6 @@
 "use server";
 
-import { readMany, readDevicesWithUsersNames } from "@/lib/data/read";
+import { readMany, readDevicesWithUsersNames, readNotificationsForUser } from "@/lib/data/read";
 import { verifySession } from "@/lib/data-access-layer";
 
 import { AddDevice, AddDeviceMobile } from "./_components/add-device";
