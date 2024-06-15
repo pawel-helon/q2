@@ -7,6 +7,7 @@ import { ChangeRole } from "@/app/_components/data-table/actions/change-role";
 import { ChangeStatus } from "@/app/_components/data-table/actions/change-status";
 import { MoreButton } from "./more-button";
 import { Div } from "@/components/motion-ui/div";
+import { Requests } from "./requests";
 
 export function Actions<TData>({
   table,
@@ -25,7 +26,8 @@ export function Actions<TData>({
         <Div duration=".3" className="flex min-w-sm h-8">
           {pathname === "/devices" && <ChangeStatus table={table} ids={ids} />}
           {pathname === "/users" && <ChangeRole  table={table} ids={ids} />}
-          {!pathname.startsWith("/devices/") && (<MoreButton pathname={pathname} ids={ids} table={table}/>)}
+          {pathname === "/notifications" && <Requests table={table} ids={ids} />}
+          {(pathname === "/devices" || pathname === "/users") && (<MoreButton pathname={pathname} ids={ids} table={table}/>)}
         </Div>
       ) : (
         <div className="size-[32px]" />

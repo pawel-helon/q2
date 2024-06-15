@@ -34,14 +34,9 @@ export function Notifications({
     >
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
-          <Button
-            size="icon"
-            className="relative rounded-full bg-muted hover:bg-muted min-w-9 size-9 p-0"
-          >
+          <Button size="icon" className="relative rounded-full bg-muted hover:bg-muted min-w-9 size-9 p-0">
             <Bell />
-            {notifications.length > 0 && (
-              <div className="absolute top-0.5 right-0.5 size-2 bg-primary rounded-full" />
-            )}
+            {notifications.length > 0 && <div className="absolute top-0.5 right-0.5 size-2 bg-primary rounded-full" />}
           </Button>
         </PopoverTrigger>
         <PopoverContent

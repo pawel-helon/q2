@@ -18,7 +18,7 @@ export function Navbar({
 
   return (
     <div className={cn("hidden xs:flex w-full py-6 justify-between items-center", className)}>
-      {pathname === "/" || pathname === "/sign-in" || pathname === "/sign-up" ? (
+      {pathname === "/" || pathname === "/sign-in" || pathname === "/sign-up"? (
         <Link href="/">
           <Container />
         </Link>

@@ -17,6 +17,7 @@ export function DataTableHeader<TData>({
         <Heading variant="h3">
           {pathname === "/users" && "User"}
           {pathname === "/devices" && "Device"}
+          {pathname === "/notifications" && "Notifications"}
           {pathname.startsWith("/devices/") && "Access list"}
         </Heading>
         <Paragraph variant="small-thick" className="text-muted-foreground">

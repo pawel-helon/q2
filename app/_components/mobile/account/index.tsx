@@ -14,9 +14,16 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 
-export function Account({ email }: { email: string }) {
+export function Account({
+  email,
+  anyNotifications,
+}: {
+  email: string;
+  anyNotifications: boolean;
+}) {
   const router = useRouter();
   const pathname = usePathname();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -39,13 +46,18 @@ export function Account({ email }: { email: string }) {
           {email}
         </div>
         <DropdownMenuSeparator />
-        <DropdownMenuItem
-          onSelect={() => router.push("/notifications")}
-          className="flex justify-between"
-        >
-          Notifications
-          <Bell size={20} />
-        </DropdownMenuItem>
+        {pathname !== "/notifications" && (
+          <DropdownMenuItem
+            onSelect={() => router.push("/notifications")}
+            className="realtive flex justify-between"
+          >
+            Notifications
+            <Bell size={20} />
+            {anyNotifications && (
+              <div className="absolute top-1 right-2 size-2 bg-primary rounded-full" />
+            )}
+          </DropdownMenuItem>
+        )}
         {!pathname.startsWith("/account") && <AccountItem />}
         <SignOutItem />
       </DropdownMenuContent>

@@ -69,7 +69,7 @@ export function DataTable<TData, TValue>({
       <div className="overflow-auto xs:max-lg:hidden">
         <Div duration=".6">
           {!pathname.startsWith("/devices/") && (
-            <DataTableSearch table={table} />
+            <DataTableSearch table={table} pathname={pathname}/>
           )}
           <div className="mt-12 py-4 border border-border shadow-black shadow-2xl rounded-lg mb-12">
             <DataTableHeader table={table} pathname={pathname} />
@@ -85,7 +85,7 @@ export function DataTable<TData, TValue>({
       <div className="hidden xs:max-lg:block">
         <Div duration=".6" className="w-full lg:hidden">
           {!pathname.startsWith("/devices/") && (
-            <DataTableSearch table={table} />
+            <DataTableSearch table={table} pathname={pathname}/>
           )}
           <div className=" h-[240px] mt-12 py-4 border border-border shadow-black shadow-2xl rounded-lg flex items-center justify-center">
             <p className="text-center text-xs text-white px-8">

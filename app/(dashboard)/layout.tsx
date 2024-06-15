@@ -8,6 +8,7 @@ import { verifySession } from "@/lib/data-access-layer";
 import { Notification, ROLE } from "@prisma/client";
 import { Account } from "../_components/mobile/account";
 import { Nav } from "../_components/mobile/nav";
+import { cn } from "@/lib/utils";
 
 export default async function DashboardLayout({
   children,
@@ -19,16 +20,18 @@ export default async function DashboardLayout({
   const role = session.role as ROLE;
 
   const email = (await readUnique(userId, "user", "email")) as string;
-  const notifications = (await readNotificationsForUser(
-    userId
-  )) as Notification[];
+  const notifications = (await readNotificationsForUser(userId)) as Notification[];
+  const anyNotifications = Boolean(notifications.length)
 
   return (
     <>
       <div className="xs:hidden relative px-3 min-h-[85vh]">
-        <div className="z-50 fixed top-0 left-3 right-3 bg-background/80 flex justify-between pt-3 pb-2">
-          <Nav />
-          <Account email={email} />
+        <div className={cn(
+          "z-50 fixed top-0 left-3 right-3 bg-background/80 flex justify-between pt-3 pb-2",
+          role !== ROLE.ADMIN && "justify-end"
+        )}>
+          {role === ROLE.ADMIN && <Nav />}
+          <Account email={email} anyNotifications={anyNotifications}/>
         </div>
         {children}
       </div>
