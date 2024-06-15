@@ -1,7 +1,5 @@
 "use client";
 
-import { useMedia } from "react-use";
-
 import { DeleteAccountForm } from "./delete-account-form";
 import { DialogContent } from "@/components/dialog-content";
 import {
@@ -21,11 +19,9 @@ import {
 import { Button } from "@/components/ui/button";
 
 export function DeleteAccount({ userId }: { userId: number }) {
-  const isMobile = useMedia("(max-width: 480px)", false);
-
   return (
     <>
-      {isMobile ? (
+      <div className="xs:hidden">
         <Sheet>
           <SheetTrigger asChild>
             <Button>Delete account</Button>
@@ -41,7 +37,8 @@ export function DeleteAccount({ userId }: { userId: number }) {
             <DeleteAccountForm userId={userId} />
           </SheetContent>
         </Sheet>
-      ) : (
+      </div>
+      <div className="hidden xs:block">
         <Dialog>
           <DialogTrigger asChild>
             <Button>Delete account</Button>
@@ -54,7 +51,7 @@ export function DeleteAccount({ userId }: { userId: number }) {
             <DeleteAccountForm userId={userId} />
           </DialogContent>
         </Dialog>
-      )}
+      </div>
     </>
   );
 }
