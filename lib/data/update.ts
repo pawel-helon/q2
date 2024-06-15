@@ -181,32 +181,6 @@ export async function update(
   }
 }
 
-export async function updateNotifications(idsArray: number[], value: string) {
-  if (value === "accept") {
-    for (const index of idsArray) {
-      await db.user.update({
-        where: {
-          id: index,
-        },
-        data: {
-          role: ROLE.ADMIN,
-        },
-      });
-    }
-  } else if (value === "decline") {
-    for (const index of idsArray) {
-      await db.user.update({
-        where: {
-          id: index,
-        },
-        data: {
-          role: ROLE.OWNER,
-        },
-      });
-    }
-  }
-}
-
 export async function updateRole(idsArray: number[], role: ROLE) {
   if (role === ROLE.ADMIN) {
     for (const index of idsArray) {

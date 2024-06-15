@@ -13,7 +13,10 @@ import {
 } from "@/components/ui/table";
 import { columns } from "@/app/(dashboard)/devices/_components/data-table/columns";
 
-export function DataTableBody<TData>({ table, pathname }: {
+export function DataTableBody<TData>({
+  table,
+  pathname,
+}: {
   table: Table<TData>;
   pathname: string;
 }) {
@@ -46,13 +49,17 @@ export function DataTableBody<TData>({ table, pathname }: {
               <TableRow
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
-                onClick={
-                  pathname === "/devices"
+                onClick={() => {
+                  if (pathname === "/devices") {
                     //@ts-ignore
-                    ? () => router.push(`/devices/${row.original.id}`)
+                    router.push(`/devices/${row.original.id}`);
+                  } else if (pathname === "/users") {
                     //@ts-ignore
-                    : () => router.push(`/users/${row.original.id}`)
-                }
+                    router.push(`/users/${row.original.id}`);
+                  } else if (pathname === "/notifications") {
+                    return;
+                  }
+                }}
               >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id}>

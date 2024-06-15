@@ -5,9 +5,9 @@ import { Table } from "@tanstack/react-table";
 import { TableColumns } from "../table-columns";
 import { ChangeRole } from "@/app/_components/data-table/actions/change-role";
 import { ChangeStatus } from "@/app/_components/data-table/actions/change-status";
+import { Requests } from "./requests";
 import { MoreButton } from "./more-button";
 import { Div } from "@/components/motion-ui/div";
-import { Requests } from "./requests";
 
 export function Actions<TData>({
   table,

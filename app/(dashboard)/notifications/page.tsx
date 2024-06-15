@@ -16,8 +16,6 @@ export default async function NotificationsPage() {
     userId
   )) as Notification[];
 
-  console.log(notifications)
-
   return (
     <>
       <Navbar />

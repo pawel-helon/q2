@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/lib/db";
-import { Device, Notification, User } from "@prisma/client";
+import { Device, Notification, ROLE, User } from "@prisma/client";
 
 export async function readUnique(
   id: number,
@@ -337,4 +337,37 @@ export async function readManyIds(entity: "devices" | "users") {
     });
   }
   return result;
+}
+
+export async function updateRolesTanstack(idsArray: number[], action: string) {
+  if (action === "accept") {
+    for (const index of idsArray) {
+      const request = await db.notification.findUnique({
+        where: {
+          id: index,
+        },
+      });
+      await db.user.update({
+        where: {
+          id: request!.requester,
+        },
+        data: {
+          role: request!.requestedRole,
+        },
+      });
+      await db.notification.delete({
+        where: {
+          id: index,
+        },
+      });
+    }
+  } else if (action === "decline") {
+    for (const index of idsArray) {
+      await db.notification.delete({
+        where: {
+          id: index,
+        },
+      });
+    }
+  }
 }
