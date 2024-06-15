@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
-import { updateRolesTanstack } from "@/lib/data/read";
+import { updateRolesTanstack } from "@/lib/data/update";
 
 export function Requests<TData>({
   table,
