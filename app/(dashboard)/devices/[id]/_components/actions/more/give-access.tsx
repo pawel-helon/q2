@@ -66,7 +66,7 @@ export function GiveAccess({
               <SheetTitle>Give access</SheetTitle>
               <form action={onSubmit}>
                 <input type="hidden" name="deviceId" value={deviceId} />
-                <Users users={users} />
+                <Users users={users} side="top"/>
                 <div className="flex flex-col xs:flex-row justify-end gap-2 mt-6">
                   <SheetClose asChild>
                     <Button variant="ghost">Cancel</Button>
