@@ -22,7 +22,7 @@ export async function AccountCard({
   const user = (await readUnique(userId, "user")) as User;
 
   return (
-    <div className="border-t my-12 pt-8">
+    <div className="border-t my-12 pt-6">
       <Card>
         <CardHeader>
           <Heading variant="h3">Account</Heading>

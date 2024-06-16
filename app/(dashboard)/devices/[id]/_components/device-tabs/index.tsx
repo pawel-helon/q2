@@ -21,10 +21,10 @@ export async function DeviceTabs({
         <TabsTrigger value="general">General</TabsTrigger>
         <TabsTrigger value="access">Access</TabsTrigger>
       </TabsList>
-      <TabsContent value="general">
+      <TabsContent value="general" className="mt-6">
         <GeneralTab role={role} device={device} />
       </TabsContent>
-      <TabsContent value="access">
+      <TabsContent value="access" className="mt-6">
         <AccessTab users={users} device={device}/>
       </TabsContent>
     </Tabs>

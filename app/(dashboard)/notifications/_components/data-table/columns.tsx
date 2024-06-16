@@ -19,6 +19,7 @@ export const columns: ColumnDef<Notification>[] = [
         }
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         aria-label="Select all"
+        // className="w-min"
       />
     ),
     cell: ({ row }) => (

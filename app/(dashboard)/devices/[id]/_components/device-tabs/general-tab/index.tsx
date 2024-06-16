@@ -20,7 +20,7 @@ export async function GeneralTab({
   const users = (await readMany("users", "email")) as email[];
 
   return (
-    <div className="mt-12 w-full flex flex-col gap-4 md:grid md:grid-cols-3 mb-12">
+    <div className="mt-6 xs:mt-12 w-full flex flex-col gap-4 md:grid md:grid-cols-3 mb-12">
       <Status />
       <DetailsCard
         device={device}

@@ -19,7 +19,7 @@ export default async function NotificationsPage() {
   return (
     <>
       <Navbar />
-      <Heading variant="h1" className="mt-20 pt-8 xs:mt-12 xs:pt-0">
+      <Heading variant="h1" className="mt-20 pt-8 xs:mt-1 xs:pt-0">
         Notifications
       </Heading>
       <DataTable columns={columns} data={notifications} />

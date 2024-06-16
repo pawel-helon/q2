@@ -13,13 +13,9 @@ export function DataTableSearch<TData>({
 }) {
 
   let searchColumn: string = "";
-  if (pathname === "/users") {
-    searchColumn = "name";
-  } else if (pathname === "/devices") {
-    searchColumn = "deviceName";
-  } else if (pathname === "/notifications") {
-    searchColumn = "title";
-  }
+  searchColumn = pathname === "/users" ? "name" : searchColumn;
+  searchColumn = pathname === "/devices" ? "deviceName" : searchColumn;
+  searchColumn = pathname === "/notifications" ? "title" : searchColumn;
 
   return (
     <div className="flex justify-between border-b border-border pb-1 my-4 xs:my-12">

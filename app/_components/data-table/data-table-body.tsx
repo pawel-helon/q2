@@ -12,6 +12,7 @@ import {
   TableCell,
 } from "@/components/ui/table";
 import { columns } from "@/app/(dashboard)/devices/_components/data-table/columns";
+import { cn } from "@/lib/utils";
 
 export function DataTableBody<TData>({
   table,
@@ -60,6 +61,7 @@ export function DataTableBody<TData>({
                     return;
                   }
                 }}
+                className={cn(pathname === "/notifications" && "hover:cursor-default")}
               >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id}>

@@ -68,10 +68,8 @@ export function DataTable<TData, TValue>({
     <>
       <div className="overflow-auto xs:max-lg:hidden">
         <Div duration=".6">
-          {!pathname.startsWith("/devices/") && (
-            <DataTableSearch table={table} pathname={pathname}/>
-          )}
-          <div className="mt-12 py-4 border border-border shadow-black shadow-2xl rounded-lg mb-12">
+          {!pathname.startsWith("/devices/") && (<DataTableSearch table={table} pathname={pathname}/>)}
+          <div className="my-6 xs:my-12 py-4 border border-border shadow-black shadow-2xl rounded-lg">
             <DataTableHeader table={table} pathname={pathname} />
             <DataTableBody table={table} pathname={pathname} />
             <DataTableFooter

@@ -103,7 +103,7 @@ export function Edit({
               Edit
             </Button>
           </SheetTrigger>
-          <SheetContent side="bottom">
+          <SheetContent side="top">
             <SheetHeader className="text-left mb-6">
               <SheetTitle>Edit details</SheetTitle>
             </SheetHeader>

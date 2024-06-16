@@ -306,13 +306,14 @@ export async function updateUsersWithAccess(
   await update(deviceId, "device", "users", updatedUsersWithAccess);
 }
 
-export async function updateRolesTanstack(idsArray: number[], action: string) {
+export async function updateRolesTanstack(ids: number[], action: "accept" | "decline") {
   if (action === "accept") {
-    for (const index of idsArray) {
+    for (const index of ids) {
       const request = await db.notification.findUnique({
         where: {
           id: index,
         },
+        select: {requester: true, requestedRole: true}
       });
       await db.user.update({
         where: {
@@ -329,7 +330,7 @@ export async function updateRolesTanstack(idsArray: number[], action: string) {
       });
     }
   } else if (action === "decline") {
-    for (const index of idsArray) {
+    for (const index of ids) {
       await db.notification.delete({
         where: {
           id: index,

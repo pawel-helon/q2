@@ -9,7 +9,7 @@ import { User, Device } from "@prisma/client";
 
 export const AccessTab = ({ users, device }: { users: User[], device: Device }) => {
   return (
-    <div className="w-full flex flex-col gap-4">
+    <div className="w-full flex flex-col gap-10">
       <Disable device={device}/>
       <DataTable columns={columns} data={users} />
     </div>
