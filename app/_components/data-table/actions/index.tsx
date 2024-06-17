@@ -28,7 +28,7 @@ export function Actions<TData>({
           {pathname === "/devices" && <ChangeStatus table={table} ids={ids} />}
           {pathname === "/users" && <ChangeRole  table={table} ids={ids} />}
           {(pathname === "/devices" || pathname === "/users") && (<MoreButton pathname={pathname} ids={ids} table={table}/>)}
-          {pathname.startsWith("/devices") && <RemoveUsers ids={ids} pathname={pathname}/>}
+          {pathname.startsWith("/devices/") && <RemoveUsers ids={ids} pathname={pathname}/>}
           {pathname === "/notifications" && <Requests table={table} ids={ids} />}
         </Div>
       ) : (

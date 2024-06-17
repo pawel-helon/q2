@@ -19,7 +19,7 @@ export default async function Loading() {
         </Button>
       </Navbar>
       <div className="mt-3 flex flex-col gap-2">
-        <div className="flex gap-1">
+        <div className="flex gap-1 w-full justify-end xs:justify-start mt-[76px] xs:mt-0">
           <Button variant="outline" size="sm" className="rounded-full px-1">
             <ChevronLeft />
           </Button>
@@ -27,9 +27,9 @@ export default async function Loading() {
             <ChevronRight />
           </Button>
         </div>
-        <div className="flex gap-4 items-start h-[40px]" />
+        <div className="flex gap-4 items-start h-[42px]" />
       </div>
-      <div className="h-10 flex justify-between border-b border-border pb-1 my-12" />
+      <div className="h-10 flex justify-between border-b border-border pb-1 mt-1 mb-6 xs:my-12" />
       <div className="w-full flex flex-col gap-4 md:grid md:grid-cols-3 mb-12">
         <div className="w-full h-[240px] flex col-span-2 items-center justify-center py-4 border border-border shadow-black shadow-2xl rounded-lg">
           <Loader className="animate-spin" />

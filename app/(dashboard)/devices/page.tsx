@@ -1,17 +1,17 @@
 "use server";
 
-import { readMany, readDevicesWithUsersNames, readNotificationsForUser } from "@/lib/data/read";
+import { readMany, readDevicesWithUsersNames } from "@/lib/data/read";
 import { verifySession } from "@/lib/data-access-layer";
 
 import { AddDevice, AddDeviceMobile } from "./_components/add-device";
 import { DataTable } from "@/app/_components/data-table";
 import { Navbar } from "@/components/navbar";
+import { Heading } from "@/components/typography";
 
 import { columns } from "./_components/data-table/columns";
 import { columnsMember } from "./_components/data-table/columns-member";
 
 import { User, ROLE } from "@prisma/client";
-import { Heading } from "@/components/typography";
 
 export default async function DevicesPage() {
   const session = await verifySession();
