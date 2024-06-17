@@ -18,13 +18,13 @@ import { Badge } from "@/components/ui/badge";
 
 export default async function DeviceLayout({
   params,
-  enduser,
+  endUser,
   notEndUser,
 }: {
   params: {
     id: number;
   };
-  enduser: React.ReactNode;
+  endUser: React.ReactNode;
   notEndUser: React.ReactNode;
 }) {
   const session = await verifySession();
@@ -67,7 +67,7 @@ export default async function DeviceLayout({
           <Badge variant={device.state}>{device.state.toLowerCase()}</Badge>
         </Tooltip>
       </Header>
-      {role === ROLE.ENDUSER ? enduser : notEndUser}
+      {role === ROLE.ENDUSER ? endUser : notEndUser}
     </>
   );
 }
