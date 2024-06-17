@@ -4,7 +4,6 @@ import { usePathname, useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { ChevronLeft } from "lucide-react";
-import Link from "next/link";
 
 export function Nav() {
   const router = useRouter();
@@ -13,11 +12,14 @@ export function Nav() {
   return (
     <>
       {pathname === "/notifications" || pathname === "/account" ? (
-        <Link href="/devices">
-        <Button variant="secondary" size="icon" className="rounded-full">
+        <Button
+          onClick={() => router.back()}
+          variant="secondary"
+          size="icon"
+          className="rounded-full"
+        >
           <ChevronLeft />
         </Button>
-        </Link>
       ) : (
         <div className="rounded-full bg-secondary p-1">
           <Button

@@ -98,7 +98,7 @@ export function Header({
         </div>
         <div className="flex gap-4 items-start">
           <Heading variant="h1">{title}</Heading>
-          {children}
+          <div className="flex gap-1">{children}</div>
         </div>
       </div>
     </>

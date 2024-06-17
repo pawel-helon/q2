@@ -8,24 +8,24 @@ import {
   readManyIds,
 } from "@/lib/data/read";
 
-import { DeviceTabs } from "./_components/device-tabs";
-import { GeneralTab } from "./_components/device-tabs/general-tab";
-import { Header } from "./_components/header";
-import { Tooltip } from "@/components/tooltip";
-import { Actions } from "./_components/actions";
-import { ActionsMobile } from "./_components/mobile/actions";
-import { Navbar } from "@/components/navbar";
-import { Badge } from "@/components/ui/badge";
-
 import { email, id } from "@/types";
 import { Device, ROLE, User } from "@prisma/client";
+import { Navbar } from "../_components/navbar";
+import { Actions } from "../../devices/[id]/_components/actions";
+import { Header } from "../../devices/[id]/_components/header";
+import { Tooltip } from "@/components/tooltip";
+import { Badge } from "@/components/ui/badge";
 
-export default async function DevicePage({
+export default async function DeviceLayout({
   params,
+  enduser,
+  notEndUser,
 }: {
   params: {
     id: number;
   };
+  enduser: React.ReactNode;
+  notEndUser: React.ReactNode;
 }) {
   const session = await verifySession();
   const role = session.role as ROLE;
@@ -39,9 +39,7 @@ export default async function DevicePage({
   )) as string;
 
   const users = (await readMany("users", "email")) as email[];
-  const usersWithAccess = (await readUsersWithAccess(
-    Number(params.id)
-  )) as User[];
+  const usersWithAccess = (await readUsersWithAccess(Number(params.id))) as User[];
 
   const devices = (await readManyIds("devices")) as id[];
 
@@ -69,20 +67,7 @@ export default async function DevicePage({
           <Badge variant={device.state}>{device.state.toLowerCase()}</Badge>
         </Tooltip>
       </Header>
-      {role === ROLE.ENDUSER ? (
-        <div className="border-t w-full my-12 xs:mt-[7.5rem]">
-          <GeneralTab role={role} device={device} />
-        </div>
-      ) : (
-        <DeviceTabs role={role} device={device} users={usersWithAccess} />
-      )}
-      <ActionsMobile
-        role={role}
-        userId={userId}
-        device={device}
-        ownerEmail={ownerEmail}
-        users={users}
-      />
+      {role === ROLE.ENDUSER ? enduser : notEndUser}
     </>
   );
 }

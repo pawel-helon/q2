@@ -25,7 +25,9 @@ export function Navbar({
       ) : (
         <Breadcrumbs />
       )}
-      <div className="flex justify-end gap-2">{children}</div>
+      <div className="flex justify-end gap-2">
+        {children}
+      </div>
     </div>
   );
 }
