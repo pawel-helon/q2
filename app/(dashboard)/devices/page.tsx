@@ -30,11 +30,10 @@ export default async function DevicesPage() {
       <Heading variant="h1" className="mt-20 pt-8 xs:mt-12 xs:pt-0">
         Devices
       </Heading>
-      {role !== ROLE.ADMIN ? (
-        <DataTable columns={columnsMember} data={devices} />
-      ) : (
-        <DataTable columns={columns} data={devices} />
-      )}
+      <DataTable
+        columns={role === ROLE.ADMIN ? columns : columnsMember}
+        data={devices}
+      />
       <AddDeviceMobile role={role} userId={userId} users={users} />
     </>
   );

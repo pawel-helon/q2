@@ -20,8 +20,8 @@ export default async function Devices({
   return (
     <>
       <Link href="/add-device">Add device</Link>
-      {role === ROLE.ADMIN ? admin : notAdmin}
       <div>{addDevice}</div>
+      {role === ROLE.ADMIN ? admin : notAdmin}
       <div>{children}</div>
     </>
   );

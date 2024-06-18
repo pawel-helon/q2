@@ -1,5 +1,5 @@
 export default async function AddDevice() {
     return (
-        <>Add device Page</>
+        <div>Add device Page</div>
     )
 }

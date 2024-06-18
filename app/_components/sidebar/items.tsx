@@ -20,7 +20,7 @@ export function Items({ role, collapsed }: { role: ROLE; collapsed: boolean }) {
             size="icon"
             className={cn(
               !collapsed && "h-9 w-full justify-between px-2 bg-primary text-whiteQ shadow hover:bg-primary/90",
-              pathname.includes("/devices") ? "bg-primary hover:bg-primary/90" : "bg-border/80 hover:bg-border/60"
+              (pathname.startsWith("/devices") || pathname === "/add-device") ? "bg-primary hover:bg-primary/90" : "bg-border/80 hover:bg-border/60"
             )}
           >
             {!collapsed && "Devices"}
@@ -35,7 +35,7 @@ export function Items({ role, collapsed }: { role: ROLE; collapsed: boolean }) {
               size="icon"
               className={cn(
                 !collapsed && "h-9 w-full justify-between px-2 bg-primary text-whiteQ shadow hover:bg-primary/90",
-                pathname.includes("/users") ? "bg-primary hover:bg-primary/90" : "bg-border/80 hover:bg-border/60"
+                pathname.startsWith("/users") ? "bg-primary hover:bg-primary/90" : "bg-border/80 hover:bg-border/60"
               )}
             >
               {!collapsed && "Users"}
