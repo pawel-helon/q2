@@ -8,17 +8,26 @@ import {
 export function Tooltip({
   children,
   title,
+  side,
+  align,
+  alignOffset,
 }: {
   children: React.ReactNode;
   title: string;
+  side?: "top" | "right" | "bottom" | "left";
+  align?: "center" | "end" | "start";
+  alignOffset?: number
 }) {
   return (
     <TooltipProvider>
       <TooltipShad>
-        <TooltipTrigger>{children}</TooltipTrigger>
+        <TooltipTrigger asChild suppressHydrationWarning>
+          {children}
+        </TooltipTrigger>
         <TooltipContent
-          side="top"
-          align="center"
+          side={side}
+          align={align}
+          alignOffset={alignOffset}
           className="bg-transparent border border-border"
         >
           {title}

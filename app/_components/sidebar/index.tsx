@@ -11,22 +11,26 @@ import { Notifications } from "./notifications";
 
 import { cn } from "@/lib/utils";
 import { Notification, ROLE } from "@prisma/client";
+import { setOpen } from "@/types";
 
 export function Sidebar({
   email,
   role,
   notifications,
+  collapsed,
+  setCollapsed,
 }: {
   role: ROLE;
   email: string;
   notifications: Notification[];
+  collapsed: boolean;
+  setCollapsed: setOpen;
 }) {
-  const [collapsed, setCollapsed] = useState(true);
   const pathname = usePathname();
 
   return (
     <motion.div
-      animate={{ width: collapsed ? 56 : 220 }}
+      animate={{ width: collapsed ? 54 : 220 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
       className={cn(
         "flex flex-col justify-between border-l-[1px] border-r-[1px] border-border",

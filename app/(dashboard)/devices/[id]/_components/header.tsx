@@ -32,12 +32,12 @@ export function Header({
         <div className="flex justify-between">
           <div className="flex gap-1">
             <Tooltip title="Device status">
-              <Badge variant={device.status}>
+              <Badge variant={device.status} className="h-min">
                 {device.status.toLowerCase()}
               </Badge>
             </Tooltip>
-            <Tooltip title="Device state">
-              <Badge variant={device.state}>{device.state.toLowerCase()}</Badge>
+            <Tooltip title="Device state" >
+              <Badge variant={device.state} className="h-min">{device.state.toLowerCase()}</Badge>
             </Tooltip>
           </div>
           <div className="flex gap-1">

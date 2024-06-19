@@ -6,8 +6,12 @@ body {
   @apply dark
 }
 
-.main-content-width {
-  width: calc(100% - 56px)
+.width54 {
+  width: calc(100% - 54px)
+}
+
+.width220 {
+  width: calc(100% - 220px)
 }
 
 @layer base {
