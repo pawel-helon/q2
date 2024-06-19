@@ -65,33 +65,19 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <>
-      <div className="overflow-auto xs:max-lg:hidden">
-        <Div duration=".6">
-          {!pathname.startsWith("/devices/") && (<DataTableSearch table={table} pathname={pathname}/>)}
-          <div className="my-6 xs:my-12 py-4 border border-border shadow-black shadow-2xl rounded-lg">
-            <DataTableHeader table={table} pathname={pathname} />
-            <DataTableBody table={table} pathname={pathname} />
-            <DataTableFooter
-              table={table}
-              pagination={pagination}
-              setPagination={setPagination}
-            />
-          </div>
-        </Div>
+    <Div duration=".6">
+      {!pathname.startsWith("/devices/") && (
+        <DataTableSearch table={table} pathname={pathname} />
+      )}
+      <div className="my-6 xs:my-12 py-4 border border-border shadow-black shadow-2xl rounded-lg">
+        <DataTableHeader table={table} pathname={pathname} />
+        <DataTableBody table={table} pathname={pathname} />
+        <DataTableFooter
+          table={table}
+          pagination={pagination}
+          setPagination={setPagination}
+        />
       </div>
-      <div className="hidden xs:max-lg:block">
-        <Div duration=".6" className="w-full lg:hidden">
-          {!pathname.startsWith("/devices/") && (
-            <DataTableSearch table={table} pathname={pathname}/>
-          )}
-          <div className=" h-[240px] mt-12 py-4 border border-border shadow-black shadow-2xl rounded-lg flex items-center justify-center">
-            <p className="text-center text-xs text-white px-8">
-              Window is too narrow to display content.
-            </p>
-          </div>
-        </Div>
-      </div>
-    </>
+    </Div>
   );
 }

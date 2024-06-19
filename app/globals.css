@@ -6,6 +6,10 @@ body {
   @apply dark
 }
 
+.main-content-width {
+  width: calc(100% - 56px)
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

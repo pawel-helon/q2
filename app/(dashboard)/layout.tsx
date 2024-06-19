@@ -37,7 +37,7 @@ export default async function DashboardLayout({
       </div>
       <div className="hidden xs:flex relative min-h-screen mx-auto xl:max-w-screen-2xl 2xl:max-w-screen-2xl scrollbar max-h-[100vh] overflow-y-scroll scrollbar-w-2 scrollbar-h-2 scrollbar-track-card-background scrollbar-thumb-rounded-full scrollbar-thumb-muted">
         <Sidebar role={role} email={email} notifications={notifications} />
-        <div className="flex flex-col w-full px-6 border-r-[1px] border-border">
+        <div className="flex flex-col main-content-width px-6 border-r-[1px] border-border">
           {children}
         </div>
       </div>

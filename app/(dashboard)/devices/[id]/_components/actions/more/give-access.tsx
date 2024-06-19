@@ -62,8 +62,11 @@ export function GiveAccess({
             </button>
           </SheetTrigger>
           <SheetContent side="bottom">
-            <SheetHeader>
-              <SheetTitle>Give access</SheetTitle>
+            <SheetHeader className="text-left mb-6">
+              <SheetTitle>
+                Give access
+              </SheetTitle>
+            </SheetHeader>
               <form action={onSubmit}>
                 <input type="hidden" name="deviceId" value={deviceId} />
                 <Users users={users} side="top"/>
@@ -74,7 +77,6 @@ export function GiveAccess({
                   <Button>Give access</Button>
                 </div>
               </form>
-            </SheetHeader>
           </SheetContent>
         </Sheet>
       </div>
