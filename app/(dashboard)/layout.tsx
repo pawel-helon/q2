@@ -1,15 +1,15 @@
 "use server";
 
 import { readUnique, readNotificationsForUser } from "@/lib/data/read";
-
-import { Sidebar } from "@/app/_components/sidebar";
 import { verifySession } from "@/lib/data-access-layer";
+
 
 import { Notification, ROLE } from "@prisma/client";
 import { Account } from "../_components/mobile/account";
 import { Nav } from "../_components/mobile/nav";
-import { cn } from "@/lib/utils";
 import { ContentDesktop } from "../_components/content-desktop";
+
+import { cn } from "@/lib/utils";
 
 export default async function DashboardLayout({
   children,

@@ -1,5 +1,5 @@
 export default async function DevicesPage() {
     return (
-        <div />
+        <div>children</div>
     )
 }

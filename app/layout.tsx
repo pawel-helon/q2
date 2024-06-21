@@ -11,7 +11,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Q",
+  title: "QT",
   description: "",
 };
 
@@ -26,7 +26,7 @@ export default function RootLayout({
         {children}
         <Toaster
           position="top-center"
-          toastOptions={{className:"bg-background p-4 border-border text-xs font-bold text-white p-2 rounded-lg shadow-black shadow-lg"}}
+          toastOptions={{className:"bg-background p-4 border-border text-xs font-bold text-white rounded-lg shadow-black shadow-lg"}}
         />
       </body>
     </html>
