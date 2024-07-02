@@ -28,7 +28,7 @@ export function Tooltip({
           side={side}
           align={align}
           alignOffset={alignOffset}
-          className="bg-transparent border border-border"
+          className="bg-transparent border border-border shadow-black shadow-md"
         >
           {title}
         </TooltipContent>
