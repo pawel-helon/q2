@@ -32,18 +32,14 @@ export default async function DevicePage({
   const userId = session.userId as number;
 
   const device = (await readUnique(Number(params.id), "device")) as Device;
-  const ownerEmail = (await readUnique(
-    device.ownerId,
-    "user",
-    "email"
-  )) as string;
+  const ownerEmail = (await readUnique(device.ownerId, "user", "email")) as string;
 
   const users = (await readMany("users", "email")) as email[];
-  const usersWithAccess = (await readUsersWithAccess(
-    Number(params.id)
-  )) as User[];
+  const usersWithAccess = (await readUsersWithAccess(Number(params.id))) as User[];
 
   const devices = (await readManyIds("devices")) as id[];
+
+  console.log(users)
 
   return (
     <>
